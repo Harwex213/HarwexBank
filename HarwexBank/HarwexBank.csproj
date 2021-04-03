@@ -6,4 +6,12 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
+    <ItemGroup>
+      <None Remove="imgs\gradient.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="imgs\gradient.png" />
+    </ItemGroup>
+
 </Project>

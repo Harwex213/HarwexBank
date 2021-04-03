@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HarwexBank"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="HarwexBank" Height="1080" Width="1920" Foreground="Black" Background="White" MinWidth="500" MinHeight="700">
+    <Grid x:Name="MainGrid" ShowGridLines="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.Background>
+            <ImageBrush ImageSource="imgs/gradient.png" Stretch="Fill"></ImageBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"></RowDefinition>
+            <RowDefinition Height="*" MinHeight="600"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border MinWidth="450" MinHeight="600" CornerRadius="50" Background="White" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Grid x:Name="LoginForm">
+
+            </Grid>
+        </Border>
+        <TextBlock Grid.Column="1" Foreground="White" FontFamily="Prompt" FontSize="36" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontWeight="Normal">
+            Harwex Bank
+        </TextBlock>
     </Grid>
 </Window>
