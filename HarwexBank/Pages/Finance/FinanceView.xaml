@@ -18,7 +18,15 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <local:AccountView/>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            
+                            <local:AccountView Grid.Row="0" 
+                                               Margin="25, 25, 25, 0"/>
+                            <local:AccountClickedView Grid.Row="1" 
+                                                      Margin="25, 0, 25, 0"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
