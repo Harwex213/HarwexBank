@@ -1,12 +1,14 @@
 ﻿using System.Windows.Controls;
 
-namespace HarwexBank.Pages.Finance
+namespace HarwexBank
 {
     public partial class FinanceView : UserControl
     {
         public FinanceView()
         {
             InitializeComponent();
+
+            DataContext = new FinanceViewModel();
         }
     }
 }
