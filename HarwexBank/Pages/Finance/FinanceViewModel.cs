@@ -25,9 +25,9 @@ namespace HarwexBank
             get { return _controlViewModels ??= new List<IControlViewModel>(); }
         }
 
-        public FinanceViewModel()
+        public FinanceViewModel(UserModel userModel)
         {
-            ControlViewModels.Add(new AccountViewModel());
+            ControlViewModels.Add(new AccountViewModel(userModel));
             ControlViewModels.Add(new CreditViewModel());
 
             SelectedControlViewModel = ControlViewModels[0];

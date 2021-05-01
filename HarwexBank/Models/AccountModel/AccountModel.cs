@@ -1,4 +1,6 @@
-﻿namespace HarwexBank
+﻿using System.Collections.Generic;
+
+namespace HarwexBank
 {
     public class AccountModel : ObservableObject
     {
@@ -6,6 +8,7 @@
         private string _creationDate;
         private decimal _cash;
         private CurrencyModel _currency;
+        private List<CardModel> _cardsList;
 
         public int Id
         {
@@ -44,6 +47,16 @@
             {
                 _currency = value;
                 OnPropertyChanged("Currency");
+            }
+        }
+
+        public List<CardModel> CardsList
+        {
+            get => _cardsList;
+            set
+            {
+                _cardsList = value;
+                OnPropertyChanged("CardsList");
             }
         }
     }

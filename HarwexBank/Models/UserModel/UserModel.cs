@@ -1,8 +1,8 @@
-﻿
+﻿using System.Collections.Generic;
 
 namespace HarwexBank
 {
-    public class User : ObservableObject
+    public class UserModel : ObservableObject
     {
         private int _id;
         private string _firstName;
@@ -10,9 +10,10 @@ namespace HarwexBank
         private string _patronymic;
         private string _address;
         private string _passport;
-        private UserType _userType;
+        private UserTypeModel _userType;
         private string _login;
         private string _password;
+        private List<AccountModel> _accountsList;
 
         public int Id
         {
@@ -50,7 +51,7 @@ namespace HarwexBank
             set => _passport = value;
         }
 
-        public UserType UserType
+        public UserTypeModel UserType
         {
             get => _userType;
             set => _userType = value;
@@ -66,6 +67,15 @@ namespace HarwexBank
         {
             get => _password;
             set => _password = value;
+        }
+        public List<AccountModel> AccountList
+        {
+            get => _accountsList;
+            set
+            {
+                _accountsList = value;
+                OnPropertyChanged("AccountList");
+            }
         }
     }
 }
