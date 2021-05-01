@@ -1,7 +1,7 @@
 ﻿namespace HarwexBank.Pages.Finance
 {
-    public class FinanceViewModel
+    public class FinanceViewModel : ObservableObject, IPageViewModel
     {
-        
+        public string Name => "Финансы";
     }
 }
