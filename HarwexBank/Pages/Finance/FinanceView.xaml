@@ -49,7 +49,45 @@
             </ScrollViewer>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:CreditViewModel}">
-            <local:CreditView />
+                        <ScrollViewer>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <Button Grid.Row="0"
+                            Width="200" Height="60"
+                            Margin="0,25,0,0">Открыть новый счёт</Button>
+                    <ItemsControl Grid.Row="1"
+                                  ItemsSource="{Binding AccountModels}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="25">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition MinHeight="180"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                            
+                                    <local:CreditView Grid.Row="0" />
+                                    <local:AccountClickedView Grid.Row="1" />
+                                    <Button Grid.Row="1"
+                                            VerticalAlignment="Bottom"
+                                            Width="150"
+                                            Height="40"
+                                            Margin="0,0,0,17">Закрыть счёт</Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+            </ScrollViewer>
         </DataTemplate>
     </UserControl.Resources>
     

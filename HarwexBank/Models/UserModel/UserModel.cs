@@ -14,6 +14,7 @@ namespace HarwexBank
         private string _login;
         private string _password;
         private List<AccountModel> _accountsList;
+        private List<CreditModel> _creditsList;
 
         public int Id
         {
@@ -75,6 +76,15 @@ namespace HarwexBank
             {
                 _accountsList = value;
                 OnPropertyChanged("AccountList");
+            }
+        }
+        public List<CreditModel> CreditList
+        {
+            get => _creditsList;
+            set
+            {
+                _creditsList = value;
+                OnPropertyChanged("CreditList");
             }
         }
     }

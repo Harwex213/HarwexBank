@@ -132,6 +132,33 @@ namespace HarwexBank
                             }
                         }
                     }
+                },
+                CreditList = new List<CreditModel>()
+                {
+                    new()
+                    {
+                        Id = 0,
+                        TakingDate = "24.12.2009",
+                        Term = 8,
+                        Amount = 241,
+                        CreditType = new CreditTypeModel() {Id = 0, Name = "Stud", Ratio = 13.2m}
+                    },
+                    new()
+                    {
+                        Id = 0,
+                        TakingDate = "24.12.2009",
+                        Term = 6,
+                        Amount = 2492,
+                        CreditType = new CreditTypeModel() {Id = 0, Name = "Stud", Ratio = 13.2m}
+                    },
+                    new()
+                    {
+                        Id = 0,
+                        TakingDate = "24.12.2009",
+                        Term = 4,
+                        Amount = 2412,
+                        CreditType = new CreditTypeModel() {Id = 0, Name = "Stud", Ratio = 13.2m}
+                    }
                 }
             };
 

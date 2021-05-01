@@ -28,9 +28,9 @@ namespace HarwexBank
         public FinanceViewModel(UserModel userModel)
         {
             ControlViewModels.Add(new AccountViewModel(userModel));
-            ControlViewModels.Add(new CreditViewModel());
+            ControlViewModels.Add(new CreditViewModel(userModel));
 
-            SelectedControlViewModel = ControlViewModels[0];
+            SelectedControlViewModel = ControlViewModels[1];
         }
     }
 }
