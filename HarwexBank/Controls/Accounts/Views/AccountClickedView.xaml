@@ -6,44 +6,68 @@
              xmlns:local="clr-namespace:HarwexBank"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Background="#2C6172">
-        <Grid.Resources>
-            <Style TargetType="TextBlock">
-                <Setter Property="Margin" Value="20, 5"></Setter>
-            </Style>
-        </Grid.Resources>
-                
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-                
-        <TextBlock Grid.Row="0" Grid.Column="0"
+    <DockPanel Background="#2C6172">
+        <TextBlock DockPanel.Dock="Top"
+                   Margin="10, 10, 0, 10"
+                   FontSize="14"
                    Text="Привязанные к счету карты"/>
-        <ItemsControl Grid.Row="1" Grid.Column="0"
-                      ItemsSource="">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-                            
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid Background="#000000" Width="155" Height="70">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        
-                        <TextBlock Grid.Row="0">Карта N1</TextBlock>
-                        <TextBlock Grid.Row="1">29 BYN</TextBlock>
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
+        <ItemsControl DockPanel.Dock="Top"
+                      ItemsSource="{Binding AccountModels}">
+            <ItemsControl ItemsSource="{Binding CardsList}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                    
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Width="155" Height="70"
+                                Background="#000"
+                                Foreground="#fff"
+                                Margin="10, 0, 0, 10"
+                                Content="{Binding CardNumber}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </ItemsControl>
-    </Grid>
+    </DockPanel>
+    <!-- <Grid Background="#2C6172"> -->
+    <!--     <Grid.Resources> -->
+    <!--         <Style TargetType="TextBlock"> -->
+    <!--             <Setter Property="Margin" Value="20, 5"></Setter> -->
+    <!--         </Style> -->
+    <!--     </Grid.Resources> -->
+    <!--              -->
+    <!--     <Grid.RowDefinitions> -->
+    <!--         <RowDefinition Height="*"></RowDefinition> -->
+    <!--         <RowDefinition Height="*"></RowDefinition> -->
+    <!--     </Grid.RowDefinitions> -->
+    <!--     <Grid.ColumnDefinitions> -->
+    <!--         <ColumnDefinition Width="*"></ColumnDefinition> -->
+    <!--     </Grid.ColumnDefinitions> -->
+    <!--              -->
+    <!--     <TextBlock Grid.Row="0" Grid.Column="0" -->
+    <!--                Text="Привязанные к счету карты"/> -->
+    <!--     <ItemsControl Grid.Row="1" Grid.Column="0" -->
+    <!--                   ItemsSource="{Binding AccountModels}"> -->
+    <!--         <ItemsControl ItemsSource="{Binding CardsList}"> -->
+    <!--             <ItemsControl.ItemsPanel> -->
+    <!--                 <ItemsPanelTemplate> -->
+    <!--                     <StackPanel Orientation="Horizontal"/> -->
+    <!--                 </ItemsPanelTemplate> -->
+    <!--             </ItemsControl.ItemsPanel> -->
+    <!--                  -->
+    <!--             <ItemsControl.ItemTemplate> -->
+    <!--                 <DataTemplate> -->
+    <!--                     <Button Width="155" Height="70" -->
+    <!--                             Background="#000" -->
+    <!--                             Foreground="#fff" -->
+    <!--                             Margin="10, 0, 0, 10" -->
+    <!--                             Content="{Binding CardNumber}"/> -->
+    <!--                 </DataTemplate> -->
+    <!--             </ItemsControl.ItemTemplate> -->
+    <!--         </ItemsControl> -->
+    <!--     </ItemsControl> -->
+    <!-- </Grid> -->
 </UserControl>

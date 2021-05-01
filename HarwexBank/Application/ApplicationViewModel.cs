@@ -95,15 +95,15 @@ namespace HarwexBank
                     },
                     new()
                     {
-                        Id = 0,
-                        Cash = 112412,
-                        CreationDate = "12.04.2012",
+                        Id = 1,
+                        Cash = 24141,
+                        CreationDate = "12.04.2521",
                         CardsList = new List<CardModel>()
                         {
                             new()
                             {
                                 Id = 0,
-                                CardNumber = "6711 0077 1050 4715",
+                                CardNumber = "6711 6132 6123 5312",
                                 CardName = "ALEH KAPORTSAU",
                                 CardPeriod = "08/22",
                                 CardCvv = "000",
@@ -113,7 +113,7 @@ namespace HarwexBank
                             new()
                             {
                                 Id = 0,
-                                CardNumber = "6711 0077 1050 4715",
+                                CardNumber = "6711 5435 2345 34523452",
                                 CardName = "ALEH KAPORTSAU",
                                 CardPeriod = "08/22",
                                 CardCvv = "000",
@@ -123,7 +123,7 @@ namespace HarwexBank
                             new()
                             {
                                 Id = 0,
-                                CardNumber = "6711 0077 1050 4715",
+                                CardNumber = "6711 1235 5431 2321",
                                 CardName = "ALEH KAPORTSAU",
                                 CardPeriod = "08/22",
                                 CardCvv = "000",
