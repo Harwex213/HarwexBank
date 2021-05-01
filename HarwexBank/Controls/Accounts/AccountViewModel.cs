@@ -4,6 +4,6 @@ namespace HarwexBank
 {
     public class AccountViewModel : ObservableObject, IControlViewModel
     {
-        public string Name => "Счёта";
+        public string Name => "Счета";
     }
 }

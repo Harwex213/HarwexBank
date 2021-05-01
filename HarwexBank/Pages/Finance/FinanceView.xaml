@@ -24,14 +24,23 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
-        <Border Grid.Row="0" Grid.Column="0" DockPanel.Dock="Top" 
+        <Border Grid.Row="0" Grid.Column="0" 
                 BorderBrush="Black" 
                 BorderThickness="0,0,0,1">
             <ItemsControl ItemsSource="{Binding ControlViewModels}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button Content="{Binding Name}"
-                                Margin="2,5"/>
+                                FontSize="18"
+                                Margin="10,10"
+                                Padding="15, 15"
+                                MaxHeight="60"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
