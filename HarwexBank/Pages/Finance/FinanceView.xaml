@@ -8,7 +8,19 @@
              d:DesignWidth="1530" d:DesignHeight="870" >
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type local:AccountViewModel}">
-            <local:AccountView />
+            <ItemsControl ItemsSource="{Binding AccountModels}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:AccountView/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:CreditViewModel}">
             <local:CreditView />
@@ -18,7 +30,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="4.3*"></RowDefinition>
+            <RowDefinition Height="6*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -39,8 +51,7 @@
                         <Button Content="{Binding Name}"
                                 FontSize="18"
                                 Margin="10,10"
-                                Padding="15, 15"
-                                MaxHeight="60"/>
+                                Padding="10, 10"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

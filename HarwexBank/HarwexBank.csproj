@@ -10,4 +10,8 @@
       <None Remove="imgs\gradient.png" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Controls\Accounts\Views" />
+    </ItemGroup>
+
 </Project>

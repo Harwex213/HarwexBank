@@ -3,7 +3,7 @@
     public class CurrencyModel : ObservableObject
     {
         private int _id;
-        private int _name;
+        private string _name;
 
         public int Id
         {
@@ -15,7 +15,7 @@
             }
         }
 
-        public int Name
+        public string Name
         {
             get => _name;
             set

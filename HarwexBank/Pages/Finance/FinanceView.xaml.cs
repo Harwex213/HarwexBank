@@ -7,8 +7,6 @@ namespace HarwexBank
         public FinanceView()
         {
             InitializeComponent();
-
-            DataContext = new FinanceViewModel();
         }
     }
 }
