@@ -17,7 +17,9 @@
                 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:AccountView/>
+                        <Grid>
+                            <local:AccountView/>
+                        </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
