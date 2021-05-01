@@ -1,9 +1,8 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿
 
 namespace HarwexBank.Models
 {
-    public class User : INotifyPropertyChanged
+    public class User : ObservableObject
     {
         private int _id;
         private string _firstName;
@@ -67,13 +66,6 @@ namespace HarwexBank.Models
         {
             get => _password;
             set => _password = value;
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
