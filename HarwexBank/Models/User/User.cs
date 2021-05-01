@@ -1,6 +1,6 @@
 ﻿
 
-namespace HarwexBank.Models
+namespace HarwexBank
 {
     public class User : ObservableObject
     {

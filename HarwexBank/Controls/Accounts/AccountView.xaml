@@ -6,7 +6,11 @@
              xmlns:local="clr-namespace:HarwexBank"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <UserControl.Resources>
         
-    </Grid>
+    </UserControl.Resources>
+    
+    <ItemsControl ItemsSource="{Binding ControlViewModels}">
+        
+    </ItemsControl>
 </UserControl>
