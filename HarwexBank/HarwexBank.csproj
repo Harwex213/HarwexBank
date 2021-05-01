@@ -10,8 +10,4 @@
       <None Remove="imgs\gradient.png" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Base\Pages" />
-    </ItemGroup>
-
 </Project>
