@@ -1,6 +1,6 @@
 ﻿namespace HarwexBank
 {
-    public class Card : ObservableObject
+    public class CardModel : ObservableObject
     {
         
     }
