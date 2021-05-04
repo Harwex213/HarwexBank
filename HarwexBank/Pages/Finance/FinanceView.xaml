@@ -11,13 +11,13 @@
             <ScrollViewer>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="60"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     
                     <Button Grid.Row="0"
-                            Width="200" Height="60"
-                            Margin="0,25,0,0">Открыть новый счёт</Button>
+                            Width="200"
+                            Margin="0,15,0,15">Открыть новый счёт</Button>
                     <ItemsControl Grid.Row="1"
                                   ItemsSource="{Binding AccountModels}">
                         <ItemsControl.ItemsPanel>
@@ -28,7 +28,15 @@
                 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Grid Margin="25">
+                                <Grid Margin="30, 0, 30, 15">
+                                    <Grid.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                            <Setter Property="Margin" Value="5"></Setter>
+                                            <Setter Property="FontSize" Value="14"></Setter>
+                                        </Style>
+                                    </Grid.Resources>
+                                    
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"></RowDefinition>
                                         <RowDefinition MinHeight="180"></RowDefinition>
@@ -49,18 +57,18 @@
             </ScrollViewer>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:CreditViewModel}">
-                        <ScrollViewer>
+            <ScrollViewer>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="60"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     
                     <Button Grid.Row="0"
-                            Width="200" Height="60"
-                            Margin="0,25,0,0">Открыть новый счёт</Button>
+                            Width="200"
+                            Margin="0,15,0,15">Открыть новый счёт</Button>
                     <ItemsControl Grid.Row="1"
-                                  ItemsSource="{Binding AccountModels}">
+                                  ItemsSource="{Binding CreditModels}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Vertical"/>
@@ -69,19 +77,22 @@
                 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Grid Margin="25">
+                                <Grid Margin="30, 0, 30, 15">
+                                    <Grid.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                            <Setter Property="Margin" Value="5"></Setter>
+                                            <Setter Property="FontSize" Value="14"></Setter>
+                                        </Style>
+                                    </Grid.Resources>
+                                    
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"></RowDefinition>
-                                        <RowDefinition MinHeight="180"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
                                     </Grid.RowDefinitions>
                             
                                     <local:CreditView Grid.Row="0" />
-                                    <local:AccountClickedView Grid.Row="1" />
-                                    <Button Grid.Row="1"
-                                            VerticalAlignment="Bottom"
-                                            Width="150"
-                                            Height="40"
-                                            Margin="0,0,0,17">Закрыть счёт</Button>
+                                    <local:CreditClickedView Grid.Row="1" />
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
