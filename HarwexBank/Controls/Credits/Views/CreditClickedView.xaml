@@ -5,10 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:HarwexBank"
              mc:Ignorable="d"
-             d:DesignHeight="105.042" d:DesignWidth="576.471">
+             d:DesignHeight="196.617" d:DesignWidth="576.471">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="Buttons" TargetType="ContentControl">
+            <Button
+                Width="200"
+                Margin="0,15,0,15">Открыть новый счёт</Button>
+        </ControlTemplate>
+    </UserControl.Resources>
+    
     <Grid VerticalAlignment="Top"
           Background="#2C6172">
         <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
@@ -25,5 +34,8 @@
                    Text="{Binding Id}"/>
         <TextBlock Grid.Row="1" Grid.Column="1"
                    Text="{Binding CreditType.Ratio}"/>
+
+        <ContentControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                        Template="{StaticResource Buttons}"></ContentControl>
     </Grid>
 </UserControl>
