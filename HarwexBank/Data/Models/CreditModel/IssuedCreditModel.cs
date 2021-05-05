@@ -2,7 +2,7 @@
 
 namespace HarwexBank
 {
-    public class CreditModel : ObservableObject
+    public class IssuedCreditModel : ObservableObject
     {
         private int _id;
         private string _takingDate;

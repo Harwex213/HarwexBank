@@ -10,4 +10,8 @@
       <None Remove="imgs\gradient.png" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Data\Models" />
+    </ItemGroup>
+
 </Project>
