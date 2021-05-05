@@ -2,9 +2,9 @@
 
 namespace HarwexBank
 {
-    public partial class AccountClickedView : UserControl
+    public partial class CloseAccount : UserControl
     {
-        public AccountClickedView()
+        public CloseAccount()
         {
             InitializeComponent();
         }
