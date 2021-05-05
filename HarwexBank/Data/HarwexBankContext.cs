@@ -1,0 +1,396 @@
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+#nullable disable
+
+namespace HarwexBank
+{
+    public sealed class HarwexBankContext : DbContext
+    {
+        public HarwexBankContext()
+        {
+            Database.EnsureDeleted();
+            Database.EnsureCreated();
+            
+            CreateDefaultData();
+        }
+
+        #region DbSet Init
+
+        // User & UserType tables.
+        public DbSet<UserModel> Users { get; set; }
+        public DbSet<UserTypeModel> UserTypes { get; set; }
+        
+        // Data belongs to User:
+        // Credit & CreditType tables.
+        public DbSet<IssuedCreditModel> IssuedCredits { get; set; }
+        public DbSet<CreditTypeModel> CreditTypes { get; set; }
+        
+        // Account & CurrencyType tables.
+        public DbSet<AccountModel> Accounts { get; set; }
+        public DbSet<CurrencyTypeModel> CurrencyTypes { get; set; }
+        
+        // Data belongs to Account:
+        // Card & CardType tables.
+        public DbSet<CardModel> Cards { get; set; }
+        public DbSet<CardTypeModel> CardTypes { get; set; }
+        
+        // Operations data:
+        // Operation baseclass.
+        // Child classes: CreditRepayment; TransferToAccount;
+        public DbSet<OperationModel> Operations { get; set; }
+        public DbSet<CreditRepayment> CreditRepayments { get; set; }
+        public DbSet<TransferToAccount> TransferToAccounts { get; set; }
+
+        #endregion
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Server=.;Database=HarwexBank;Trusted_Connection=True;");
+            }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasAnnotation("Relational:Collation", "Cyrillic_General_CI_AS");
+            
+            modelBuilder.Entity<UserModel>(UserConfigure);
+            modelBuilder.Entity<UserTypeModel>(UserTypeConfigure);
+            
+            modelBuilder.Entity<IssuedCreditModel>(IssuedCreditConfigure);
+            modelBuilder.Entity<CreditTypeModel>(CreditTypeConfigure);
+            
+            modelBuilder.Entity<AccountModel>(AccountConfigure);
+            modelBuilder.Entity<CurrencyTypeModel>(CurrencyTypeConfigure);
+
+            modelBuilder.Entity<CardModel>(CardConfigure);
+            modelBuilder.Entity<CardTypeModel>(CardTypeConfigure);
+
+            modelBuilder.Entity<OperationModel>(OperationConfigure);
+            modelBuilder.Entity<CreditRepayment>(CreditRepaymentConfigure);
+            modelBuilder.Entity<TransferToAccount>(TransferToAccountConfigure);
+        }
+
+        #region Configures
+
+        private void UserConfigure(EntityTypeBuilder<UserModel> entity)
+        {
+            entity.ToTable("USER");
+            
+            // Columns.
+            entity.Property(e => e.FirstName)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            entity.Property(e => e.LastName)
+                .IsRequired()
+                .HasMaxLength(50);
+            
+            entity.Property(e => e.Patronymic).HasMaxLength(50);
+
+            entity.Property(e => e.Address)
+                .IsRequired()
+                .HasMaxLength(50);
+            
+            entity.Property(e => e.Passport)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            entity.Property(e => e.Login).HasMaxLength(50);
+            
+            entity.Property(e => e.Password).HasMaxLength(50);
+            
+            // References.
+            entity.HasAlternateKey(e => e.Login);
+            
+            entity.HasOne(d => d.UserTypeModelNavigation)
+                .WithMany(p => p.Users)
+                .HasForeignKey(d => d.UserType)
+                .HasPrincipalKey(t=> t.Name)
+                .HasConstraintName("USER_TYPE_FK");
+        }
+        private void UserTypeConfigure(EntityTypeBuilder<UserTypeModel> entity)
+        {
+            entity.ToTable("USER_TYPE");
+            
+            // Columns.
+            entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(50);
+        }
+        private void AccountConfigure(EntityTypeBuilder<AccountModel> entity)
+        {
+            entity.ToTable("ACCOUNT");
+
+            // Columns.
+            entity.Property(e => e.Amount).HasColumnType("money");
+
+            entity.Property(e => e.RegistrationDate).HasColumnType("date");
+
+            // References.
+            entity.HasOne(d => d.CurrencyTypeModelNavigation)
+                .WithMany(p => p.Accounts)
+                .HasForeignKey(d => d.CurrencyType)
+                .HasPrincipalKey(t=> t.Name)
+                .HasConstraintName("ACCOUNT_CURRENCY_FK");
+
+            entity.HasOne(d => d.UserModelAccount)
+                .WithMany(p => p.Accounts)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("ACCOUNT_USER_FK");
+        }
+        private void CurrencyTypeConfigure(EntityTypeBuilder<CurrencyTypeModel> entity)
+        {
+            entity.ToTable("CURRENCY_TYPE");
+
+            entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(50);
+        }
+        private void CardConfigure(EntityTypeBuilder<CardModel> entity)
+        {
+            entity.ToTable("CARD");
+
+            // Columns.
+            entity.Property(e => e.Cvv)
+                .IsRequired()
+                .HasMaxLength(3)
+                .IsFixedLength(true);
+
+            entity.Property(e => e.OwnerName)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            entity.Property(e => e.Number).HasColumnType("numeric(16, 0)");
+
+            entity.Property(e => e.TimeFrame)
+                .IsRequired()
+                .HasMaxLength(5)
+                .IsFixedLength(true);
+
+            // References.
+            entity.HasOne(d => d.BankAccountModel)
+                .WithMany(p => p.Cards)
+                .HasForeignKey(d => d.AccountId)
+                .HasConstraintName("CARD_USER_FK");
+
+            entity.HasOne(d => d.CardTypeModelNavigation)
+                .WithMany(p => p.Cards)
+                .HasForeignKey(d => d.CardType)
+                .HasPrincipalKey(t=> t.Name)
+                .HasConstraintName("CARD_TYPE_FK");
+        }
+        private void CardTypeConfigure(EntityTypeBuilder<CardTypeModel> entity)
+        {
+            entity.ToTable("CARD_TYPE");
+
+            entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(50);
+        }
+        private void IssuedCreditConfigure(EntityTypeBuilder<IssuedCreditModel> entity)
+        {
+            entity.ToTable("ISSUED_CREDITS");
+
+            // Columns.
+            entity.Property(e => e.Amount).HasColumnType("money");
+
+            entity.Property(e => e.DateIn).HasColumnType("date");
+
+            // References.
+            entity.HasOne(d => d.CreditTypeModelNavigation)
+                .WithMany(p => p.IssuedCredits)
+                .HasForeignKey(d => d.CreditType)
+                .HasPrincipalKey(t=> t.Name)
+                .HasConstraintName("ISSUED_CREDITS_TYPE_FK");
+
+            entity.HasOne(d => d.UserModelAccount)
+                .WithMany(p => p.IssuedCredits)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("ISSUED_CREDITS_USER_FK");
+        }
+        private void CreditTypeConfigure(EntityTypeBuilder<CreditTypeModel> entity)
+        {
+            entity.ToTable("CREDIT_TYPE");
+
+            // Columns.
+            entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(50);
+        }
+        private void OperationConfigure(EntityTypeBuilder<OperationModel> entity)
+        {
+            entity.ToTable("OPERATION");
+
+            // Columns.
+            entity.Property(e => e.Amount).HasColumnType("money");
+
+            entity.Property(e => e.Date).HasColumnType("date");
+            
+            // References.
+            entity.HasOne(d => d.BankAccountModelInitiatorNavigation)
+                .WithMany(p => p.Operations)
+                .HasForeignKey(d => d.BankAccountInitiator)
+                .HasConstraintName("OPERATION_ACCOUNT_INIT_FK");
+        }
+        private void CreditRepaymentConfigure(EntityTypeBuilder<CreditRepayment> entity)
+        {
+            entity.ToTable("CREDIT_REPAYMENT");
+            
+            // References.
+            entity.HasOne(d => d.SelectedCreditModelNavigation)
+                .WithMany(p => p.CreditRepayments)
+                .HasForeignKey(d => d.SelectedCredit)
+                .HasConstraintName("CREDIT_REPAYMENT_SELECTED_CREDIT_FK");
+        }
+        private void TransferToAccountConfigure(EntityTypeBuilder<TransferToAccount> entity)
+        {
+            entity.ToTable("TRANSFER_TO_ACCOUNT");
+            
+            // References.
+            entity.HasOne(d => d.BankAccountModelReceiverNavigation)
+                .WithMany(p => p.TransferToAccounts)
+                .HasForeignKey(d => d.BankAccountReceiver)
+                .HasConstraintName("TRANSFER_TO_ACCOUNT_RECEIVER_FK");
+        }
+
+        #endregion
+
+        private void CreateDefaultData()
+        {
+            UserTypes.AddRange(new List<UserTypeModel>
+            {
+                new() { Name = "admin"},
+                new() { Name = "worker"},
+                new() { Name = "client"}
+            });
+            
+            Users.AddRange(new List<UserModel>
+            {
+                new()
+                {
+                    FirstName = "Oleg",
+                    LastName = "Kaportsev",
+                    Patronymic = "Andreevich",
+                    Address = "Vitebsk",
+                    Passport = "BM1234576",
+                    UserType = "admin",
+                    Login = "client",
+                    Password = "1111",
+                    IsBlocked = false
+                },
+                new()
+                {
+                    FirstName = "Igor",
+                    LastName = "Skvortsoff",
+                    Address = "Vitebsk",
+                    Passport = "BM1234576",
+                    UserType = "worker",
+                    Login = "worker",
+                    Password = "1111",
+                    IsBlocked = false
+                }
+            });
+            
+            SaveChanges();
+
+            CurrencyTypes.AddRange(new List<CurrencyTypeModel>
+            {
+                new() { Name = "RUB" },
+                new() { Name = "USD" },
+                new() { Name = "BYN" }
+            });
+            
+            Accounts.AddRange(new List<AccountModel>
+            {
+                new()
+                {
+                    UserId = 1,
+                    CurrencyType = "BYN",
+                    RegistrationDate = DateTime.Today,
+                    Amount = 74812m,
+                    IsFrozen = false
+                },
+                new()
+                {
+                    UserId = 1,
+                    CurrencyType = "USD",
+                    RegistrationDate = DateTime.Today,
+                    Amount = 9994451m,
+                    IsFrozen = false
+                }
+            });
+            
+            SaveChanges();
+            
+            CardTypes.AddRange(new List<CardTypeModel>
+            {
+                new() { Name = "Visa Standard" },
+                new() { Name = "Visa Classic" },
+                new() { Name = "Visa Gold" }
+            });
+            
+            Cards.AddRange(new List<CardModel>
+            {
+                new()
+                {
+                    AccountId = 1,
+                    CardType = "Visa Standard",
+                    Number = 6700110010504715,
+                    OwnerName = "ALEH KAPORTSAU",
+                    TimeFrame = "08/22",
+                    Cvv = "999"
+                },
+                new()
+                {
+                    AccountId = 2,
+                    CardType = "Visa Gold",
+                    Number = 6700110010509999,
+                    OwnerName = "ALEH KAPORTSAU",
+                    TimeFrame = "08/23",
+                    Cvv = "000"
+                }
+            });
+            
+            SaveChanges();
+            
+            CreditTypes.AddRange(new List<CreditTypeModel>
+            {
+                new() {Name = "Студенческий", Rate = 0.13m },
+                new() {Name = "Потребительский", Rate = 0.25m},
+                new() {Name = "Корпоративный", Rate = 0.1m}
+            });
+            
+            IssuedCredits.AddRange(new List<IssuedCreditModel>
+            {
+                new()
+                {
+                    UserId = 1,
+                    CreditType = "Корпоративный",
+                    DateIn = DateTime.Today,
+                    Term = 5,
+                    Amount = 20000m,
+                    IsApproved = true,
+                    IsRepaid = false
+                },
+                new()
+                {
+                    UserId = 1,
+                    CreditType = "Студенческий",
+                    DateIn = DateTime.Today,
+                    Term = 2,
+                    Amount = 4000m,
+                    IsApproved = false,
+                    IsRepaid = false
+                }
+            });
+            
+            SaveChanges();
+        }
+    }
+}

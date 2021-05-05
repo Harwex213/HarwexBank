@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace HarwexBank
 {
@@ -14,7 +15,7 @@ namespace HarwexBank
         private int _id;
         private int? _userId;
         private string _currencyType;
-        private string _registrationDate;
+        private DateTime _registrationDate;
         private decimal _amount;
         private bool _isFrozen;
 
@@ -54,7 +55,7 @@ namespace HarwexBank
             }
         }
 
-        public string RegistrationDate
+        public DateTime RegistrationDate
         {
             get => _registrationDate;
             set

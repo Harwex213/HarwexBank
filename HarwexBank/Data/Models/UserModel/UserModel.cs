@@ -18,6 +18,7 @@ namespace HarwexBank
         private string _passport;
         private string _login;
         private string _password;
+        private bool _isBlocked;
         public string UserType { get; set; }
 
         public virtual UserTypeModel UserTypeModelNavigation { get; set; }
@@ -100,6 +101,15 @@ namespace HarwexBank
             {
                 _password = value;
                 OnPropertyChanged("Password");
+            }
+        }
+        public bool IsBlocked
+        {
+            get => _isBlocked;
+            set
+            {
+                _isBlocked = value;
+                OnPropertyChanged("IsBlocked");
             }
         }
     }

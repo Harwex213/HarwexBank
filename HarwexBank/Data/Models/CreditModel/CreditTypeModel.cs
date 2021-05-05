@@ -34,13 +34,13 @@ namespace HarwexBank
             }
         }
         
-        public decimal Ratio
+        public decimal Rate
         {
             get => _ratio;
             set
             {
                 _ratio = value;
-                OnPropertyChanged("Ratio");
+                OnPropertyChanged("Rate");
             }
         }
     }
