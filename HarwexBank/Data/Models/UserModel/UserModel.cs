@@ -2,7 +2,7 @@
 
 namespace HarwexBank
 {
-    public class UserModel : ObservableObject
+    public class UserModel : ObservableObject, ModelResourcesManager.IModel
     {
         public UserModel()
         {

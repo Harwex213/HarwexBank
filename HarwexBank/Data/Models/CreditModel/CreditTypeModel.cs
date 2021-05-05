@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace HarwexBank
 {
-    public class CreditTypeModel : ObservableObject
+    public class CreditTypeModel : ObservableObject, ModelResourcesManager.IModel
     {
         public CreditTypeModel()
         {

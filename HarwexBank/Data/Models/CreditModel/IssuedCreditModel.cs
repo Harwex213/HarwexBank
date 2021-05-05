@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HarwexBank
 {
-    public class IssuedCreditModel : ObservableObject
+    public class IssuedCreditModel : ObservableObject, ModelResourcesManager.IModel
     {
         public IssuedCreditModel()
         {

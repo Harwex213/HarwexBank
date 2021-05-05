@@ -2,7 +2,7 @@
 
 namespace HarwexBank
 {
-    public class CardTypeModel : ObservableObject
+    public class CardTypeModel : ObservableObject, ModelResourcesManager.IModel
     {
         public CardTypeModel()
         {

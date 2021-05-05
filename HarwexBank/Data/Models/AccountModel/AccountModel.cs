@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HarwexBank
 {
-    public class AccountModel : ObservableObject
+    public class AccountModel : ObservableObject, ModelResourcesManager.IModel
     {
         public AccountModel()
         {

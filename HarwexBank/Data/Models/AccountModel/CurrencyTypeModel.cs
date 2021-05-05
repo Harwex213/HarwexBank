@@ -2,7 +2,7 @@
 
 namespace HarwexBank
 {
-    public class CurrencyTypeModel : ObservableObject
+    public class CurrencyTypeModel : ObservableObject, ModelResourcesManager.IModel
     {
         public CurrencyTypeModel()
         {

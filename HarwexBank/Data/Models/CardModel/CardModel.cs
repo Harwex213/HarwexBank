@@ -1,6 +1,6 @@
 ﻿namespace HarwexBank
 {
-    public class CardModel : ObservableObject
+    public class CardModel : ObservableObject, ModelResourcesManager.IModel
     {
         private int _id;
         private int _accountId;
