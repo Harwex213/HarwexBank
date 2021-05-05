@@ -33,7 +33,7 @@
         <TextBlock Grid.Row="1" Grid.Column="0"
                    Text="{Binding Id}"/>
         <TextBlock Grid.Row="1" Grid.Column="1"
-                   Text="{Binding CreditType.Ratio}"/>
+                   Text="{Binding CreditTypeModelNavigation.Rate}"/>
 
         <ContentControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                         Template="{StaticResource Buttons}"></ContentControl>

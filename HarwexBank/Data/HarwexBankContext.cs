@@ -269,32 +269,45 @@ namespace HarwexBank
                 new() { Name = "worker"},
                 new() { Name = "client"}
             });
+
+            var userOleg = new UserModel
+            {
+                FirstName = "Oleg",
+                LastName = "Kaportsev",
+                Patronymic = "Andreevich",
+                Address = "Vitebsk",
+                Passport = "BM1234576",
+                UserType = "client",
+                Login = "oleg",
+                Password = "1111",
+                IsBlocked = false
+            };
+            var userSergey = new UserModel
+            {
+                FirstName = "Sergey",
+                LastName = "Turov",
+                Address = "Vitebsk",
+                Passport = "BM1234576",
+                UserType = "client",
+                Login = "sergey",
+                Password = "1111",
+                IsBlocked = false
+            };
+            var userIgor = new UserModel
+            {
+                FirstName = "Igor",
+                LastName = "Skvortsoff",
+                Address = "Vitebsk",
+                Passport = "BM1234576",
+                UserType = "worker",
+                Login = "igor",
+                Password = "1111",
+                IsBlocked = false
+            };
             
             Users.AddRange(new List<UserModel>
             {
-                new()
-                {
-                    FirstName = "Oleg",
-                    LastName = "Kaportsev",
-                    Patronymic = "Andreevich",
-                    Address = "Vitebsk",
-                    Passport = "BM1234576",
-                    UserType = "admin",
-                    Login = "client",
-                    Password = "1111",
-                    IsBlocked = false
-                },
-                new()
-                {
-                    FirstName = "Igor",
-                    LastName = "Skvortsoff",
-                    Address = "Vitebsk",
-                    Passport = "BM1234576",
-                    UserType = "worker",
-                    Login = "worker",
-                    Password = "1111",
-                    IsBlocked = false
-                }
+                userOleg, userSergey, userIgor
             });
             
             SaveChanges();
@@ -310,7 +323,7 @@ namespace HarwexBank
             {
                 new()
                 {
-                    UserId = 1,
+                    UserId = userOleg.Id,
                     CurrencyType = "BYN",
                     RegistrationDate = DateTime.Today,
                     Amount = 74812m,
@@ -318,10 +331,18 @@ namespace HarwexBank
                 },
                 new()
                 {
-                    UserId = 1,
+                    UserId = userOleg.Id,
                     CurrencyType = "USD",
                     RegistrationDate = DateTime.Today,
                     Amount = 9994451m,
+                    IsFrozen = false
+                },
+                new()
+                {
+                    UserId = userSergey.Id,
+                    CurrencyType = "RUB",
+                    RegistrationDate = DateTime.Today,
+                    Amount = 897556m,
                     IsFrozen = false
                 }
             });
@@ -354,6 +375,15 @@ namespace HarwexBank
                     OwnerName = "ALEH KAPORTSAU",
                     TimeFrame = "08/23",
                     Cvv = "000"
+                },
+                new()
+                {
+                    AccountId = 3,
+                    CardType = "Visa Gold",
+                    Number = 6700110010507777,
+                    OwnerName = "SERGEY TUROV",
+                    TimeFrame = "08/23",
+                    Cvv = "000"
                 }
             });
             
@@ -370,7 +400,7 @@ namespace HarwexBank
             {
                 new()
                 {
-                    UserId = 1,
+                    UserId = userOleg.Id,
                     CreditType = "Корпоративный",
                     DateIn = DateTime.Today,
                     Term = 5,
@@ -380,7 +410,7 @@ namespace HarwexBank
                 },
                 new()
                 {
-                    UserId = 1,
+                    UserId = userOleg.Id,
                     CreditType = "Студенческий",
                     DateIn = DateTime.Today,
                     Term = 2,

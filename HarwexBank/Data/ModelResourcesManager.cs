@@ -12,7 +12,6 @@ namespace HarwexBank
         {
             _context = new HarwexBankContext();
         }
-
         public static ModelResourcesManager GetInstance()
         {
             return _manager ??= new ModelResourcesManager();
@@ -90,7 +89,7 @@ namespace HarwexBank
             }
         }
 
-        public void StartOperation(OperationModel operation)
+        public void GenerateOperation(OperationModel operation)
         {
             _context.Operations.Add(operation);
         }

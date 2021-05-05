@@ -1,13 +1,25 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace HarwexBank
 {
     public class ApplicationViewModel : ObservableObject
     {
+        public ApplicationViewModel()
+        {
+            LoggedInUser = ModelResourcesManager.GetInstance().GetUserByLogin("oleg");
+            
+            PageViewModels.Add(new CardsViewModel());
+            PageViewModels.Add(new FinanceViewModel());
+
+            SelectedPageViewModel = PageViewModels[1];
+        }
+        
+        public static UserModel LoggedInUser { get; set; }
+        public static ObservableCollection<UserModel> ExistedClients { get; set; }
+            
         private IPageViewModel _selectedPageViewModel;
         private List<IPageViewModel> _pageViewModels;
-        private UserModel _user;
-
         public IPageViewModel SelectedPageViewModel
         {
             get => _selectedPageViewModel;
@@ -19,28 +31,9 @@ namespace HarwexBank
                 OnPropertyChanged("SelectedPageViewModel");
             }
         }
-
         public List<IPageViewModel> PageViewModels
         {
             get { return _pageViewModels ??= new List<IPageViewModel>(); }
-        }
-
-        public UserModel User
-        {
-            get => _user;
-            set
-            {
-                _user = value;
-                OnPropertyChanged("User");
-            }
-        }
-
-        public ApplicationViewModel()
-        {
-            PageViewModels.Add(new CardsViewModel(user));
-            PageViewModels.Add(new FinanceViewModel(user));
-
-            SelectedPageViewModel = PageViewModels[1];
         }
     }
 }

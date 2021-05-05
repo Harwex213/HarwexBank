@@ -1,6 +1,7 @@
 ﻿
 
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace HarwexBank
@@ -8,10 +9,10 @@ namespace HarwexBank
     public class AccountViewModel : ObservableObject, IControlViewModel
     {
         public string Name => "Счета";
-        public List<AccountModel> AccountModels { get; }
-        public AccountViewModel(UserModel userModel)
+        public ObservableCollection<AccountModel> AccountModels { get; }
+        public AccountViewModel()
         {
-            AccountModels = userModel.AccountList;
+            AccountModels = new ObservableCollection<AccountModel>(ApplicationViewModel.LoggedInUser.Accounts);
         }
     }
 }

@@ -4,7 +4,7 @@
     {
         public string Name => "Карты";
 
-        public CardsViewModel(UserModel userModel)
+        public CardsViewModel()
         {
             
         }

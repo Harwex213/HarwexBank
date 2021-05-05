@@ -25,12 +25,12 @@ namespace HarwexBank
             get { return _controlViewModels ??= new List<IControlViewModel>(); }
         }
 
-        public FinanceViewModel(UserModel userModel)
+        public FinanceViewModel()
         {
-            ControlViewModels.Add(new AccountViewModel(userModel));
-            ControlViewModels.Add(new CreditViewModel(userModel));
+            ControlViewModels.Add(new AccountViewModel());
+            ControlViewModels.Add(new CreditViewModel());
 
-            SelectedControlViewModel = ControlViewModels[1];
+            SelectedControlViewModel = ControlViewModels[0];
         }
     }
 }
