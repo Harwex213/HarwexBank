@@ -4,11 +4,25 @@ namespace HarwexBank
 {
     public class AccountModel : ObservableObject
     {
+        public AccountModel()
+        {
+            Cards = new HashSet<CardModel>();
+            Operations = new HashSet<OperationModel>();
+            TransferToAccounts = new HashSet<TransferToAccount>();
+        }
+        
         private int _id;
-        private string _creationDate;
-        private decimal _cash;
-        private CurrencyModel _currency;
-        private List<CardModel> _cardsList;
+        private int? _userId;
+        private string _currencyType;
+        private string _registrationDate;
+        private decimal _amount;
+        private bool _isFrozen;
+
+        public virtual CurrencyTypeModel CurrencyTypeModelNavigation { get; set; }
+        public virtual UserModel UserModelAccount { get; set; }
+        public virtual ICollection<CardModel> Cards { get; set; }
+        public virtual ICollection<OperationModel> Operations { get; set; }
+        public virtual ICollection<TransferToAccount> TransferToAccounts { get; set; }
 
         public int Id
         {
@@ -20,43 +34,53 @@ namespace HarwexBank
             }
         }
 
-        public string CreationDate
+        public int? UserId
         {
-            get => _creationDate;
+            get => _userId;
             set
             {
-                _creationDate = value;
-                OnPropertyChanged("CreationDate");
+                _userId = value;
+                OnPropertyChanged("UserId");
             }
         }
 
-        public decimal Cash
+        public string CurrencyType
         {
-            get => _cash;
+            get => _currencyType;
             set
             {
-                _cash = value;
-                OnPropertyChanged("Cash");
+                _currencyType = value;
+                OnPropertyChanged("CurrencyType");
             }
         }
 
-        public CurrencyModel Currency
+        public string RegistrationDate
         {
-            get => _currency;
+            get => _registrationDate;
             set
             {
-                _currency = value;
-                OnPropertyChanged("Currency");
+                _registrationDate = value;
+                OnPropertyChanged("RegistrationDate");
             }
         }
 
-        public List<CardModel> CardsList
+        public decimal Amount
         {
-            get => _cardsList;
+            get => _amount;
             set
             {
-                _cardsList = value;
-                OnPropertyChanged("CardsList");
+                _amount = value;
+                OnPropertyChanged("Amount");
+            }
+        }
+
+        public bool IsFrozen
+        {
+            get => _isFrozen;
+            set
+            {
+                _isFrozen = value;
+                OnPropertyChanged("IsFrozen");
             }
         }
     }
