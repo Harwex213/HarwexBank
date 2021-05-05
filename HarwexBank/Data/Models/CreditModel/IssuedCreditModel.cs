@@ -1,15 +1,29 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace HarwexBank
 {
     public class IssuedCreditModel : ObservableObject
     {
+        public IssuedCreditModel()
+        {
+            CreditRepayments = new HashSet<CreditRepayment>();
+        }
+        
         private int _id;
-        private string _takingDate;
-        private int _term;
+        private int? _userId;
+        private string _creditType;
+        private DateTime _dateIn;
+        private long _term;
         private decimal _amount;
-        private CreditTypeModel _creditType;
+        private bool _isApproved;
+        private bool _isRepaid;
 
+        public virtual CreditTypeModel CreditTypeModelNavigation { get; set; }
+        public virtual UserModel UserModelAccount { get; set; }
+        public virtual ICollection<CreditRepayment> CreditRepayments { get; set; }
+        
         public int Id
         {
             get => _id;
@@ -19,18 +33,36 @@ namespace HarwexBank
                 OnPropertyChanged("Id");
             }
         }
-
-        public string TakingDate
+        public int? UserId
         {
-            get => _takingDate;
+            get => _userId;
             set
             {
-                _takingDate = value;
-                OnPropertyChanged("TakingDate");
+                _userId = value;
+                OnPropertyChanged("UserId");
             }
         }
 
-        public int Term
+        public string CreditType
+        {
+            get => _creditType;
+            set
+            {
+                _creditType = value;
+                OnPropertyChanged("CreditType");
+            }
+        }
+
+        public DateTime DateIn
+        {
+            get => _dateIn;
+            set
+            {
+                _dateIn = value;
+                OnPropertyChanged("DateIn");
+            }
+        }
+        public long Term
         {
             get => _term;
             set
@@ -39,7 +71,6 @@ namespace HarwexBank
                 OnPropertyChanged("Term");
             }
         }
-
         public decimal Amount
         {
             get => _amount;
@@ -49,14 +80,22 @@ namespace HarwexBank
                 OnPropertyChanged("Amount");
             }
         }
-
-        public CreditTypeModel CreditType
+        public bool IsApproved
         {
-            get => _creditType;
+            get => _isApproved;
             set
             {
-                _creditType = value;
-                OnPropertyChanged("CreditType");
+                _isApproved = value;
+                OnPropertyChanged("IsApproved");
+            }
+        }
+        public bool IsRepaid
+        {
+            get => _isRepaid;
+            set
+            {
+                _isRepaid = value;
+                OnPropertyChanged("IsRepaid");
             }
         }
     }

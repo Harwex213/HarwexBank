@@ -1,13 +1,19 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace HarwexBank
 {
     public class CreditTypeModel : ObservableObject
     {
+        public CreditTypeModel()
+        {
+            IssuedCredits = new HashSet<IssuedCreditModel>();
+        }
+        
         private int _id;
         private string _name;
         private decimal _ratio;
-
+        public virtual ICollection<IssuedCreditModel> IssuedCredits { get; set; }
         public int Id
         {
             get => _id;
