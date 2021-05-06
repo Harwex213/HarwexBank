@@ -10,14 +10,6 @@
                     
                     <Button HorizontalContentAlignment="Stretch">
                         <Grid>
-                            <Grid.Resources>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Margin" Value="5"></Setter>
-                                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                                </Style>
-                            </Grid.Resources>
-                            
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
@@ -92,7 +84,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:OpenAccount}">
                     
-                    <Button Width="200" Height="60">Открыть новый счёт</Button>
+                    <Button Width="150" Height="40">Открыть новый счёт</Button>
                     
                 </ControlTemplate>
             </Setter.Value>

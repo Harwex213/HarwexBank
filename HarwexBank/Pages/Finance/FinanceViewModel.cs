@@ -30,7 +30,7 @@ namespace HarwexBank
             ControlViewModels.Add(new AccountViewModel());
             ControlViewModels.Add(new CreditViewModel());
 
-            SelectedControlViewModel = ControlViewModels[0];
+            SelectedControlViewModel = ControlViewModels[1];
         }
     }
 }

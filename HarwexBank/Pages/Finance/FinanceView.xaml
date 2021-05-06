@@ -11,45 +11,7 @@
             <local:AccountViewToFinancePage/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:CreditViewModel}">
-            <ScrollViewer>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="60"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    
-                    <ItemsControl Grid.Row="1"
-                                  ItemsSource="{Binding CreditModels}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Vertical"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Margin="30, 0, 30, 15">
-                                    <Grid.Resources>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                                            <Setter Property="Margin" Value="5"></Setter>
-                                            <Setter Property="FontSize" Value="14"></Setter>
-                                        </Style>
-                                    </Grid.Resources>
-                                    
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                            
-                                    <local:CreditGeneralInfo Grid.Row="0" />
-                                    <local:CreditClickedView Grid.Row="1" />
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </Grid>
-            </ScrollViewer>
+            <local:CreditViewToFinancePage/>
         </DataTemplate>
     </UserControl.Resources>
     

@@ -9,6 +9,7 @@ namespace HarwexBank
             Accounts = new HashSet<AccountModel>();
             IssuedCredits = new HashSet<IssuedCreditModel>();
         }
+        public string FullName => FirstName + " " + LastName + " " + Patronymic;
         
         private int _id;
         private string _firstName;
@@ -20,10 +21,10 @@ namespace HarwexBank
         private string _password;
         private bool _isBlocked;
         public string UserType { get; set; }
-
         public virtual UserTypeModel UserTypeModelNavigation { get; set; }
         public virtual ICollection<AccountModel> Accounts { get; set; }
         public virtual ICollection<IssuedCreditModel> IssuedCredits { get; set; }
+
         public int Id
         {
             get => _id;

@@ -16,6 +16,7 @@
             
             <!--LAYOUT-->
             <local:OpenAccount Grid.Row="0" Margin="10"/>
+            
             <ItemsControl Grid.Row="1" ItemsSource="{Binding AccountModels}">
                 <!--ITEMS PANEL TEMPLATE-->
                 <ItemsControl.ItemsPanel>
@@ -29,11 +30,12 @@
                     <DataTemplate>
                         <Grid Margin="30, 0, 30, 15">
                             <!--RESOURCES-->
+                            <!-- TODO: Make Resource Dictionary Theme and add to there -->
                             <Grid.Resources>
                                 <Style TargetType="TextBlock">
-                                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
                                     <Setter Property="Margin" Value="5"></Setter>
-                                    <Setter Property="FontSize" Value="14"></Setter>
+                                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
                                 </Style>
                             </Grid.Resources>
                             
@@ -42,8 +44,10 @@
                                 <RowDefinition Height="*"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
-                    
+                            
+                            <!--GRID LAYOUT-->
                             <local:AccountGeneralInfo Grid.Row="0" Background="#3D89A1"/>
+                            
                             <Grid Grid.Row="1" Background="#2C6172">
                                 <!--GRID DEFINITIONS-->
                                 <Grid.RowDefinitions>
@@ -51,11 +55,11 @@
                                     <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 
+                                <!--GRID LAYOUT-->
                                 <local:AccountAdditionalInfo Grid.Row="0"/>
                                 <local:CloseAccount Grid.Row="1"
                                                     Margin="0,0,0,17"/>
                             </Grid>
-                            
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
