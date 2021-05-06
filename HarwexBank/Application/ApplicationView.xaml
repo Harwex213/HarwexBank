@@ -51,6 +51,9 @@
                                 <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                                 <Button Content="{Binding Name}"
+                                                        Command="{Binding DataContext.ChangePageCommand,
+                                                                RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                                        CommandParameter="{Binding }"
                                                         FontSize="18"
                                                         Margin="10,10"
                                                         Padding="15, 15"/>
