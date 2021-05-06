@@ -48,7 +48,7 @@
                             </Grid.RowDefinitions>
     
                             <!--GRID LAYOUT-->
-                            <ContentControl Grid.Row="0" Content="{StaticResource GeneralInfo}"/>
+                            <ContentControl Grid.Row="0" Content="{StaticResource CreditGeneralInfo}"/>
                             
                             <Grid Grid.Row="1"
                                   Background="#2C6172"
