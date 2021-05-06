@@ -6,18 +6,20 @@
              xmlns:local="clr-namespace:HarwexBank"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
+    
     <ScrollViewer>
         <Grid>
             <!--GRID DEFINITIONS-->
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*" MaxHeight="100"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             
             <!--LAYOUT-->
             <ContentControl Grid.Row="0" Margin="10" Content="{StaticResource OpenAccount}"/>
             
-            <ItemsControl Grid.Row="1" ItemsSource="{Binding AccountModels}">
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding AccountModels}"
+                          Name="AccountsList">
                 <!--ITEMS PANEL TEMPLATE-->
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -46,10 +48,16 @@
                             </Grid.RowDefinitions>
                             
                             <!--GRID LAYOUT-->
-                            <ContentControl Grid.Row="0" Background="#3D89A1" 
-                                            Content="{StaticResource AccountGeneralInfo}"/>
+                            <!-- TODO: сделать выдвижное меню -->
+                            <Button Grid.Row="0" x:Name="AccountGeneralInfo"
+                                    HorizontalContentAlignment="Stretch" 
+                                    Background="#3D89A1">
+                                <ContentControl Content="{StaticResource AccountGeneralInfo}"/>
+                            </Button>
                             
-                            <Grid Grid.Row="1" Background="#2C6172">
+                            <Grid Grid.Row="1" x:Name="AccountAdditionalInfo"
+                                  Background="#2C6172">
+                                
                                 <!--GRID DEFINITIONS-->
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"></RowDefinition>

@@ -2,34 +2,30 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <!-- GENERAL INFO CONTROL -->
-    <Button x:Key="AccountGeneralInfo" x:Shared="False"
-            HorizontalContentAlignment="Stretch"
-            Background="#3D89A1">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+    <Grid x:Key="AccountGeneralInfo" x:Shared="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
                 
-            <TextBlock Grid.Row="0" Grid.Column="0"
-                       Text="Номер счёта"/>
-            <TextBlock Grid.Row="0" Grid.Column="1"
-                       Text="Дата открытия счёта"/>
-            <TextBlock Grid.Row="0" Grid.Column="2"
-                       Text="Остаток на счёте"/>
-            <TextBlock Grid.Row="1" Grid.Column="0"
-                       Text="{Binding Id}"/>
-            <TextBlock Grid.Row="1" Grid.Column="1" 
-                       Text="{Binding RegistrationDate}"/>
-            <TextBlock Grid.Row="1" Grid.Column="2" 
-                       Text="{Binding Amount}"/>
-        </Grid>
-    </Button>
+        <TextBlock Grid.Row="0" Grid.Column="0"
+                   Text="Номер счёта"/>
+        <TextBlock Grid.Row="0" Grid.Column="1"
+                   Text="Дата открытия счёта"/>
+        <TextBlock Grid.Row="0" Grid.Column="2"
+                   Text="Остаток на счёте"/>
+        <TextBlock Grid.Row="1" Grid.Column="0"
+                   Text="{Binding Id}"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" 
+                   Text="{Binding RegistrationDate}"/>
+        <TextBlock Grid.Row="1" Grid.Column="2" 
+                   Text="{Binding Amount}"/>
+    </Grid>
     
     <!-- ADDITIONAL INFO CONTROLS -->
     <!-- Account currency -->
