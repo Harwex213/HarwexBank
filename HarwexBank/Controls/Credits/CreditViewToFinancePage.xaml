@@ -37,7 +37,7 @@
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="HorizontalAlignment" Value="Center"></Setter>
                                     <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                                    <Setter Property="Margin" Value="5"></Setter>
+                                    <Setter Property="Margin" Value="20"></Setter>
                                 </Style>
                             </Grid.Resources>
     
@@ -50,15 +50,24 @@
                             <!--GRID LAYOUT-->
                             <ContentControl Grid.Row="0" Content="{StaticResource GeneralInfo}"/>
                             
-                            <WrapPanel Grid.Row="1"
-                                       Background="#2C6172"
-                                       Margin="0,0,0,17"
-                                       Orientation="Horizontal">
-                                <ContentControl Content="{StaticResource CreditId}"/>
-                                <ContentControl Content="{StaticResource CreditRate}"/>
-                                <ContentControl Content="{StaticResource CreditOwnerName}"/>
-                                <ContentControl Content="{StaticResource CreditOwnerPassport}"/>
-                            </WrapPanel>
+                            <Grid Grid.Row="1"
+                                  Background="#2C6172"
+                                  Margin="0,0,0,17">
+                                
+                                <!--GRID DEFINITIONS-->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                
+                                <!--GRID LAYOUT-->
+                                <ContentControl Grid.Column="0" Content="{StaticResource CreditId}"/>
+                                <ContentControl Grid.Column="1" Content="{StaticResource CreditRate}"/>
+                                <ContentControl Grid.Column="2" Content="{StaticResource CreditOwnerName}"/>
+                                <ContentControl Grid.Column="3" Content="{StaticResource CreditOwnerPassport}"/>
+                            </Grid>
                             
                         </Grid>
                     </DataTemplate>
