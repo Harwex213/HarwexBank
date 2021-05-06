@@ -15,7 +15,7 @@
             </Grid.RowDefinitions>
             
             <!--LAYOUT-->
-            <local:CreateAccount Grid.Row="0" Margin="10"/>
+            <local:OpenAccount Grid.Row="0" Margin="10"/>
             <ItemsControl Grid.Row="1" ItemsSource="{Binding AccountModels}">
                 <!--ITEMS PANEL TEMPLATE-->
                 <ItemsControl.ItemsPanel>
