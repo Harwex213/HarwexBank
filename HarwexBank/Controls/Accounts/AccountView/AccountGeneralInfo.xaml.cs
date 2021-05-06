@@ -3,9 +3,9 @@ using System.Windows.Controls;
 
 namespace HarwexBank
 {
-    public partial class GeneralInfo : UserControl
+    public partial class AccountGeneralInfo : UserControl
     {
-        public GeneralInfo()
+        public AccountGeneralInfo()
         {
             InitializeComponent();
         }

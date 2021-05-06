@@ -8,7 +8,7 @@
              d:DesignWidth="1530" d:DesignHeight="870" >
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type local:AccountViewModel}">
-            <local:AccountViewToFinance/>
+            <local:AccountViewToFinancePage/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type local:CreditViewModel}">
             <ScrollViewer>
@@ -42,7 +42,7 @@
                                         <RowDefinition Height="*"></RowDefinition>
                                     </Grid.RowDefinitions>
                             
-                                    <local:CreditView Grid.Row="0" />
+                                    <local:CreditGeneralInfo Grid.Row="0" />
                                     <local:CreditClickedView Grid.Row="1" />
                                 </Grid>
                             </DataTemplate>

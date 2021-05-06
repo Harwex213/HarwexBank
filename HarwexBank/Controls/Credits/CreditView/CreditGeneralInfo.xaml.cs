@@ -2,9 +2,9 @@
 
 namespace HarwexBank
 {
-    public partial class AdditionalInfo : UserControl
+    public partial class CreditGeneralInfo : UserControl
     {
-        public AdditionalInfo()
+        public CreditGeneralInfo()
         {
             InitializeComponent();
         }
