@@ -2,7 +2,7 @@
 
 namespace HarwexBank
 {
-    public class FinanceViewModel : BasePageViewModel, IPageViewModel
+    public class FinanceViewModel : BaseControlViewModel, IControlViewModel 
     {
         public string Name => "Финансы";
 

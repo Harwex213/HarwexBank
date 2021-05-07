@@ -1,6 +1,6 @@
 ﻿namespace HarwexBank
 {
-    public class ClientsViewModel : ObservableObject, IPageViewModel
+    public class ClientsViewModel : BaseControlViewModel, IControlViewModel
     {
         public string Name => "Клиенты";
     }
