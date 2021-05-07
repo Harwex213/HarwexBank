@@ -5,17 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:HarwexBank"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        
-        <TextBox Grid.Row="0" Name="Login"></TextBox>
-        <Button Grid.Row="1"
-                Command="{Binding DataContext.EnterAppCommand,
-                    RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                CommandParameter="{Binding ElementName=Login, Path=Text}">Enter</Button>
+             d:DesignHeight="1080" d:DesignWidth="1920">
+    <Grid Background="#564684">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="{Binding DataContext.SelectedControlViewModel.Name,
+                RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+        </Grid>
     </Grid>
 </UserControl>
+<!-- <TextBox Grid.Row="0" Name="Login"></TextBox> -->
+<!-- <Button Grid.Row="1" -->
+<!--         Command="{Binding DataContext.EnterAppCommand, -->
+<!--             RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" -->
+<!--         CommandParameter="{Binding ElementName=Login, Path=Text}">Enter</Button> -->

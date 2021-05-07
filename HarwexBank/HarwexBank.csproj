@@ -21,7 +21,7 @@
 
     <ItemGroup>
       <Folder Include="Application\Controls" />
-      <Folder Include="Application\Pages\Login" />
+      <Folder Include="Application\Pages\ForMainWindow" />
     </ItemGroup>
 
 </Project>

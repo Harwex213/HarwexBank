@@ -21,12 +21,9 @@ namespace HarwexBank
             SelectedControlViewModel = _authorization;
         }
 
-        public void EnterToApplication(string login)
+        public void EnterToApplication()
         {
-            // TODO: get the login of the AuthorizationViewModel
-            MainViewModel.LoggedInUser = ModelResourcesManager.GetInstance().GetUserByLogin(login);
-            
-            SelectedControlViewModel = _main ??= new MainViewModel();
+            SelectedControlViewModel = _main ??= new MainViewModel(this);
         }
 
         public void ExitOfApplication()

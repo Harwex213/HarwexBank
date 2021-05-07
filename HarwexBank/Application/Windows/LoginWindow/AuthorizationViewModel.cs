@@ -8,22 +8,73 @@ namespace HarwexBank
 
         public AuthorizationViewModel(ApplicationViewModel applicationViewModel)
         {
-            _applicationViewModel = applicationViewModel;
+            ApplicationViewModel = applicationViewModel;
+
+            _loginViewModel = new LoginViewModel(this);
+            _registrationViewModel = new RegistrationViewModel(this);
+
+            SelectedControlViewModel = _loginViewModel;
         }
 
-        private readonly ApplicationViewModel _applicationViewModel;
-        private ICommand _enterAppCommand;
+        public ApplicationViewModel ApplicationViewModel { get; }
         
-        public ICommand EnterAppCommand
+        private readonly LoginViewModel _loginViewModel;
+        private readonly RegistrationViewModel _registrationViewModel;
+
+        #region Commands
+        
+        private ICommand _registrationStartCommand;
+        private ICommand _backToLoginCommand;
+        private ICommand _registrationFinishCommand;
+        
+        public ICommand RegistrationCommand
         {
             get
             {
-                _enterAppCommand ??= new RelayCommand(
-                    c => _applicationViewModel.EnterToApplication((string)c),
-                    c => c is string);
+                _registrationStartCommand ??= new RelayCommand(
+                    c => SelectedControlViewModel = _registrationViewModel);
 
-                return _enterAppCommand;
+                return _registrationStartCommand;
             }
         }
+        
+        public ICommand BackToLoginCommand
+        {
+            get
+            {
+                _backToLoginCommand ??= new RelayCommand(
+                    c => SelectedControlViewModel = _loginViewModel);
+
+                return _backToLoginCommand;
+            }
+        }
+
+        public ICommand RegistrationFinishCommand
+        {
+            get
+            {
+                _registrationFinishCommand ??= new RelayCommand(
+                    c => RegistrationFinished((UserModel) c),
+                    c => c is UserModel);
+
+                return _registrationFinishCommand;
+            }
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void RegistrationFinished(UserModel userModel)
+        {
+            ModelResourcesManager.GetInstance().AddModel(userModel);
+        }
+
+        public void EnterToApplication()
+        {
+            ApplicationViewModel.EnterToApplication();
+        }
+
+        #endregion
     }
 }
