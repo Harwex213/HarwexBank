@@ -4,8 +4,8 @@
     <Application.Resources>
          <ResourceDictionary>
              <ResourceDictionary.MergedDictionaries>
-                 <ResourceDictionary Source="/HarwexBank;component/Controls/Accounts/AccountView.xaml"></ResourceDictionary>
-                 <ResourceDictionary Source="/HarwexBank;component/Controls/Credits/CreditView.xaml"></ResourceDictionary>
+                 <ResourceDictionary Source="/HarwexBank;component/Application/Controls/Accounts/AccountView.xaml"></ResourceDictionary>
+                 <ResourceDictionary Source="/HarwexBank;component/Application/Controls/Credits/CreditView.xaml"></ResourceDictionary>
                  <ResourceDictionary Source="/HarwexBank;component/Styles/TextBlock.xaml"></ResourceDictionary>
              </ResourceDictionary.MergedDictionaries>
          </ResourceDictionary>

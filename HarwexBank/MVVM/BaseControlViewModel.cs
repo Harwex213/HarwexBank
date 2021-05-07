@@ -39,7 +39,7 @@ namespace HarwexBank
             get { return _controlViewModels ??= new List<IControlViewModel>(); }
         }
         
-        private void ChangeViewModel(IControlViewModel viewModel)
+        protected void ChangeViewModel(IControlViewModel viewModel)
         {
             if (!ControlViewModels.Contains(viewModel))
                 ControlViewModels.Add(viewModel);

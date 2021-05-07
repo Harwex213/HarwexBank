@@ -8,7 +8,7 @@ namespace HarwexBank
         public string Name => "Счета";
         public AccountViewModel()
         {
-            AccountModels = new ObservableCollection<AccountModel>(ApplicationViewModel.LoggedInUser.Accounts);
+            AccountModels = new ObservableCollection<AccountModel>(MainViewModel.LoggedInUser.Accounts);
         }
         public ObservableCollection<AccountModel> AccountModels { get; }
 
@@ -62,7 +62,7 @@ namespace HarwexBank
         
         private void OpenAccountModel(AccountModel account)
         {
-            
+            // TODO: Make opening new Account
         }
         private void CloseAccountModel(AccountModel account)
         {
@@ -72,6 +72,8 @@ namespace HarwexBank
         
         private void FreezeAccountModel(AccountModel account)
         {
+            // TODO: Update the account
+            
             account.IsFrozen = !account.IsFrozen;
         }
 
