@@ -327,7 +327,7 @@ namespace HarwexBank
                     CurrencyType = "BYN",
                     RegistrationDate = DateTime.Today,
                     Amount = 74812m,
-                    IsFrozen = false
+                    IsFrozen = true
                 },
                 new()
                 {

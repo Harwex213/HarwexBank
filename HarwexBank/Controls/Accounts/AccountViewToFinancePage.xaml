@@ -37,7 +37,7 @@
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="HorizontalAlignment" Value="Center"></Setter>
                                     <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                                    <Setter Property="Margin" Value="20"></Setter>
+                                    <Setter Property="Margin" Value="5"></Setter>
                                 </Style>
                             </Grid.Resources>
                             
@@ -51,7 +51,8 @@
                             <!-- TODO: сделать выдвижное меню -->
                             <Button Grid.Row="0" x:Name="AccountGeneralInfo"
                                     HorizontalContentAlignment="Stretch" 
-                                    Background="#3D89A1">
+                                    Background="#3D89A1"
+                                    IsEnabled="{Binding IsNotFrozen}">
                                 <ContentControl Content="{StaticResource AccountGeneralInfo}"/>
                             </Button>
                             
@@ -69,7 +70,7 @@
                                 <ContentControl Grid.Row="0" Content="{StaticResource AccountCurrency}"/>
                                 <ContentControl Grid.Row="1" Content="{StaticResource AccountCards}"/>
                                 <ContentControl Grid.Row="2" Margin="0,0,0,17"
-                                                Content="{StaticResource CloseAccount}"/>
+                                                Content="{StaticResource FreezeAccount}"/>
                             </Grid>
                         </Grid>
                     </DataTemplate>

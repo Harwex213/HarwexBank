@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HarwexBank
 {
@@ -81,8 +82,11 @@ namespace HarwexBank
             set
             {
                 _isFrozen = value;
-                OnPropertyChanged("IsFrozen");
+                OnPropertyChanged($"IsNotFrozen");
             }
         }
+        
+        [NotMapped]
+        public bool IsNotFrozen => !_isFrozen;
     }
 }

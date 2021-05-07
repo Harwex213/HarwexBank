@@ -2,9 +2,11 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using Microsoft.EntityFrameworkCore;
 
 namespace HarwexBank
 {
@@ -25,47 +27,60 @@ namespace HarwexBank
         private ICommand _closeAccountCommand;
         private ICommand _freezeAccountCommand;
 
-        // public ICommand OpenAccountCommand
-        // {
-        //     get
-        //     {
-        //         _openAccountCommand ??= new RelayCommand(
-        //             p => ChangeViewModel((IPageViewModel)p),
-        //             p => p is IPageViewModel);
-        //
-        //         return _openAccountCommand;
-        //     }
-        // }
-        //
-        // public ICommand CloseAccountCommand
-        // {
-        //     get
-        //     {
-        //         _closeAccountCommand ??= new RelayCommand(
-        //             p => ChangeViewModel((IPageViewModel)p),
-        //             p => p is IPageViewModel);
-        //
-        //         return _closeAccountCommand;
-        //     }
-        // }
-        //
-        // public ICommand FreezeAccountCommand
-        // {
-        //     get
-        //     {
-        //         _freezeAccountCommand ??= new RelayCommand(
-        //             p => ChangeViewModel((IPageViewModel)p),
-        //             p => p is IPageViewModel);
-        //
-        //         return _freezeAccountCommand;
-        //     }
-        // }
+        public ICommand OpenAccountCommand
+        {
+            get
+            {
+                _openAccountCommand ??= new RelayCommand(
+                    a => OpenAccountModel((AccountModel)a),
+                    a => a is AccountModel);
+        
+                return _openAccountCommand;
+            }
+        }
+        
+        public ICommand CloseAccountCommand
+        {
+            get
+            {
+                _closeAccountCommand ??= new RelayCommand(
+                    a => CloseAccountModel((AccountModel)a),
+                    a => a is AccountModel);
+        
+                return _closeAccountCommand;
+            }
+        }
+        
+        public ICommand FreezeAccountCommand
+        {
+            get
+            {
+                _freezeAccountCommand ??= new RelayCommand(
+                    a => FreezeAccountModel((AccountModel)a),
+                    a => a is AccountModel);
+        
+                return _freezeAccountCommand;
+            }
+        }
         
         #endregion
 
         #region Methods
         
+        private void OpenAccountModel(AccountModel account)
+        {
+            
+        }
+        private void CloseAccountModel(AccountModel account)
+        {
+            ModelResourcesManager.GetInstance().RemoveModel(account);
+            AccountModels.Remove(account);
+        }
         
+        private void FreezeAccountModel(AccountModel account)
+        {
+            account.IsFrozen = !account.IsFrozen;
+        }
 
         #endregion
 
