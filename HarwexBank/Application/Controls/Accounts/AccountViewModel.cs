@@ -62,19 +62,19 @@ namespace HarwexBank
         
         private void OpenAccountModel(AccountModel account)
         {
-            // TODO: Make opening new Account
+            AccountModels.Add(account);
+            ModelResourcesManager.GetInstance().AddModel(account);
         }
         private void CloseAccountModel(AccountModel account)
         {
-            ModelResourcesManager.GetInstance().RemoveModel(account);
             AccountModels.Remove(account);
+            ModelResourcesManager.GetInstance().RemoveModel(account);
         }
         
         private void FreezeAccountModel(AccountModel account)
         {
-            // TODO: Update the account
-            
             account.IsFrozen = !account.IsFrozen;
+            ModelResourcesManager.GetInstance().UpdateModel(account);
         }
 
         #endregion

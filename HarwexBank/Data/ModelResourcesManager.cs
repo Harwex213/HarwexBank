@@ -15,7 +15,7 @@ namespace HarwexBank
             
             _context.Users.Load();
             _context.UserTypes.Load();
-            _context.Accounts.Load();
+             _context.Accounts.Load();
             _context.CurrencyTypes.Load();
             _context.IssuedCredits.Load();
             _context.CreditTypes.Load();
@@ -69,6 +69,8 @@ namespace HarwexBank
                     _context.CardTypes.Add(cardTypeModel);
                     break;
             }
+            
+            _context.SaveChangesAsync();
         }
         
         public void UpdateModel(IModel model)
@@ -100,6 +102,8 @@ namespace HarwexBank
                     _context.CardTypes.Update(cardTypeModel);
                     break;
             }
+            
+            _context.SaveChangesAsync();
         }
 
         public void RemoveModel(IModel model)
@@ -131,11 +135,15 @@ namespace HarwexBank
                     _context.CardTypes.Remove(cardTypeModel);
                     break;
             }
+            
+            _context.SaveChangesAsync();
         }
 
         public void GenerateOperation(OperationModel operation)
         {
             _context.Operations.Add(operation);
+            
+            _context.SaveChangesAsync();
         }
     }
 }
