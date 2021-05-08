@@ -30,6 +30,7 @@
         <Style x:Key="ButtonRegistration" TargetType="Button">
             <Setter Property="Width" Value="125"></Setter>
             <Setter Property="Height" Value="24"></Setter>
+            <Setter Property="Margin" Value="0, 0, 0, 40"></Setter>
         </Style>
 
     </UserControl.Resources>

@@ -28,8 +28,8 @@
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="80"></RowDefinition>
-                <RowDefinition Height="3*" MinHeight="{Binding SelectedControlViewModel.MinHeight}"></RowDefinition>
+                <RowDefinition Height="70"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 

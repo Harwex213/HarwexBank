@@ -20,9 +20,5 @@
                 
         </Window.Resources>
         
-        <ContentControl Name="Window" Content="{Binding SelectedControlViewModel}"/>
-        <!-- <WrapPanel> -->
-        <!--         <ContentControl Name="Window" Content="{Binding SelectedControlViewModel}"/> -->
-        <!--         <TextBlock Text="{Binding Source=AuthorizationView, Path=MinHeight}"></TextBlock> -->
-        <!-- </WrapPanel> -->
+        <ContentControl Content="{Binding SelectedControlViewModel}"/>
 </Window>
