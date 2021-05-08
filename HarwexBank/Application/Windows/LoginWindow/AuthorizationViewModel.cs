@@ -75,9 +75,10 @@ namespace HarwexBank
             SelectedControlViewModel = _loginViewModel;
         }
         
-        private static void RegistrationFinish(UserModel userModel)
+        private void RegistrationFinish(UserModel userModel)
         {
-            ModelResourcesManager.GetInstance().AddModel( userModel);
+            ModelResourcesManager.GetInstance().AddModel(userModel);
+            SelectedControlViewModel = _loginViewModel;
         }
 
         #endregion

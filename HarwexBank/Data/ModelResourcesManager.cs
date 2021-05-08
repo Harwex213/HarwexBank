@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace HarwexBank
 {
@@ -11,6 +12,18 @@ namespace HarwexBank
         private ModelResourcesManager()
         {
             _context = new HarwexBankContext();
+            
+            _context.Users.Load();
+            _context.UserTypes.Load();
+            _context.Accounts.Load();
+            _context.CurrencyTypes.Load();
+            _context.IssuedCredits.Load();
+            _context.CreditTypes.Load();
+            _context.Cards.Load();
+            _context.CardTypes.Load();
+            _context.Operations.Load();
+            _context.TransferToAccounts.Load();
+            _context.CreditRepayments.Load();
         }
         public static ModelResourcesManager GetInstance()
         {
@@ -54,6 +67,37 @@ namespace HarwexBank
                     break;
                 case CardTypeModel cardTypeModel:
                     _context.CardTypes.Add(cardTypeModel);
+                    break;
+            }
+        }
+        
+        public void UpdateModel(IModel model)
+        {
+            switch (model)
+            {
+                case UserModel userModel:
+                    _context.Users.Update(userModel);
+                    break;
+                case UserTypeModel userTypeModel:
+                    _context.UserTypes.Update(userTypeModel);
+                    break;
+                case IssuedCreditModel issuedCreditModel:
+                    _context.IssuedCredits.Update(issuedCreditModel);
+                    break;
+                case CreditTypeModel creditTypeModel:
+                    _context.CreditTypes.Update(creditTypeModel);
+                    break;
+                case AccountModel accountModel:
+                    _context.Accounts.Update(accountModel);
+                    break;
+                case CurrencyTypeModel currencyTypeModel:
+                    _context.CurrencyTypes.Update(currencyTypeModel);
+                    break;
+                case CardModel cardModel:
+                    _context.Cards.Update(cardModel);
+                    break;
+                case CardTypeModel cardTypeModel:
+                    _context.CardTypes.Update(cardTypeModel);
                     break;
             }
         }

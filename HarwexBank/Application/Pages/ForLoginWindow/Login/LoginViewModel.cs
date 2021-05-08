@@ -7,12 +7,10 @@ namespace HarwexBank
     public class LoginViewModel : BaseControlViewModel, IControlViewModel
     {
         public string Name => "Вход";
-        public double MinHeight { get; set; }
 
         public LoginViewModel(AuthorizationViewModel authorizationViewModel)
         {
             AuthorizationViewModel = authorizationViewModel;
-            MinHeight = 455;
         }
         public AuthorizationViewModel AuthorizationViewModel { get; }
         public string Login { get; set; }
@@ -45,6 +43,10 @@ namespace HarwexBank
                 if (user.Password != Password)
                 {
                     throw new Exception("Неверно введён пароль.");
+                }
+                if (user.IsBlocked)
+                {
+                    throw new Exception("Пользователь заблокирован.");
                 }
                 
                 // If login & password is typed correctly

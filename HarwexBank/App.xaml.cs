@@ -16,6 +16,7 @@ namespace HarwexBank
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            ModelResourcesManager.GetInstance();
 
             var app = new ApplicationView();
             var context = new ApplicationViewModel();

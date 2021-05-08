@@ -2,9 +2,9 @@
 
 namespace HarwexBank
 {
-    public partial class RegistrationView1 : UserControl
+    public partial class RegistrationView : UserControl
     {
-        public RegistrationView1()
+        public RegistrationView()
         {
             InitializeComponent();
         }

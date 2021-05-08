@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace HarwexBank
 {
-    public class UserModel : ObservableObject, ModelResourcesManager.IModel
+    public class UserModel : ObservableObject, ModelResourcesManager.IModel, IDataErrorInfo
     {
         public UserModel()
         {
@@ -111,6 +113,74 @@ namespace HarwexBank
             {
                 _isBlocked = value;
                 OnPropertyChanged("IsBlocked");
+            }
+        }
+        
+        public string Error
+        {
+            get
+            {
+                return null;
+            }
+        }
+
+        public string this[string name]
+        {
+            get
+            {
+                string result = null;
+                var stringNameToCheck = string.Empty;
+
+                switch (name)
+                {
+                    case nameof(FirstName):
+                        stringNameToCheck = FirstName;
+                        goto case "CheckFullName";
+                        
+                    case nameof(LastName):
+                        stringNameToCheck = LastName;
+                        goto case "CheckFullName";
+                        
+                    case nameof(Patronymic):
+                        if (!string.IsNullOrEmpty(Patronymic))
+                        {
+                            stringNameToCheck = Patronymic;
+                            goto case "CheckFullName";
+                        }
+                        break;
+
+                    case "CheckFullName":
+                        if (stringNameToCheck.Length is < 2 or > 50)
+                        {
+                            result = "Должно быть длиннее 2 символов и меньше 50";
+                        }
+                
+                        if (Regex.Match(stringNameToCheck, @"^[A-Z][a-zA-Z]*$").Success)
+                        {
+                            result = "Должно содержать только буквы";
+                        }
+                        break;
+                    
+                    case nameof(Address):
+                        if (stringNameToCheck.Length > 6)
+                        {
+                            result = "Должен быть длиннее 6 символов.";
+                        }
+                        break;
+                    
+                    case nameof(Passport):
+                        if (Regex.Match(Address, @"^[A-Z]{2}[0-9]{7}$").Success)
+                        {
+                            result = "Первые два символа должны быть латинские буквы. Следующие семь цифры.";
+                        }
+                        break;
+                    
+                    case nameof(Login):
+                        
+                        break;
+                }
+
+                return result;
             }
         }
     }
