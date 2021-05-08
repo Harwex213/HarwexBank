@@ -23,16 +23,18 @@ namespace HarwexBank
 
         #region Commands
         
+        // Fields.
         private ICommand _registrationStartCommand;
         private ICommand _backToLoginCommand;
         private ICommand _registrationFinishCommand;
         
-        public ICommand RegistrationCommand
+        // Props.
+        public ICommand RegistrationStartCommand
         {
             get
             {
                 _registrationStartCommand ??= new RelayCommand(
-                    c => SelectedControlViewModel = _registrationViewModel);
+                    _ => RegistrationStart());
 
                 return _registrationStartCommand;
             }
@@ -43,7 +45,7 @@ namespace HarwexBank
             get
             {
                 _backToLoginCommand ??= new RelayCommand(
-                    c => SelectedControlViewModel = _loginViewModel);
+                    _ => BackToLogin());
 
                 return _backToLoginCommand;
             }
@@ -54,25 +56,28 @@ namespace HarwexBank
             get
             {
                 _registrationFinishCommand ??= new RelayCommand(
-                    c => RegistrationFinished((UserModel) c),
+                    c => RegistrationFinish((UserModel)c),
                     c => c is UserModel);
 
                 return _registrationFinishCommand;
             }
         }
+        
+        // Methods.
 
-        #endregion
-
-        #region Methods
-
-        private void RegistrationFinished(UserModel userModel)
+        private void RegistrationStart()
         {
-            ModelResourcesManager.GetInstance().AddModel(userModel);
+            SelectedControlViewModel = _registrationViewModel;
         }
-
-        public void EnterToApplication()
+        
+        private void BackToLogin()
         {
-            ApplicationViewModel.EnterToApplication();
+            SelectedControlViewModel = _loginViewModel;
+        }
+        
+        private static void RegistrationFinish(UserModel userModel)
+        {
+            ModelResourcesManager.GetInstance().AddModel( userModel);
         }
 
         #endregion

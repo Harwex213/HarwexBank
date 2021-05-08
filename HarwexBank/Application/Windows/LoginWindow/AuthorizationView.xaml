@@ -6,27 +6,60 @@
              xmlns:local="clr-namespace:HarwexBank"
              mc:Ignorable="d"
              d:DesignHeight="1080" d:DesignWidth="1920">
+    <UserControl.Resources>
+
+        <DataTemplate DataType="{x:Type local:LoginViewModel}">
+            <local:LoginView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type local:RegistrationViewModel}">
+            <local:RegistrationViewGeneral />
+        </DataTemplate>
+        
+    </UserControl.Resources>
+    
     <Grid Background="#564684">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="465"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="3*" MinHeight="{Binding SelectedControlViewModel.MinHeight}"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="{Binding DataContext.SelectedControlViewModel.Name,
-                RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <TextBlock Grid.Row="1" 
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="48"
+                       Foreground="White"
+                       FontFamily="Roboto"
+                       FontWeight="Light" Text="Harwex Bank"/>
+
+            <Grid Grid.Row="2"
+                  Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" 
+                           VerticalAlignment="Bottom"
+                           Margin="0, 0, 0, 5"
+                           HorizontalAlignment="Center"
+                           FontSize="36"
+                           Text="{Binding SelectedControlViewModel.Name}"/>
+                
+                <ContentControl Grid.Row="1" 
+                                Margin="40, 0"
+                                Content="{Binding SelectedControlViewModel}"/>
+            </Grid>
+           
         </Grid>
     </Grid>
 </UserControl>
-<!-- <TextBox Grid.Row="0" Name="Login"></TextBox> -->
-<!-- <Button Grid.Row="1" -->
-<!--         Command="{Binding DataContext.EnterAppCommand, -->
-<!--             RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" -->
-<!--         CommandParameter="{Binding ElementName=Login, Path=Text}">Enter</Button> -->

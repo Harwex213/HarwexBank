@@ -21,14 +21,46 @@ namespace HarwexBank
             SelectedControlViewModel = _authorization;
         }
 
-        public void EnterToApplication()
+        #region Commands
+
+        // Fields.
+        private ICommand _enterToApplicationCommand;
+        private ICommand _exitOfApplicationCommand;
+
+        // Props.
+        public ICommand EnterToApplicationCommand
+        {
+            get
+            {
+                _enterToApplicationCommand ??= new RelayCommand(
+                    c => EnterToApplication());
+
+                return _enterToApplicationCommand;
+            }
+        }
+        
+        public ICommand ExitOfApplicationCommand
+        {
+            get
+            {
+                _exitOfApplicationCommand ??= new RelayCommand(
+                    c => ExitOfApplication());
+
+                return _exitOfApplicationCommand;
+            }
+        }
+        
+        // Methods.
+        private void EnterToApplication()
         {
             SelectedControlViewModel = _main ??= new MainViewModel(this);
         }
 
-        public void ExitOfApplication()
+        private void ExitOfApplication()
         {
             SelectedControlViewModel = _authorization;
         }
+
+        #endregion
     }
 }
