@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -88,8 +89,11 @@ namespace HarwexBank
         
         private void CreateAccountModel()
         {
-            // TODO: construct account model
-            
+            AccountToOpen.UserId = MainViewModel.Data.LoggedInUser.Id;
+            AccountToOpen.RegistrationDate = DateTime.Now;
+            AccountToOpen.Amount = 0;
+            AccountToOpen.IsFrozen = false;
+
             AccountModels.Add(AccountToOpen);
             ModelResourcesManager.GetInstance().AddModel(AccountToOpen);
             
