@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace HarwexBank
 {
@@ -9,13 +10,11 @@ namespace HarwexBank
         public MainViewModel(ApplicationViewModel applicationViewModel)
         {
             ApplicationViewModel = applicationViewModel;
+
+            ControlViewModels.AddRange(
+                PagesFactory.GetFactoryByUserType(LoggedInUser.UserTypeModelNavigation).GetPages());
             
-            // TODO: 
-            
-            ControlViewModels.Add(new CardsViewModel());
-            ControlViewModels.Add(new FinanceViewModel());
-            
-            SelectedControlViewModel = ControlViewModels[1];
+            SelectedControlViewModel = ControlViewModels[0];
         }
         public ApplicationViewModel ApplicationViewModel { get; }
         

@@ -8,7 +8,7 @@ namespace HarwexBank
 {
     public class ApplicationViewModel : BaseControlViewModel
     {
-        #region Exites Windows
+        #region Existed Windows
 
         private readonly AuthorizationViewModel _authorization;
         private MainViewModel _main;
