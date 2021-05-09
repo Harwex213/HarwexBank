@@ -10,7 +10,7 @@ namespace HarwexBank
         public ObservableCollection<IssuedCreditModel> CreditModels { get; }
         public CreditViewModel()
         {
-            CreditModels = new ObservableCollection<IssuedCreditModel>(MainViewModel.LoggedInUser.IssuedCredits);
+            CreditModels = new ObservableCollection<IssuedCreditModel>(MainViewModel.Data.LoggedInUser.IssuedCredits);
         }
     }
 }

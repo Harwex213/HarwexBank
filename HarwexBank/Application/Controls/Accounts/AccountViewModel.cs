@@ -8,7 +8,7 @@ namespace HarwexBank
         public string Name => "Счета";
         public AccountViewModel()
         {
-            AccountModels = new ObservableCollection<AccountModel>(MainViewModel.LoggedInUser.Accounts);
+            AccountModels = new ObservableCollection<AccountModel>(MainViewModel.Data.LoggedInUser.Accounts);
         }
         public ObservableCollection<AccountModel> AccountModels { get; }
 

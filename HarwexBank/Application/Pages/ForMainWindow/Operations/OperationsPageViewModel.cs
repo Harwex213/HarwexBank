@@ -1,6 +1,6 @@
 ﻿namespace HarwexBank
 {
-    public class OperationsViewModel : BaseControlViewModel, IControlViewModel
+    public class OperationsPageViewModel : BaseControlViewModel, IControlViewModel
     {
         public string Name => "Операции";
     }

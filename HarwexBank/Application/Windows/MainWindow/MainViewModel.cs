@@ -7,22 +7,28 @@ namespace HarwexBank
     {
         public string Name => "Harwex Bank";
 
+        static MainViewModel()
+        {
+            Data = new MainWindowInfo();
+        }
+
         public MainViewModel(ApplicationViewModel applicationViewModel)
         {
             ApplicationViewModel = applicationViewModel;
 
             ControlViewModels.AddRange(
-                PagesFactory.GetFactoryByUserType(LoggedInUser.UserTypeModelNavigation).GetPages());
+                MainWindowFactory.GetFactoryByUserType(Data.LoggedInUser.UserTypeModelNavigation).GetPages());
             
             SelectedControlViewModel = ControlViewModels[0];
         }
         public ApplicationViewModel ApplicationViewModel { get; }
-        
-        #region Data global properties for pages
-
-        public static UserModel LoggedInUser { get; set; }
-        public static ObservableCollection<UserModel> ExistedClients { get; set; }
-
-        #endregion
+        public static MainWindowInfo Data { get; }
+    }
+    
+    public class MainWindowInfo
+    {
+        public UserModel LoggedInUser { get; set; }
+        public ObservableCollection<UserModel> ExistedClients { get; set; }
+        public OperationModel AllPerformedOperations { get; set; }
     }
 }

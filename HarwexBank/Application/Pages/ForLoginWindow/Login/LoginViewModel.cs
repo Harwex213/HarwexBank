@@ -50,7 +50,7 @@ namespace HarwexBank
                 }
                 
                 // If login & password is typed correctly
-                MainViewModel.LoggedInUser = user;
+                MainViewModel.Data.LoggedInUser = user;
                 AuthorizationViewModel.ApplicationViewModel.EnterToApplicationCommand.Execute(new object());
             }
             catch (Exception e)

@@ -20,7 +20,7 @@ namespace HarwexBank
 
     public partial class CreditRepayment : OperationModel
     {
-        public int? SelectedCredit { get; set; }
+        public int SelectedCredit { get; set; }
         public virtual IssuedCreditModel SelectedCreditModelNavigation { get; set; }
     }
 }

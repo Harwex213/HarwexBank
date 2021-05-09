@@ -2,23 +2,25 @@
 
 namespace HarwexBank
 {
-    public abstract class PagesFactory
+    public abstract class MainWindowFactory
     {
-        public static PagesFactory GetFactoryByUserType(UserTypeModel userTypeModel)
+        public static MainWindowFactory GetFactoryByUserType(UserTypeModel userTypeModel)
         {
             return userTypeModel.Name switch
             {
-                "admin" => new AdminPages(),
-                "worker" => new WorkerPages(),
-                "client" => new ClientPages(),
+                "admin" => new AdminMainWindow(),
+                "worker" => new WorkerMainWindow(),
+                "client" => new ClientMainWindow(),
                 _ => null
             };
         }
 
         public abstract List<IControlViewModel> GetPages();
+        
+        // TODO: public abstract void GetNecessaryInfo();
     }
     
-    public class AdminPages : PagesFactory
+    public class AdminMainWindow : MainWindowFactory
     {
         public override List<IControlViewModel> GetPages()
         {
@@ -26,7 +28,7 @@ namespace HarwexBank
         }
     }
     
-    public class WorkerPages : PagesFactory
+    public class WorkerMainWindow : MainWindowFactory
     {
         public override List<IControlViewModel> GetPages()
         {
@@ -39,7 +41,7 @@ namespace HarwexBank
         }
     }
     
-    public class ClientPages : PagesFactory
+    public class ClientMainWindow : MainWindowFactory
     {
         public override List<IControlViewModel> GetPages()
         {
@@ -47,7 +49,7 @@ namespace HarwexBank
             {
                 new CardsViewModel(),
                 new FinanceViewModel(),
-                new OperationsViewModel(),
+                new OperationsPageViewModel(),
                 new JournalViewModel()
             };
         }
