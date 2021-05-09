@@ -2,9 +2,9 @@
 
 namespace HarwexBank
 {
-    public partial class AccountViewToFinancePage : UserControl
+    public partial class AccountViewToClientsPage : UserControl
     {
-        public AccountViewToFinancePage()
+        public AccountViewToClientsPage()
         {
             InitializeComponent();
         }

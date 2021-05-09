@@ -5,8 +5,8 @@ using System.Windows.Input;
 
 namespace HarwexBank
 {
-    public class AccountsListPage : Control, IControlViewModel { }
-    public class CreateNewAccountPage : Control, IControlViewModel { }
+    public class AccountsListViewModel : Control, IControlViewModel { }
+    public class CreateNewAccountViewModel : Control, IControlViewModel { }
     public class AccountViewModel : BaseControlViewModel, IControlViewModel
     {
         public string Name => "Счета";
@@ -14,8 +14,8 @@ namespace HarwexBank
         {
             AccountModels = new ObservableCollection<AccountModel>(MainViewModel.Data.LoggedInUser.Accounts);
             
-            ControlViewModels.Add(new AccountsListPage());
-            ControlViewModels.Add(new CreateNewAccountPage());
+            ControlViewModels.Add(new AccountsListViewModel());
+            ControlViewModels.Add(new CreateNewAccountViewModel());
 
             SelectedControlViewModel = ControlViewModels[0];
         }

@@ -6,75 +6,104 @@
              xmlns:local="clr-namespace:HarwexBank"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    
-    <ScrollViewer>
-        <Grid>
-            <!--GRID DEFINITIONS-->
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" MaxHeight="100"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            
-            <!--LAYOUT-->
-            <ContentControl Grid.Row="0" Margin="10" Content="{StaticResource OpenAccount}"/>
-            
-            <ItemsControl Grid.Row="1" ItemsSource="{Binding AccountModels}">
-                <!--ITEMS PANEL TEMPLATE-->
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
+    <UserControl.Resources>
         
-                <!--ITEM TEMPLATE-->
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="30, 0, 30, 15">
-                            <!--RESOURCES-->
-                            <!-- TODO: Make Resource Dictionary Theme and add to there -->
-                            <Grid.Resources>
-                                <Style TargetType="{x:Type TextBlock}">
-                                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                                    <Setter Property="Margin" Value="5"></Setter>
-                                </Style>
-                            </Grid.Resources>
-                            
-                            <!--GRID DEFINITIONS-->
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            
-                            <!--GRID LAYOUT-->
-                            <!-- TODO: сделать выдвижное меню -->
-                            <Button Grid.Row="0" x:Name="AccountGeneralInfo"
-                                    HorizontalContentAlignment="Stretch" 
-                                    Background="#3D89A1"
-                                    IsEnabled="{Binding IsNotFrozen}">
-                                <ContentControl Content="{StaticResource AccountGeneralInfo}"/>
-                            </Button>
-                            
-                            <Grid Grid.Row="1" x:Name="AccountAdditionalInfo"
-                                  Background="#2C6172">
-                                
+        <Style TargetType="{x:Type local:AccountsListViewModel}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:AccountsListViewModel}">
+                    
+                        <ScrollViewer>
+                            <Grid>
                                 <!--GRID DEFINITIONS-->
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"></RowDefinition>
-                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*" MaxHeight="100"></RowDefinition>
                                     <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 
-                                <!--GRID LAYOUT-->
-                                <ContentControl Grid.Row="0" Content="{StaticResource AccountCurrency}"/>
-                                <ContentControl Grid.Row="1" Content="{StaticResource AccountCards}"/>
-                                <ContentControl Grid.Row="2" Margin="0,0,0,17"
-                                                Content="{StaticResource FreezeAccount}"/>
+                                <!--LAYOUT-->
+                                <ContentControl Grid.Row="0" 
+                                                Margin="10"
+                                                Content="{StaticResource OpenAccount}"></ContentControl>
+                                
+                                <ItemsControl Grid.Row="1" ItemsSource="{Binding AccountModels}">
+                                    <!--ITEMS PANEL TEMPLATE-->
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Vertical"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                            
+                                    <!--ITEM TEMPLATE-->
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="30, 0, 30, 15">
+                                                <!--RESOURCES-->
+                                                <!-- TODO: Make Resource Dictionary Theme and add to there -->
+                                                <Grid.Resources>
+                                                    <Style TargetType="{x:Type TextBlock}">
+                                                        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                                                        <Setter Property="Margin" Value="5"></Setter>
+                                                    </Style>
+                                                </Grid.Resources>
+                                                
+                                                <!--GRID DEFINITIONS-->
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"></RowDefinition>
+                                                    <RowDefinition Height="*"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                
+                                                <!--GRID LAYOUT-->
+                                                <!-- TODO: сделать выдвижное меню -->
+                                                <Button Grid.Row="0" x:Name="AccountGeneralInfo"
+                                                        HorizontalContentAlignment="Stretch" 
+                                                        Background="#3D89A1"
+                                                        IsEnabled="{Binding IsNotFrozen}">
+                                                    <ContentControl Content="{StaticResource AccountGeneralInfo}"/>
+                                                </Button>
+                                                
+                                                <Grid Grid.Row="1" x:Name="AccountAdditionalInfo"
+                                                      Background="#2C6172">
+                                                    
+                                                    <!--GRID DEFINITIONS-->
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                    </Grid.RowDefinitions>
+                                                    
+                                                    <!--GRID LAYOUT-->
+                                                    <ContentControl Grid.Row="0" Content="{StaticResource AccountCurrency}"/>
+                                                    <ContentControl Grid.Row="1" Content="{StaticResource AccountCards}"/>
+                                                    <ContentControl Grid.Row="2" Margin="0,0,0,17"
+                                                                    Content="{StaticResource FreezeAccount}"/>
+                                                </Grid>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </Grid>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </Grid>
-    </ScrollViewer>
+                        </ScrollViewer>
+                    
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style TargetType="{x:Type local:CreateNewAccountViewModel}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:CreateNewAccountViewModel}">
+                    
+                    
+                    
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </UserControl.Resources>
+    
+    <ContentControl Content="{Binding SelectedControlViewModel}"></ContentControl>
 </UserControl>
