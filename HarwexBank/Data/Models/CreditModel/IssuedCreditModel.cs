@@ -12,7 +12,7 @@ namespace HarwexBank
         }
         
         private int _id;
-        private int? _userId;
+        private int _userId;
         private string _creditType;
         private DateTime _dateIn;
         private long _term;
@@ -33,7 +33,7 @@ namespace HarwexBank
                 OnPropertyChanged("Id");
             }
         }
-        public int? UserId
+        public int UserId
         {
             get => _userId;
             set

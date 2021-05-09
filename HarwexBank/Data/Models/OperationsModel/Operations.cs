@@ -5,7 +5,7 @@ namespace HarwexBank
     public class OperationModel : ObservableObject
     {
         public int Id { get; set; }
-        public int? BankAccountInitiator { get; set; }
+        public int BankAccountInitiator { get; set; }
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }
 
@@ -14,7 +14,7 @@ namespace HarwexBank
     
     public partial class TransferToAccount : OperationModel
     {
-        public int? BankAccountReceiver { get; set; }
+        public int BankAccountReceiver { get; set; }
         public virtual AccountModel BankAccountModelReceiverNavigation { get; set; }
     }
 
