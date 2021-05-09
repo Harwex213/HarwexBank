@@ -23,7 +23,9 @@
         <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBlock Text="Пароль"/>
-        <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
+        <PasswordBox local:PasswordHelper.Attach="True" 
+                     local:PasswordHelper.Password="{Binding Password,
+                        UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
         <Button Style="{StaticResource LogInButton}"
                 Content="Вход"

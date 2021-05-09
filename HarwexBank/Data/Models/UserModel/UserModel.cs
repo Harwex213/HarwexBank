@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.RegularExpressions;
 
 namespace HarwexBank
@@ -21,6 +22,7 @@ namespace HarwexBank
         private string _passport;
         private string _login;
         private string _password;
+        private string _repeatedPassword;
         private bool _isBlocked;
         public string UserType { get; set; }
         public virtual UserTypeModel UserTypeModelNavigation { get; set; }
@@ -106,6 +108,18 @@ namespace HarwexBank
                 OnPropertyChanged("Password");
             }
         }
+
+        [NotMapped]
+        public string RepeatedPassword
+        {
+            get => _repeatedPassword;
+            set
+            {
+                _repeatedPassword = value;
+                OnPropertyChanged("RepeatedPassword");
+            }
+        }
+        
         public bool IsBlocked
         {
             get => _isBlocked;
@@ -116,13 +130,7 @@ namespace HarwexBank
             }
         }
         
-        public string Error
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public string Error => null;
 
         public string this[string name]
         {
@@ -150,34 +158,61 @@ namespace HarwexBank
                         break;
 
                     case "CheckFullName":
-                        if (stringNameToCheck.Length is < 2 or > 50)
+                        if (string.IsNullOrEmpty(stringNameToCheck) || stringNameToCheck.Length is < 2 or > 50)
                         {
-                            result = "Должно быть длиннее 2 символов и меньше 50";
+                            result = "Должно быть длиннее 2 символов";
                         }
-                
-                        if (Regex.Match(stringNameToCheck, @"^[A-Z][a-zA-Z]*$").Success)
+                        else if (!Regex.Match(stringNameToCheck ?? string.Empty, @"^[A-Z][a-zA-Z]*$").Success)
                         {
                             result = "Должно содержать только буквы";
                         }
+
                         break;
                     
                     case nameof(Address):
-                        if (stringNameToCheck.Length > 6)
+                        if (string.IsNullOrEmpty(Address) || Address.Length < 6)
                         {
                             result = "Должен быть длиннее 6 символов.";
                         }
                         break;
                     
                     case nameof(Passport):
-                        if (Regex.Match(Address, @"^[A-Z]{2}[0-9]{7}$").Success)
+                        if (string.IsNullOrEmpty(Passport) ||
+                            !Regex.Match(Passport, @"^[A-Z]{2}[0-9]{7}$").Success)
                         {
                             result = "Первые два символа должны быть латинские буквы. Следующие семь цифры.";
                         }
                         break;
                     
                     case nameof(Login):
-                        
+                        if (string.IsNullOrEmpty(Login))
+                        {
+                            result = "Введите логин";
+                        }
+                        else if (ModelResourcesManager.GetInstance().GetUserByLogin(Login) != null)
+                        {
+                            result = "Логин уже занят";
+                        }
                         break;
+                    
+                    case nameof(Password):
+                        if (string.IsNullOrEmpty(Password))
+                        {
+                            result = "Введите пароль";
+                        }
+                        break;
+                    
+                    case nameof(RepeatedPassword):
+                        if (string.IsNullOrEmpty(RepeatedPassword))
+                        {
+                            result = "Повторите пароль";
+                        }
+                        else if (Password != RepeatedPassword)
+                        {
+                            result = "Введённые пароли не совпадают";
+                        }
+                        break;
+
                 }
 
                 return result;

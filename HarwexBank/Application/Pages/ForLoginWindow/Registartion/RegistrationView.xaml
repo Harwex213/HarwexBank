@@ -25,26 +25,101 @@
                     
                             <!-- LAYOUT -->
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="Фамилия"/>
-                                <TextBox Text="{Binding RegisteredUser.LastName, UpdateSourceTrigger=PropertyChanged}"/>
-
+                                
+                                <!-- FIRSTNAME -->
                                 <TextBlock Text="Имя"/>
-                                <TextBox Text="{Binding RegisteredUser.FirstName, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBox Name="UserFirstName">
+                                    <TextBox.Text>
+                                        <Binding Path="RegisteredUser.FirstName"
+                                                 ValidatesOnExceptions="True"
+                                                 UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                
+                                <!-- LASTNAME -->
+                                <TextBlock Text="Фамилия"/>
+                                <TextBox Name="UserLastName">
+                                    <TextBox.Text>
+                                        <Binding Path="RegisteredUser.LastName"
+                                                 ValidatesOnExceptions="True"
+                                                 UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
                 
+                                <!-- PATRONYMIC -->
                                 <TextBlock Text="Отчество"/>
-                                <TextBox Text="{Binding RegisteredUser.Patronymic, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBox Name="UserPatronymic">
+                                    <TextBox.Text>
+                                        <Binding Path="RegisteredUser.Patronymic"
+                                                 ValidatesOnExceptions="True"
+                                                 UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
                 
+                                <!-- ADDRESS -->
                                 <TextBlock Text="Адрес"/>
-                                <TextBox Text="{Binding RegisteredUser.Address, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBox Name="UserAddress">
+                                    <TextBox.Text>
+                                        <Binding Path="RegisteredUser.Address"
+                                                 ValidatesOnExceptions="True"
+                                                 UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
                 
-
+                                <!-- BUTTONS -->
                                 <StackPanel Orientation="Horizontal">
+                                    
+                                    <!-- BUTTON BACK TO LOGIN FORM -->
                                     <Button Style="{StaticResource RegistrationButtons}"
                                             Content="Назад"
                                             Command="{Binding AuthorizationViewModel.BackToLoginCommand}"></Button>
-                                    <Button Style="{StaticResource RegistrationButtons}"
-                                            Content="Далее"
-                                            Command="{Binding ContinueRegistrationCommand}"></Button>
+                                    
+                                    <!-- BUTTON CONTINUE REGISTRATION -->
+                                    <Button Content="Далее"
+                                            Command="{Binding ContinueRegistrationCommand}">
+                                        <Button.Style>
+                                            <Style TargetType="Button" 
+                                                   BasedOn="{StaticResource RegistrationButtons}">
+    
+                                                <Setter Property="IsEnabled" Value="False"/>
+    
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError),
+                                                            ElementName=UserFirstName}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError),
+                                                            ElementName=UserLastName}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError),
+                                                            ElementName=UserPatronymic}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError),
+                                                            ElementName=UserAddress}" Value="False"/>
+                                                        </MultiDataTrigger.Conditions>
+    
+                                                        <Setter Property="IsEnabled" Value="True"/>
+    
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                                
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
                                 </StackPanel>
                             </StackPanel>
                     
@@ -69,25 +144,104 @@
 
                             <!-- LAYOUT -->
                             <StackPanel Orientation="Vertical">
+                                
+                                <!-- PASSPORT -->
                                 <TextBlock Text="Номер паспорта"/>
-                                <TextBox MaxLength="9"
-                                         Text="{Binding RegisteredUser.Login, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBox Name="UserPassport"
+                                         MaxLength="9">
+                                    <TextBox.Text>
+                                        <Binding Path="RegisteredUser.Passport"
+                                                 ValidatesOnExceptions="True"
+                                                 UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
 
+                                <!-- LOGIN -->
                                 <TextBlock Text="Логин"/>
-                                <TextBox Text="{Binding RegisteredUser.FirstName, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBox Name="UserLogin">
+                                    <TextBox.Text>
+                                        <Binding Path="RegisteredUser.Login"
+                                                 ValidatesOnExceptions="True"
+                                                 UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
                 
+                                <!-- PASSWORD -->
                                 <TextBlock Text="Пароль"/>
-                                <TextBox Text="{Binding RegisteredUser.Password, UpdateSourceTrigger=PropertyChanged}"/>
-                                <TextBox Text="{Binding RepeatedPassword, UpdateSourceTrigger=PropertyChanged}"/>
+                                <PasswordBox Name="UserPassword"
+                                             local:PasswordHelper.Attach="True">
+                                    <local:PasswordHelper.Password>
+                                        <Binding Path="RegisteredUser.Password"
+                                                 ValidatesOnExceptions="True"
+                                                 UpdateSourceTrigger="PropertyChanged"
+                                                 Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </local:PasswordHelper.Password>
+                                </PasswordBox>
+                                <PasswordBox Name="UserRepeatedPassword"
+                                             local:PasswordHelper.Attach="True">
+                                    <local:PasswordHelper.Password>
+                                        <Binding Path="RegisteredUser.RepeatedPassword"
+                                                 ValidatesOnExceptions="True"
+                                                 UpdateSourceTrigger="PropertyChanged"
+                                                 Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </local:PasswordHelper.Password>
+                                </PasswordBox>
 
+                                <!-- BUTTONS -->
                                 <StackPanel Orientation="Horizontal">
+                                    
+                                    <!-- BUTTON RETURN BACK -->
                                     <Button Style="{StaticResource RegistrationButtons}"
                                             Content="Назад"
                                             Command="{Binding ReturnBackCommand}"></Button>
-                                    <Button Style="{StaticResource RegistrationButtons}"
-                                            Content="Зарегистрироваться"
+                                    
+                                    <!-- BUTTON TO REGISTER -->
+                                    <Button Content="Зарегистрироваться"
                                             Command="{Binding AuthorizationViewModel.RegistrationFinishCommand}"
-                                            CommandParameter="{Binding RegisteredUser}"></Button>
+                                            CommandParameter="{Binding RegisteredUser}">
+                                        <Button.Style>
+                                            <Style TargetType="Button" 
+                                                   BasedOn="{StaticResource RegistrationButtons}">
+    
+                                                <Setter Property="IsEnabled" Value="False"/>
+    
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError),
+                                                            ElementName=UserPassport}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError),
+                                                            ElementName=UserLogin}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError),
+                                                            ElementName=UserPassword}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError),
+                                                            ElementName=UserRepeatedPassword}" Value="False"/>
+                                                        </MultiDataTrigger.Conditions>
+    
+                                                        <Setter Property="IsEnabled" Value="True"/>
+    
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                                
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
                                 </StackPanel>
                             </StackPanel>
                             

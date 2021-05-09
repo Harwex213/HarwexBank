@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -29,8 +30,6 @@ namespace HarwexBank
         public AuthorizationViewModel AuthorizationViewModel { get; }
 
         public UserModel RegisteredUser { get; set; }
-
-        public string RepeatedPassword { get; set; }
 
         #region Commands
 
