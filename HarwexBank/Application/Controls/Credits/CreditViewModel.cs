@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace HarwexBank
 {
-    public class CreditViewModel : ObservableObject, IControlViewModel
+    public class CreditViewModel : BaseViewModel, IControlViewModel
     {
         public string Name => "Кредиты";
         public ObservableCollection<IssuedCreditModel> CreditModels { get; }

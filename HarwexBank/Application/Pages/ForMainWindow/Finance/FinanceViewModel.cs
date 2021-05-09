@@ -9,7 +9,10 @@ namespace HarwexBank
         public FinanceViewModel()
         {
             ControlViewModels.Add(new AccountViewModel());
+            ((AccountViewModel) ControlViewModels[0]).ControlViewModelOwner = this;
+            
             ControlViewModels.Add(new CreditViewModel());
+            ((CreditViewModel) ControlViewModels[1]).ControlViewModelOwner = this;
 
             SelectedControlViewModel = ControlViewModels[0];
         }

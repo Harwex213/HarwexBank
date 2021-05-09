@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace HarwexBank
 {
-    public abstract class BaseControlViewModel : ObservableObject
+    public abstract class BaseControlViewModel : BaseViewModel
     {
         private ICommand _changeControlCommand;
         private IControlViewModel _selectedControlViewModel;

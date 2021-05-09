@@ -18,8 +18,7 @@
             <!--LAYOUT-->
             <ContentControl Grid.Row="0" Margin="10" Content="{StaticResource OpenAccount}"/>
             
-            <ItemsControl Grid.Row="1" ItemsSource="{Binding AccountModels}"
-                          Name="AccountsList">
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding AccountModels}">
                 <!--ITEMS PANEL TEMPLATE-->
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
