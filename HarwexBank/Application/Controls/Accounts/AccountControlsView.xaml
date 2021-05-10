@@ -1,113 +1,112 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:HarwexBank">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
-    <!-- INFO CONTROLS -->
-    <!-- Account Id -->
-    <Grid x:Key="AccountId" x:Shared="False">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        
-        <TextBlock Grid.Row="0"
-                   Text="Номер счёта"/>
-        <TextBlock Grid.Row="1"
-                   Text="{Binding Id}"/>
-    </Grid>
-    
-    <!-- Account RegistrationDate -->
-    <Grid x:Key="AccountDateIn" x:Shared="False">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        
-        <TextBlock Grid.Row="0"
-                   Text="Дата открытия счёта"/>
-        <TextBlock Grid.Row="1"
-                   Text="{Binding RegistrationDate}"/>
-    </Grid>
-    
-    <!-- Account Amount -->
-    <Grid x:Key="AccountAmount" x:Shared="False">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        
-        <TextBlock Grid.Row="0"
-                   Text="Остаток на счёте"/>
-        <TextBlock Grid.Row="1"
-                   Text="{Binding Amount}"/>
-    </Grid>
-    
-    <!-- Account General Info -->
-    <Grid x:Key="AccountGeneralInfo" x:Shared="False">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+    <!-- GENERAL INFO -->
+    <Grid x:Key="AccountGeneralInfo" x:Shared="False"
+          Background="#3D89A1">
+        <Grid HorizontalAlignment="Center">
+            <Grid.Resources>
+            <ResourceDictionary>
                 
-        <TextBlock Grid.Row="0" Grid.Column="0"
-                   Text="Номер счёта"/>
-        <TextBlock Grid.Row="0" Grid.Column="1"
-                   Text="Дата открытия счёта"/>
-        <TextBlock Grid.Row="0" Grid.Column="2"
-                   Text="Остаток на счёте"/>
-        <TextBlock Grid.Row="1" Grid.Column="0"
-                   Text="{Binding Id}"/>
-        <TextBlock Grid.Row="1" Grid.Column="1" 
-                   Text="{Binding RegistrationDate}"/>
-        <TextBlock Grid.Row="1" Grid.Column="2" 
-                   Text="{Binding Amount}"/>
+                <!-- INCLUDING STYLES -->
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="/HarwexBank;component/Styles/MainWindowStyle.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+                
+                <Style TargetType="{x:Type StackPanel}">
+                    <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                </Style>
+                
+            </ResourceDictionary>
+        </Grid.Resources> 
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Column="0">
+            <TextBlock Style="{StaticResource TittleTextBlock}"
+                       Text="Номер счёта"/>
+            <TextBlock Style="{StaticResource InfoTextBlock}"
+                       Text="{Binding Id}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <TextBlock Style="{StaticResource TittleTextBlock}"
+                       Text="Дата открытия счёта"/>
+            <TextBlock Style="{StaticResource InfoTextBlock}"
+                       Text="{Binding RegistrationDate}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2">
+            <TextBlock Style="{StaticResource TittleTextBlock}"
+                       Text="Остаток на счёте"/>
+            <TextBlock Style="{StaticResource InfoTextBlock}"
+                       Text="{Binding Amount}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="3">
+            <TextBlock Style="{StaticResource TittleTextBlock}"
+                       Text="Валюта счёта"/>
+            <TextBlock Style="{StaticResource InfoTextBlock}"
+                       Text="{Binding CurrencyTypeModelNavigation.Name}"/>
+        </StackPanel>
+        </Grid>
     </Grid>
     
-    <!-- ADDITIONAL INFO CONTROLS -->
-    <!-- Account currency -->
-    <Grid x:Key="AccountCurrency" x:Shared="False">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        
-        <TextBlock Grid.Row="0"
-                   Text="Валюта счёта"/>
-        <TextBlock Grid.Row="1"
-                   Text="{Binding CurrencyTypeModelNavigation.Name}"/>
-    </Grid>
-    <!-- Account cards -->
-    <DockPanel x:Key="AccountCards" x:Shared="False">
-        <TextBlock  DockPanel.Dock="Top"
-                    Margin="10, 10, 0, 10"
-                    FontSize="12"
-                    Text="Привязанные к счету карты"/>
-        <ItemsControl DockPanel.Dock="Top"
-                      ItemsSource="{Binding AccountModels}">
+    <!-- CARDS INFO -->
+    <StackPanel x:Key="AccountCards" x:Shared="False"
+                Margin="0, 15, 0, 15"
+                HorizontalAlignment="Center">
+        <StackPanel.Resources>
+            <ResourceDictionary>
+                
+                <!-- INCLUDING STYLES -->
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="/HarwexBank;component/Styles/MainWindowStyle.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+                
+            </ResourceDictionary>
+        </StackPanel.Resources>
+            
+        <!-- Account cards Tittle -->
+        <TextBlock Style="{StaticResource TittleTextAdditionalBlock}"
+                   HorizontalAlignment="Center"
+                   Text="Привязанные к счету карты"
+                   Margin="0, 0, 0, 15"/>
+
+        <!-- Account cards -->
+        <ItemsControl ItemsSource="{Binding AccountModels}">
             <ItemsControl ItemsSource="{Binding Cards}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
+                        <WrapPanel Orientation="Horizontal"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-    
+
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Width="155" Height="70"
-                                Background="#000"
-                                Foreground="#fff"
-                                Margin="10, 0, 0, 10"
-                                Content="{Binding Number}"/>
+                        
+                        <Grid Background="Black"
+                              Width="155" Height="70"
+                              Margin="7.5, 7.5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+        
+                            <TextBlock Grid.Row="0" Style="{StaticResource CardNumberTextBlock}"
+                                       Text="{Binding Number}"></TextBlock>
+                            <TextBlock Grid.Row="1" Style="{StaticResource CardTypeTextBlock}"
+                                       Text="{Binding CardTypeModelNavigation.Name}"></TextBlock>
+                        </Grid>
+                        
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ItemsControl>
-    </DockPanel>
+    </StackPanel>
     
     <!-- OPEN ACCOUNT CONTROL -->
     <Button x:Key="OpenAccount" x:Shared="False"
@@ -137,132 +136,86 @@
     
     <!-- ACCOUNTS LIST CONTROLS -->
     <!-- Accounts list for FinancePage -->
-    <Style x:Key="AccountsListToFinancePage" TargetType="ListBoxItem">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="ListBoxItem">
-                    
-                    <Grid Margin="30, 0, 30, 15">
-                        <!--RESOURCES-->
-                        <!-- TODO: Make Resource Dictionary Theme and add to there -->
-                        <Grid.Resources>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                                <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                                <Setter Property="Margin" Value="5"></Setter>
-                            </Style>
-                        </Grid.Resources>
-                        
-                        <!--GRID DEFINITIONS-->
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        
-                        <!--GRID LAYOUT-->
-                        <!-- Account General Info -->
-                        <Grid Grid.Row="0" 
-                              Background="#3D89A1">
-                            <ContentControl Content="{StaticResource AccountGeneralInfo}"/>
-                        </Grid>
-                        
-                        <!-- Account Additional Info -->
-                        <Grid Grid.Row="1" x:Name="AccountAdditionalInfo"
-                              Background="#2C6172">
-                            
-                            <!--GRID DEFINITIONS-->
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            
-                            <!--GRID LAYOUT-->
-                            <ContentControl Grid.Row="0" Content="{StaticResource AccountCurrency}"/>
-                            <ContentControl Grid.Row="1" Content="{StaticResource AccountCards}"/>
-                            
-                            <!-- Buttons -->
-                            <ContentControl Grid.Row="2" Margin="0,0,0,17"
-                                            Content="{StaticResource CloseAccount}"/>
-                        </Grid>
-                    </Grid>
-                    
-                    <ControlTemplate.Triggers>
-                        
-                        <!-- TODO: сделать выдвижное меню -->
-                        <Trigger Property="IsSelected" Value="true">
-                            <Setter TargetName="AccountAdditionalInfo" Property="Visibility" Value="Visible"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                    
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <DataTemplate x:Key="AccountsListToFinancePage">
+        
+        <Grid Margin="0, 0, 0, 15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" MaxHeight="110"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <!-- Account Info -->
+            <ContentControl Grid.Row="0"
+                            Background="#3D89A1"
+                            Content="{StaticResource AccountGeneralInfo}"></ContentControl>
+            
+            <!-- Account Additional Info -->
+            <Grid Grid.Row="1"
+                  Background="#2C6172">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <ContentControl Grid.Column="0" Content="{StaticResource AccountCards}">
+                </ContentControl>
+
+                <StackPanel Grid.Column="1"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Center"
+                            Margin="22.5">
+                    <ContentControl Content="{StaticResource CloseAccount}"></ContentControl>
+                </StackPanel>
+            </Grid>
+            
+        </Grid>
+        
+    </DataTemplate>
     
     <!-- Accounts list for ClientsPage -->
-        <Style x:Key="AccountsListToClientsPage" TargetType="ListBoxItem">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="ListBoxItem">
-                    
-                    <Grid Margin="30, 0, 30, 15">
-                        <!--RESOURCES-->
-                        <!-- TODO: Make Resource Dictionary Theme and add to there -->
-                        <Grid.Resources>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                                <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                                <Setter Property="Margin" Value="5"></Setter>
-                            </Style>
-                        </Grid.Resources>
-                        
-                        <!--GRID DEFINITIONS-->
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        
-                        <!--GRID LAYOUT-->
-                        <!-- Account General Info -->
-                        <Grid Grid.Row="0" 
-                              Background="#3D89A1">
-                            <ContentControl Content="{StaticResource AccountGeneralInfo}"/>
-                        </Grid>
-                        
-                        <!-- Account Additional Info -->
-                        <Grid Grid.Row="1" x:Name="AccountAdditionalInfo"
-                              Background="#2C6172">
-                            
-                            <!--GRID DEFINITIONS-->
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            
-                            <!--GRID LAYOUT-->
-                            <ContentControl Grid.Row="0" Content="{StaticResource AccountCurrency}"/>
-                            <ContentControl Grid.Row="1" Content="{StaticResource AccountCards}"/>
-                            
-                            <!-- Buttons -->
-                            <ContentControl Grid.Row="2" Margin="0,0,0,17"
-                                            Content="{StaticResource FreezeAccount}"/>
-                        </Grid>
-                    </Grid>
-                    
-                    <ControlTemplate.Triggers>
-                        
-                        <!-- TODO: сделать выдвижное меню -->
-                        <Trigger Property="IsSelected" Value="true">
-                            <Setter TargetName="AccountAdditionalInfo" Property="Visibility" Value="Visible"/>
-                        </Trigger>
-                        
-                    </ControlTemplate.Triggers>
-                    
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <DataTemplate x:Key="AccountsListToClientsPage">
+        
+        <!-- INCLUDING STYLES -->
+        <DataTemplate.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="/HarwexBank;component/Styles/MainWindowStyle.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </DataTemplate.Resources>
+        
+        <Grid Margin="0, 0, 0, 15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" MaxHeight="110"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <!-- Account Info -->
+            <ContentControl Grid.Row="0"
+                            Background="#3D89A1"
+                            Content="{StaticResource AccountGeneralInfo}"></ContentControl>
+            
+            <!-- Account Additional Info -->
+            <Grid Grid.Row="1"
+                  Background="#2C6172">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <ContentControl Grid.Column="0" Content="{StaticResource AccountCards}">
+                </ContentControl>
+
+                <StackPanel Grid.Column="1"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Center"
+                            Margin="22.5">
+                    <ContentControl Content="{StaticResource FreezeAccount}"></ContentControl>
+                </StackPanel>
+            </Grid>
+            
+        </Grid>
+        
+    </DataTemplate>
     
 </ResourceDictionary>

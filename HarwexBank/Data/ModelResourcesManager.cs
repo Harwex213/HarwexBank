@@ -90,7 +90,7 @@ namespace HarwexBank
                     break;
             }
             
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
         
         public void UpdateModel(IModel model)
@@ -123,7 +123,7 @@ namespace HarwexBank
                     break;
             }
             
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public void RemoveModel(IModel model)
@@ -156,14 +156,14 @@ namespace HarwexBank
                     break;
             }
             
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public void GenerateOperation(OperationModel operation)
         {
             _context.Operations.Add(operation);
             
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
     }
 }

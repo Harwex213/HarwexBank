@@ -16,26 +16,27 @@
                         <ScrollViewer>
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" MaxHeight="60"></RowDefinition>
+                                    <RowDefinition Height="*" MaxHeight="90"></RowDefinition>
                                     <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 
                                 <!--Open New Account-->
                                 <ContentControl Grid.Row="0" 
-                                                Margin="10"
+                                                Margin="0, 15, 0, 15"
                                                 Content="{StaticResource OpenAccount}">
                                 </ContentControl>
                                 
                                 <!-- Accounts List -->
-                                <ListBox Grid.Row="1" 
-                                         ItemsSource="{Binding AccountModels}"
-                                         ItemContainerStyle="{StaticResource AccountsListToFinancePage}">
-                                    <ListBox.ItemsPanel>
+                                <ItemsControl Grid.Row="1"
+                                              Margin="30, 0, 30, 0"
+                                              ItemsSource="{Binding AccountModels}"
+                                              ItemTemplate="{StaticResource AccountsListToFinancePage}">
+                                    <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <StackPanel Orientation="Vertical"/>
                                         </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                </ListBox>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
                             </Grid>
                         </ScrollViewer>
                     
