@@ -22,10 +22,13 @@
                                 </Grid.RowDefinitions>
                                 
                                 <!--LAYOUT-->
+                                
+                                <!--Open New Account-->
                                 <ContentControl Grid.Row="0" 
                                                 Margin="10"
                                                 Content="{StaticResource OpenAccount}"></ContentControl>
                                 
+                                <!-- Accounts List -->
                                 <ItemsControl Grid.Row="1" ItemsSource="{Binding AccountModels}">
                                     <!--ITEMS PANEL TEMPLATE-->
                                     <ItemsControl.ItemsPanel>
@@ -56,6 +59,8 @@
                                                 
                                                 <!--GRID LAYOUT-->
                                                 <!-- TODO: сделать выдвижное меню -->
+                                                
+                                                <!-- Account General Info -->
                                                 <Button Grid.Row="0" x:Name="AccountGeneralInfo"
                                                         HorizontalContentAlignment="Stretch" 
                                                         Background="#3D89A1"
@@ -63,6 +68,7 @@
                                                     <ContentControl Content="{StaticResource AccountGeneralInfo}"/>
                                                 </Button>
                                                 
+                                                <!-- Account Additional Info -->
                                                 <Grid Grid.Row="1" x:Name="AccountAdditionalInfo"
                                                       Background="#2C6172">
                                                     
@@ -76,6 +82,8 @@
                                                     <!--GRID LAYOUT-->
                                                     <ContentControl Grid.Row="0" Content="{StaticResource AccountCurrency}"/>
                                                     <ContentControl Grid.Row="1" Content="{StaticResource AccountCards}"/>
+                                                    
+                                                    <!-- Buttons -->
                                                     <ContentControl Grid.Row="2" Margin="0,0,0,17"
                                                                     Content="{StaticResource FreezeAccount}"/>
                                                 </Grid>

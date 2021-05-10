@@ -23,6 +23,21 @@ namespace HarwexBank
         
         public AccountModel AccountToOpen { get; set; }
 
+        #region InfoForView
+
+        private string _freezeButtonText;
+        public string FreezeButtonText
+        {
+            get { return _freezeButtonText ??= "Заморозить счёт"; }
+            set
+            {
+                _freezeButtonText = value;
+                OnPropertyChanged("FreezeButtonText"); 
+            }
+        }
+
+        #endregion
+
         #region Commands
 
         #region Files & Properties
@@ -110,6 +125,8 @@ namespace HarwexBank
         {
             account.IsFrozen = !account.IsFrozen;
             ModelResourcesManager.GetInstance().UpdateModel(account);
+
+            _freezeButtonText = "Разморозить счёт";
         }
 
         #endregion
