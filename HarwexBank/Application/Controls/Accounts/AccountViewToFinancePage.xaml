@@ -98,7 +98,6 @@
                             <Button Grid.Column="1"
                                     Command="{Binding CreateAccountCommand}"
                                     Content="Отправить"></Button>
-                            
                         </Grid>
                         
                     </Grid>

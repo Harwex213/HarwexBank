@@ -51,6 +51,8 @@ namespace HarwexBank
                 ModelResourcesManager.GetInstance().GetAllClients());
             mainWindowInfo.AllPerformedOperations = new ObservableCollection<OperationModel>(
                 ModelResourcesManager.GetInstance().GetAllOperations());
+            mainWindowInfo.TakingCredits = new ObservableCollection<IssuedCreditModel>(
+                ModelResourcesManager.GetInstance().GetAllTakingCredits());;
         }
     }
     

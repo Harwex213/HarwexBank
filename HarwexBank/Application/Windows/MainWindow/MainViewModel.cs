@@ -32,6 +32,8 @@ namespace HarwexBank
         
         public ObservableCollection<UserModel> ExistedClients { get; set; }
         
+        public ObservableCollection<IssuedCreditModel> TakingCredits { get; set; }
+        
         public ObservableCollection<CurrencyTypeModel> ExistedCurrencyTypes { get; set; }
         
         public ObservableCollection<CardTypeModel> ExistedCardTypes { get; set; }

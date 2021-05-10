@@ -15,18 +15,33 @@ namespace HarwexBank
             AccountToOpen = new AccountModel();
             CardToCreate = new CardModel();
             
-            AccountModels = new ObservableCollection<AccountModel>(MainViewModel.Data.LoggedInUser.Accounts);
-            CurrencyTypeModels = new ObservableCollection<CurrencyTypeModel>(MainViewModel.Data.ExistedCurrencyTypes);
-            CardTypeModels = new ObservableCollection<CardTypeModel>(MainViewModel.Data.ExistedCardTypes);
-            
+            switch (MainViewModel.Data.LoggedInUser.UserType)
+            {
+                case "client":
+                    AccountModels = new ObservableCollection<AccountModel>(MainViewModel.Data.LoggedInUser.Accounts);
+                    CurrencyTypeModels = MainViewModel.Data.ExistedCurrencyTypes;
+                    CardTypeModels = MainViewModel.Data.ExistedCardTypes;
+                    break;
+                
+                case "worker":
+                    AccountModels = new ObservableCollection<AccountModel>(MainViewModel.Data.LoggedInUser.Accounts);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
             ControlViewModels.Add(new AccountsListViewModel());
             ControlViewModels.Add(new CreateNewAccountViewModel());
 
             SelectedControlViewModel = ControlViewModels[0];
         }
+        
+        // Used data in Views
         public ObservableCollection<AccountModel> AccountModels { get; }
         public ObservableCollection<CurrencyTypeModel> CurrencyTypeModels { get; }
         public ObservableCollection<CardTypeModel> CardTypeModels { get; }
+        
+        // Shells for new models
         public AccountModel AccountToOpen { get; set; }
         public CardModel CardToCreate { get; set; }
 

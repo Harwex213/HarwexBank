@@ -5,7 +5,7 @@
          <ResourceDictionary>
              <ResourceDictionary.MergedDictionaries>
                  <ResourceDictionary Source="/HarwexBank;component/Application/Controls/Accounts/AccountControlsView.xaml"/>
-                 <ResourceDictionary Source="/HarwexBank;component/Application/Controls/Credits/CreditView.xaml"/>
+                 <ResourceDictionary Source="/HarwexBank;component/Application/Controls/Credits/CreditControlsView.xaml"/>
                  <ResourceDictionary Source="/HarwexBank;component/Styles/TextBlock.xaml"/>
              </ResourceDictionary.MergedDictionaries>
          </ResourceDictionary>

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace HarwexBank
 {
-    public class IssuedCreditModel : ObservableObject, ModelResourcesManager.IModel
+    public class IssuedCreditModel : ObservableObject, ModelResourcesManager.IModel, IDataErrorInfo
     {
         public IssuedCreditModel()
         {
@@ -96,6 +97,34 @@ namespace HarwexBank
             {
                 _isRepaid = value;
                 OnPropertyChanged("IsRepaid");
+            }
+        }
+        
+        public string Error => null;
+
+        public string this[string name]
+        {
+            get
+            {
+                string result = null;
+
+                switch (name)
+                {
+                    case nameof(Amount):
+                        if (Amount is < 0 or > 100000)
+                        {
+                            result = "Сумма должна быть от 0 до 100000";
+                        }
+                        break;
+                    case nameof(Term):
+                        if (Term is < 0 or > 10)
+                        {
+                            result = "Срок должен быть от 0 до 10";
+                        }
+                        break;
+                }
+
+                return result;
             }
         }
     }

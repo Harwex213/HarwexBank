@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
+    <!-- STYLE FOR TEXT BLOCKS IN BLOCKS OF ACCOUNT, CREDITS, OPERATIONS... -->
     <Style x:Key="TextBlock" TargetType="{x:Type TextBlock}">
         <Setter Property="HorizontalAlignment" Value="Left"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
@@ -20,6 +21,7 @@
         <Setter Property="Foreground" Value="#FFFFFF"></Setter>
     </Style>
     
+    <!-- STYLE FOR CARD TEXT BLOCKS -->
     <Style x:Key="CardTextBlock" TargetType="{x:Type TextBlock}">
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
@@ -33,6 +35,17 @@
     <Style x:Key="CardTypeTextBlock" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource CardTextBlock}">
         <Setter Property="FontSize" Value="12"></Setter>
         <Setter Property="Foreground" Value="#BABABA"></Setter>
+    </Style>
+    
+    <!-- STYLE FOR TEXT BOX IN CREATING NEW MODELS -->
+    <Style TargetType="TextBox">
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter Property="ToolTip"
+                        Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                        Path=(Validation.Errors)[0].ErrorContent}"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
     
 </ResourceDictionary>
