@@ -40,6 +40,26 @@ namespace HarwexBank
             return _context.Users.Where(u => u.UserType == "client").ToList();
         }
         
+        public IEnumerable<OperationModel> GetAllOperations()
+        {
+            return _context.Operations.ToList();
+        }
+        
+        public IEnumerable<CurrencyTypeModel> GetExistedCurrencyTypeModels()
+        {
+            return _context.CurrencyTypes.ToList();
+        }
+        
+        public IEnumerable<CreditTypeModel> GetExistedCreditTypeModels()
+        {
+            return _context.CreditTypes.ToList();
+        }
+        
+        public IEnumerable<CardTypeModel> GetExistedCardTypeModels()
+        {
+            return _context.CardTypes.ToList();
+        }
+        
         public void AddModel(IModel model)
         {
             switch (model)

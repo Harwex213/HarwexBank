@@ -88,5 +88,18 @@ namespace HarwexBank
         
         [NotMapped]
         public bool IsNotFrozen => !_isFrozen;
+        
+        private string _freezeButtonText;
+        
+        [NotMapped]
+        public string FreezeButtonText
+        {
+            get { return _freezeButtonText ??= "Заморозить счёт"; }
+            set
+            {
+                _freezeButtonText = value;
+                OnPropertyChanged("FreezeButtonText"); 
+            }
+        }
     }
 }

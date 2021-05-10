@@ -12,7 +12,12 @@ namespace HarwexBank
         public string Name => "Счета";
         public AccountViewModel()
         {
+            AccountToOpen = new AccountModel();
+            CardToCreate = new CardModel();
+            
             AccountModels = new ObservableCollection<AccountModel>(MainViewModel.Data.LoggedInUser.Accounts);
+            CurrencyTypeModels = new ObservableCollection<CurrencyTypeModel>(MainViewModel.Data.ExistedCurrencyTypes);
+            CardTypeModels = new ObservableCollection<CardTypeModel>(MainViewModel.Data.ExistedCardTypes);
             
             ControlViewModels.Add(new AccountsListViewModel());
             ControlViewModels.Add(new CreateNewAccountViewModel());
@@ -20,32 +25,31 @@ namespace HarwexBank
             SelectedControlViewModel = ControlViewModels[0];
         }
         public ObservableCollection<AccountModel> AccountModels { get; }
-        
+        public ObservableCollection<CurrencyTypeModel> CurrencyTypeModels { get; }
+        public ObservableCollection<CardTypeModel> CardTypeModels { get; }
         public AccountModel AccountToOpen { get; set; }
-
-        #region InfoForView
-
-        private string _freezeButtonText;
-        public string FreezeButtonText
-        {
-            get { return _freezeButtonText ??= "Заморозить счёт"; }
-            set
-            {
-                _freezeButtonText = value;
-                OnPropertyChanged("FreezeButtonText"); 
-            }
-        }
-
-        #endregion
+        public CardModel CardToCreate { get; set; }
 
         #region Commands
 
         #region Files & Properties
 
+        private ICommand _goBackCommand;
         private ICommand _openAccountCommand;
         private ICommand _createAccountCommand;
         private ICommand _closeAccountCommand;
         private ICommand _freezeAccountCommand;
+
+        public ICommand GoBackCommand
+        {
+            get
+            {
+                _goBackCommand ??= new RelayCommand(
+                    _ => GoBack());
+        
+                return _goBackCommand;
+            }
+        }
 
         public ICommand OpenAccountCommand
         {
@@ -62,10 +66,10 @@ namespace HarwexBank
         {
             get
             {
-                _openAccountCommand ??= new RelayCommand(
+                _createAccountCommand ??= new RelayCommand(
                     _ => CreateAccountModel());
         
-                return _openAccountCommand;
+                return _createAccountCommand;
             }
         }
         
@@ -97,6 +101,11 @@ namespace HarwexBank
 
         #region Methods
         
+        private void GoBack()
+        {
+            SelectedControlViewModel = ControlViewModels[0];
+        }
+        
         private void OpenAccountModel()
         {
             SelectedControlViewModel = ControlViewModels[1];
@@ -108,9 +117,22 @@ namespace HarwexBank
             AccountToOpen.RegistrationDate = DateTime.Now;
             AccountToOpen.Amount = 0;
             AccountToOpen.IsFrozen = false;
+            ModelResourcesManager.GetInstance().AddModel(AccountToOpen);
+
+            CardToCreate.AccountId = AccountToOpen.Id;
+            CardToCreate.Number = 6711007710504715;
+            CardToCreate.OwnerName = MainViewModel.Data.LoggedInUser.FirstName.ToUpper() + " " +
+                                     MainViewModel.Data.LoggedInUser.LastName.ToUpper();
+            CardToCreate.TimeFrame = "4";
+            CardToCreate.Cvv = "999";
+            ModelResourcesManager.GetInstance().AddModel(CardToCreate);
+            
+            AccountToOpen.Cards.Add(CardToCreate);
 
             AccountModels.Add(AccountToOpen);
-            ModelResourcesManager.GetInstance().AddModel(AccountToOpen);
+            
+            AccountToOpen = new AccountModel();
+            CardToCreate = new CardModel();
             
             SelectedControlViewModel = ControlViewModels[0];
         }
@@ -126,7 +148,16 @@ namespace HarwexBank
             account.IsFrozen = !account.IsFrozen;
             ModelResourcesManager.GetInstance().UpdateModel(account);
 
-            _freezeButtonText = "Разморозить счёт";
+            switch (account.FreezeButtonText)
+            {
+                case "Разморозить счёт":
+                    account.FreezeButtonText = "Заморозить счёт";
+                    break;
+                
+                case "Заморозить счёт":
+                    account.FreezeButtonText = "Разморозить счёт";
+                    break;
+            }
         }
 
         #endregion

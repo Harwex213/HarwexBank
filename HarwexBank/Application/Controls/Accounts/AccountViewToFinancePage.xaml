@@ -15,82 +15,27 @@
                     
                         <ScrollViewer>
                             <Grid>
-                                <!--GRID DEFINITIONS-->
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" MaxHeight="100"></RowDefinition>
+                                    <RowDefinition Height="*" MaxHeight="60"></RowDefinition>
                                     <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                
-                                <!--LAYOUT-->
                                 
                                 <!--Open New Account-->
                                 <ContentControl Grid.Row="0" 
                                                 Margin="10"
-                                                Content="{StaticResource OpenAccount}"></ContentControl>
+                                                Content="{StaticResource OpenAccount}">
+                                </ContentControl>
                                 
                                 <!-- Accounts List -->
-                                <ItemsControl Grid.Row="1" ItemsSource="{Binding AccountModels}">
-                                    <!--ITEMS PANEL TEMPLATE-->
-                                    <ItemsControl.ItemsPanel>
+                                <ListBox Grid.Row="1" 
+                                         ItemsSource="{Binding AccountModels}"
+                                         ItemContainerStyle="{StaticResource AccountsListToFinancePage}">
+                                    <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <StackPanel Orientation="Vertical"/>
                                         </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                            
-                                    <!--ITEM TEMPLATE-->
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid Margin="30, 0, 30, 15">
-                                                <!--RESOURCES-->
-                                                <!-- TODO: Make Resource Dictionary Theme and add to there -->
-                                                <Grid.Resources>
-                                                    <Style TargetType="{x:Type TextBlock}">
-                                                        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                                                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                                                        <Setter Property="Margin" Value="5"></Setter>
-                                                    </Style>
-                                                </Grid.Resources>
-                                                
-                                                <!--GRID DEFINITIONS-->
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="*"></RowDefinition>
-                                                    <RowDefinition Height="*"></RowDefinition>
-                                                </Grid.RowDefinitions>
-                                                
-                                                <!--GRID LAYOUT-->
-                                                <!-- TODO: сделать выдвижное меню -->
-                                                
-                                                <!-- Account General Info -->
-                                                <Button Grid.Row="0" x:Name="AccountGeneralInfo"
-                                                        HorizontalContentAlignment="Stretch" 
-                                                        Background="#3D89A1"
-                                                        IsEnabled="{Binding IsNotFrozen}">
-                                                    <ContentControl Content="{StaticResource AccountGeneralInfo}"/>
-                                                </Button>
-                                                
-                                                <!-- Account Additional Info -->
-                                                <Grid Grid.Row="1" x:Name="AccountAdditionalInfo"
-                                                      Background="#2C6172">
-                                                    
-                                                    <!--GRID DEFINITIONS-->
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="*"></RowDefinition>
-                                                        <RowDefinition Height="*"></RowDefinition>
-                                                        <RowDefinition Height="*"></RowDefinition>
-                                                    </Grid.RowDefinitions>
-                                                    
-                                                    <!--GRID LAYOUT-->
-                                                    <ContentControl Grid.Row="0" Content="{StaticResource AccountCurrency}"/>
-                                                    <ContentControl Grid.Row="1" Content="{StaticResource AccountCards}"/>
-                                                    
-                                                    <!-- Buttons -->
-                                                    <ContentControl Grid.Row="2" Margin="0,0,0,17"
-                                                                    Content="{StaticResource FreezeAccount}"/>
-                                                </Grid>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
+                                    </ListBox.ItemsPanel>
+                                </ListBox>
                             </Grid>
                         </ScrollViewer>
                     
@@ -104,7 +49,58 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type local:CreateNewAccountViewModel}">
                     
-                    
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <!-- Card Type -->
+                        <StackPanel Grid.Row="0" Orientation="Vertical">
+                            <TextBlock Text="Тип создаваемой карты"></TextBlock>
+                            
+                            <ComboBox ItemsSource="{Binding CurrencyTypeModels}"
+                                      SelectedValue="{Binding AccountToOpen.CurrencyTypeModelNavigation}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                        
+                        <!-- Credit Type -->
+                        <StackPanel Grid.Row="1" Orientation="Vertical">
+                            <TextBlock Text="Валюта"></TextBlock>
+                            
+                            <ComboBox ItemsSource="{Binding CardTypeModels}"
+                                      SelectedValue="{Binding CardToCreate.CardTypeModelNavigation}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                        
+                        <!-- Buttons -->
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            
+                            <Button Grid.Column="0"
+                                    Command="{Binding GoBackCommand}"
+                                    Content="Назад"></Button>
+                            <Button Grid.Column="1"
+                                    Command="{Binding CreateAccountCommand}"
+                                    Content="Отправить"></Button>
+                            
+                        </Grid>
+                        
+                    </Grid>
                     
                     </ControlTemplate>
                 </Setter.Value>

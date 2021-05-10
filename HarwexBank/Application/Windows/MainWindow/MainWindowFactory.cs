@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace HarwexBank
 {
@@ -16,8 +17,7 @@ namespace HarwexBank
         }
 
         public abstract List<IControlViewModel> GetPages();
-        
-        // TODO: public abstract void GetNecessaryInfo();
+        public abstract void GetNecessaryInfo(MainWindowInfo mainWindowInfo);
     }
     
     public class AdminMainWindow : MainWindowFactory
@@ -25,6 +25,11 @@ namespace HarwexBank
         public override List<IControlViewModel> GetPages()
         {
             return new();
+        }
+
+        public override void GetNecessaryInfo(MainWindowInfo mainWindowInfo)
+        {
+            
         }
     }
     
@@ -39,6 +44,14 @@ namespace HarwexBank
                 new JournalViewModel()
             };
         }
+        
+        public override void GetNecessaryInfo(MainWindowInfo mainWindowInfo)
+        {
+            mainWindowInfo.ExistedClients = new ObservableCollection<UserModel>(
+                ModelResourcesManager.GetInstance().GetAllClients());
+            mainWindowInfo.AllPerformedOperations = new ObservableCollection<OperationModel>(
+                ModelResourcesManager.GetInstance().GetAllOperations());
+        }
     }
     
     public class ClientMainWindow : MainWindowFactory
@@ -52,6 +65,16 @@ namespace HarwexBank
                 new OperationsPageViewModel(),
                 new JournalViewModel()
             };
+        }
+        
+        public override void GetNecessaryInfo(MainWindowInfo mainWindowInfo)
+        {
+            mainWindowInfo.ExistedCardTypes = new ObservableCollection<CardTypeModel>(
+                ModelResourcesManager.GetInstance().GetExistedCardTypeModels());
+            mainWindowInfo.ExistedCreditTypes = new ObservableCollection<CreditTypeModel>(
+                ModelResourcesManager.GetInstance().GetExistedCreditTypeModels());
+            mainWindowInfo.ExistedCurrencyTypes = new ObservableCollection<CurrencyTypeModel>(
+                ModelResourcesManager.GetInstance().GetExistedCurrencyTypeModels());
         }
     }
 }

@@ -113,14 +113,18 @@
     <Button x:Key="OpenAccount" x:Shared="False"
             Width="150" Height="40"
             Command="{Binding DataContext.OpenAccountCommand,
-            RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}">Открыть новый счёт</Button>
+            RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+            Content="Открыть новый счёт">
+    </Button>
    
     <!-- CLOSE ACCOUNT CONTROL -->
     <Button x:Key="CloseAccount" x:Shared="False"
             Width="150" Height="40"
             Command="{Binding DataContext.CloseAccountCommand,
             RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-            CommandParameter="{Binding }">Закрыть счёт</Button>
+            CommandParameter="{Binding }"
+            Content="Закрыть счёт">
+    </Button>
     
     <!-- FREEZE ACCOUNT CONTROL -->
     <Button x:Key="FreezeAccount" x:Shared="False"
@@ -128,8 +132,137 @@
             Command="{Binding DataContext.FreezeAccountCommand,
             RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
             CommandParameter="{Binding }"
-            Content="{Binding DataContext.FreezeButtonText,
-            RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}">
+            Content="{Binding FreezeButtonText}">
     </Button>
+    
+    <!-- ACCOUNTS LIST CONTROLS -->
+    <!-- Accounts list for FinancePage -->
+    <Style x:Key="AccountsListToFinancePage" TargetType="ListBoxItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    
+                    <Grid Margin="30, 0, 30, 15">
+                        <!--RESOURCES-->
+                        <!-- TODO: Make Resource Dictionary Theme and add to there -->
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                                <Setter Property="Margin" Value="5"></Setter>
+                            </Style>
+                        </Grid.Resources>
+                        
+                        <!--GRID DEFINITIONS-->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <!--GRID LAYOUT-->
+                        <!-- Account General Info -->
+                        <Grid Grid.Row="0" 
+                              Background="#3D89A1">
+                            <ContentControl Content="{StaticResource AccountGeneralInfo}"/>
+                        </Grid>
+                        
+                        <!-- Account Additional Info -->
+                        <Grid Grid.Row="1" x:Name="AccountAdditionalInfo"
+                              Background="#2C6172">
+                            
+                            <!--GRID DEFINITIONS-->
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            
+                            <!--GRID LAYOUT-->
+                            <ContentControl Grid.Row="0" Content="{StaticResource AccountCurrency}"/>
+                            <ContentControl Grid.Row="1" Content="{StaticResource AccountCards}"/>
+                            
+                            <!-- Buttons -->
+                            <ContentControl Grid.Row="2" Margin="0,0,0,17"
+                                            Content="{StaticResource CloseAccount}"/>
+                        </Grid>
+                    </Grid>
+                    
+                    <ControlTemplate.Triggers>
+                        
+                        <!-- TODO: сделать выдвижное меню -->
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter TargetName="AccountAdditionalInfo" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Accounts list for ClientsPage -->
+        <Style x:Key="AccountsListToClientsPage" TargetType="ListBoxItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    
+                    <Grid Margin="30, 0, 30, 15">
+                        <!--RESOURCES-->
+                        <!-- TODO: Make Resource Dictionary Theme and add to there -->
+                        <Grid.Resources>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                                <Setter Property="Margin" Value="5"></Setter>
+                            </Style>
+                        </Grid.Resources>
+                        
+                        <!--GRID DEFINITIONS-->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <!--GRID LAYOUT-->
+                        <!-- Account General Info -->
+                        <Grid Grid.Row="0" 
+                              Background="#3D89A1">
+                            <ContentControl Content="{StaticResource AccountGeneralInfo}"/>
+                        </Grid>
+                        
+                        <!-- Account Additional Info -->
+                        <Grid Grid.Row="1" x:Name="AccountAdditionalInfo"
+                              Background="#2C6172">
+                            
+                            <!--GRID DEFINITIONS-->
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            
+                            <!--GRID LAYOUT-->
+                            <ContentControl Grid.Row="0" Content="{StaticResource AccountCurrency}"/>
+                            <ContentControl Grid.Row="1" Content="{StaticResource AccountCards}"/>
+                            
+                            <!-- Buttons -->
+                            <ContentControl Grid.Row="2" Margin="0,0,0,17"
+                                            Content="{StaticResource FreezeAccount}"/>
+                        </Grid>
+                    </Grid>
+                    
+                    <ControlTemplate.Triggers>
+                        
+                        <!-- TODO: сделать выдвижное меню -->
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter TargetName="AccountAdditionalInfo" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        
+                    </ControlTemplate.Triggers>
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     
 </ResourceDictionary>
