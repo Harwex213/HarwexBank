@@ -28,6 +28,7 @@ namespace HarwexBank
         public virtual UserTypeModel UserTypeModelNavigation { get; set; }
         public virtual ICollection<AccountModel> Accounts { get; set; }
         public virtual ICollection<IssuedCreditModel> IssuedCredits { get; set; }
+        public virtual ICollection<JournalModel> Journal { get; set; }
 
         public int Id
         {

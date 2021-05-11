@@ -21,6 +21,8 @@ namespace HarwexBank
             _context.CreditTypes.Load();
             _context.Cards.Load();
             _context.CardTypes.Load();
+            _context.Journal.Load();
+            _context.Notifications.Load();
             _context.Operations.Load();
             _context.TransferToAccounts.Load();
             _context.CreditRepayments.Load();

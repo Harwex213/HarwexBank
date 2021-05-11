@@ -2,11 +2,22 @@
 
 namespace HarwexBank
 {
-    public class OperationModel : ObservableObject
+    public abstract class JournalModel : ObservableObject
     {
         public int Id { get; set; }
-        public int BankAccountInitiator { get; set; }
+        public int UserId { get; set; }
         public DateTime Date { get; set; }
+        public virtual UserModel UserIdNavigation { get; set; }
+    }
+    
+    public class NotificationModel : JournalModel
+    {
+        public string Message { get; set; }
+    }
+    
+    public class OperationModel : JournalModel
+    {
+        public int BankAccountInitiator { get; set; }
         public decimal Amount { get; set; }
 
         public virtual AccountModel BankAccountModelInitiatorNavigation { get; set; }

@@ -12,10 +12,10 @@ namespace HarwexBank
     {
         public HarwexBankContext()
         {
-            // Database.EnsureDeleted();
-            // Database.EnsureCreated();
-            //
-            // CreateDefaultData();
+            Database.EnsureDeleted();
+            Database.EnsureCreated();
+            
+            CreateDefaultData();
         }
 
         #region DbSet Init
@@ -41,6 +41,8 @@ namespace HarwexBank
         // Operations data:
         // Operation baseclass.
         // Child classes: CreditRepayment; TransferToAccount;
+        public DbSet<JournalModel> Journal { get; set; }
+        public DbSet<NotificationModel> Notifications { get; set; }
         public DbSet<OperationModel> Operations { get; set; }
         public DbSet<CreditRepayment> CreditRepayments { get; set; }
         public DbSet<TransferToAccount> TransferToAccounts { get; set; }
@@ -71,6 +73,8 @@ namespace HarwexBank
             modelBuilder.Entity<CardModel>(CardConfigure);
             modelBuilder.Entity<CardTypeModel>(CardTypeConfigure);
 
+            modelBuilder.Entity<JournalModel>(JournalConfigure);
+            modelBuilder.Entity<NotificationModel>(NotificationConfigure);
             modelBuilder.Entity<OperationModel>(OperationConfigure);
             modelBuilder.Entity<CreditRepayment>(CreditRepaymentConfigure);
             modelBuilder.Entity<TransferToAccount>(TransferToAccountConfigure);
@@ -220,6 +224,25 @@ namespace HarwexBank
 
             // Columns.
             entity.Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(50);
+        }
+        private void JournalConfigure(EntityTypeBuilder<JournalModel> entity)
+        {
+            entity.ToTable("JOURNAL");
+
+            entity.Property(e => e.Date).IsRequired();
+            // References.
+            entity.HasOne(d => d.UserIdNavigation)
+                .WithMany(p => p.Journal)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("JOURNAL_TO_USER_RECEIVER_FK");
+        }
+        private void NotificationConfigure(EntityTypeBuilder<NotificationModel> entity)
+        {
+            entity.ToTable("NOTIFICATIONS");
+            
+            entity.Property(e => e.Message)
                 .IsRequired()
                 .HasMaxLength(50);
         }
