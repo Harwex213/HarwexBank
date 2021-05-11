@@ -37,6 +37,11 @@ namespace HarwexBank
             return _context.Users.FirstOrDefault(u => u.Login == login);
         }
         
+        public AccountModel GetAccountById(int id)
+        {
+            return _context.Accounts.FirstOrDefault(a => a.Id == id);
+        }
+        
         public IEnumerable<UserModel> GetAllClients()
         {
             return _context.Users.Where(u => u.UserType == "client").ToList();
@@ -47,9 +52,9 @@ namespace HarwexBank
             return _context.IssuedCredits.ToList();
         }
 
-        public IEnumerable<OperationModel> GetAllOperations()
+        public IEnumerable<JournalModel> GetJournalNotes()
         {
-            return _context.Operations.ToList();
+            return _context.Journal.ToList();
         }
         
         public IEnumerable<CurrencyTypeModel> GetExistedCurrencyTypeModels()
@@ -166,10 +171,9 @@ namespace HarwexBank
             _context.SaveChanges();
         }
 
-        public void GenerateOperation(OperationModel operation)
+        public void GenerateJournalNote(JournalModel operation)
         {
-            _context.Operations.Add(operation);
-            
+            _context.Journal.Add(operation);
             _context.SaveChanges();
         }
     }

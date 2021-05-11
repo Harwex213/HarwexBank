@@ -40,6 +40,6 @@ namespace HarwexBank
         
         public ObservableCollection<CreditTypeModel> ExistedCreditTypes { get; set; }
         
-        public ObservableCollection<OperationModel> AllPerformedOperations { get; set; }
+        public ObservableCollection<JournalModel> Journal { get; set; }
     }
 }
