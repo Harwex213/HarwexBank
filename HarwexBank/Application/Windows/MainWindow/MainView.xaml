@@ -7,12 +7,19 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
         <UserControl.Resources>
+                
                 <DataTemplate DataType="{x:Type local:CardsViewModel}">
                         <local:CardsView />
                 </DataTemplate>
+                
                 <DataTemplate DataType="{x:Type local:FinanceViewModel}">
                         <local:FinanceView />
                 </DataTemplate>
+                
+                <DataTemplate DataType="{x:Type local:OperationsPageViewModel}">
+                        <local:OperationsPageView />
+                </DataTemplate>
+                
         </UserControl.Resources>
         
         <Grid>

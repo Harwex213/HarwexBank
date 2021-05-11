@@ -23,13 +23,13 @@ namespace HarwexBank
         public virtual AccountModel BankAccountModelInitiatorNavigation { get; set; }
     }
     
-    public partial class TransferToAccount : OperationModel
+    public partial class TransferToAccountModel : OperationModel
     {
         public int BankAccountReceiver { get; set; }
         public virtual AccountModel BankAccountModelReceiverNavigation { get; set; }
     }
 
-    public partial class CreditRepayment : OperationModel
+    public partial class CreditRepaymentModel : OperationModel
     {
         public int SelectedCredit { get; set; }
         public virtual IssuedCreditModel SelectedCreditModelNavigation { get; set; }

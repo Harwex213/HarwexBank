@@ -10,7 +10,7 @@ namespace HarwexBank
         {
             Cards = new HashSet<CardModel>();
             Operations = new HashSet<OperationModel>();
-            TransferToAccounts = new HashSet<TransferToAccount>();
+            TransferToAccounts = new HashSet<TransferToAccountModel>();
         }
         
         private int _id;
@@ -24,7 +24,7 @@ namespace HarwexBank
         public virtual UserModel UserModelAccount { get; set; }
         public virtual ICollection<CardModel> Cards { get; set; }
         public virtual ICollection<OperationModel> Operations { get; set; }
-        public virtual ICollection<TransferToAccount> TransferToAccounts { get; set; }
+        public virtual ICollection<TransferToAccountModel> TransferToAccounts { get; set; }
 
         public int Id
         {

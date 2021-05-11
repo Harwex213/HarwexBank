@@ -44,8 +44,8 @@ namespace HarwexBank
         public DbSet<JournalModel> Journal { get; set; }
         public DbSet<NotificationModel> Notifications { get; set; }
         public DbSet<OperationModel> Operations { get; set; }
-        public DbSet<CreditRepayment> CreditRepayments { get; set; }
-        public DbSet<TransferToAccount> TransferToAccounts { get; set; }
+        public DbSet<CreditRepaymentModel> CreditRepayments { get; set; }
+        public DbSet<TransferToAccountModel> TransferToAccounts { get; set; }
 
         #endregion
         
@@ -76,8 +76,8 @@ namespace HarwexBank
             modelBuilder.Entity<JournalModel>(JournalConfigure);
             modelBuilder.Entity<NotificationModel>(NotificationConfigure);
             modelBuilder.Entity<OperationModel>(OperationConfigure);
-            modelBuilder.Entity<CreditRepayment>(CreditRepaymentConfigure);
-            modelBuilder.Entity<TransferToAccount>(TransferToAccountConfigure);
+            modelBuilder.Entity<CreditRepaymentModel>(CreditRepaymentConfigure);
+            modelBuilder.Entity<TransferToAccountModel>(TransferToAccountConfigure);
         }
 
         #region Configures
@@ -261,7 +261,7 @@ namespace HarwexBank
                 .HasForeignKey(d => d.BankAccountInitiator)
                 .HasConstraintName("OPERATION_ACCOUNT_INIT_FK");
         }
-        private void CreditRepaymentConfigure(EntityTypeBuilder<CreditRepayment> entity)
+        private void CreditRepaymentConfigure(EntityTypeBuilder<CreditRepaymentModel> entity)
         {
             entity.ToTable("CREDIT_REPAYMENT");
             
@@ -271,7 +271,7 @@ namespace HarwexBank
                 .HasForeignKey(d => d.SelectedCredit)
                 .HasConstraintName("CREDIT_REPAYMENT_SELECTED_CREDIT_FK");
         }
-        private void TransferToAccountConfigure(EntityTypeBuilder<TransferToAccount> entity)
+        private void TransferToAccountConfigure(EntityTypeBuilder<TransferToAccountModel> entity)
         {
             entity.ToTable("TRANSFER_TO_ACCOUNT");
             

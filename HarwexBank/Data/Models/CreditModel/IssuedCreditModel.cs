@@ -9,7 +9,7 @@ namespace HarwexBank
     {
         public IssuedCreditModel()
         {
-            CreditRepayments = new HashSet<CreditRepayment>();
+            CreditRepayments = new HashSet<CreditRepaymentModel>();
         }
         
         private int _id;
@@ -23,7 +23,7 @@ namespace HarwexBank
 
         public virtual CreditTypeModel CreditTypeModelNavigation { get; set; }
         public virtual UserModel UserModelAccount { get; set; }
-        public virtual ICollection<CreditRepayment> CreditRepayments { get; set; }
+        public virtual ICollection<CreditRepaymentModel> CreditRepayments { get; set; }
         
         public int Id
         {
