@@ -28,18 +28,17 @@ namespace HarwexBank
     
     public class MainWindowInfo
     {
+        // Logged In User Data.
         public UserModel LoggedInUser { get; set; }
+        public ObservableCollection<AccountModel> UserAccounts { get; set; }
+        public ObservableCollection<IssuedCreditModel> UserApprovedCredits { get; set; }
         
+        // Global Data.
         public ObservableCollection<UserModel> ExistedClients { get; set; }
-        
-        public ObservableCollection<IssuedCreditModel> TakingCredits { get; set; }
-        
+        public ObservableCollection<IssuedCreditModel> AllNonApprovedCredits { get; set; }
         public ObservableCollection<CurrencyTypeModel> ExistedCurrencyTypes { get; set; }
-        
         public ObservableCollection<CardTypeModel> ExistedCardTypes { get; set; }
-        
         public ObservableCollection<CreditTypeModel> ExistedCreditTypes { get; set; }
-        
         public ObservableCollection<JournalModel> Journal { get; set; }
     }
 }

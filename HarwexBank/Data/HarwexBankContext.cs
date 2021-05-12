@@ -203,6 +203,7 @@ namespace HarwexBank
 
             // Columns.
             entity.Property(e => e.Amount).HasColumnType("money");
+            entity.Property(e => e.RepaidAmount).HasColumnType("money");
 
             entity.Property(e => e.DateIn).HasColumnType("date");
 

@@ -49,7 +49,7 @@ namespace HarwexBank
         
         public IEnumerable<IssuedCreditModel> GetAllTakingCredits()
         {
-            return _context.IssuedCredits.ToList();
+            return _context.IssuedCredits.Where(c => !c.IsRepaid).ToList();
         }
 
         public IEnumerable<JournalModel> GetJournalNotes()
@@ -169,6 +169,22 @@ namespace HarwexBank
             }
             
             _context.SaveChanges();
+        }
+
+        public void GenerateCreditRepayment(JournalModel note, AccountModel accountInitiator,
+            IssuedCreditModel selectedCredit)
+        {
+            _context.Accounts.Update(accountInitiator);
+            _context.IssuedCredits.Update(selectedCredit);
+            GenerateJournalNote(note);
+        }
+        
+        public void GenerateTransfer(JournalModel note, AccountModel accountInitiator,
+            AccountModel accountReceiver)
+        {
+            _context.Accounts.Update(accountInitiator);
+            _context.Accounts.Update(accountReceiver);
+            GenerateJournalNote(note);
         }
 
         public void GenerateJournalNote(JournalModel operation)

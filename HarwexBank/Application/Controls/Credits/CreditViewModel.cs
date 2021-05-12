@@ -30,11 +30,7 @@ namespace HarwexBank
                     UserApprovedCreditModels = new ObservableCollection<IssuedCreditModel>(
                         MainViewModel.Data.LoggedInUser.IssuedCredits.Where(i => i.IsApproved));
 
-                    AwaitToApprovedCreditModels = new ObservableCollection<IssuedCreditModel>(
-                        MainViewModel.Data.TakingCredits.Where(c => !c.IsApproved));
-
-                    AllApprovedCreditModels = new ObservableCollection<IssuedCreditModel>(
-                        MainViewModel.Data.TakingCredits.Where(c => c.IsApproved));
+                    AwaitToApprovedCreditModels = MainViewModel.Data.AllNonApprovedCredits;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -49,7 +45,6 @@ namespace HarwexBank
         // Used data in Views
         public ObservableCollection<IssuedCreditModel> UserApprovedCreditModels { get; }
         public ObservableCollection<IssuedCreditModel> AwaitToApprovedCreditModels { get; }
-        public ObservableCollection<IssuedCreditModel> AllApprovedCreditModels { get; }
         public ObservableCollection<CreditTypeModel> CreditTypeModels { get; }
         
         // Shells for new models
@@ -150,16 +145,18 @@ namespace HarwexBank
         private void AcceptCredit(IssuedCreditModel issuedCreditModel)
         {
             issuedCreditModel.IsApproved = true;
+            
             ModelResourcesManager.GetInstance().UpdateModel(issuedCreditModel);
-            AllApprovedCreditModels.Add(issuedCreditModel);
             AwaitToApprovedCreditModels.Remove(issuedCreditModel);
+            
             MessageBox.Show("Кредит принят");
         }
         
         private void DeclineCredit(IssuedCreditModel issuedCreditModel)
         {
-            AwaitToApprovedCreditModels.Remove(issuedCreditModel);
             ModelResourcesManager.GetInstance().RemoveModel(issuedCreditModel);
+            AwaitToApprovedCreditModels.Remove(issuedCreditModel);
+            
             MessageBox.Show("Кредит отклонен");
         }
 

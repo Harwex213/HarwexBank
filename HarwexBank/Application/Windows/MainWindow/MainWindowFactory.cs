@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace HarwexBank
 {
@@ -51,8 +52,8 @@ namespace HarwexBank
                 ModelResourcesManager.GetInstance().GetAllClients());
             mainWindowInfo.Journal = new ObservableCollection<JournalModel>(
                 ModelResourcesManager.GetInstance().GetJournalNotes());
-            mainWindowInfo.TakingCredits = new ObservableCollection<IssuedCreditModel>(
-                ModelResourcesManager.GetInstance().GetAllTakingCredits());;
+            mainWindowInfo.AllNonApprovedCredits = new ObservableCollection<IssuedCreditModel>(
+                ModelResourcesManager.GetInstance().GetAllTakingCredits().Where(c => !c.IsApproved));
         }
     }
     
@@ -71,6 +72,11 @@ namespace HarwexBank
         
         public override void GetNecessaryInfo(MainWindowInfo mainWindowInfo)
         {
+            mainWindowInfo.UserAccounts = new ObservableCollection<AccountModel>(
+                mainWindowInfo.LoggedInUser.Accounts);
+            mainWindowInfo.UserApprovedCredits = new ObservableCollection<IssuedCreditModel>(
+                mainWindowInfo.LoggedInUser.IssuedCredits.Where(c => c.IsApproved)
+                    .Where(c => !c.IsRepaid));
             mainWindowInfo.ExistedCardTypes = new ObservableCollection<CardTypeModel>(
                 ModelResourcesManager.GetInstance().GetExistedCardTypeModels());
             mainWindowInfo.ExistedCreditTypes = new ObservableCollection<CreditTypeModel>(
