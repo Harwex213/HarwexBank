@@ -1,7 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace HarwexBank
 {
+    public class SortJournalByDate : IComparer<JournalModel>
+    {
+        public int Compare(JournalModel x, JournalModel y)
+        {
+            if (ReferenceEquals(x, y)) 
+                return 0;
+            
+            if (ReferenceEquals(null, y)) 
+                return 1;
+            
+            if (ReferenceEquals(null, x)) 
+                return -1;
+            
+            return x.Date.CompareTo(y.Date);
+        }
+    }
+    
     public abstract class JournalModel : ObservableObject
     {
         public int Id { get; set; }

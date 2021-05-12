@@ -50,8 +50,11 @@ namespace HarwexBank
         {
             mainWindowInfo.ExistedClients = new ObservableCollection<UserModel>(
                 ModelResourcesManager.GetInstance().GetAllClients());
-            mainWindowInfo.GlobalJournal = new ObservableCollection<JournalModel>(
-                ModelResourcesManager.GetInstance().GetJournalNotes());
+
+            var journal = ModelResourcesManager.GetInstance().GetJournalNotes().ToList();
+            journal.Sort(new SortJournalByDate());
+            mainWindowInfo.GlobalJournal = new ObservableCollection<JournalModel>(journal);
+            
             mainWindowInfo.AllNonApprovedCredits = new ObservableCollection<IssuedCreditModel>(
                 ModelResourcesManager.GetInstance().GetAllTakingCredits().Where(c => !c.IsApproved));
         }
@@ -74,15 +77,21 @@ namespace HarwexBank
         {
             mainWindowInfo.UserAccounts = new ObservableCollection<AccountModel>(
                 mainWindowInfo.LoggedInUser.Accounts);
+            
             mainWindowInfo.UserCredits = new ObservableCollection<IssuedCreditModel>(
                 mainWindowInfo.LoggedInUser.IssuedCredits.Where(c => c.IsApproved)
                     .Where(c => !c.IsRepaid));
-            mainWindowInfo.UserJournal = new ObservableCollection<JournalModel>(
-                mainWindowInfo.LoggedInUser.Journal);
+            
+            var journal = mainWindowInfo.LoggedInUser.Journal.ToList();
+            journal.Sort(new SortJournalByDate());
+            mainWindowInfo.UserJournal = new ObservableCollection<JournalModel>(journal);
+            
             mainWindowInfo.ExistedCardTypes = new ObservableCollection<CardTypeModel>(
                 ModelResourcesManager.GetInstance().GetExistedCardTypeModels());
+            
             mainWindowInfo.ExistedCreditTypes = new ObservableCollection<CreditTypeModel>(
                 ModelResourcesManager.GetInstance().GetExistedCreditTypeModels());
+            
             mainWindowInfo.ExistedCurrencyTypes = new ObservableCollection<CurrencyTypeModel>(
                 ModelResourcesManager.GetInstance().GetExistedCurrencyTypeModels());
         }
