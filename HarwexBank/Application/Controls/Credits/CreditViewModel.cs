@@ -19,17 +19,12 @@ namespace HarwexBank
             switch (MainViewModel.Data.LoggedInUser.UserType)
             {
                 case "client":
-                    UserApprovedCreditModels = new ObservableCollection<IssuedCreditModel>(
-                        MainViewModel.Data.LoggedInUser.IssuedCredits
-                            .Where(i => i.IsApproved).Where(i => !i.IsRepaid));
-                    
+                    UserApprovedCreditModels = MainViewModel.Data.UserCredits;
                     CreditTypeModels = MainViewModel.Data.ExistedCreditTypes;
                     break;
                 
                 case "worker":
-                    UserApprovedCreditModels = new ObservableCollection<IssuedCreditModel>(
-                        MainViewModel.Data.LoggedInUser.IssuedCredits.Where(i => i.IsApproved));
-
+                    UserApprovedCreditModels = MainViewModel.Data.UserCredits;
                     AwaitToApprovedCreditModels = MainViewModel.Data.AllNonApprovedCredits;
                     break;
                 default:

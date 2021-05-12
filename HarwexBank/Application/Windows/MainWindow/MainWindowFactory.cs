@@ -74,7 +74,7 @@ namespace HarwexBank
         {
             mainWindowInfo.UserAccounts = new ObservableCollection<AccountModel>(
                 mainWindowInfo.LoggedInUser.Accounts);
-            mainWindowInfo.UserApprovedCredits = new ObservableCollection<IssuedCreditModel>(
+            mainWindowInfo.UserCredits = new ObservableCollection<IssuedCreditModel>(
                 mainWindowInfo.LoggedInUser.IssuedCredits.Where(c => c.IsApproved)
                     .Where(c => !c.IsRepaid));
             mainWindowInfo.ExistedCardTypes = new ObservableCollection<CardTypeModel>(

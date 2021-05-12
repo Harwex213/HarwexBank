@@ -31,7 +31,7 @@ namespace HarwexBank
         // Logged In User Data.
         public UserModel LoggedInUser { get; set; }
         public ObservableCollection<AccountModel> UserAccounts { get; set; }
-        public ObservableCollection<IssuedCreditModel> UserApprovedCredits { get; set; }
+        public ObservableCollection<IssuedCreditModel> UserCredits { get; set; }
         
         // Global Data.
         public ObservableCollection<UserModel> ExistedClients { get; set; }

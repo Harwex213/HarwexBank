@@ -18,13 +18,13 @@ namespace HarwexBank
             switch (MainViewModel.Data.LoggedInUser.UserType)
             {
                 case "client":
-                    AccountModels = new ObservableCollection<AccountModel>(MainViewModel.Data.LoggedInUser.Accounts);
+                    AccountModels = MainViewModel.Data.UserAccounts;
                     CurrencyTypeModels = MainViewModel.Data.ExistedCurrencyTypes;
                     CardTypeModels = MainViewModel.Data.ExistedCardTypes;
                     break;
                 
                 case "worker":
-                    AccountModels = new ObservableCollection<AccountModel>(MainViewModel.Data.LoggedInUser.Accounts);
+                    AccountModels = MainViewModel.Data.UserAccounts;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
