@@ -1,13 +1,127 @@
-﻿namespace HarwexBank
+﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Controls;
+using System.Windows.Input;
+
+namespace HarwexBank
 {
+    public class CardsListViewModel : Control, IControlViewModel { }
+    public class CreateNewCardViewModel : Control, IControlViewModel { }
     public class CardsViewModel : BaseControlViewModel, IControlViewModel
     {
         public string Name => "Карты";
 
         public CardsViewModel()
         {
-            
+            LoggedInUser = MainViewModel.Data.LoggedInUser;
+            UserCards = MainViewModel.Data.UserCards;
+            UserAccounts = MainViewModel.Data.UserAccounts;
+            UserJournal = MainViewModel.Data.UserJournal;
+
+            CardTypeModels = MainViewModel.Data.ExistedCardTypes;
+
+            ControlViewModels.Add(new CardsListViewModel());
+            ControlViewModels.Add(new CreateNewCardViewModel());
+
+            SelectedControlViewModel = ControlViewModels[0];
+        }
+
+        // Using Data
+        public UserModel LoggedInUser { get; set; }
+        
+        // Using in Card List
+        public ObservableCollection<CardModel> UserCards { get; set; }
+        public ObservableCollection<JournalModel> UserJournal { get; set; }
+        public ObservableCollection<AccountModel> UserAccounts { get; set; }
+        public CardModel SelectedCard { get; set; }
+        public AccountModel SelectedAccount => ModelResourcesManager.GetInstance().GetAccountById(SelectedCard.AccountId);
+
+        // Using in Creating New Card
+        public CardModel CardToCreate { get; set; }
+        public AccountModel SelectedAccountToAdd { get; set; }
+        public ObservableCollection<CardTypeModel> CardTypeModels { get; }
+
+        #region Commands
+
+        // Fields.
+        private ICommand _goToCardCreationCommand;
+        private ICommand _createNewCardCommand;
+        private ICommand _goToCardListCommand;
+        
+        // Props.
+        public ICommand GoToCardCreationCommand
+        {
+            get
+            {
+                _goToCardCreationCommand ??= new RelayCommand(
+                    _ => GoToCardCreation());
+        
+                return _goToCardCreationCommand;
+            }
         }
         
+        public ICommand CreateNewCardCommand
+        {
+            get
+            {
+                _createNewCardCommand ??= new RelayCommand(
+                    _ => CreateNewCard());
+        
+                return _createNewCardCommand;
+            }
+        }
+        
+        public ICommand GoToCardListCommand
+        {
+            get
+            {
+                _goToCardListCommand ??= new RelayCommand(
+                    _ => GoToCardList());
+        
+                return _goToCardListCommand;
+            }
+        }
+        
+        // Methods.
+        private void GoToCardCreation()
+        {
+            SelectedControlViewModel = ControlViewModels[1];
+        }
+
+        private void GoToCardList()
+        {
+            SelectedControlViewModel = ControlViewModels[0];
+        }
+
+        private void CreateNewCard()
+        {
+            // Creating new Card.
+            decimal number = new Random().Next(1, 9999);
+            number += new Random().Next(1, 9999) * 1000;
+            number += new Random().Next(1, 9999) * 1000 * 1000;
+            number += new Random().Next(1, 9999) * 1000 * 1000 * 1000;
+            CardToCreate = new CardModel()
+            {
+                AccountId = SelectedAccountToAdd.Id,
+                Number = number,
+                OwnerName = MainViewModel.Data.LoggedInUser.FirstName.ToUpper() + " " +
+                                         MainViewModel.Data.LoggedInUser.LastName.ToUpper(),
+                TimeFrame = new Random().Next(0, 12) + "/" + (DateTime.Now.Year + 3),
+                Cvv = new Random().Next(0, 9).ToString() + new Random().Next(0, 9) + new Random().Next(0, 9)
+            };
+            
+            // Add it's to DataBase + to User Cards
+            UserCards.Add(CardToCreate);
+            ModelResourcesManager.GetInstance().AddModel(CardToCreate);
+
+            // Add it to User Accounts.
+            UserAccounts.FirstOrDefault(a => a.Id == SelectedAccountToAdd.Id)?.Cards.Add(CardToCreate);
+            
+            GoToCardList();
+        }
+
+        #endregion
     }
 }

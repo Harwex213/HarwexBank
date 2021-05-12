@@ -77,6 +77,16 @@ namespace HarwexBank
         {
             mainWindowInfo.UserAccounts = new ObservableCollection<AccountModel>(
                 mainWindowInfo.LoggedInUser.Accounts);
+
+            var userCards = new ObservableCollection<CardModel>();
+            foreach (var account in mainWindowInfo.UserAccounts)
+            {
+                foreach (var card in account.Cards)
+                {
+                    userCards.Add(card);
+                }
+            }
+            mainWindowInfo.UserCards = userCards;
             
             mainWindowInfo.UserCredits = new ObservableCollection<IssuedCreditModel>(
                 mainWindowInfo.LoggedInUser.IssuedCredits.Where(c => c.IsApproved)
