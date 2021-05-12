@@ -20,6 +20,14 @@
                         <local:OperationsPageView />
                 </DataTemplate>
                 
+                <DataTemplate DataType="{x:Type local:JournalClientViewModel}">
+                        <local:JournalClientView />
+                </DataTemplate>
+                
+                <DataTemplate DataType="{x:Type local:JournalWorkerViewModel}">
+                        <local:JournalWorkerView />
+                </DataTemplate>
+                
         </UserControl.Resources>
         
         <Grid>

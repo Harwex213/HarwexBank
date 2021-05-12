@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="HarwexBank.JournalClientView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:HarwexBank"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        
+        <!-- ALL NOTES -->
+        <DataTemplate DataType="{x:Type local:AllJournalNotesTabViewModel}">
+            <DataTemplate.Resources>
+                
+                <DataTemplate DataType="{x:Type local:TransferToAccountModel}">
+                    <ContentControl Content="{StaticResource TransferBlockToClient}"></ContentControl>
+                </DataTemplate>
+        
+                <DataTemplate DataType="{x:Type local:CreditRepaymentModel}">
+                    <ContentControl Content="{StaticResource CreditRepaymentBlockToClient}"></ContentControl>
+                </DataTemplate>
+        
+                <DataTemplate DataType="{x:Type local:NotificationModel}">
+                    <ContentControl Content="{StaticResource NotificationBlockToClient}"></ContentControl>
+                </DataTemplate>
+                
+            </DataTemplate.Resources>
+            
+            <ItemsControl ItemsSource="{Binding JournalView.Journal}"></ItemsControl>
+        </DataTemplate>
+        
+        <!-- TRANSFERS NOTES -->
+        <DataTemplate DataType="{x:Type local:TransfersTabViewModel}">
+            <DataTemplate.Resources>
+                
+                <DataTemplate DataType="{x:Type local:TransferToAccountModel}">
+                    <ContentControl Content="{StaticResource TransferBlockToClient}"></ContentControl>
+                </DataTemplate>
+                
+            </DataTemplate.Resources>
+            
+            <ItemsControl ItemsSource="{Binding JournalView.Transfers}"></ItemsControl>
+        </DataTemplate>
+        
+        <!-- CREDIT REPAYMENTS NOTES -->
+        <DataTemplate DataType="{x:Type local:CreditRepaymentTabViewModel}">
+            <DataTemplate.Resources>
+        
+                <DataTemplate DataType="{x:Type local:CreditRepaymentModel}">
+                    <ContentControl Content="{StaticResource CreditRepaymentBlockToClient}"></ContentControl>
+                </DataTemplate>
+                
+            </DataTemplate.Resources>
+            
+            <ItemsControl ItemsSource="{Binding JournalView.CreditRepayments}"></ItemsControl>
+        </DataTemplate>
+        
+        <!-- NOTIFICATIONS NOTES -->
+        <DataTemplate DataType="{x:Type local:NotificationTabViewModel}">
+            <DataTemplate.Resources>
+        
+                <DataTemplate DataType="{x:Type local:NotificationModel}">
+                    <ContentControl Content="{StaticResource NotificationBlockToClient}"></ContentControl>
+                </DataTemplate>
+                
+            </DataTemplate.Resources>
+            
+            <ItemsControl ItemsSource="{Binding JournalView.Notifications}"></ItemsControl>
+        </DataTemplate>
+        
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" MinHeight="60"></RowDefinition>
+            <RowDefinition Height="6*"></RowDefinition>
+        </Grid.RowDefinitions>
+    
+        <Border Grid.Row="0"
+                BorderBrush="Black"
+                BorderThickness="0,0,0,1">
+            <ItemsControl ItemsSource="{Binding ControlViewModels}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+        
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Name}"
+                                Command="{Binding DataContext.ChangeControlCommand,
+                                    RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                CommandParameter="{Binding }"
+                                FontSize="18"
+                                Margin="10,10"
+                                Padding="10, 10"
+                                MinWidth="70"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+    
+        <ContentControl Grid.Row="1" Content="{Binding SelectedControlViewModel}"/>
+    </Grid>
+</UserControl>

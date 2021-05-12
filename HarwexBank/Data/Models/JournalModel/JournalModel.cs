@@ -16,7 +16,7 @@ namespace HarwexBank
             if (ReferenceEquals(null, x)) 
                 return -1;
             
-            return x.Date.CompareTo(y.Date);
+            return y.Date.CompareTo(x.Date);
         }
     }
     

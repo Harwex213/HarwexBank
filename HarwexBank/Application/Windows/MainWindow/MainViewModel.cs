@@ -22,12 +22,14 @@ namespace HarwexBank
 
             SelectedControlViewModel = ControlViewModels[0];
         }
+
         public ApplicationViewModel ApplicationViewModel { get; }
         public static MainWindowInfo Data { get; }
     }
     
     public class MainWindowInfo
     {
+
         // Logged In User Data.
         public UserModel LoggedInUser { get; set; }
         public ObservableCollection<AccountModel> UserAccounts { get; set; }

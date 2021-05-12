@@ -17,9 +17,15 @@ namespace HarwexBank
 
         public ApplicationViewModel()
         {
+            MinHeight = 600;
+            MinWidth = 800;
+            
             _authorization = new AuthorizationViewModel(this);
             SelectedControlViewModel = _authorization;
         }
+        
+        public double MinHeight { get; set; }
+        public double MinWidth { get; set; }
 
         #region Commands
 

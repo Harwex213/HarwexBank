@@ -42,7 +42,7 @@ namespace HarwexBank
             {
                 new ClientsViewModel(),
                 new CreditsPageViewModel(),
-                new JournalViewModel()
+                new JournalWorkerViewModel()
             };
         }
         
@@ -69,7 +69,7 @@ namespace HarwexBank
                 new CardsViewModel(),
                 new FinanceViewModel(),
                 new OperationsPageViewModel(),
-                new JournalViewModel()
+                new JournalClientViewModel()
             };
         }
         

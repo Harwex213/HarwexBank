@@ -18,9 +18,8 @@ namespace HarwexBank
             base.OnStartup(e);
             ModelResourcesManager.GetInstance();
 
-            var app = new ApplicationView();
             var context = new ApplicationViewModel();
-            app.DataContext = context;
+            var app = new ApplicationView {DataContext = context};
             app.Show();
         }
     }

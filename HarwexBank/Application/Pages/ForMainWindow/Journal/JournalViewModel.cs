@@ -1,30 +1,38 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace HarwexBank
 {
-    public class AllJournalTab : Control, IControlViewModel
+    public class AllJournalNotesTabViewModel : BaseControlViewModel, IControlViewModel
     {
-        public new string Name => "Всё";
+        public string Name => "Всё";
+        public JournalViewModel JournalView { get; set; }
     }
     
-    public class OperationsTab : Control, IControlViewModel
+    public class TransfersTabViewModel : BaseControlViewModel, IControlViewModel
     {
-        public new string Name => "Переводы";
+        public string Name => "Переводы";
+        public JournalViewModel JournalView { get; set; }
+    }
+    
+    public class CreditRepaymentTabViewModel : BaseControlViewModel, IControlViewModel
+    {
+        public string Name => "Погашения кредитов";
+        public JournalViewModel JournalView { get; set; }
+    }
+    
+    public class NotificationTabViewModel : BaseControlViewModel, IControlViewModel
+    {
+        public string Name => "Уведомления";
+        public JournalViewModel JournalView { get; set; }
     }
 
-    public class CreditRepaymentsTab : Control, IControlViewModel
-    {
-        public new string Name => "Погашение кредитов";
-    }
-    
-    public class NotificationsTab : Control, IControlViewModel
-    {
-        public new string Name => "Уведомления";
-    }
+    public class JournalClientViewModel : JournalViewModel {}
+    public class JournalWorkerViewModel : JournalViewModel {}
 
     public class JournalViewModel : BaseControlViewModel, IControlViewModel
     {
@@ -32,53 +40,67 @@ namespace HarwexBank
 
         public JournalViewModel()
         {
-            Journal = MainViewModel.Data.LoggedInUser.UserType switch
+            switch (MainViewModel.Data.LoggedInUser.UserType)
             {
-                "worker" => MainViewModel.Data.GlobalJournal,
-                "client" => MainViewModel.Data.UserJournal,
-                _ => null
+                case "worker":
+                    Journal = MainViewModel.Data.GlobalJournal;
+                    
+                    ControlViewModels.Add(new AllJournalNotesTabViewModel{ JournalView = this });
+                    ControlViewModels.Add(new TransfersTabViewModel{ JournalView = this });
+                    ControlViewModels.Add(new CreditRepaymentTabViewModel{ JournalView = this });
+                    break;
+                
+                case "client":
+                    Journal = MainViewModel.Data.UserJournal;
+
+                    ControlViewModels.Add(new AllJournalNotesTabViewModel{ JournalView = this });
+                    ControlViewModels.Add(new TransfersTabViewModel{ JournalView = this });
+                    ControlViewModels.Add(new CreditRepaymentTabViewModel{ JournalView = this });
+                    ControlViewModels.Add(new NotificationTabViewModel{ JournalView = this });
+                    break;
+            }
+
+            Transfers = new ObservableCollection<TransferToAccountModel>();
+            CreditRepayments = new ObservableCollection<CreditRepaymentModel>();
+            Notifications = new ObservableCollection<NotificationModel>();
+
+            foreach (var journalNote in Journal)
+            {
+                DetermineJournalModel(journalNote);
+            }
+
+            Journal.CollectionChanged += (sender, e) =>
+            {
+                if (e.NewItems == null || e.Action != NotifyCollectionChangedAction.Add) 
+                    return;
+
+                DetermineJournalModel((JournalModel) e.NewItems[0]);
             };
 
-            RefreshPage();
-            
-            ControlViewModels.Add(new AllJournalTab());
-            ControlViewModels.Add(new OperationsTab());
-            ControlViewModels.Add(new CreditRepaymentsTab());
-            ControlViewModels.Add(new NotificationsTab());
-            
             SelectedControlViewModel = ControlViewModels[0];
         }
-        
-        public ObservableCollection<JournalModel> Journal { get; set; }
-        public List<JournalModel> Transfers { get; set; }
-        public List<JournalModel> CreditRepayments { get; set; }
-        public List<JournalModel> Notifications { get; set; }
-        
-        #region Commands
 
-        // Fields.
-        private ICommand _refreshPageCommand;
-        
-        // Props.
-        public ICommand RefreshPageCommand
+        public ObservableCollection<JournalModel> Journal { get; set; }
+        public ObservableCollection<TransferToAccountModel> Transfers { get; set; }
+        public ObservableCollection<CreditRepaymentModel> CreditRepayments { get; set; }
+        public ObservableCollection<NotificationModel> Notifications { get; set; }
+
+        private void DetermineJournalModel(JournalModel journalNote)
         {
-            get
+            switch (journalNote)
             {
-                _refreshPageCommand ??= new RelayCommand(
-                    _ => RefreshPage());
-        
-                return _refreshPageCommand;
+                case TransferToAccountModel transferToAccountModel: 
+                    Transfers.Add(transferToAccountModel);
+                    break;
+                
+                case CreditRepaymentModel creditRepaymentModel:
+                    CreditRepayments.Add(creditRepaymentModel);
+                    break;
+                
+                case NotificationModel notificationModel:
+                    Notifications.Add(notificationModel);
+                    break;
             }
         }
-        
-        // Methods.
-        private void RefreshPage()
-        {
-            Transfers = Journal?.Where(j => j is TransferToAccountModel).ToList();
-            CreditRepayments = Journal?.Where(j => j is CreditRepaymentModel).ToList();
-            Notifications = Journal?.Where(j => j is NotificationModel).ToList();
-        }
-
-        #endregion
     }
 }
