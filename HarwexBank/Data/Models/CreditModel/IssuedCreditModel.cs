@@ -55,6 +55,8 @@ namespace HarwexBank
             }
         }
 
+        public string CreditName => "Кредит номер " + Id + ", " + CreditType;
+
         public DateTime DateIn
         {
             get => _dateIn;

@@ -51,9 +51,9 @@ namespace HarwexBank
             mainWindowInfo.ExistedClients = new ObservableCollection<UserModel>(
                 ModelResourcesManager.GetInstance().GetAllClients());
 
-            var journal = ModelResourcesManager.GetInstance().GetJournalNotes().ToList();
-            journal.Sort(new SortJournalByDate());
-            mainWindowInfo.GlobalJournal = new ObservableCollection<JournalModel>(journal);
+            var journal = ModelResourcesManager.GetInstance().GetJournalNotes()?.ToList();
+            journal?.Sort(new SortJournalByDate());
+            mainWindowInfo.GlobalJournal = new ObservableCollection<JournalModel>(journal ?? new List<JournalModel>());
             
             mainWindowInfo.AllNonApprovedCredits = new ObservableCollection<IssuedCreditModel>(
                 ModelResourcesManager.GetInstance().GetAllTakingCredits().Where(c => !c.IsApproved));
@@ -89,12 +89,11 @@ namespace HarwexBank
             mainWindowInfo.UserCards = userCards;
             
             mainWindowInfo.UserCredits = new ObservableCollection<IssuedCreditModel>(
-                mainWindowInfo.LoggedInUser.IssuedCredits.Where(c => c.IsApproved)
-                    .Where(c => !c.IsRepaid));
+                mainWindowInfo.LoggedInUser.IssuedCredits);
             
-            var journal = mainWindowInfo.LoggedInUser.Journal.ToList();
-            journal.Sort(new SortJournalByDate());
-            mainWindowInfo.UserJournal = new ObservableCollection<JournalModel>(journal);
+            var journal = mainWindowInfo.LoggedInUser.Journal?.ToList();
+            journal?.Sort(new SortJournalByDate());
+            mainWindowInfo.UserJournal = new ObservableCollection<JournalModel>(journal ?? new List<JournalModel>());
             
             mainWindowInfo.ExistedCardTypes = new ObservableCollection<CardTypeModel>(
                 ModelResourcesManager.GetInstance().GetExistedCardTypeModels());

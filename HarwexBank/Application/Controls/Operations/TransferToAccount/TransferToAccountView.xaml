@@ -6,7 +6,86 @@
              xmlns:local="clr-namespace:HarwexBank"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            
+            <!-- INCLUDING STYLES -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/HarwexBank;component/Styles/MainWindowStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <StackPanel Orientation="Vertical"
+                Background="#266885">
         
-    </Grid>
+        <!-- What account to use -->
+        <TextBlock Text="Выберите используемый счёт"></TextBlock>
+        <ComboBox ItemsSource="{Binding UserAccounts}"
+                  SelectedItem="{Binding AccountInitiator}"
+                  SelectedIndex="0">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Id}"></TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        
+        <!-- What account to transfer to -->
+        <TextBlock Text="Введите номер счёта получателя"></TextBlock>
+        <TextBox Name="AccountReceiverId">
+            <TextBox.Text>
+                <Binding Path="AccountReceiverId"
+                         ValidatesOnExceptions="True"
+                         UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <DataErrorValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        
+        <!-- Amount -->
+        <TextBlock Text="Введите сумму"></TextBlock>
+        <TextBox Name="TransferAmount">
+            <TextBox.Text>
+                <Binding Path="AmountToTransfer"
+                         ValidatesOnExceptions="True"
+                         UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <DataErrorValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        
+        <!-- Button -->
+        <Button  Content="Отправить"
+                 Command="{Binding TransferToAccountCommand}">
+            <Button.Style>
+                <Style TargetType="Button">
+    
+                    <Setter Property="IsEnabled" Value="False"/>
+    
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError),
+                                                            ElementName=TransferAmount}" Value="False"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError),
+                                                            ElementName=AccountReceiverId}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+    
+                            <Setter Property="IsEnabled" Value="True"/>
+    
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                                                
+                </Style>
+            </Button.Style>
+        </Button>
+        
+    </StackPanel>
+    
 </UserControl>

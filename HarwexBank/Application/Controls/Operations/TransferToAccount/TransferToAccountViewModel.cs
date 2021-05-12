@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace HarwexBank
@@ -30,29 +31,32 @@ namespace HarwexBank
         {
             get
             {
-                string result = null;
+                if (AccountInitiator is null)
+                {
+                    return "Выберите сначала счёт";
+                }
 
                 switch (name)
                 {
                     case nameof(AccountReceiverId):
                         if ((AccountReceiver = ModelResourcesManager.GetInstance().GetAccountById(AccountReceiverId)) == null)
                         {
-                            result = "Введённый счёт не найден";
+                            return "Введённый счёт не найден";
                         }
                         break;
                     case nameof(AmountToTransfer):
                         if (AmountToTransfer < 0)
                         {
-                            result = "Сумма не должна быть отрицательной";
+                            return "Сумма не должна быть отрицательной";
                         }
                         if (AmountToTransfer > AccountInitiator.Amount)
                         {
-                            result = "Сумма не должна превышать сумму счёта: " + AccountInitiator.Amount;
+                            return "Сумма не должна превышать сумму счёта: " + AccountInitiator.Amount;
                         }
                         break;
                 }
 
-                return result;
+                return null;
             }
         }
 
@@ -88,6 +92,8 @@ namespace HarwexBank
             };
             UserJournal.Add(journalNote);
             ModelResourcesManager.GetInstance().GenerateTransfer(journalNote, AccountInitiator, AccountReceiver);
+            
+            MessageBox.Show("Успешно переведено");
         }
         
         #endregion

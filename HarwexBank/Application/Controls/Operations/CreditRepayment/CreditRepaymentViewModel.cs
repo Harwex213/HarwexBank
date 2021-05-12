@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace HarwexBank
@@ -31,28 +32,35 @@ namespace HarwexBank
         {
             get
             {
-                string result = null;
-                var amountToPaid = SelectedCredit.Amount - SelectedCredit.RepaidAmount;
+                if (AccountInitiator is null)
+                {
+                    return "Выберите сначала счёт";
+                }
+                if (SelectedCredit is null)
+                {
+                    return "Выберите сначала кредит";
+                }
 
+                var amountToPaid = SelectedCredit.Amount - SelectedCredit.RepaidAmount;
                 switch (name)
                 {
                     case nameof(AmountToTransfer):
                         if (AmountToTransfer < 0)
                         {
-                            result = "Сумма не должна быть отрицательной";
+                            return "Сумма не должна быть отрицательной";
                         }
                         if (AmountToTransfer > AccountInitiator.Amount)
                         {
-                            result = "Сумма не должна превышать сумму счёта: " + AccountInitiator.Amount;
+                            return "Сумма не должна превышать сумму счёта: " + AccountInitiator.Amount;
                         }
                         if (AmountToTransfer > amountToPaid)
                         {
-                            result = "Сумма не должна превышать сумму погашения: " + amountToPaid;
+                            return "Сумма не должна превышать сумму погашения: " + amountToPaid;
                         }
                         break;
                 }
 
-                return result;
+                return null;
             }
         }
 
@@ -92,6 +100,8 @@ namespace HarwexBank
             };
             UserJournal.Add(journalNote);
             ModelResourcesManager.GetInstance().GenerateCreditRepayment(journalNote, AccountInitiator, SelectedCredit);
+
+            MessageBox.Show("Успешно оплачено");
         }
         
         #endregion
