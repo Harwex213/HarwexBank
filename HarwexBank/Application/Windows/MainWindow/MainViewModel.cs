@@ -32,6 +32,7 @@ namespace HarwexBank
         public UserModel LoggedInUser { get; set; }
         public ObservableCollection<AccountModel> UserAccounts { get; set; }
         public ObservableCollection<IssuedCreditModel> UserCredits { get; set; }
+        public ObservableCollection<JournalModel> UserJournal { get; set; }
         
         // Global Data.
         public ObservableCollection<UserModel> ExistedClients { get; set; }
@@ -39,6 +40,6 @@ namespace HarwexBank
         public ObservableCollection<CurrencyTypeModel> ExistedCurrencyTypes { get; set; }
         public ObservableCollection<CardTypeModel> ExistedCardTypes { get; set; }
         public ObservableCollection<CreditTypeModel> ExistedCreditTypes { get; set; }
-        public ObservableCollection<JournalModel> Journal { get; set; }
+        public ObservableCollection<JournalModel> GlobalJournal { get; set; }
     }
 }

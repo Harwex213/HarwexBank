@@ -12,9 +12,11 @@ namespace HarwexBank
         public TransferToAccountViewModel()
         {
             UserAccounts = MainViewModel.Data.UserAccounts;
+            UserJournal = MainViewModel.Data.UserJournal;
         }
 
         // Using Data.
+        public ObservableCollection<JournalModel> UserJournal { get; set; }
         public ObservableCollection<AccountModel> UserAccounts { get; set; }
         public AccountModel AccountInitiator { get; set; }
         public AccountModel AccountReceiver { get; set; }
@@ -84,6 +86,7 @@ namespace HarwexBank
                 BankAccountReceiver = AccountReceiver.Id,
                 Amount = AmountToTransfer
             };
+            UserJournal.Add(journalNote);
             ModelResourcesManager.GetInstance().GenerateTransfer(journalNote, AccountInitiator, AccountReceiver);
         }
         

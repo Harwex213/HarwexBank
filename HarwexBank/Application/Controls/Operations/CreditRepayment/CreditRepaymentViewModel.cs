@@ -13,9 +13,11 @@ namespace HarwexBank
         {
             UserAccounts = MainViewModel.Data.UserAccounts;
             UserCredits = MainViewModel.Data.UserCredits;
+            UserJournal = MainViewModel.Data.UserJournal;
         }
 
         // Using Data.
+        public ObservableCollection<JournalModel> UserJournal { get; set; }
         public ObservableCollection<AccountModel> UserAccounts { get; set; }
         public ObservableCollection<IssuedCreditModel> UserCredits { get; set; }
         public AccountModel AccountInitiator { get; set; }
@@ -88,6 +90,7 @@ namespace HarwexBank
                 SelectedCredit = SelectedCredit.Id,
                 Amount = AmountToTransfer
             };
+            UserJournal.Add(journalNote);
             ModelResourcesManager.GetInstance().GenerateCreditRepayment(journalNote, AccountInitiator, SelectedCredit);
         }
         

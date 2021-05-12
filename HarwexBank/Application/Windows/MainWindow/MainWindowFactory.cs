@@ -50,7 +50,7 @@ namespace HarwexBank
         {
             mainWindowInfo.ExistedClients = new ObservableCollection<UserModel>(
                 ModelResourcesManager.GetInstance().GetAllClients());
-            mainWindowInfo.Journal = new ObservableCollection<JournalModel>(
+            mainWindowInfo.GlobalJournal = new ObservableCollection<JournalModel>(
                 ModelResourcesManager.GetInstance().GetJournalNotes());
             mainWindowInfo.AllNonApprovedCredits = new ObservableCollection<IssuedCreditModel>(
                 ModelResourcesManager.GetInstance().GetAllTakingCredits().Where(c => !c.IsApproved));
@@ -77,6 +77,8 @@ namespace HarwexBank
             mainWindowInfo.UserCredits = new ObservableCollection<IssuedCreditModel>(
                 mainWindowInfo.LoggedInUser.IssuedCredits.Where(c => c.IsApproved)
                     .Where(c => !c.IsRepaid));
+            mainWindowInfo.UserJournal = new ObservableCollection<JournalModel>(
+                mainWindowInfo.LoggedInUser.Journal);
             mainWindowInfo.ExistedCardTypes = new ObservableCollection<CardTypeModel>(
                 ModelResourcesManager.GetInstance().GetExistedCardTypeModels());
             mainWindowInfo.ExistedCreditTypes = new ObservableCollection<CreditTypeModel>(
