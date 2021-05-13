@@ -6,7 +6,209 @@
              xmlns:local="clr-namespace:HarwexBank"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <UserControl.Resources>
         
-    </Grid>
+        <!-- - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- CREDIT TYPE LISTS -->
+        <Style TargetType="{x:Type local:CreditTypesListViewModel}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:CreditTypesListViewModel}">
+                    
+                        <StackPanel>
+                            <Button Content="Создать новый вид кредита"
+                                    Command="{Binding GoToCreateNewCreditTypeCommand}"></Button>
+                            
+                            <ItemsControl ItemsSource="{Binding ExistedCreditTypes}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                        
+                                        <Button Background="#3D89A1"
+                                                Command="{Binding DataContext.SelectCreditTypeCommand,
+                                RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                                CommandParameter="{Binding }">
+                                            <StackPanel Orientation="Horizontal">
+                                            
+                                                <StackPanel>
+                                                    <TextBlock Text="Название"></TextBlock>
+                                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                                </StackPanel>
+                                            
+                                                <StackPanel>
+                                                    <TextBlock Text="Ставка"></TextBlock>
+                                                    <TextBlock Text="{Binding Rate}"></TextBlock>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Button>
+                        
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- - - - - - - - - - - - - - - - - - - - - - -->
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- CREATE NEW CREDIT TYPE -->
+        <Style TargetType="{x:Type local:CreateNewCreditTypeViewModel}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:CreateNewCreditTypeViewModel}">
+                        
+                        <StackPanel>
+                                            
+                            <StackPanel>
+                                <TextBlock Text="Название"></TextBlock>
+                                <TextBox Name="CreditTypeName">
+                                    <TextBox.Text>
+                                        <Binding Path="CreditTypeToCreate.Name"
+                                                 ValidatesOnExceptions="True"
+                                                 UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+                                            
+                            <StackPanel>
+                                <TextBlock Text="Ставка"></TextBlock>
+                                <TextBox Name="CreditTypeRate">
+                                    <TextBox.Text>
+                                        <Binding Path="CreditTypeToCreate.Rate"
+                                                 ValidatesOnExceptions="True"
+                                                 UpdateSourceTrigger="PropertyChanged"
+                                                 StringFormat="N2">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+                            
+                            <StackPanel Orientation="Horizontal">
+                                <Button Command="{Binding GoToCreditTypesListCommand}"
+                                        Content="Назад"></Button>
+                                <Button Content="Создать"
+                                        Command="{Binding CreateNewCreditTypeCommand}">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+    
+                                            <Setter Property="IsEnabled" Value="False"/>
+    
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Path=(Validation.HasError),
+                                                            ElementName=CreditTypeName}" Value="False"/>
+                                                        <Condition Binding="{Binding Path=(Validation.HasError),
+                                                            ElementName=CreditTypeRate}" Value="False"/>
+                                                    </MultiDataTrigger.Conditions>
+    
+                                                    <Setter Property="IsEnabled" Value="True"/>
+    
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                                
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
+                            
+                        </StackPanel>
+                    
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- - - - - - - - - - - - - - - - - - - - - - -->
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- UPDATE EXISTED CREDIT TYPE -->
+        <Style TargetType="{x:Type local:UpdateExistedCreditTypeViewModel}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:UpdateExistedCreditTypeViewModel}">
+                    
+                        <StackPanel>
+                                            
+                            <StackPanel>
+                                <TextBlock Text="Название"></TextBlock>
+                                <TextBox Name="CreditTypeName">
+                                    <TextBox.Text>
+                                        <Binding Path="SelectedCreditType.Name"
+                                                 ValidatesOnExceptions="True"
+                                                 UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+                                            
+                            <StackPanel>
+                                <TextBlock Text="Ставка"></TextBlock>
+                                <TextBox Name="CreditTypeRate">
+                                    <TextBox.Text>
+                                        <Binding Path="SelectedCreditType.Rate"
+                                                 ValidatesOnExceptions="True"
+                                                 UpdateSourceTrigger="PropertyChanged"
+                                                 StringFormat="N2">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+                            
+                            <StackPanel Orientation="Horizontal">
+                                <Button Command="{Binding GoToCreditTypesListCommand}"
+                                        Content="Назад"></Button>
+                                <Button Content="Сохранить изменения"
+                                        Command="{Binding SaveUpdatesOfCreditTypeCommand}">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+    
+                                            <Setter Property="IsEnabled" Value="False"/>
+    
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Path=(Validation.HasError),
+                                                            ElementName=CreditTypeName}" Value="False"/>
+                                                        <Condition Binding="{Binding Path=(Validation.HasError),
+                                                            ElementName=CreditTypeRate}" Value="False"/>
+                                                    </MultiDataTrigger.Conditions>
+    
+                                                    <Setter Property="IsEnabled" Value="True"/>
+    
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                                
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                                <Button Command="{Binding DeleteCreditTypeCommand}"
+                                        Content="Удалить вид кредита"></Button>
+                            </StackPanel>
+                            
+                        </StackPanel>
+                    
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- - - - - - - - - - - - - - - - - - - - - - -->
+
+    </UserControl.Resources>
+    
+    <ContentControl Content="{Binding SelectedControlViewModel}"></ContentControl>
 </UserControl>
