@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -18,26 +19,30 @@ namespace HarwexBank
             switch (MainViewModel.Data.LoggedInUser.UserType)
             {
                 case "client":
+                    // Using data.
                     AccountModels = MainViewModel.Data.UserAccounts;
                     CurrencyTypeModels = MainViewModel.Data.ExistedCurrencyTypes;
                     CardTypeModels = MainViewModel.Data.ExistedCardTypes;
+                    
+                    // Using VM
+                    ControlViewModels.Add(new AccountsListViewModel());
+                    ControlViewModels.Add(new CreateNewAccountViewModel());
                     break;
                 
                 case "worker":
-                    AccountModels = MainViewModel.Data.UserAccounts;
+                    
+                    // Using VM
+                    ControlViewModels.Add(new AccountsListViewModel());
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            ControlViewModels.Add(new AccountsListViewModel());
-            ControlViewModels.Add(new CreateNewAccountViewModel());
-
-            SelectedControlViewModel = ControlViewModels[0];
+            SelectedControlViewModel = ControlViewModels.FirstOrDefault();
         }
         
         // Used data in Views
-        public ObservableCollection<AccountModel> AccountModels { get; }
+        public ObservableCollection<AccountModel> AccountModels { get; set; }
         public ObservableCollection<CurrencyTypeModel> CurrencyTypeModels { get; }
         public ObservableCollection<CardTypeModel> CardTypeModels { get; }
         

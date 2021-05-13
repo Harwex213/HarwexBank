@@ -19,29 +19,35 @@ namespace HarwexBank
             switch (MainViewModel.Data.LoggedInUser.UserType)
             {
                 case "client":
+                    // Using data.
                     UserApprovedCreditModels = MainViewModel.Data.UserCredits;
                     CreditTypeModels = MainViewModel.Data.ExistedCreditTypes;
+                    
+                    // Using VM
+                    ControlViewModels.Add(new CreditListViewModel());
+                    ControlViewModels.Add(new TakeNewCreditViewModel());
                     break;
                 
                 case "worker":
-                    UserApprovedCreditModels = MainViewModel.Data.UserCredits;
+                    
+                    // Using VM
+                    ControlViewModels.Add(new CreditListViewModel());
+                    ControlViewModels.Add(new TakeNewCreditViewModel());
                     break;
                 
                 case "admin":
                     CreditTypeModels = MainViewModel.Data.ExistedCreditTypes;
+                    
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            ControlViewModels.Add(new CreditListViewModel());
-            ControlViewModels.Add(new TakeNewCreditViewModel());
-
-            SelectedControlViewModel = ControlViewModels[0];
+            SelectedControlViewModel = ControlViewModels.FirstOrDefault();
         }
         
         // Used data in Views
-        public ObservableCollection<IssuedCreditModel> UserApprovedCreditModels { get; }
+        public ObservableCollection<IssuedCreditModel> UserApprovedCreditModels { get; set; }
         public ObservableCollection<CreditTypeModel> CreditTypeModels { get; }
         
         // Shells for new models

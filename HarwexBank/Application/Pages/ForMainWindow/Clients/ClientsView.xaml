@@ -6,7 +6,203 @@
              xmlns:local="clr-namespace:HarwexBank"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <UserControl.Resources>
         
-    </Grid>
+        <!-- - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- CLIENTS LIST -->
+        <DataTemplate DataType="{x:Type local:ExistedClientsViewModel}">
+            
+            <ItemsControl ItemsSource="{Binding ClientsViewModel.ExistedClients}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        
+                        <Button Background="#3D89A1"
+                                Command="{Binding DataContext.SelectClientCommand,
+                                RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                CommandParameter="{Binding }">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding FullName}"></TextBlock>
+                                    <TextBlock Text="{Binding UserBlockedTextMessage}"></TextBlock>
+                                </StackPanel>
+                                
+                                <TextBlock Text="{Binding Address}"></TextBlock>
+                            </StackPanel>
+                        </Button>
+                        
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            
+        </DataTemplate>
+        <!-- - - - - - - - - - - - - - - - - - - - - - -->
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- CLIENT SELECTED INFO -->
+        <DataTemplate DataType="{x:Type local:ClientInfoViewModel}">
+            <DataTemplate.Resources>
+                
+                <DataTemplate DataType="{x:Type local:AccountViewModel}">
+                    <local:AccountViewToClientsPage/>
+                </DataTemplate>
+        
+                <DataTemplate DataType="{x:Type local:CreditViewModel}">
+                    <local:CreditViewToClientsPage/>
+                </DataTemplate>
+                
+            </DataTemplate.Resources>
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="4*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <!-- CLIENT GENERAL INFO -->
+                <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                            Orientation="Horizontal">
+                    
+                    <StackPanel>
+                        <TextBlock Text="{Binding ClientsViewModel.SelectedClient.FullName}"></TextBlock>
+                        <TextBlock Text="{Binding ClientsViewModel.SelectedClient.UserBlockedTextMessage}"></TextBlock>
+                    </StackPanel>
+                    
+                    <Button Content="Назад"
+                            Command="{Binding ClientsViewModel.GoToClientsListCommand}"></Button>
+                    
+                    <Button Content="{Binding ClientsViewModel.SelectedClient.UserToBlockButtonText}"
+                            Command="{Binding ClientsViewModel.BlockClientCommand}"></Button>
+                    
+                </StackPanel>
+                
+                <!-- CLIENT ADDITIONAL INFO -->
+                <StackPanel Grid.Row="1" Grid.Column="0">
+                    
+                    <TextBlock Text="Номер паспорта"></TextBlock>
+                    <TextBlock Text="{Binding ClientsViewModel.SelectedClient.Passport}"></TextBlock>
+                    
+                    <TextBlock Text="Адрес"></TextBlock>
+                    <TextBlock Text="{Binding ClientsViewModel.SelectedClient.Address}"></TextBlock>
+                    
+                    <Button Content="Отправить уведомление"
+                            Command="{Binding ClientsViewModel.GoToSendClientNotificationCommand}"></Button>
+                    
+                </StackPanel>
+                
+                <!-- CLIENT ACCOUNTS & CREDITS -->
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" MinHeight="70"></RowDefinition>
+                        <RowDefinition Height="6*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                        
+                    <Border Grid.Row="0"
+                            BorderBrush="Black" 
+                            BorderThickness="0,0,0,1">
+                        <ItemsControl ItemsSource="{Binding ControlViewModels}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Content="{Binding Name}"
+                                            Command="{Binding DataContext.ChangeControlCommand,
+                                    RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}"
+                                            CommandParameter="{Binding }"
+                                            FontSize="18"
+                                            Margin="10,10"
+                                            Padding="10, 10"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Border>
+        
+                    <ContentControl Grid.Row="1"
+                                    Content="{Binding SelectedControlViewModel}"/>
+                </Grid>
+            </Grid>
+            
+        </DataTemplate>
+        <!-- - - - - - - - - - - - - - - - - - - - - - -->
+        
+        <!-- - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- NOTIFICATION GENERATION -->
+        <DataTemplate DataType="{x:Type local:SendClientNotificationViewModel}">
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <!-- Card Type -->
+                <StackPanel Grid.Row="0" Orientation="Vertical">
+                    <TextBlock Text="Сообщение уведомления: "></TextBlock>
+                    <TextBox Name="NotificationMessage" 
+                             AcceptsReturn="True" 
+                             AcceptsTab="True"
+                             MinHeight="100">
+                        <TextBox.Text>
+                            <Binding Path="ClientsViewModel.NotificationMessage"
+                                     ValidatesOnExceptions="True"
+                                     Mode="TwoWay"
+                                     UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <DataErrorValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+
+                
+                <!-- Buttons -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button Grid.Column="0"
+                            Command="{Binding ClientsViewModel.GoToClientInfoCommand}"
+                            Content="Назад"></Button>
+                    <Button Grid.Column="1"
+                            Command="{Binding ClientsViewModel.GenerateNotificationToClientCommand}"
+                            Content="Отправить">
+                        <Button.Style>
+                            <Style TargetType="Button">
+    
+                                <Setter Property="IsEnabled" Value="False"/>
+    
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=(Validation.HasError),
+                                                            ElementName=NotificationMessage}" Value="False"/>
+                                        </MultiDataTrigger.Conditions>
+    
+                                        <Setter Property="IsEnabled" Value="True"/>
+    
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                                                
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+                
+            </Grid>
+            
+        </DataTemplate>
+        
+    </UserControl.Resources>
+    
+    <ContentControl Content="{Binding SelectedControlViewModel}"></ContentControl>
 </UserControl>

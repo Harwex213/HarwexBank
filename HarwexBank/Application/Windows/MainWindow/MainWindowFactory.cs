@@ -93,7 +93,7 @@ namespace HarwexBank
             mainWindowInfo.UserCards = userCards;
             
             mainWindowInfo.UserCredits = new ObservableCollection<IssuedCreditModel>(
-                mainWindowInfo.LoggedInUser.IssuedCredits);
+                mainWindowInfo.LoggedInUser.IssuedCredits.Where(c => c.IsApproved));
             
             var journal = mainWindowInfo.LoggedInUser.Journal?.ToList();
             journal?.Sort(new SortJournalByDate());

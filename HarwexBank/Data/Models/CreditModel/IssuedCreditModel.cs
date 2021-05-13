@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace HarwexBank
@@ -55,6 +56,7 @@ namespace HarwexBank
             }
         }
 
+        [NotMapped]
         public string CreditName => "Кредит номер " + Id + ", " + CreditType;
 
         public DateTime DateIn

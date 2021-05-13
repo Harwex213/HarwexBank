@@ -219,5 +219,45 @@ namespace HarwexBank
                 return result;
             }
         }
+        
+        
+        private string _userBlockedTextMessage;
+        private string _userToBlockButtonText;
+        
+        [NotMapped]
+        public string UserBlockedTextMessage
+        {
+            get 
+            {
+                return IsBlocked switch
+                {
+                    true => "Заблокирован",
+                    false => ""
+                }; 
+            }
+            set
+            {
+                _userBlockedTextMessage = value;
+                OnPropertyChanged("UserBlockedTextMessage");
+            }
+        }
+        
+        [NotMapped]
+        public string UserToBlockButtonText
+        {
+            get 
+            {
+                return IsBlocked switch
+                {
+                    true => "Разблокировать",
+                    false => "Заблокировать"
+                }; 
+            }
+            set
+            {
+                _userToBlockButtonText = value;
+                OnPropertyChanged("UserToBlockButtonText");
+            }
+        }
     }
 }
