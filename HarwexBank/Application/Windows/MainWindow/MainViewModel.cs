@@ -15,7 +15,7 @@ namespace HarwexBank
         public MainViewModel(ApplicationViewModel applicationViewModel)
         {
             ApplicationViewModel = applicationViewModel;
-
+            
             var windowFactory = MainWindowFactory.GetFactoryByUserType(Data.LoggedInUser.UserTypeModelNavigation);
             windowFactory.GetNecessaryInfo(Data);
             ControlViewModels.AddRange(windowFactory.GetPages());

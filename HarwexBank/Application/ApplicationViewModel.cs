@@ -8,20 +8,13 @@ namespace HarwexBank
 {
     public class ApplicationViewModel : BaseControlViewModel
     {
-        #region Existed Windows
-
-        private readonly AuthorizationViewModel _authorization;
-        private MainViewModel _main;
-
-        #endregion // Existed Windows
 
         public ApplicationViewModel()
         {
             MinHeight = 600;
             MinWidth = 800;
             
-            _authorization = new AuthorizationViewModel(this);
-            SelectedControlViewModel = _authorization;
+            SelectedControlViewModel = new AuthorizationViewModel(this);
         }
         
         public double MinHeight { get; set; }
@@ -59,12 +52,12 @@ namespace HarwexBank
         // Methods.
         private void EnterToApplication()
         {
-            SelectedControlViewModel = _main ??= new MainViewModel(this);
+            SelectedControlViewModel = new MainViewModel(this);
         }
 
         private void ExitOfApplication()
         {
-            SelectedControlViewModel = _authorization;
+            SelectedControlViewModel = new AuthorizationViewModel(this);
         }
 
         #endregion

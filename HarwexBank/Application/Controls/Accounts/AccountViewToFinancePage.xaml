@@ -13,7 +13,8 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type local:AccountsListViewModel}">
                     
-                        <ScrollViewer>
+                        <ScrollViewer DataContext="{Binding DataContext,
+                         RelativeSource={RelativeSource AncestorType=UserControl}}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" MaxHeight="90"></RowDefinition>
@@ -50,7 +51,8 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type local:CreateNewAccountViewModel}">
                     
-                    <Grid>
+                    <Grid DataContext="{Binding DataContext,
+                    RelativeSource={RelativeSource AncestorType=UserControl}}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
