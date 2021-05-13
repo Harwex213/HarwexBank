@@ -244,28 +244,8 @@
         
     </DataTemplate>
     
-    <!-- Credit list for CreditsPage -->
+    <!-- Credit list for Credits Worker Page -->
     <DataTemplate x:Key="CreditsNonApprovedListToCreditsPage">
-        
-        <Grid Margin="0, 0, 0, 15">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-            </Grid.RowDefinitions>
-            
-            <!-- Credit Info -->
-            <ContentControl Grid.Row="0"
-                            Background="#3D89A1"
-                            Content="{StaticResource CreditGeneralInfo}"></ContentControl>
-            
-            <!-- Credit Additional Info -->
-            <ContentControl Grid.Row="1" Content="{StaticResource CreditAdditionalInfoToCreditsPage}">
-            </ContentControl>
-            
-        </Grid>
-        
-    </DataTemplate>
-    <DataTemplate x:Key="CreditsApprovedListToCreditsPage">
         
         <Grid Margin="0, 0, 0, 15">
             <Grid.RowDefinitions>

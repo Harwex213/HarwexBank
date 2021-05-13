@@ -25,7 +25,10 @@ namespace HarwexBank
                 
                 case "worker":
                     UserApprovedCreditModels = MainViewModel.Data.UserCredits;
-                    AwaitToApprovedCreditModels = MainViewModel.Data.AllNonApprovedCredits;
+                    break;
+                
+                case "admin":
+                    CreditTypeModels = MainViewModel.Data.ExistedCreditTypes;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -39,7 +42,6 @@ namespace HarwexBank
         
         // Used data in Views
         public ObservableCollection<IssuedCreditModel> UserApprovedCreditModels { get; }
-        public ObservableCollection<IssuedCreditModel> AwaitToApprovedCreditModels { get; }
         public ObservableCollection<CreditTypeModel> CreditTypeModels { get; }
         
         // Shells for new models
@@ -51,8 +53,6 @@ namespace HarwexBank
         private ICommand _goBackCommand;
         private ICommand _takeNewCreditCommand;
         private ICommand _createNewCreditCommand;
-        private ICommand _acceptCreditCommand;
-        private ICommand _declineCreditCommand;
         
         // Props.
         
@@ -87,31 +87,7 @@ namespace HarwexBank
                 return _createNewCreditCommand;
             }
         }
-        
-        public ICommand AcceptCreditCommand
-        {
-            get
-            {
-                _acceptCreditCommand ??= new RelayCommand(
-                    c => AcceptCredit((IssuedCreditModel) c),
-                    c => c is IssuedCreditModel);
-        
-                return _acceptCreditCommand;
-            }
-        }
-        
-        public ICommand DeclineCreditCommand
-        {
-            get
-            {
-                _declineCreditCommand ??= new RelayCommand(
-                    c => DeclineCredit((IssuedCreditModel) c),
-                    c => c is IssuedCreditModel);
-        
-                return _declineCreditCommand;
-            }
-        }
-        
+
         // Methods.
         private void GoBack()
         {
@@ -135,24 +111,6 @@ namespace HarwexBank
             CreditToTaking = new IssuedCreditModel();
             
             SelectedControlViewModel = ControlViewModels[0];
-        }
-        
-        private void AcceptCredit(IssuedCreditModel issuedCreditModel)
-        {
-            issuedCreditModel.IsApproved = true;
-            
-            ModelResourcesManager.GetInstance().UpdateModel(issuedCreditModel);
-            AwaitToApprovedCreditModels.Remove(issuedCreditModel);
-            
-            MessageBox.Show("Кредит принят");
-        }
-        
-        private void DeclineCredit(IssuedCreditModel issuedCreditModel)
-        {
-            ModelResourcesManager.GetInstance().RemoveModel(issuedCreditModel);
-            AwaitToApprovedCreditModels.Remove(issuedCreditModel);
-            
-            MessageBox.Show("Кредит отклонен");
         }
 
         #endregion

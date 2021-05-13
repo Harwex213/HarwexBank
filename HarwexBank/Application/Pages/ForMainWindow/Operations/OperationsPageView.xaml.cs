@@ -7,8 +7,6 @@ namespace HarwexBank
         public OperationsPageView()
         {
             InitializeComponent();
-
-            DataContext = new OperationsPageViewModel();
         }
     }
 }
