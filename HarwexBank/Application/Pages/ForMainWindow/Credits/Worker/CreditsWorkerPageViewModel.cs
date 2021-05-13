@@ -1,6 +1,6 @@
 ﻿namespace HarwexBank
 {
-    public class CreditsPageViewModel : BaseControlViewModel, IControlViewModel
+    public class CreditsWorkerPageViewModel : BaseControlViewModel, IControlViewModel
     {
         public string Name => "Кредиты";
     }

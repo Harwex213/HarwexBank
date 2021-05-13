@@ -25,12 +25,16 @@ namespace HarwexBank
     {
         public override List<IControlViewModel> GetPages()
         {
-            return new();
+            return new()
+            {
+                new CreditsAdminPageViewModel()
+            };
         }
 
         public override void GetNecessaryInfo(MainWindowInfo mainWindowInfo)
         {
-            
+            mainWindowInfo.ExistedCreditTypes = new ObservableCollection<CreditTypeModel>(
+                ModelResourcesManager.GetInstance().GetExistedCreditTypeModels());
         }
     }
     
@@ -41,7 +45,7 @@ namespace HarwexBank
             return new()
             {
                 new ClientsViewModel(),
-                new CreditsPageViewModel(),
+                new CreditsWorkerPageViewModel(),
                 new JournalWorkerViewModel()
             };
         }
