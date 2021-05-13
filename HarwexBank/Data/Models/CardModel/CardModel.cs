@@ -5,7 +5,7 @@
         private int _id;
         private int _accountId;
         private string _cardType;
-        private decimal _number;
+        private string _number;
         private string _ownerName;
         private string _timeFrame;
         private string _cvv;
@@ -42,7 +42,7 @@
             }
         }
 
-        public decimal Number
+        public string Number
         {
             get => _number;
             set

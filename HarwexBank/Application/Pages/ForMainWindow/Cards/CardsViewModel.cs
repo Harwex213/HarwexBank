@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Numerics;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -15,11 +16,11 @@ namespace HarwexBank
 
         public CardsViewModel()
         {
+            CardToCreate = new CardModel();
+            
             LoggedInUser = MainViewModel.Data.LoggedInUser;
             UserCards = MainViewModel.Data.UserCards;
             UserAccounts = MainViewModel.Data.UserAccounts;
-            UserJournal = MainViewModel.Data.UserJournal;
-
             CardTypeModels = MainViewModel.Data.ExistedCardTypes;
 
             ControlViewModels.Add(new CardsListViewModel());
@@ -32,14 +33,67 @@ namespace HarwexBank
         public UserModel LoggedInUser { get; set; }
         
         // Using in Card List
+
+        #region Fields
+
+        private CardModel _selectedCard;
+        private AccountModel _selectedAccount;
+        private JournalModel _lastOperation;
+        private string _lastOperationName;
+
+        #endregion
+        
         public ObservableCollection<CardModel> UserCards { get; set; }
-        public ObservableCollection<JournalModel> UserJournal { get; set; }
-        public ObservableCollection<AccountModel> UserAccounts { get; set; }
-        public CardModel SelectedCard { get; set; }
-        public AccountModel SelectedAccount => ModelResourcesManager.GetInstance().GetAccountById(SelectedCard.AccountId);
+
+        public CardModel SelectedCard
+        {
+            get => _selectedCard;
+            set
+            {
+                _selectedCard = value;
+                SelectedAccount = ModelResourcesManager.GetInstance().GetAccountById(SelectedCard.AccountId);
+                LastOperation = SelectedAccount.Operations.FirstOrDefault();
+                LastOperationName = LastOperation switch
+                {
+                    TransferToAccountModel => "Переводы",
+                    CreditRepaymentModel => "Погашение кредита",
+                    _ => ""
+                };
+                OnPropertyChanged("SelectedCard");
+            }
+        }
+
+        public AccountModel SelectedAccount
+        {
+            get => _selectedAccount;
+            set
+            {
+                _selectedAccount = value;
+                OnPropertyChanged("SelectedAccount");
+            }
+        }
+        public JournalModel LastOperation
+        {
+            get => _lastOperation;
+            set
+            {
+                _lastOperation = value;
+                OnPropertyChanged("LastOperation");
+            }
+        }
+        public string LastOperationName
+        {
+            get => _lastOperationName;
+            set
+            {
+                _lastOperationName = value;
+                OnPropertyChanged("LastOperationName");
+            }
+        }
 
         // Using in Creating New Card
         public CardModel CardToCreate { get; set; }
+        public ObservableCollection<AccountModel> UserAccounts { get; set; }
         public AccountModel SelectedAccountToAdd { get; set; }
         public ObservableCollection<CardTypeModel> CardTypeModels { get; }
 
@@ -98,26 +152,26 @@ namespace HarwexBank
         private void CreateNewCard()
         {
             // Creating new Card.
-            decimal number = new Random().Next(1, 9999);
-            number += new Random().Next(1, 9999) * 1000;
-            number += new Random().Next(1, 9999) * 1000 * 1000;
-            number += new Random().Next(1, 9999) * 1000 * 1000 * 1000;
-            CardToCreate = new CardModel()
+            var number = string.Empty;
+            for (var i = 0; i < 16; i++)
             {
-                AccountId = SelectedAccountToAdd.Id,
-                Number = number,
-                OwnerName = MainViewModel.Data.LoggedInUser.FirstName.ToUpper() + " " +
-                                         MainViewModel.Data.LoggedInUser.LastName.ToUpper(),
-                TimeFrame = new Random().Next(0, 12) + "/" + (DateTime.Now.Year + 3),
-                Cvv = new Random().Next(0, 9).ToString() + new Random().Next(0, 9) + new Random().Next(0, 9)
-            };
-            
+                number += new Random().Next(0, 9).ToString();
+            }
+            CardToCreate.AccountId = SelectedAccountToAdd.Id;
+            CardToCreate.Number = number;
+            CardToCreate.OwnerName = MainViewModel.Data.LoggedInUser.FirstName.ToUpper() + " " +
+                                     MainViewModel.Data.LoggedInUser.LastName.ToUpper();
+            CardToCreate.TimeFrame = new Random().Next(0, 12) + "/" + (DateTime.Now.Year + 3).ToString()[2..];
+            CardToCreate.Cvv = new Random().Next(0, 9).ToString() + new Random().Next(0, 9) + new Random().Next(0, 9);
+
             // Add it's to DataBase + to User Cards
             UserCards.Add(CardToCreate);
             ModelResourcesManager.GetInstance().AddModel(CardToCreate);
 
             // Add it to User Accounts.
-            UserAccounts.FirstOrDefault(a => a.Id == SelectedAccountToAdd.Id)?.Cards.Add(CardToCreate);
+            MainViewModel.Data.UserAccounts.FirstOrDefault(a => a.Id == SelectedAccountToAdd.Id)
+                ?.Cards.Add(CardToCreate);
+            CardToCreate = new CardModel();
             
             GoToCardList();
         }

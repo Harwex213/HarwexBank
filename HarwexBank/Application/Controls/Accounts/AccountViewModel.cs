@@ -128,22 +128,28 @@ namespace HarwexBank
         
         private void CreateAccountModel()
         {
+            // Adding Account Model to DB.
             AccountToOpen.UserId = MainViewModel.Data.LoggedInUser.Id;
             AccountToOpen.RegistrationDate = DateTime.Now;
             AccountToOpen.Amount = 0;
             AccountToOpen.IsFrozen = false;
             ModelResourcesManager.GetInstance().AddModel(AccountToOpen);
 
+            // Adding Card Model to DB.
+            var number = string.Empty;
+            for (var i = 0; i < 16; i++)
+            {
+                number += new Random().Next(0, 9).ToString();
+            }
             CardToCreate.AccountId = AccountToOpen.Id;
-            CardToCreate.Number = 6711007710504715;
+            CardToCreate.Number = number;
             CardToCreate.OwnerName = MainViewModel.Data.LoggedInUser.FirstName.ToUpper() + " " +
                                      MainViewModel.Data.LoggedInUser.LastName.ToUpper();
-            CardToCreate.TimeFrame = "4";
-            CardToCreate.Cvv = "999";
+            CardToCreate.TimeFrame = new Random().Next(0, 12) + "/" + (DateTime.Now.Year + 3).ToString()[2..];
+            CardToCreate.Cvv = new Random().Next(0, 9).ToString() + new Random().Next(0, 9) + new Random().Next(0, 9);
             ModelResourcesManager.GetInstance().AddModel(CardToCreate);
             
             AccountToOpen.Cards.Add(CardToCreate);
-
             AccountModels.Add(AccountToOpen);
             
             AccountToOpen = new AccountModel();

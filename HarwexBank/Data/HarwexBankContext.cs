@@ -170,7 +170,7 @@ namespace HarwexBank
                 .IsRequired()
                 .HasMaxLength(50);
 
-            entity.Property(e => e.Number).HasColumnType("numeric(16, 0)");
+            entity.Property(e => e.Number).HasMaxLength(16);
 
             entity.Property(e => e.TimeFrame)
                 .IsRequired()
@@ -386,7 +386,7 @@ namespace HarwexBank
                 {
                     AccountId = 1,
                     CardType = "Visa Standard",
-                    Number = 6700110010504715,
+                    Number = "6700110010504715",
                     OwnerName = "ALEH KAPORTSAU",
                     TimeFrame = "08/22",
                     Cvv = "999"
@@ -395,7 +395,7 @@ namespace HarwexBank
                 {
                     AccountId = 2,
                     CardType = "Visa Gold",
-                    Number = 6700110010509999,
+                    Number = "6700110010509999",
                     OwnerName = "ALEH KAPORTSAU",
                     TimeFrame = "08/23",
                     Cvv = "000"
@@ -404,7 +404,7 @@ namespace HarwexBank
                 {
                     AccountId = 3,
                     CardType = "Visa Gold",
-                    Number = 6700110010507777,
+                    Number = "6700110010507777",
                     OwnerName = "SERGEY TUROV",
                     TimeFrame = "08/23",
                     Cvv = "000"
