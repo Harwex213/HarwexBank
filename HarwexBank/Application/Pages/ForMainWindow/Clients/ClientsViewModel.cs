@@ -14,7 +14,7 @@ namespace HarwexBank
 
         public ClientsViewModel()
         {
-            ExistedClients = MainViewModel.Data.ExistedClients;
+            ExistedClients = ModelResourcesManager.GetInstance().ExistedClients;
 
             ControlViewModels.Add(new ExistedClientsViewModel(this));
             ControlViewModels.Add(new SendClientNotificationViewModel(this));

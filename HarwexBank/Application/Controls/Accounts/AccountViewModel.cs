@@ -16,20 +16,20 @@ namespace HarwexBank
             AccountToOpen = new AccountModel();
             CardToCreate = new CardModel();
             
-            switch (MainViewModel.Data.LoggedInUser.UserType)
+            switch (MainViewModel.WindowFactory)
             {
-                case "client":
+                case ClientMainWindow:
                     // Using data.
-                    AccountModels = MainViewModel.Data.UserAccounts;
-                    CurrencyTypeModels = MainViewModel.Data.ExistedCurrencyTypes;
-                    CardTypeModels = MainViewModel.Data.ExistedCardTypes;
+                    AccountModels = ModelResourcesManager.GetInstance().UserAccounts;
+                    CurrencyTypeModels = ModelResourcesManager.GetInstance().ExistedCurrencyTypes;
+                    CardTypeModels = ModelResourcesManager.GetInstance().ExistedCardTypes;
                     
                     // Using VM
                     ControlViewModels.Add(new AccountsListViewModel());
                     ControlViewModels.Add(new CreateNewAccountViewModel());
                     break;
                 
-                case "worker":
+                case WorkerMainWindow:
                     
                     // Using VM
                     ControlViewModels.Add(new AccountsListViewModel());
@@ -134,7 +134,7 @@ namespace HarwexBank
         private void CreateAccountModel()
         {
             // Adding Account Model to DB.
-            AccountToOpen.UserId = MainViewModel.Data.LoggedInUser.Id;
+            AccountToOpen.UserId = ModelResourcesManager.GetInstance().LoggedInUser.Id;
             AccountToOpen.RegistrationDate = DateTime.Now;
             AccountToOpen.Amount = 0;
             AccountToOpen.IsFrozen = false;
@@ -148,8 +148,8 @@ namespace HarwexBank
             }
             CardToCreate.AccountId = AccountToOpen.Id;
             CardToCreate.Number = number;
-            CardToCreate.OwnerName = MainViewModel.Data.LoggedInUser.FirstName.ToUpper() + " " +
-                                     MainViewModel.Data.LoggedInUser.LastName.ToUpper();
+            CardToCreate.OwnerName = ModelResourcesManager.GetInstance().LoggedInUser.FirstName.ToUpper() + " " +
+                                     ModelResourcesManager.GetInstance().LoggedInUser.LastName.ToUpper();
             CardToCreate.TimeFrame = new Random().Next(0, 12) + "/" + (DateTime.Now.Year + 3).ToString()[2..];
             CardToCreate.Cvv = new Random().Next(0, 9).ToString() + new Random().Next(0, 9) + new Random().Next(0, 9);
             ModelResourcesManager.GetInstance().AddModel(CardToCreate);

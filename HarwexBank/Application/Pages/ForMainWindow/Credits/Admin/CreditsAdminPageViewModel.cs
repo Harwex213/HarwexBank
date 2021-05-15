@@ -17,7 +17,7 @@ namespace HarwexBank
 
         public CreditsAdminPageViewModel()
         {
-            ExistedCreditTypes = MainViewModel.Data.ExistedCreditTypes;
+            ExistedCreditTypes = ModelResourcesManager.GetInstance().ExistedCreditTypes;
             
             ControlViewModels.Add(new CreditTypesListViewModel());
             ControlViewModels.Add(new CreateNewCreditTypeViewModel());

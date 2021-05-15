@@ -9,30 +9,24 @@ namespace HarwexBank
         public AuthorizationViewModel(ApplicationViewModel applicationViewModel)
         {
             ApplicationViewModel = applicationViewModel;
-            SelectedControlViewModel = LoginViewModel;
+            SelectedControlViewModel = new LoginViewModel(this);
         }
 
         public ApplicationViewModel ApplicationViewModel { get; }
 
-        private LoginViewModel _loginViewModel;
-        private RegistrationViewModel _registrationViewModel;
-
-        private LoginViewModel LoginViewModel => _loginViewModel ?? new LoginViewModel(this);
-        private RegistrationViewModel RegistrationViewModel => _registrationViewModel ?? new RegistrationViewModel(this);
-
         public void GoToLoginView()
         {
-            SelectedControlViewModel = LoginViewModel;
+            ApplicationViewModel.GoToAuthorizationView();
         }
         
         public void GoToRegistrationView()
         {
-            SelectedControlViewModel = RegistrationViewModel;
+            SelectedControlViewModel = new RegistrationViewModel(this);
         }
 
         public void RegistrationFinished()
         {
-            ApplicationViewModel.GoToAuthorizationView();
+            GoToLoginView();
         }
     }
 }

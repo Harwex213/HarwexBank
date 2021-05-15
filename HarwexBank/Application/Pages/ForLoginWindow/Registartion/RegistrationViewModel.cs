@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Windows.Controls;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace HarwexBank
 {
-    public class RegistrationPage01 : Control, IControlViewModel { }
-    public class RegistrationPage02 : Control, IControlViewModel { }
+    public class RegistrationPage01 : IControlViewModel
+    {
+        public string Name => "Регистрация";
+    }
+    public class RegistrationPage02 : IControlViewModel
+    {
+        public string Name => "Регистрация";
+    }
     public class RegistrationViewModel : BaseControlViewModel, IControlViewModel
     {
         public string Name => "Регистрация";
@@ -20,7 +23,7 @@ namespace HarwexBank
 
             SelectedControlViewModel = ControlViewModels[_iterator];
 
-            RegisteredUser = new UserModel();
+            RegisteredUser = new UserModel{ UserType = "client" };
         }
         
         // Fields.

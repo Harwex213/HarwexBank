@@ -6,9 +6,9 @@ namespace HarwexBank
 {
     public abstract class MainWindowFactory
     {
-        public static MainWindowFactory GetFactoryByUserType(UserTypeModel userTypeModel)
+        public static MainWindowFactory GetFactory()
         {
-            return userTypeModel.Name switch
+            return ModelResourcesManager.GetInstance().LoggedInUser.UserType switch
             {
                 "admin" => new AdminMainWindow(),
                 "worker" => new WorkerMainWindow(),
@@ -18,7 +18,6 @@ namespace HarwexBank
         }
 
         public abstract List<IControlViewModel> GetPages();
-        public abstract void GetNecessaryInfo(MainWindowInfo mainWindowInfo);
     }
     
     public class AdminMainWindow : MainWindowFactory
@@ -29,12 +28,6 @@ namespace HarwexBank
             {
                 new CreditsAdminPageViewModel()
             };
-        }
-
-        public override void GetNecessaryInfo(MainWindowInfo mainWindowInfo)
-        {
-            mainWindowInfo.ExistedCreditTypes = new ObservableCollection<CreditTypeModel>(
-                ModelResourcesManager.GetInstance().GetExistedCreditTypeModels());
         }
     }
     
@@ -49,19 +42,6 @@ namespace HarwexBank
                 new JournalWorkerViewModel()
             };
         }
-        
-        public override void GetNecessaryInfo(MainWindowInfo mainWindowInfo)
-        {
-            mainWindowInfo.ExistedClients = new ObservableCollection<UserModel>(
-                ModelResourcesManager.GetInstance().GetAllClients());
-
-            var journal = ModelResourcesManager.GetInstance().GetJournalNotes()?.ToList();
-            journal?.Sort(new SortJournalByDate());
-            mainWindowInfo.GlobalJournal = new ObservableCollection<JournalModel>(journal ?? new List<JournalModel>());
-            
-            mainWindowInfo.AllNonApprovedCredits = new ObservableCollection<IssuedCreditModel>(
-                ModelResourcesManager.GetInstance().GetAllTakingCredits().Where(c => !c.IsApproved));
-        }
     }
     
     public class ClientMainWindow : MainWindowFactory
@@ -75,38 +55,6 @@ namespace HarwexBank
                 new OperationsPageViewModel(),
                 new JournalClientViewModel()
             };
-        }
-        
-        public override void GetNecessaryInfo(MainWindowInfo mainWindowInfo)
-        {
-            mainWindowInfo.UserAccounts = new ObservableCollection<AccountModel>(
-                mainWindowInfo.LoggedInUser.Accounts);
-
-            var userCards = new ObservableCollection<CardModel>();
-            foreach (var account in mainWindowInfo.UserAccounts)
-            {
-                foreach (var card in account.Cards)
-                {
-                    userCards.Add(card);
-                }
-            }
-            mainWindowInfo.UserCards = userCards;
-            
-            mainWindowInfo.UserCredits = new ObservableCollection<IssuedCreditModel>(
-                mainWindowInfo.LoggedInUser.IssuedCredits.Where(c => c.IsApproved));
-            
-            var journal = mainWindowInfo.LoggedInUser.Journal?.ToList();
-            journal?.Sort(new SortJournalByDate());
-            mainWindowInfo.UserJournal = new ObservableCollection<JournalModel>(journal ?? new List<JournalModel>());
-            
-            mainWindowInfo.ExistedCardTypes = new ObservableCollection<CardTypeModel>(
-                ModelResourcesManager.GetInstance().GetExistedCardTypeModels());
-            
-            mainWindowInfo.ExistedCreditTypes = new ObservableCollection<CreditTypeModel>(
-                ModelResourcesManager.GetInstance().GetExistedCreditTypeModels());
-            
-            mainWindowInfo.ExistedCurrencyTypes = new ObservableCollection<CurrencyTypeModel>(
-                ModelResourcesManager.GetInstance().GetExistedCurrencyTypeModels());
         }
     }
 }

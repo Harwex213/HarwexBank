@@ -167,7 +167,7 @@
                                 </Grid.ColumnDefinitions>
                                 
                                 <Button Grid.Column="0"
-                                        Command="{Binding GoToCardCreationCommand}"
+                                        Command="{Binding GoToCardListCommand}"
                                         Content="Назад"></Button>
                                 <Button Grid.Column="1"
                                         Command="{Binding CreateNewCardCommand}"

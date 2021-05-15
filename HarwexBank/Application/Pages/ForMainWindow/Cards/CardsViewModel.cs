@@ -18,10 +18,10 @@ namespace HarwexBank
         {
             CardToCreate = new CardModel();
             
-            LoggedInUser = MainViewModel.Data.LoggedInUser;
-            UserCards = MainViewModel.Data.UserCards;
-            UserAccounts = MainViewModel.Data.UserAccounts;
-            CardTypeModels = MainViewModel.Data.ExistedCardTypes;
+            LoggedInUser = ModelResourcesManager.GetInstance().LoggedInUser;
+            UserCards = ModelResourcesManager.GetInstance().UserCards;
+            UserAccounts = ModelResourcesManager.GetInstance().UserAccounts;
+            CardTypeModels = ModelResourcesManager.GetInstance().ExistedCardTypes;
 
             ControlViewModels.Add(new CardsListViewModel());
             ControlViewModels.Add(new CreateNewCardViewModel());
@@ -159,8 +159,8 @@ namespace HarwexBank
             }
             CardToCreate.AccountId = SelectedAccountToAdd.Id;
             CardToCreate.Number = number;
-            CardToCreate.OwnerName = MainViewModel.Data.LoggedInUser.FirstName.ToUpper() + " " +
-                                     MainViewModel.Data.LoggedInUser.LastName.ToUpper();
+            CardToCreate.OwnerName = ModelResourcesManager.GetInstance().LoggedInUser.FirstName.ToUpper() + " " +
+                                     ModelResourcesManager.GetInstance().LoggedInUser.LastName.ToUpper();
             CardToCreate.TimeFrame = new Random().Next(0, 12) + "/" + (DateTime.Now.Year + 3).ToString()[2..];
             CardToCreate.Cvv = new Random().Next(0, 9).ToString() + new Random().Next(0, 9) + new Random().Next(0, 9);
 
@@ -169,8 +169,8 @@ namespace HarwexBank
             ModelResourcesManager.GetInstance().AddModel(CardToCreate);
 
             // Add it to User Accounts.
-            MainViewModel.Data.UserAccounts.FirstOrDefault(a => a.Id == SelectedAccountToAdd.Id)
-                ?.Cards.Add(CardToCreate);
+            ModelResourcesManager.GetInstance().UserAccounts.First(a => a.Id == SelectedAccountToAdd.Id)
+                .Cards.Add(CardToCreate);
             CardToCreate = new CardModel();
             
             GoToCardList();

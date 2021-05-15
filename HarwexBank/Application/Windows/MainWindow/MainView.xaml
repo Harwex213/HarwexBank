@@ -68,8 +68,8 @@
                                 
                                 <TextBlock Grid.Column="0">Harwex Bank</TextBlock>
                                 <TextBlock Grid.Column="2">Oleg Kaportsev</TextBlock>
-                                <Button Grid.Column="3" Content="Exit"
-                                        Command="{Binding ApplicationViewModel.ExitOfApplicationCommand}">
+                                <Button Grid.Column="3" Content="Выйти"
+                                        Command="{Binding LoggOutCommand}">
                                 </Button>
                         </Grid>
                 </Border>

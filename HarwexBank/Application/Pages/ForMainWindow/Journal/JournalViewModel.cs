@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -40,24 +41,27 @@ namespace HarwexBank
 
         public JournalViewModel()
         {
-            switch (MainViewModel.Data.LoggedInUser.UserType)
+            switch (MainViewModel.WindowFactory)
             {
-                case "worker":
-                    Journal = MainViewModel.Data.GlobalJournal;
-                    
-                    ControlViewModels.Add(new AllJournalNotesTabViewModel{ JournalView = this });
-                    ControlViewModels.Add(new TransfersTabViewModel{ JournalView = this });
-                    ControlViewModels.Add(new CreditRepaymentTabViewModel{ JournalView = this });
+                case AdminMainWindow:
                     break;
-                
-                case "client":
-                    Journal = MainViewModel.Data.UserJournal;
-
+                case ClientMainWindow:
+                    Journal = ModelResourcesManager.GetInstance().UserJournal;
+                    
                     ControlViewModels.Add(new AllJournalNotesTabViewModel{ JournalView = this });
                     ControlViewModels.Add(new TransfersTabViewModel{ JournalView = this });
                     ControlViewModels.Add(new CreditRepaymentTabViewModel{ JournalView = this });
                     ControlViewModels.Add(new NotificationTabViewModel{ JournalView = this });
                     break;
+                case WorkerMainWindow:
+                    Journal = ModelResourcesManager.GetInstance().AllJournal;
+                    
+                    ControlViewModels.Add(new AllJournalNotesTabViewModel{ JournalView = this });
+                    ControlViewModels.Add(new TransfersTabViewModel{ JournalView = this });
+                    ControlViewModels.Add(new CreditRepaymentTabViewModel{ JournalView = this });
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             Transfers = new ObservableCollection<TransferToAccountModel>();
