@@ -45,7 +45,8 @@
                                 CommandParameter="{Binding }"
                                 FontSize="18"
                                 Margin="10,10"
-                                Padding="10, 10"/>
+                                Padding="10, 10">
+                        </Button>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
