@@ -21,8 +21,6 @@ namespace HarwexBank
             ControlViewModels.AddRange(windowFactory.GetPages());
 
             SelectedControlViewModel = ControlViewModels[0];
-            
-            // Test branching
         }
 
         public ApplicationViewModel ApplicationViewModel { get; }
