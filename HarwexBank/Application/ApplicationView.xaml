@@ -6,8 +6,6 @@
         xmlns:local="clr-namespace:HarwexBank"
         mc:Ignorable="d"
         Title="HarwexBank" Height="800" Width="700"
-        MinHeight="{Binding MinHeight}"
-        MinWidth="{Binding MinWidth}"
         WindowStartupLocation="CenterScreen">
         
         <Window.Resources>

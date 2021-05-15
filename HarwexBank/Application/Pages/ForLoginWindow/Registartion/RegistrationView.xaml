@@ -88,7 +88,7 @@
                                     <!-- BUTTON BACK TO LOGIN FORM -->
                                     <Button Style="{StaticResource RegistrationButtons}"
                                             Content="Назад"
-                                            Command="{Binding AuthorizationViewModel.BackToLoginCommand}"></Button>
+                                            Command="{Binding BackToLoginCommand}"></Button>
                                     
                                     <!-- BUTTON CONTINUE REGISTRATION -->
                                     <Button Content="Далее"
@@ -213,8 +213,7 @@
                                     
                                     <!-- BUTTON TO REGISTER -->
                                     <Button Content="Зарегистрироваться"
-                                            Command="{Binding AuthorizationViewModel.RegistrationFinishCommand}"
-                                            CommandParameter="{Binding RegisteredUser}">
+                                            Command="{Binding FinishRegistrationCommand}">
                                         <Button.Style>
                                             <Style TargetType="Button" 
                                                    BasedOn="{StaticResource RegistrationButtons}">

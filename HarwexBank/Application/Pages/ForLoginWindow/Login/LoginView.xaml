@@ -32,6 +32,6 @@
                 Command="{Binding LogInCommand}"></Button>
         <Button Style="{StaticResource StartRegistrationButton}"
                 Content="Регистрация"
-                Command="{Binding AuthorizationViewModel.RegistrationStartCommand}"></Button>
+                Command="{Binding StartRegistrationCommand}"></Button>
     </StackPanel>
 </UserControl>

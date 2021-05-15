@@ -34,10 +34,34 @@ namespace HarwexBank
         #region Commands
 
         // Fields.
+        private ICommand _backToLoginCommand;
+        private ICommand _finishRegistrationCommand;
         private ICommand _continueRegistrationCommand;
         private ICommand _returnBackCommand;
 
         // Props.
+        public ICommand BackToLoginCommand
+        {
+            get
+            {
+                _backToLoginCommand ??= new RelayCommand(
+                    _ => BackToLogin());
+
+                return _backToLoginCommand;
+            }
+        }
+        
+        public ICommand FinishRegistrationCommand
+        {
+            get
+            {
+                _finishRegistrationCommand ??= new RelayCommand(
+                    _ => FinishRegistration());
+
+                return _finishRegistrationCommand;
+            }
+        }
+        
         public ICommand ContinueRegistrationCommand
         {
             get
@@ -61,6 +85,18 @@ namespace HarwexBank
         }
         
         // Methods.
+        private void BackToLogin()
+        {
+            AuthorizationViewModel.GoToLoginView();
+        }
+        
+        private void FinishRegistration()
+        {
+            ModelResourcesManager.GetInstance().AddModel(RegisteredUser);
+            
+            AuthorizationViewModel.RegistrationFinished();
+        }
+        
         private void ContinueRegistration()
         {
             SelectedControlViewModel = ControlViewModels[++_iterator];
