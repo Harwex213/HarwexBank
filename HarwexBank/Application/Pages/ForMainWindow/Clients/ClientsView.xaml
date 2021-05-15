@@ -11,30 +11,6 @@
         <!-- - - - - - - - - - - - - - - - - - - - - - -->
         <!-- CLIENTS LIST -->
         <DataTemplate DataType="{x:Type local:ExistedClientsViewModel}">
-            <Grid DataContext="{Binding DataContext,
-            RelativeSource={RelativeSource AncestorType=UserControl}}">
-                <ItemsControl ItemsSource="{Binding ExistedClients}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                        
-                            <Button Background="#3D89A1"
-                                    Command="{Binding DataContext.SelectClientCommand,
-                                RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                    CommandParameter="{Binding }">
-                                <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding FullName}"></TextBlock>
-                                        <TextBlock Text="{Binding UserBlockedTextMessage}"></TextBlock>
-                                    </StackPanel>
-                                
-                                    <TextBlock Text="{Binding Address}"></TextBlock>
-                                </StackPanel>
-                            </Button>
-                        
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </Grid>
             
             <ItemsControl ItemsSource="{Binding ClientsViewModel.ExistedClients}">
                 <ItemsControl.ItemTemplate>

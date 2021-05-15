@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace HarwexBank
@@ -16,11 +11,19 @@ namespace HarwexBank
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            ModelResourcesManager.GetInstance();
 
-            var context = new ApplicationViewModel();
-            var app = new ApplicationView {DataContext = context};
-            app.Show();
+            try
+            {
+                ModelResourcesManager.GetInstance();
+                
+                var app = new ApplicationView { DataContext = new ApplicationViewModel() };
+                app.Show();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+                Environment.Exit(0);
+            }
         }
     }
 }
