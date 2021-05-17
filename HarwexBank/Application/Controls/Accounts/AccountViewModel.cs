@@ -6,8 +6,6 @@ using System.Windows.Input;
 
 namespace HarwexBank
 {
-    public class AccountsListViewModel : Control, IControlViewModel { }
-    public class CreateNewAccountViewModel : Control, IControlViewModel { }
     public class AccountViewModel : BaseControlViewModel, IControlViewModel
     {
         public string Name => "Счета";

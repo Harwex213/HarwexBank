@@ -8,106 +8,100 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         
-        <Style TargetType="{x:Type local:AccountsListViewModel}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type local:AccountsListViewModel}">
-                    
-                        <ScrollViewer DataContext="{Binding DataContext,
-                         RelativeSource={RelativeSource AncestorType=UserControl}}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" MaxHeight="90"></RowDefinition>
-                                    <RowDefinition Height="*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                
-                                <!--Open New Account-->
-                                <ContentControl Grid.Row="0" 
-                                                Margin="0, 15, 0, 15"
-                                                Content="{StaticResource OpenAccount}">
-                                </ContentControl>
-                                
-                                <!-- Accounts List -->
-                                <ItemsControl Grid.Row="1"
-                                              Margin="30, 0, 30, 0"
-                                              ItemsSource="{Binding AccountModels}"
-                                              ItemTemplate="{StaticResource AccountsListToFinancePage}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Vertical"/>
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                </ItemsControl>
-                            </Grid>
-                        </ScrollViewer>
-                    
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        
-        <Style TargetType="{x:Type local:CreateNewAccountViewModel}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type local:CreateNewAccountViewModel}">
-                    
-                    <Grid DataContext="{Binding DataContext,
-                    RelativeSource={RelativeSource AncestorType=UserControl}}">
+        <!-- ACCOUNT LIST -->
+        <DataTemplate DataType="{x:Type local:AccountsListViewModel}">
+            <Grid DataContext="{Binding DataContext,
+            RelativeSource={RelativeSource AncestorType=UserControl}}">
+                
+                <ScrollViewer>
+                    <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*" MaxHeight="90"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
+                                
+                        <!--Open New Account-->
+                        <ContentControl Grid.Row="0" 
+                                        Margin="0, 15, 0, 15"
+                                        Content="{StaticResource OpenAccount}">
+                        </ContentControl>
+                                
+                        <!-- Accounts List -->
+                        <ItemsControl Grid.Row="1"
+                                      Margin="30, 0, 30, 0"
+                                      ItemsSource="{Binding AccountModels}"
+                                      ItemTemplate="{StaticResource AccountsListToFinancePage}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </Grid>
+                </ScrollViewer>
+                
+            </Grid>
+        </DataTemplate>
+        
+        <!-- OPEN NEW ACCOUNT -->
+        <DataTemplate DataType="{x:Type local:CreateNewAccountViewModel}">
+            <Grid DataContext="{Binding DataContext,
+            RelativeSource={RelativeSource AncestorType=UserControl}}">
+                
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Card Type -->
+                    <StackPanel Grid.Row="0" Orientation="Vertical">
+                        <TextBlock Text="Тип создаваемой карты"></TextBlock>
                         
-                        <!-- Card Type -->
-                        <StackPanel Grid.Row="0" Orientation="Vertical">
-                            <TextBlock Text="Тип создаваемой карты"></TextBlock>
-                            
-                            <ComboBox ItemsSource="{Binding CurrencyTypeModels}"
-                                      SelectedValue="{Binding AccountToOpen.CurrencyTypeModelNavigation}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}"></TextBlock>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </StackPanel>
+                        <ComboBox ItemsSource="{Binding CurrencyTypeModels}"
+                                  SelectedValue="{Binding AccountToOpen.CurrencyTypeModelNavigation}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                    
+                    <!-- Credit Type -->
+                    <StackPanel Grid.Row="1" Orientation="Vertical">
+                        <TextBlock Text="Валюта"></TextBlock>
                         
-                        <!-- Credit Type -->
-                        <StackPanel Grid.Row="1" Orientation="Vertical">
-                            <TextBlock Text="Валюта"></TextBlock>
-                            
-                            <ComboBox ItemsSource="{Binding CardTypeModels}"
-                                      SelectedValue="{Binding CardToCreate.CardTypeModelNavigation}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}"></TextBlock>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </StackPanel>
+                        <ComboBox ItemsSource="{Binding CardTypeModels}"
+                                  SelectedValue="{Binding CardToCreate.CardTypeModelNavigation}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                    
+                    <!-- Buttons -->
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
                         
-                        <!-- Buttons -->
-                        <Grid Grid.Row="2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            
-                            <Button Grid.Column="0"
-                                    Command="{Binding GoBackCommand}"
-                                    Content="Назад"></Button>
-                            <Button Grid.Column="1"
-                                    Command="{Binding CreateAccountCommand}"
-                                    Content="Отправить"></Button>
-                        </Grid>
-                        
+                        <Button Grid.Column="0"
+                                Command="{Binding GoBackCommand}"
+                                Content="Назад"></Button>
+                        <Button Grid.Column="1"
+                                Command="{Binding CreateAccountCommand}"
+                                Content="Отправить"></Button>
                     </Grid>
                     
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                </Grid>
+                
+            </Grid>
+        </DataTemplate>
         
     </UserControl.Resources>
     
