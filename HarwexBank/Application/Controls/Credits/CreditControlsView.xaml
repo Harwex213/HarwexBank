@@ -214,13 +214,6 @@
             CommandParameter="{Binding}"
             Content="Отклонить"></Button>
     
-    <!-- NOTIFY OF CREDIT TERM CONTROL -->
-    <!-- TODO: оповещение о просрочке по кредиту -->
-    <Button x:Key="NotifyTermCredit" x:Shared="False"
-            Width="150" Height="40"
-            
-            Content="Оповестить о просрочке"></Button>
-    
     <!-- CREDIT LIST CONTROLS -->
     <!-- Credit list for FinancePage -->
     <DataTemplate x:Key="CreditsListToFinancePage">
