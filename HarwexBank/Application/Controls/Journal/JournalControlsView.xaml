@@ -2,22 +2,22 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <!-- CARDS PAGE -->
-        <Grid x:Key="TransferBlockToCardsPage" x:Shared="False" 
+    <Grid x:Key="TransferBlockToCardsPage" x:Shared="False" 
           MaxHeight="140" Background="#266885">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="8.5*"></ColumnDefinition>
-                <ColumnDefinition Width="*" MinWidth="150"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            
-            <StackPanel Grid.Column="0">
-                <TextBlock Text="Счёт получатель" TextWrapping="WrapWithOverflow"></TextBlock>
-                <TextBlock Text="{Binding BankAccountReceiver}"></TextBlock>
-            </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8.5*"></ColumnDefinition>
+            <ColumnDefinition Width="*" MinWidth="150"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         
-            <StackPanel Grid.Column="1">
-                <TextBlock Text="{Binding Date}"></TextBlock>
-                <TextBlock Text="{Binding Amount}"></TextBlock>
-            </StackPanel>
+        <StackPanel Grid.Column="0">
+            <TextBlock Text="Счёт получатель" TextWrapping="WrapWithOverflow"></TextBlock>
+            <TextBlock Text="{Binding BankAccountReceiver}"></TextBlock>
+        </StackPanel>
+    
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="{Binding Date}"></TextBlock>
+            <TextBlock Text="{Binding Amount}"></TextBlock>
+        </StackPanel>
             
     </Grid>
     <Grid x:Key="CreditRepaymentBlockToCardsPage" x:Shared="False"

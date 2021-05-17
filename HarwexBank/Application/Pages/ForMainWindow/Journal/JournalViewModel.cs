@@ -8,30 +8,6 @@ using System.Windows.Input;
 
 namespace HarwexBank
 {
-    public class AllJournalNotesTabViewModel : BaseControlViewModel, IControlViewModel
-    {
-        public string Name => "Всё";
-        public JournalViewModel JournalView { get; set; }
-    }
-    
-    public class TransfersTabViewModel : BaseControlViewModel, IControlViewModel
-    {
-        public string Name => "Переводы";
-        public JournalViewModel JournalView { get; set; }
-    }
-    
-    public class CreditRepaymentTabViewModel : BaseControlViewModel, IControlViewModel
-    {
-        public string Name => "Погашения кредитов";
-        public JournalViewModel JournalView { get; set; }
-    }
-    
-    public class NotificationTabViewModel : BaseControlViewModel, IControlViewModel
-    {
-        public string Name => "Уведомления";
-        public JournalViewModel JournalView { get; set; }
-    }
-
     public class JournalClientViewModel : JournalViewModel {}
     public class JournalWorkerViewModel : JournalViewModel {}
 
@@ -48,17 +24,17 @@ namespace HarwexBank
                 case ClientMainWindow:
                     Journal = ModelResourcesManager.GetInstance().UserJournal;
                     
-                    ControlViewModels.Add(new AllJournalNotesTabViewModel{ JournalView = this });
-                    ControlViewModels.Add(new TransfersTabViewModel{ JournalView = this });
-                    ControlViewModels.Add(new CreditRepaymentTabViewModel{ JournalView = this });
-                    ControlViewModels.Add(new NotificationTabViewModel{ JournalView = this });
+                    ControlViewModels.Add(new AllJournalNotesTabViewModel(this));
+                    ControlViewModels.Add(new TransfersTabViewModel(this));
+                    ControlViewModels.Add(new CreditRepaymentTabViewModel(this));
+                    ControlViewModels.Add(new NotificationTabViewModel(this));
                     break;
                 case WorkerMainWindow:
                     Journal = ModelResourcesManager.GetInstance().AllJournal;
                     
-                    ControlViewModels.Add(new AllJournalNotesTabViewModel{ JournalView = this });
-                    ControlViewModels.Add(new TransfersTabViewModel{ JournalView = this });
-                    ControlViewModels.Add(new CreditRepaymentTabViewModel{ JournalView = this });
+                    ControlViewModels.Add(new AllJournalNotesTabViewModel(this));
+                    ControlViewModels.Add(new TransfersTabViewModel(this));
+                    ControlViewModels.Add(new CreditRepaymentTabViewModel(this));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -73,7 +49,7 @@ namespace HarwexBank
                 DetermineJournalModel(journalNote);
             }
 
-            Journal.CollectionChanged += (sender, e) =>
+            Journal.CollectionChanged += (_, e) =>
             {
                 if (e.NewItems == null || e.Action != NotifyCollectionChangedAction.Add) 
                     return;
