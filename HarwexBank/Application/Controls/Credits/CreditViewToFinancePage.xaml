@@ -8,160 +8,158 @@
              d:DesignHeight="300" d:DesignWidth="300">
     
     <UserControl.Resources>
-        
-        <Style TargetType="{x:Type local:CreditListViewModel}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type local:CreditListViewModel}">
-                    
-                        <ScrollViewer>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" MaxHeight="90"></RowDefinition>
-                                    <RowDefinition Height="*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                
-                                <!--Open New Account-->
-                                <ContentControl Grid.Row="0" 
-                                                Margin="0, 15, 0, 15"
-                                                Content="{StaticResource TakeNewCredit}">
-                                </ContentControl>
-                                
-                                <!-- Accounts List -->
-                                <ItemsControl Grid.Row="1"
-                                              Margin="30, 0, 30, 0"
-                                              ItemsSource="{Binding UserApprovedCreditModels}"
-                                              ItemTemplate="{StaticResource CreditsListToFinancePage}">
-                                    <ItemsControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Vertical"/>
-                                        </ItemsPanelTemplate>
-                                    </ItemsControl.ItemsPanel>
-                                </ItemsControl>
-                            </Grid>
-                        </ScrollViewer>
-                    
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        
-        <Style TargetType="{x:Type local:TakeNewCreditViewModel}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type local:TakeNewCreditViewModel}">
-                        <ControlTemplate.Resources>
-                            <ResourceDictionary>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
                 
-                                <!-- INCLUDING STYLES -->
-                                <ResourceDictionary.MergedDictionaries>
-                                    <ResourceDictionary Source="/HarwexBank;component/Styles/MainWindowStyle.xaml"/>
-                                </ResourceDictionary.MergedDictionaries>
+                    <!-- INCLUDING STYLES -->
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="/HarwexBank;component/Styles/MainWindowStyle.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
                 
-                            </ResourceDictionary>
-                        </ControlTemplate.Resources>
-                        
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        
-                        <!-- Credit Type -->
-                        <StackPanel Grid.Row="0" Orientation="Vertical">
-                            <TextBlock Text="Тип кредита"></TextBlock>
-                            
-                            <ComboBox ItemsSource="{Binding CreditTypeModels}"
-                                      SelectedIndex="0"
-                                      SelectedValue="{Binding CreditToTaking.CreditTypeModelNavigation}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}"></TextBlock>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </StackPanel>
-                        
-                        <!-- Credit Amount -->
-                        <StackPanel Grid.Row="1" Orientation="Vertical">
-                            <TextBlock Text="Сумма кредита"></TextBlock>
-                            
-                            <TextBox Name="CreditAmount">
-                                <TextBox.Text>
-                                    <Binding Path="CreditToTaking.Amount"
-                                             ValidatesOnExceptions="True"
-                                             UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <DataErrorValidationRule/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
-                        </StackPanel>
-                        
-                        <!-- Credit Term -->
-                        <StackPanel Grid.Row="2" Orientation="Vertical">
-                            <TextBlock Text="Срок кредита"></TextBlock>
-                            
-                            <TextBox Name="CreditTerm">
-                                <TextBox.Text>
-                                    <Binding Path="CreditToTaking.Term"
-                                             ValidatesOnExceptions="True"
-                                             UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <DataErrorValidationRule/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
-                        </StackPanel>
-                        
-                        <!-- Buttons -->
-                        <Grid Grid.Row="3">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            
-                            <Button Grid.Column="0"
-                                    Command="{Binding GoBackCommand}"
-                                    Content="Назад"></Button>
-                            <Button Grid.Column="1"
-                                    Command="{Binding CreateNewCreditCommand}"
-                                    Content="Отправить">
-                                <Button.Style>
-                                    <Style TargetType="Button">
-    
-                                        <Setter Property="IsEnabled" Value="False"/>
-    
-                                        <Style.Triggers>
-                                            <MultiDataTrigger>
-                                                <MultiDataTrigger.Conditions>
-                                                    <Condition Binding="{Binding Path=(Validation.HasError),
-                                                            ElementName=CreditAmount}" Value="False"/>
-                                                    <Condition Binding="{Binding Path=(Validation.HasError),
-                                                            ElementName=CreditTerm}" Value="False"/>
-                                                </MultiDataTrigger.Conditions>
-    
-                                                <Setter Property="IsEnabled" Value="True"/>
-    
-                                            </MultiDataTrigger>
-                                        </Style.Triggers>
-                                                
-                                    </Style>
-                                </Button.Style>
-                            </Button>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <!-- CREDITS LIST -->
+            <DataTemplate DataType="{x:Type local:CreditListViewModel}">
+                <Grid DataContext="{Binding DataContext,
+                RelativeSource={RelativeSource AncestorType=UserControl}}">
+                
+                    <ScrollViewer>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" MaxHeight="90"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                                
+                            <!--Open New Account-->
+                            <ContentControl Grid.Row="0" 
+                                            Margin="0, 15, 0, 15"
+                                            Content="{StaticResource TakeNewCredit}">
+                            </ContentControl>
+                                
+                            <!-- Accounts List -->
+                            <ItemsControl Grid.Row="1"
+                                          Margin="30, 0, 30, 0"
+                                          ItemsSource="{Binding UserApprovedCreditModels}"
+                                          ItemTemplate="{StaticResource CreditsListToFinancePage}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
                         </Grid>
+                    </ScrollViewer>
+                
+                </Grid>
+            </DataTemplate>
+            
+            <!-- TAKE NEW CREDIT -->
+            <DataTemplate DataType="{x:Type local:TakeNewCreditViewModel}">
+            <Grid DataContext="{Binding DataContext,
+            RelativeSource={RelativeSource AncestorType=UserControl}}">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                
+                    <!-- Credit Type -->
+                    <StackPanel Grid.Row="0" Orientation="Vertical">
+                        <TextBlock Text="Тип кредита"></TextBlock>
                         
+                        <ComboBox ItemsSource="{Binding CreditTypeModels}"
+                                  SelectedIndex="0"
+                                  SelectedValue="{Binding CreditToTaking.CreditTypeModelNavigation}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                
+                    <!-- Credit Amount -->
+                    <StackPanel Grid.Row="1" Orientation="Vertical">
+                        <TextBlock Text="Сумма кредита"></TextBlock>
+                        
+                        <TextBox Name="CreditAmount">
+                            <TextBox.Text>
+                                <Binding Path="CreditToTaking.Amount"
+                                         ValidatesOnExceptions="True"
+                                         UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <DataErrorValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                
+                    <!-- Credit Term -->
+                    <StackPanel Grid.Row="2" Orientation="Vertical">
+                        <TextBlock Text="Срок кредита"></TextBlock>
+                        
+                        <TextBox Name="CreditTerm">
+                            <TextBox.Text>
+                                <Binding Path="CreditToTaking.Term"
+                                         ValidatesOnExceptions="True"
+                                         UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <DataErrorValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                
+                    <!-- Buttons -->
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Button Grid.Column="0"
+                                Command="{Binding GoBackCommand}"
+                                Content="Назад"></Button>
+                        <Button Grid.Column="1"
+                                Command="{Binding CreateNewCreditCommand}"
+                                Content="Отправить">
+                            <Button.Style>
+                                <Style TargetType="Button">
+
+                                    <Setter Property="IsEnabled" Value="False"/>
+
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=(Validation.HasError),
+                                                        ElementName=CreditAmount}" Value="False"/>
+                                                <Condition Binding="{Binding Path=(Validation.HasError),
+                                                        ElementName=CreditTerm}" Value="False"/>
+                                            </MultiDataTrigger.Conditions>
+
+                                            <Setter Property="IsEnabled" Value="True"/>
+
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                            
+                                </Style>
+                            </Button.Style>
+                        </Button>
                     </Grid>
-                    
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        
+                
+                </Grid>
+                
+            </Grid>
+        </DataTemplate>
+            
+        </ResourceDictionary>
     </UserControl.Resources>
     
     <ContentControl Content="{Binding SelectedControlViewModel}"></ContentControl>
