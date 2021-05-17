@@ -8,8 +8,6 @@ using System.Windows.Input;
 
 namespace HarwexBank
 {
-    public class CardsListViewModel : Control, IControlViewModel { }
-    public class CreateNewCardViewModel : Control, IControlViewModel { }
     public class CardsViewModel : BaseControlViewModel, IControlViewModel
     {
         public string Name => "Карты";

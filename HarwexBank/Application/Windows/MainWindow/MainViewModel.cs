@@ -16,7 +16,6 @@ namespace HarwexBank
         }
 
         public ApplicationViewModel ApplicationViewModel { get; }
-
         public static MainWindowFactory WindowFactory { get; } = MainWindowFactory.GetFactory();
 
         #region Commands
