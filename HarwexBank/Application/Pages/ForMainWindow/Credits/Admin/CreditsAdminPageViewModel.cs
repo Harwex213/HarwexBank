@@ -7,9 +7,20 @@ using System.Windows.Input;
 
 namespace HarwexBank
 {
-    public class CreditTypesListViewModel : Control, IControlViewModel { }
-    public class CreateNewCreditTypeViewModel : Control, IControlViewModel { }
-    public class UpdateExistedCreditTypeViewModel : Control, IControlViewModel { }
+    public class CreditTypesListViewModel : IControlViewModel
+    {
+        public string Name => "";
+    }
+
+    public class CreateNewCreditTypeViewModel : IControlViewModel
+    {
+        public string Name => "";
+    }
+
+    public class UpdateExistedCreditTypeViewModel : IControlViewModel
+    {
+        public string Name => "";
+    }
     
     public class CreditsAdminPageViewModel : BaseControlViewModel, IControlViewModel
     {
