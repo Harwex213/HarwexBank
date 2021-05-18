@@ -8,6 +8,17 @@ using System.Configuration;
 
 namespace HarwexBank
 {
+    // Migrations
+    // ----------
+    // Add-Migration [migration name]
+    // Update-Database
+    // ----------
+    
+    // Database First
+    // ----------
+    // Scaffold-DbContext "[connection string]" Microsoft.EntityFrameworkCore.SqlServer
+    // ----------
+    
     public sealed class HarwexBankContext : DbContext
     {
         public HarwexBankContext()
