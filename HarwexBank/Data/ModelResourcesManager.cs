@@ -144,101 +144,20 @@ namespace HarwexBank
 
         public void AddModel(IModel model)
         {
-            switch (model)
-            {
-                case UserModel userModel:
-                    _context.Users.Add(userModel);
-                    break;
-                case UserTypeModel userTypeModel:
-                    _context.UserTypes.Add(userTypeModel);
-                    break;
-                case IssuedCreditModel issuedCreditModel:
-                    _context.IssuedCredits.Add(issuedCreditModel);
-                    break;
-                case CreditTypeModel creditTypeModel:
-                    _context.CreditTypes.Add(creditTypeModel);
-                    break;
-                case AccountModel accountModel:
-                    _context.Accounts.Add(accountModel);
-                    break;
-                case CurrencyTypeModel currencyTypeModel:
-                    _context.CurrencyTypes.Add(currencyTypeModel);
-                    break;
-                case CardModel cardModel:
-                    _context.Cards.Add(cardModel);
-                    break;
-                case CardTypeModel cardTypeModel:
-                    _context.CardTypes.Add(cardTypeModel);
-                    break;
-            }
-            
-            _context.SaveChanges();
+            _context.Add(model);
+            _context.SaveChangesAsync();
         }
         
         public void UpdateModel(IModel model)
         {
-            switch (model)
-            {
-                case UserModel userModel:
-                    _context.Users.Update(userModel);
-                    break;
-                case UserTypeModel userTypeModel:
-                    _context.UserTypes.Update(userTypeModel);
-                    break;
-                case IssuedCreditModel issuedCreditModel:
-                    _context.IssuedCredits.Update(issuedCreditModel);
-                    break;
-                case CreditTypeModel creditTypeModel:
-                    _context.CreditTypes.Update(creditTypeModel);
-                    break;
-                case AccountModel accountModel:
-                    _context.Accounts.Update(accountModel);
-                    break;
-                case CurrencyTypeModel currencyTypeModel:
-                    _context.CurrencyTypes.Update(currencyTypeModel);
-                    break;
-                case CardModel cardModel:
-                    _context.Cards.Update(cardModel);
-                    break;
-                case CardTypeModel cardTypeModel:
-                    _context.CardTypes.Update(cardTypeModel);
-                    break;
-            }
-            
-            _context.SaveChanges();
+            _context.Update(model);
+            _context.SaveChangesAsync();
         }
 
         public void RemoveModel(IModel model)
         {
-            switch (model)
-            {
-                case UserModel userModel:
-                    _context.Users.Remove(userModel);
-                    break;
-                case UserTypeModel userTypeModel:
-                    _context.UserTypes.Remove(userTypeModel);
-                    break;
-                case IssuedCreditModel issuedCreditModel:
-                    _context.IssuedCredits.Remove(issuedCreditModel);
-                    break;
-                case CreditTypeModel creditTypeModel:
-                    _context.CreditTypes.Remove(creditTypeModel);
-                    break;
-                case AccountModel accountModel:
-                    _context.Accounts.Remove(accountModel);
-                    break;
-                case CurrencyTypeModel currencyTypeModel:
-                    _context.CurrencyTypes.Remove(currencyTypeModel);
-                    break;
-                case CardModel cardModel:
-                    _context.Cards.Remove(cardModel);
-                    break;
-                case CardTypeModel cardTypeModel:
-                    _context.CardTypes.Remove(cardTypeModel);
-                    break;
-            }
-            
-            _context.SaveChanges();
+            _context.Remove(model);
+            _context.SaveChangesAsync();
         }
 
         public void GenerateCreditRepayment(JournalModel note, AccountModel accountInitiator,
@@ -260,7 +179,7 @@ namespace HarwexBank
         public void GenerateJournalNote(JournalModel operation)
         {
             _context.Journal.Add(operation);
-            _context.SaveChanges();
+            _context.SaveChangesAsync();
         }
         
         #endregion
