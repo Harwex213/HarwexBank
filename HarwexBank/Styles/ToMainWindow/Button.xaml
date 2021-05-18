@@ -57,6 +57,7 @@
         <Setter Property="Foreground" Value="#FFF"></Setter>
         <Setter Property="Margin" Value="10"></Setter>
         <Setter Property="FontWeight" Value="300"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -89,6 +90,7 @@
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Foreground" Value="#000"></Setter>
         <Setter Property="FontWeight" Value="300"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">

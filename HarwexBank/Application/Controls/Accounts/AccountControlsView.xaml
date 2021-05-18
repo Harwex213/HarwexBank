@@ -5,53 +5,37 @@
     <Grid x:Key="AccountGeneralInfo" x:Shared="False"
           Background="#3D89A1">
         <Grid HorizontalAlignment="Center">
-            <Grid.Resources>
-            <ResourceDictionary>
-                
-                <!-- INCLUDING STYLES -->
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="/HarwexBank;component/Styles/MainWindowStyle.xaml"/>
-                </ResourceDictionary.MergedDictionaries>
-                
-                <Style TargetType="{x:Type StackPanel}">
-                    <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                </Style>
-                
-            </ResourceDictionary>
-        </Grid.Resources> 
-        
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        
-        <StackPanel Grid.Column="0">
-            <TextBlock Style="{StaticResource TittleTextBlock}"
-                       Text="Номер счёта"/>
-            <TextBlock Style="{StaticResource InfoTextBlock}"
-                       Text="{Binding Id}"/>
-        </StackPanel>
-        <StackPanel Grid.Column="1">
-            <TextBlock Style="{StaticResource TittleTextBlock}"
-                       Text="Дата открытия счёта"/>
-            <TextBlock Style="{StaticResource InfoTextBlock}"
-                       Text="{Binding RegistrationDate}"/>
-        </StackPanel>
-        <StackPanel Grid.Column="2">
-            <TextBlock Style="{StaticResource TittleTextBlock}"
-                       Text="Остаток на счёте"/>
-            <TextBlock Style="{StaticResource InfoTextBlock}"
-                       Text="{Binding Amount}"/>
-        </StackPanel>
-        <StackPanel Grid.Column="3">
-            <TextBlock Style="{StaticResource TittleTextBlock}"
-                       Text="Валюта счёта"/>
-            <TextBlock Style="{StaticResource InfoTextBlock}"
-                       Text="{Binding CurrencyTypeModelNavigation.Name}"/>
-        </StackPanel>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Grid.Column="0">
+                <TextBlock Style="{StaticResource TittleTextBlock}"
+                           Text="Номер счёта"/>
+                <TextBlock Style="{StaticResource InfoTextBlock}"
+                           Text="{Binding Id}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <TextBlock Style="{StaticResource TittleTextBlock}"
+                           Text="Дата открытия счёта"/>
+                <TextBlock Style="{StaticResource InfoTextBlock}"
+                           Text="{Binding RegistrationDate}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2">
+                <TextBlock Style="{StaticResource TittleTextBlock}"
+                           Text="Остаток на счёте"/>
+                <TextBlock Style="{StaticResource InfoTextBlock}"
+                           Text="{Binding Amount}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="3">
+                <TextBlock Style="{StaticResource TittleTextBlock}"
+                           Text="Валюта счёта"/>
+                <TextBlock Style="{StaticResource InfoTextBlock}"
+                           Text="{Binding CurrencyTypeModelNavigation.Name}"/>
+            </StackPanel>
         </Grid>
     </Grid>
     
@@ -59,17 +43,6 @@
     <StackPanel x:Key="AccountCards" x:Shared="False"
                 Margin="0, 15, 0, 15"
                 HorizontalAlignment="Center">
-        <StackPanel.Resources>
-            <ResourceDictionary>
-                
-                <!-- INCLUDING STYLES -->
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="/HarwexBank;component/Styles/MainWindowStyle.xaml"/>
-                </ResourceDictionary.MergedDictionaries>
-                
-            </ResourceDictionary>
-        </StackPanel.Resources>
-            
         <!-- Account cards Tittle -->
         <TextBlock Style="{StaticResource TittleTextAdditionalBlock}"
                    HorizontalAlignment="Center"
@@ -110,7 +83,7 @@
     
     <!-- OPEN ACCOUNT CONTROL -->
     <Button x:Key="OpenAccount" x:Shared="False"
-            Width="150" Height="40"
+            Style="{StaticResource OuterButton}"
             Command="{Binding DataContext.OpenAccountCommand,
             RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
             Content="Открыть новый счёт">
@@ -118,7 +91,7 @@
    
     <!-- CLOSE ACCOUNT CONTROL -->
     <Button x:Key="CloseAccount" x:Shared="False"
-            Width="150" Height="40"
+            Style="{StaticResource InnerButton}"
             Command="{Binding DataContext.CloseAccountCommand,
             RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
             CommandParameter="{Binding }"
@@ -127,7 +100,7 @@
     
     <!-- FREEZE ACCOUNT CONTROL -->
     <Button x:Key="FreezeAccount" x:Shared="False"
-            Width="150" Height="40"
+            Style="{StaticResource InnerButton}"
             Command="{Binding DataContext.FreezeAccountCommand,
             RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
             CommandParameter="{Binding }"

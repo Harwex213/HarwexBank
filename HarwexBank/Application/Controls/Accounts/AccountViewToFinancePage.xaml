@@ -22,7 +22,7 @@
                                 
                         <!--Open New Account-->
                         <ContentControl Grid.Row="0" 
-                                        Margin="0, 15, 0, 15"
+                                        Margin="20"
                                         Content="{StaticResource OpenAccount}">
                         </ContentControl>
                                 
