@@ -8,177 +8,174 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         
-        <Style TargetType="{x:Type local:CardsListViewModel}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type local:CardsListViewModel}">
+        <!-- CARDS LIST -->
+        <DataTemplate DataType="{x:Type local:CardsListViewModel}">
+            <Grid DataContext="{Binding DataContext,
+                RelativeSource={RelativeSource AncestorType=UserControl}}">
+                
+                <!-- LAYOUT -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="2.5*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                        <Button Width="150" Height="40"
+                                Command="{Binding GoToCardCreationCommand}">
+                            <TextBlock Text="Создать новую карту" TextWrapping="WrapWithOverflow"></TextBlock>
+                        </Button>
                         
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="2.5*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            
-                            <StackPanel Grid.Column="0" Orientation="Vertical">
-                                <Button Width="150" Height="40"
-                                        Command="{Binding GoToCardCreationCommand}">
-                                    <TextBlock Text="Создать новую карту" TextWrapping="WrapWithOverflow"></TextBlock>
-                                </Button>
+                        <ListBox ItemsSource="{Binding UserCards}"
+                                 SelectedItem="{Binding SelectedCard}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
                                 
-                                <ListBox ItemsSource="{Binding UserCards}"
-                                         SelectedItem="{Binding SelectedCard}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                        
-                                            <Grid Background="#34747C">
-                                                <StackPanel VerticalAlignment="Center"
-                                                            HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding Number}"></TextBlock>
-                                                    <TextBlock Text="{Binding CardType}"></TextBlock>
-                                                </StackPanel>
-                                            </Grid>
-                                        
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </StackPanel>
-                            
-                            <StackPanel Grid.Column="1" Background="#266885">
+                                    <Grid Background="#34747C">
+                                        <StackPanel VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center">
+                                            <TextBlock Text="{Binding Number}"></TextBlock>
+                                            <TextBlock Text="{Binding CardType}"></TextBlock>
+                                        </StackPanel>
+                                    </Grid>
                                 
-                                <StackPanel>
-                                    <TextBlock Text="Номер Карты"></TextBlock>
-                                    <TextBlock Text="{Binding SelectedCard.Number}"></TextBlock>
-                                    
-                                    <TextBlock Text="Срок Карты"></TextBlock>
-                                    <TextBlock Text="{Binding SelectedCard.TimeFrame}"></TextBlock>
-                                    
-                                    <TextBlock Text="Владелец Карты"></TextBlock>
-                                    <TextBlock Text="{Binding SelectedCard.OwnerName}"></TextBlock>
-                                    
-                                </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Column="1" Background="#266885">
+                        
+                        <StackPanel>
+                            <TextBlock Text="Номер Карты"></TextBlock>
+                            <TextBlock Text="{Binding SelectedCard.Number}"></TextBlock>
+                            
+                            <TextBlock Text="Срок Карты"></TextBlock>
+                            <TextBlock Text="{Binding SelectedCard.TimeFrame}"></TextBlock>
+                            
+                            <TextBlock Text="Владелец Карты"></TextBlock>
+                            <TextBlock Text="{Binding SelectedCard.OwnerName}"></TextBlock>
+                            
+                        </StackPanel>
+                        
+                        <Border BorderBrush="#FFF"
+                                BorderThickness="0, 1">
+                            <StackPanel>
+                                <TextBlock Text="Привязанный счёт"></TextBlock>
                                 
-                                <Border BorderBrush="#FFF"
-                                        BorderThickness="0, 1">
-                                    <StackPanel>
-                                        <TextBlock Text="Привязанный счёт"></TextBlock>
+                                <Grid MaxHeight="140" Background="#0C3141">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="8.5*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*" MinWidth="150"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                    
+                                    <StackPanel Grid.Column="0" Orientation="Horizontal">
                                         
-                                        <Grid MaxHeight="140" Background="#0C3141">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="8.5*"></ColumnDefinition>
-                                                <ColumnDefinition Width="*" MinWidth="150"></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-                            
-                                            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                                
-                                                <StackPanel>
-                                                    <TextBlock Text="Номер счёта"></TextBlock>
-                                                    <TextBlock Text="{Binding SelectedAccount.Id}"></TextBlock>
-                                                </StackPanel>
-                                                
-                                                <StackPanel>
-                                                    <TextBlock Text="Валюта счёта"></TextBlock>
-                                                    <TextBlock Text="{Binding SelectedAccount.CurrencyType}"></TextBlock>
-                                                </StackPanel>
-                                                
-                                            </StackPanel>
-                            
-                                            <StackPanel Grid.Column="1">
-                                                <TextBlock Text="Остаток на счёте"></TextBlock>
-                                                <TextBlock Text="{Binding SelectedAccount.Amount}"></TextBlock>
-                                            </StackPanel>
-                            
-                                        </Grid>
+                                        <StackPanel>
+                                            <TextBlock Text="Номер счёта"></TextBlock>
+                                            <TextBlock Text="{Binding SelectedAccount.Id}"></TextBlock>
+                                        </StackPanel>
+                                        
+                                        <StackPanel>
+                                            <TextBlock Text="Валюта счёта"></TextBlock>
+                                            <TextBlock Text="{Binding SelectedAccount.CurrencyType}"></TextBlock>
+                                        </StackPanel>
+                                        
                                     </StackPanel>
-                                </Border>
+                    
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Text="Остаток на счёте"></TextBlock>
+                                        <TextBlock Text="{Binding SelectedAccount.Amount}"></TextBlock>
+                                    </StackPanel>
+                    
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                        
+                        <StackPanel>
+                            <StackPanel.Resources>
                                 
-                                <StackPanel>
-                                    <StackPanel.Resources>
-                                        
-                                        <DataTemplate DataType="{x:Type local:TransferToAccountModel}">
-                                            <ContentControl Content="{StaticResource TransferBlockToCardsPage}"></ContentControl>
-                                        </DataTemplate>
+                                <DataTemplate DataType="{x:Type local:TransferToAccountModel}">
+                                    <ContentControl Content="{StaticResource TransferBlockToCardsPage}"></ContentControl>
+                                </DataTemplate>
+
+                                <DataTemplate DataType="{x:Type local:CreditRepaymentModel}">
+                                    <ContentControl Content="{StaticResource CreditRepaymentBlockToCardsPage}"></ContentControl>
+                                </DataTemplate>
+                                
+                            </StackPanel.Resources>
+                            
+                            <TextBlock Text="Последняя операция"></TextBlock>
+                            
+                            <ContentControl Content="{Binding LastOperation}"></ContentControl>
+                        </StackPanel>
+                        
+                    </StackPanel>
+                </Grid>
+                
+            </Grid>
+        </DataTemplate>
         
-                                        <DataTemplate DataType="{x:Type local:CreditRepaymentModel}">
-                                            <ContentControl Content="{StaticResource CreditRepaymentBlockToCardsPage}"></ContentControl>
-                                        </DataTemplate>
-                                        
-                                    </StackPanel.Resources>
-                                    
-                                    <TextBlock Text="Последняя операция"></TextBlock>
-                                    
-                                    <ContentControl Content="{Binding LastOperation}"></ContentControl>
-                                </StackPanel>
-                                
-                            </StackPanel>
-                        </Grid>
+        <!-- CREATE NEW CARD -->
+        <DataTemplate DataType="{x:Type local:CreateNewCardViewModel}">
+            <Grid>
+                
+                <!-- LAYOUT -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Card Type -->
+                    <StackPanel Grid.Row="0" Orientation="Vertical">
+                        <TextBlock Text="Тип создаваемой карты"></TextBlock>
                         
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        
-        <Style TargetType="{x:Type local:CreateNewCardViewModel}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type local:CreateNewCardViewModel}">
+                        <ComboBox ItemsSource="{Binding CardTypeModels}"
+                                  SelectedIndex="0"
+                                  SelectedItem="{Binding CardToCreate.CardTypeModelNavigation}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                    
+                    <!-- Credit Type -->
+                    <StackPanel Grid.Row="1" Orientation="Vertical">
+                        <TextBlock Text="Счёт, к которому следует привязать"></TextBlock>
                         
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            
-                            <!-- Card Type -->
-                            <StackPanel Grid.Row="0" Orientation="Vertical">
-                                <TextBlock Text="Тип создаваемой карты"></TextBlock>
-                                
-                                <ComboBox ItemsSource="{Binding CardTypeModels}"
-                                          SelectedIndex="0"
-                                          SelectedItem="{Binding CardToCreate.CardTypeModelNavigation}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Name}"></TextBlock>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-                            </StackPanel>
-                            
-                            <!-- Credit Type -->
-                            <StackPanel Grid.Row="1" Orientation="Vertical">
-                                <TextBlock Text="Счёт, к которому следует привязать"></TextBlock>
-                                
-                                <ComboBox ItemsSource="{Binding UserAccounts}"
-                                          SelectedIndex="0"
-                                          SelectedItem="{Binding SelectedAccountToAdd}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Id}"></TextBlock>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-                            </StackPanel>
-                            
-                            <!-- Buttons -->
-                            <Grid Grid.Row="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                
-                                <Button Grid.Column="0"
-                                        Command="{Binding GoToCardCreationCommand}"
-                                        Content="Назад"></Button>
-                                <Button Grid.Column="1"
-                                        Command="{Binding CreateNewCardCommand}"
-                                        Content="Создать"></Button>
-                            </Grid>
-                        </Grid>
+                        <ComboBox ItemsSource="{Binding UserAccounts}"
+                                  SelectedIndex="0"
+                                  SelectedItem="{Binding SelectedAccountToAdd}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Id}"></TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                    
+                    <!-- Buttons -->
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
                         
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                        <Button Grid.Column="0"
+                                Command="{Binding GoToCardListCommand}"
+                                Content="Назад"></Button>
+                        <Button Grid.Column="1"
+                                Command="{Binding CreateNewCardCommand}"
+                                Content="Создать"></Button>
+                    </Grid>
+                </Grid>
+                
+            </Grid>
+        </DataTemplate>
         
     </UserControl.Resources>
     

@@ -12,9 +12,9 @@ namespace HarwexBank
 
         public CreditRepaymentViewModel()
         {
-            UserAccounts = MainViewModel.Data.UserAccounts;
-            UserCredits = MainViewModel.Data.UserCredits;
-            UserJournal = MainViewModel.Data.UserJournal;
+            UserAccounts = ModelResourcesManager.GetInstance().UserAccounts;
+            UserCredits = ModelResourcesManager.GetInstance().UserCredits;
+            UserJournal = ModelResourcesManager.GetInstance().UserJournal;
         }
 
         // Using Data.

@@ -20,6 +20,7 @@ namespace HarwexBank
 
         // Fields.
         private ICommand _logInCommand;
+        private ICommand _startRegistrationCommand;
         
         // Props.
         public ICommand LogInCommand
@@ -30,6 +31,17 @@ namespace HarwexBank
                     _ => LogIn());
 
                 return _logInCommand;
+            }
+        }
+        
+        public ICommand StartRegistrationCommand
+        {
+            get
+            {
+                _startRegistrationCommand ??= new RelayCommand(
+                    _ => StartRegistration());
+
+                return _startRegistrationCommand;
             }
         }
 
@@ -50,13 +62,19 @@ namespace HarwexBank
                 }
                 
                 // If login & password is typed correctly
-                MainViewModel.Data.LoggedInUser = user;
-                AuthorizationViewModel.ApplicationViewModel.EnterToApplicationCommand.Execute(new object());
+                ModelResourcesManager.GetInstance().LoggedInUser = user;
+                
+                AuthorizationViewModel.ApplicationViewModel.GoToMainView();
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
+        }
+
+        private void StartRegistration()
+        {
+            AuthorizationViewModel.GoToRegistrationView();
         }
 
         #endregion

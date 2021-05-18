@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Windows.Controls;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace HarwexBank
 {
-    public class RegistrationPage01 : Control, IControlViewModel { }
-    public class RegistrationPage02 : Control, IControlViewModel { }
+    public class RegistrationPage01 : IControlViewModel
+    {
+        public string Name => "Регистрация";
+    }
+    public class RegistrationPage02 : IControlViewModel
+    {
+        public string Name => "Регистрация";
+    }
     public class RegistrationViewModel : BaseControlViewModel, IControlViewModel
     {
         public string Name => "Регистрация";
@@ -20,7 +23,7 @@ namespace HarwexBank
 
             SelectedControlViewModel = ControlViewModels[_iterator];
 
-            RegisteredUser = new UserModel();
+            RegisteredUser = new UserModel{ UserType = "client" };
         }
         
         // Fields.
@@ -34,10 +37,34 @@ namespace HarwexBank
         #region Commands
 
         // Fields.
+        private ICommand _backToLoginCommand;
+        private ICommand _finishRegistrationCommand;
         private ICommand _continueRegistrationCommand;
         private ICommand _returnBackCommand;
 
         // Props.
+        public ICommand BackToLoginCommand
+        {
+            get
+            {
+                _backToLoginCommand ??= new RelayCommand(
+                    _ => BackToLogin());
+
+                return _backToLoginCommand;
+            }
+        }
+        
+        public ICommand FinishRegistrationCommand
+        {
+            get
+            {
+                _finishRegistrationCommand ??= new RelayCommand(
+                    _ => FinishRegistration());
+
+                return _finishRegistrationCommand;
+            }
+        }
+        
         public ICommand ContinueRegistrationCommand
         {
             get
@@ -61,6 +88,18 @@ namespace HarwexBank
         }
         
         // Methods.
+        private void BackToLogin()
+        {
+            AuthorizationViewModel.GoToLoginView();
+        }
+        
+        private void FinishRegistration()
+        {
+            ModelResourcesManager.GetInstance().AddModel(RegisteredUser);
+            
+            AuthorizationViewModel.RegistrationFinished();
+        }
+        
         private void ContinueRegistration()
         {
             SelectedControlViewModel = ControlViewModels[++_iterator];

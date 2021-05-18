@@ -10,7 +10,7 @@ namespace HarwexBank
 
         public CreditsWorkerPageViewModel()
         {
-            AwaitToApprovedCreditModels = MainViewModel.Data.AllNonApprovedCredits;
+            AwaitToApprovedCreditModels = ModelResourcesManager.GetInstance().AllNonApprovedCredits;
         }
 
         public ObservableCollection<IssuedCreditModel> AwaitToApprovedCreditModels { get; }

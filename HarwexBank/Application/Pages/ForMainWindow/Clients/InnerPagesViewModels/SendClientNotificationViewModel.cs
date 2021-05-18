@@ -7,6 +7,7 @@
         {
             ClientsViewModel = clientsViewModel;
         }
+        
         public ClientsViewModel ClientsViewModel { get; }
     }
 }

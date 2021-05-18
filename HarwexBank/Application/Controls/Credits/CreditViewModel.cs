@@ -7,8 +7,15 @@ using System.Windows.Input;
 
 namespace HarwexBank
 {
-    public class CreditListViewModel : Control, IControlViewModel { }
-    public class TakeNewCreditViewModel : Control, IControlViewModel { }
+    public class CreditListViewModel : IControlViewModel
+    {
+        public string Name => "";
+    }
+
+    public class TakeNewCreditViewModel : IControlViewModel
+    {
+        public string Name => "";
+    }
     public class CreditViewModel : BaseControlViewModel, IControlViewModel
     {
         public string Name => "Кредиты";
@@ -16,27 +23,27 @@ namespace HarwexBank
         {
             CreditToTaking = new IssuedCreditModel();
 
-            switch (MainViewModel.Data.LoggedInUser.UserType)
+            switch (MainViewModel.WindowFactory)
             {
-                case "client":
+                case ClientMainWindow:
                     // Using data.
-                    UserApprovedCreditModels = MainViewModel.Data.UserCredits;
-                    CreditTypeModels = MainViewModel.Data.ExistedCreditTypes;
+                    UserApprovedCreditModels = ModelResourcesManager.GetInstance().UserCredits;
+                    CreditTypeModels = ModelResourcesManager.GetInstance().ExistedCreditTypes;
                     
                     // Using VM
                     ControlViewModels.Add(new CreditListViewModel());
                     ControlViewModels.Add(new TakeNewCreditViewModel());
                     break;
                 
-                case "worker":
+                case WorkerMainWindow:
                     
                     // Using VM
                     ControlViewModels.Add(new CreditListViewModel());
                     ControlViewModels.Add(new TakeNewCreditViewModel());
                     break;
                 
-                case "admin":
-                    CreditTypeModels = MainViewModel.Data.ExistedCreditTypes;
+                case AdminMainWindow:
+                    CreditTypeModels = ModelResourcesManager.GetInstance().ExistedCreditTypes;
                     
                     break;
                 default:
@@ -107,7 +114,7 @@ namespace HarwexBank
 
         private void CreateNewCredit()
         {
-            CreditToTaking.UserId = MainViewModel.Data.LoggedInUser.Id;
+            CreditToTaking.UserId = ModelResourcesManager.GetInstance().LoggedInUser.Id;
             CreditToTaking.DateIn = DateTime.Now;
             CreditToTaking.IsApproved = false;
             CreditToTaking.IsRepaid = false;

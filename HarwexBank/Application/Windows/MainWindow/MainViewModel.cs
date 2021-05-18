@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace HarwexBank
 {
@@ -7,42 +7,41 @@ namespace HarwexBank
     {
         public string Name => "Harwex Bank";
 
-        static MainViewModel()
-        {
-            Data = new MainWindowInfo();
-        }
-
         public MainViewModel(ApplicationViewModel applicationViewModel)
         {
             ApplicationViewModel = applicationViewModel;
             
-            var windowFactory = MainWindowFactory.GetFactoryByUserType(Data.LoggedInUser.UserTypeModelNavigation);
-            windowFactory.GetNecessaryInfo(Data);
-            ControlViewModels.AddRange(windowFactory.GetPages());
-
+            ControlViewModels.AddRange(WindowFactory.GetPages());
             SelectedControlViewModel = ControlViewModels[0];
         }
 
         public ApplicationViewModel ApplicationViewModel { get; }
-        public static MainWindowInfo Data { get; }
-    }
-    
-    public class MainWindowInfo
-    {
+        public static MainWindowFactory WindowFactory { get; } = MainWindowFactory.GetFactory();
 
-        // Logged In User Data.
-        public UserModel LoggedInUser { get; set; }
-        public ObservableCollection<AccountModel> UserAccounts { get; set; }
-        public ObservableCollection<CardModel> UserCards { get; set; }
-        public ObservableCollection<IssuedCreditModel> UserCredits { get; set; }
-        public ObservableCollection<JournalModel> UserJournal { get; set; }
+        #region Commands
+
+        // Fields.
+        private ICommand _loggOutCommand;
+
+        // Props.
+        public ICommand LoggOutCommand
+        {
+            get
+            {
+                _loggOutCommand ??= new RelayCommand(
+                    _ => LoggOut());
+
+                return _loggOutCommand;
+            }
+        }
+
+        // Methods.
+        private void LoggOut()
+        {
+            ApplicationViewModel.GoToAuthorizationView();
+        }
         
-        // Global Data.
-        public ObservableCollection<UserModel> ExistedClients { get; set; }
-        public ObservableCollection<IssuedCreditModel> AllNonApprovedCredits { get; set; }
-        public ObservableCollection<CurrencyTypeModel> ExistedCurrencyTypes { get; set; }
-        public ObservableCollection<CardTypeModel> ExistedCardTypes { get; set; }
-        public ObservableCollection<CreditTypeModel> ExistedCreditTypes { get; set; }
-        public ObservableCollection<JournalModel> GlobalJournal { get; set; }
+
+        #endregion
     }
 }

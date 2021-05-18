@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -7,30 +8,6 @@ using System.Windows.Input;
 
 namespace HarwexBank
 {
-    public class AllJournalNotesTabViewModel : BaseControlViewModel, IControlViewModel
-    {
-        public string Name => "Всё";
-        public JournalViewModel JournalView { get; set; }
-    }
-    
-    public class TransfersTabViewModel : BaseControlViewModel, IControlViewModel
-    {
-        public string Name => "Переводы";
-        public JournalViewModel JournalView { get; set; }
-    }
-    
-    public class CreditRepaymentTabViewModel : BaseControlViewModel, IControlViewModel
-    {
-        public string Name => "Погашения кредитов";
-        public JournalViewModel JournalView { get; set; }
-    }
-    
-    public class NotificationTabViewModel : BaseControlViewModel, IControlViewModel
-    {
-        public string Name => "Уведомления";
-        public JournalViewModel JournalView { get; set; }
-    }
-
     public class JournalClientViewModel : JournalViewModel {}
     public class JournalWorkerViewModel : JournalViewModel {}
 
@@ -40,24 +17,27 @@ namespace HarwexBank
 
         public JournalViewModel()
         {
-            switch (MainViewModel.Data.LoggedInUser.UserType)
+            switch (MainViewModel.WindowFactory)
             {
-                case "worker":
-                    Journal = MainViewModel.Data.GlobalJournal;
+                case AdminMainWindow:
+                    break;
+                case ClientMainWindow:
+                    Journal = ModelResourcesManager.GetInstance().UserJournal;
                     
-                    ControlViewModels.Add(new AllJournalNotesTabViewModel{ JournalView = this });
-                    ControlViewModels.Add(new TransfersTabViewModel{ JournalView = this });
-                    ControlViewModels.Add(new CreditRepaymentTabViewModel{ JournalView = this });
+                    ControlViewModels.Add(new AllJournalNotesTabViewModel(this));
+                    ControlViewModels.Add(new TransfersTabViewModel(this));
+                    ControlViewModels.Add(new CreditRepaymentTabViewModel(this));
+                    ControlViewModels.Add(new NotificationTabViewModel(this));
                     break;
-                
-                case "client":
-                    Journal = MainViewModel.Data.UserJournal;
-
-                    ControlViewModels.Add(new AllJournalNotesTabViewModel{ JournalView = this });
-                    ControlViewModels.Add(new TransfersTabViewModel{ JournalView = this });
-                    ControlViewModels.Add(new CreditRepaymentTabViewModel{ JournalView = this });
-                    ControlViewModels.Add(new NotificationTabViewModel{ JournalView = this });
+                case WorkerMainWindow:
+                    Journal = ModelResourcesManager.GetInstance().AllJournal;
+                    
+                    ControlViewModels.Add(new AllJournalNotesTabViewModel(this));
+                    ControlViewModels.Add(new TransfersTabViewModel(this));
+                    ControlViewModels.Add(new CreditRepaymentTabViewModel(this));
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             Transfers = new ObservableCollection<TransferToAccountModel>();
@@ -69,7 +49,7 @@ namespace HarwexBank
                 DetermineJournalModel(journalNote);
             }
 
-            Journal.CollectionChanged += (sender, e) =>
+            Journal.CollectionChanged += (_, e) =>
             {
                 if (e.NewItems == null || e.Action != NotifyCollectionChangedAction.Add) 
                     return;

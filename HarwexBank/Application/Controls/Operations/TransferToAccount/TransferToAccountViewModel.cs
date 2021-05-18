@@ -12,8 +12,8 @@ namespace HarwexBank
 
         public TransferToAccountViewModel()
         {
-            UserAccounts = MainViewModel.Data.UserAccounts;
-            UserJournal = MainViewModel.Data.UserJournal;
+            UserAccounts = ModelResourcesManager.GetInstance().UserAccounts;
+            UserJournal = ModelResourcesManager.GetInstance().UserJournal;
         }
 
         // Using Data.

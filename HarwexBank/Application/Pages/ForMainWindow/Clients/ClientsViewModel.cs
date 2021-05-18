@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace HarwexBank
@@ -14,7 +12,7 @@ namespace HarwexBank
 
         public ClientsViewModel()
         {
-            ExistedClients = MainViewModel.Data.ExistedClients;
+            ExistedClients = ModelResourcesManager.GetInstance().ExistedClients;
 
             ControlViewModels.Add(new ExistedClientsViewModel(this));
             ControlViewModels.Add(new SendClientNotificationViewModel(this));
