@@ -4,9 +4,14 @@
     <Application.Resources>
          <ResourceDictionary>
              <ResourceDictionary.MergedDictionaries>
+                 <!-- CONTROLS -->
                  <ResourceDictionary Source="/HarwexBank;component/Application/Controls/Accounts/AccountControlsView.xaml"/>
                  <ResourceDictionary Source="/HarwexBank;component/Application/Controls/Credits/CreditControlsView.xaml"/>
                  <ResourceDictionary Source="/HarwexBank;component/Application/Controls/Journal/JournalControlsView.xaml"/>
+                 
+                 <!-- STYLES -->
+                 <ResourceDictionary Source="/HarwexBank;component/Styles/ToMainWindow/TextBlock.xaml"/>
+                 <ResourceDictionary Source="/HarwexBank;component/Styles/ToMainWindow/ToggleButton.xaml"/>
              </ResourceDictionary.MergedDictionaries>
          </ResourceDictionary>
     </Application.Resources>
