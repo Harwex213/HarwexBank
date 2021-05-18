@@ -103,7 +103,7 @@
     <!-- - - - - - - - - - - - - - - - - - - - - -->
     
     <!-- - - - - - - - - - - - - - - - - - - - - -->
-    <!-- INFO BLOCK CONTROL -->
+    <!-- INFO BLOCKS BASE -->
     <!-- - - - - - - - - - - - - - - - - - - - - -->
     <Style x:Key="InfoBlock" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource ToggleButtonBase}">
         <Setter Property="FontSize" Value="20"/>

@@ -12,6 +12,7 @@
                  <!-- STYLES -->
                  <ResourceDictionary Source="/HarwexBank;component/Styles/ToMainWindow/TextBlock.xaml"/>
                  <ResourceDictionary Source="/HarwexBank;component/Styles/ToMainWindow/ToggleButton.xaml"/>
+                 <ResourceDictionary Source="/HarwexBank;component/Styles/ToMainWindow/Button.xaml"/>
              </ResourceDictionary.MergedDictionaries>
          </ResourceDictionary>
     </Application.Resources>
