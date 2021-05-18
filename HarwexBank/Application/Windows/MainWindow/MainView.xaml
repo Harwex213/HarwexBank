@@ -3,7 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
              xmlns:local="clr-namespace:HarwexBank"
+             tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=800, TransitionOn=Loaded}"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
         <UserControl.Resources>
@@ -45,53 +48,121 @@
                 
         </UserControl.Resources>
         
-        <Grid>
+        <!-- - - - - - - - - - - - - - - - - - - - - -->
+        <!-- TOP NAVBAR -->
+        <!-- - - - - - - - - - - - - - - - - - - - - -->
+        <Grid Background="#DBDBDB">
+                <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" MaxWidth="330"></ColumnDefinition>
+                        <ColumnDefinition Width="4.8*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="6.5*"></RowDefinition>
+                        <RowDefinition Height="6*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="4.5*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
+                
                 
                 <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                        BorderBrush="Black" 
-                        BorderThickness="0,1,0,1">
-                        <Grid VerticalAlignment="Center">
-                                <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="180"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="230"></ColumnDefinition>
-                                        <ColumnDefinition Width="50"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                
-                                <TextBlock Grid.Column="0">Harwex Bank</TextBlock>
-                                <TextBlock Grid.Column="2">Oleg Kaportsev</TextBlock>
-                                <Button Grid.Column="3" Content="Выйти"
-                                        Command="{Binding LoggOutCommand}">
-                                </Button>
+                        Background="#FFF" Panel.ZIndex="1">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="30" Opacity="0.25" Direction="180"></DropShadowEffect>
+                    </Border.Effect>
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" MaxWidth="330"></ColumnDefinition>
+                            <ColumnDefinition Width="4.8*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5*"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="5*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            
+                            <fa5:FontAwesome Grid.Row="1"
+                                             Icon="Solid_University"
+                                             FontSize="32">
+                            </fa5:FontAwesome>
+                            <StackPanel Grid.Row="3"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                <TextBlock Text="Harwex ">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock" BasedOn="{StaticResource LogoHarwexBank}">
+                                            <Setter Property="FontWeight" Value="600"></Setter>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="Bank"
+                                           Style="{StaticResource LogoHarwexBank}"></TextBlock>
+                            </StackPanel>
                         </Grid>
+                        <StackPanel Grid.Column="1"
+                                    Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Text="Oleg Kaportsev"
+                               Style="{StaticResource TopBarElements}"></TextBlock>
+                            <Button Style="{StaticResource ButtonForIcon}"
+                                    VerticalAlignment="Center"
+                                    Margin="37.5, 0, 75, 0"
+                                    Command="{Binding LoggOutCommand}">
+                                <fa5:FontAwesome Icon="Solid_SignOutAlt"
+                                                 FontSize="44">
+                                </fa5:FontAwesome>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
                 </Border>
-                
-                <Border Grid.Row="1" Grid.Column="0" DockPanel.Dock="Left" 
-                        BorderBrush="Black" 
-                        BorderThickness="0,0,1,0">
-                        <ItemsControl ItemsSource="{Binding ControlViewModels}">
-                                <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                                <Button Content="{Binding Name}"
-                                                        Command="{Binding DataContext.ChangeControlCommand,
-                                                                RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                                        CommandParameter="{Binding }"
-                                                        FontSize="18"
-                                                        Margin="10,10"
-                                                        Padding="15, 15"/>
-                                        </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                <!-- - - - - - - - - - - - - - - - - - - - - -->
+                        
+                <!-- - - - - - - - - - - - - - - - - - - - - -->
+                <!-- LEFT NAVBAR -->
+                <!-- - - - - - - - - - - - - - - - - - - - - -->
+                <Grid Grid.Row="1" Grid.Column="0"
+                      Background="#FFF">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="6*"></RowDefinition>
+                    </Grid.RowDefinitions>
+            
+                    <ItemsControl Grid.Row="1" Name="LeftNavbar"
+                                  ItemsSource="{Binding ControlViewModels}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel></StackPanel>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate> 
+                            <DataTemplate> 
+             
+                                <ToggleButton Name="LeftBarToggleButton" 
+                                              Style="{StaticResource LeftBarButtonStyle}" 
+                                              Content="{Binding Name}"
+                                              Command="{Binding DataContext.ChangeControlCommand,
+                                              RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                              CommandParameter="{Binding }"
+                                              Click="LeftBarToggleButton_OnClick"
+                                              Loaded="LeftBarToggleButton_OnLoaded"> 
+                                </ToggleButton>
+             
+                            </DataTemplate> 
+                        </ItemsControl.ItemTemplate> 
+                    </ItemsControl> 
+                </Grid>
+                <!-- - - - - - - - - - - - - - - - - - - - - -->
+                                        
+                <!-- - - - - - - - - - - - - - - - - - - - - -->
+                <!-- CONTENT OF SELECTED PAGE -->
+                <!-- - - - - - - - - - - - - - - - - - - - - -->
+                <Border Grid.Row="1" Grid.Column="1"
+                        CornerRadius="20" Background="#FFFFFF"
+                        Margin="10">
+                    <ContentControl Content="{Binding SelectedControlViewModel}"/>
                 </Border>
-                
-                <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding SelectedControlViewModel}"/>
+                <!-- - - - - - - - - - - - - - - - - - - - - -->
         </Grid>
 </UserControl>
