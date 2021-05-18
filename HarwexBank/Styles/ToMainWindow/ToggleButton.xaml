@@ -63,7 +63,7 @@
     <!-- FINANCE PAGE -->
     <!-- - - - - - - - - - - - - - - - - - - - - -->
     <!-- Finance Bar Toggle Buttons -->
-    <Style x:Key="RoundButton" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource ToggleButtonBase}">
+    <Style x:Key="FinanceBarButtonStyle" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource ToggleButtonBase}">
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="Foreground" Value="#000"></Setter>
         <Setter Property="Margin" Value="15, 5"></Setter>
