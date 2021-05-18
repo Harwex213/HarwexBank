@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Configuration;
 
 #nullable disable
 
@@ -11,10 +12,10 @@ namespace HarwexBank
     {
         public HarwexBankContext()
         {
-            // Database.EnsureDeleted();
-            // Database.EnsureCreated();
-            //
-            // CreateDefaultData();
+            Database.EnsureDeleted();
+            Database.EnsureCreated();
+            
+            CreateDefaultData();
         }
 
         #region DbSet Init
@@ -52,7 +53,7 @@ namespace HarwexBank
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=.;Database=HarwexBank;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["connect"].ConnectionString);
             }
         }
 

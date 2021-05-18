@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using Microsoft.EntityFrameworkCore;
 
 namespace HarwexBank
@@ -163,17 +165,41 @@ namespace HarwexBank
         public void GenerateCreditRepayment(JournalModel note, AccountModel accountInitiator,
             IssuedCreditModel selectedCredit)
         {
-            _context.Accounts.Update(accountInitiator);
-            _context.IssuedCredits.Update(selectedCredit);
-            GenerateJournalNote(note);
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    _context.Accounts.Update(accountInitiator);
+                    _context.IssuedCredits.Update(selectedCredit);
+                    GenerateJournalNote(note);
+                    transaction.Commit();
+                }
+                catch (Exception e)
+                {
+                    transaction.Rollback();
+                    MessageBox.Show(e.Message);
+                }
+            }
         }
         
         public void GenerateTransfer(JournalModel note, AccountModel accountInitiator,
             AccountModel accountReceiver)
         {
-            _context.Accounts.Update(accountInitiator);
-            _context.Accounts.Update(accountReceiver);
-            GenerateJournalNote(note);
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    _context.Accounts.Update(accountInitiator);
+                    _context.Accounts.Update(accountReceiver);
+                    GenerateJournalNote(note);
+                    transaction.CommitAsync();
+                }
+                catch (Exception e)
+                {
+                    transaction.Rollback();
+                    MessageBox.Show(e.Message);
+                }
+            }
         }
 
         public void GenerateJournalNote(JournalModel operation)
