@@ -10,13 +10,14 @@ namespace HarwexBank
         public MainViewModel(ApplicationViewModel applicationViewModel)
         {
             ApplicationViewModel = applicationViewModel;
-            
+
+            WindowFactory = MainWindowFactory.GetFactory();
             ControlViewModels.AddRange(WindowFactory.GetPages());
             SelectedControlViewModel = ControlViewModels[0];
         }
 
         public ApplicationViewModel ApplicationViewModel { get; }
-        public static MainWindowFactory WindowFactory { get; } = MainWindowFactory.GetFactory();
+        public static MainWindowFactory WindowFactory { get; private set; }
 
         #region Commands
 
