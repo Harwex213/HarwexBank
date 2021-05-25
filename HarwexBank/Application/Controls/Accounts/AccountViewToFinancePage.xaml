@@ -28,7 +28,6 @@
                                 
                         <!-- Accounts List -->
                         <ItemsControl Grid.Row="1"
-                                      Margin="30, 0, 30, 0"
                                       ItemsSource="{Binding AccountModels}"
                                       ItemTemplate="{StaticResource AccountsListToFinancePage}">
                             <ItemsControl.ItemsPanel>

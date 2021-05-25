@@ -8,8 +8,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     
     <ScrollViewer>
-        <ItemsControl Margin="30, 0, 30, 0"
-                      ItemsSource="{Binding AccountModels}"
+        <ItemsControl ItemsSource="{Binding AccountModels}"
                       ItemTemplate="{StaticResource AccountsListToClientsPage}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
