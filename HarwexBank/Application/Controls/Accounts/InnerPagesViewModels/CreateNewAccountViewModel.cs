@@ -2,6 +2,6 @@
 {
     public class CreateNewAccountViewModel : IControlViewModel
     {
-        public string Name => "";
+        public string Name => "Открытие нового счёта";
     }
 }
