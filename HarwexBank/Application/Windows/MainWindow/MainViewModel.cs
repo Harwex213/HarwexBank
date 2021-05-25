@@ -10,7 +10,9 @@ namespace HarwexBank
         public MainViewModel(ApplicationViewModel applicationViewModel)
         {
             ApplicationViewModel = applicationViewModel;
-            
+            applicationViewModel.MinHeight = 500;
+            applicationViewModel.MinWidth = 700;
+
             ControlViewModels.AddRange(WindowFactory.GetPages());
             SelectedControlViewModel = ControlViewModels[0];
         }
