@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     
-    <ScrollViewer>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
         <ItemsControl ItemsSource="{Binding AccountModels}"
                       ItemTemplate="{StaticResource AccountsListToClientsPage}">
             <ItemsControl.ItemsPanel>

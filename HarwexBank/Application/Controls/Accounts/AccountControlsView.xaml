@@ -99,7 +99,7 @@
             Style="{StaticResource OuterButton}"
             Command="{Binding DataContext.OpenAccountCommand,
             RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-            Content="Открыть новый счёт">
+            Content="Открыть счёт">
     </Button>
    
     <!-- CLOSE ACCOUNT CONTROL -->

@@ -13,11 +13,11 @@
             <Grid DataContext="{Binding DataContext,
             RelativeSource={RelativeSource AncestorType=UserControl}}">
                 
-                <ScrollViewer>
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*" MaxHeight="90"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
                                 
                         <!--Open New Account-->
