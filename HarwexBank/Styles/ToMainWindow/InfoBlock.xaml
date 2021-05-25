@@ -5,41 +5,29 @@
     </ResourceDictionary.MergedDictionaries>
     
     <!-- - - - - - - - - - - - - - - - - - - - - -->
-    <!-- BUTTON BASE -->
-    <!-- - - - - - - - - - - - - - - - - - - - - -->
-    <Style x:Key="ButtonBase" TargetType="{x:Type Button}">
-        <Setter Property="SnapsToDevicePixels" Value="true"/>
-        <Setter Property="OverridesDefaultStyle" Value="true"/>
-        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
-        <Setter Property="FontFamily" Value="Roboto"/>
-        <Setter Property="Cursor" Value="Hand"></Setter>
-    </Style>
+    <!-- INFO BLOCKS BASE -->
     <!-- - - - - - - - - - - - - - - - - - - - - -->
     
-    <!-- - - - - - - - - - - - - - - - - - - - - -->
-    <!-- GENERAL -->
-    <!-- - - - - - - - - - - - - - - - - - - - - -->
-     <!-- Button for Icon -->
-    <Style x:Key="ButtonForIcon" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBase}">
-        <Setter Property="Foreground" Value="#212529"></Setter>
+    <!-- TOGGLE BUTTONS -->
+    <Style x:Key="InfoBlock" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource ToggleButtonBase}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Foreground" Value="#000"></Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border 
-                        x:Name="Border"
-                        Background="Transparent">
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border x:Name="Border"
+                            Background="#3D89A1"
+                            CornerRadius="27.5">
                         <ContentPresenter
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
+                            Margin="20"
                             RecognizesAccessKey="True"/>
                     </Border>
-                    
+
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Foreground" Value="#0047FF"></Setter>
-                        </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Foreground" Value="#114DEA"></Setter>
+                            <Setter Property="Background" Value="#367D94"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -48,16 +36,17 @@
     </Style>
     <!-- - - - - - - - - - - - - - - - - - - - - -->
     
-    <!-- - - - - - - - - - - - - - - - - - - - - -->
-    <!-- INFO BLOCKS BASE -->
-    <!-- - - - - - - - - - - - - - - - - - - - - -->
-    <!-- Outer Buttons -->
-    <Style x:Key="OuterButton" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBase}">
+    <!-- BUTTONS -->
+    <Style x:Key="InfoBlockButtonBase" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBase}">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Foreground" Value="#FFF"></Setter>
-        <Setter Property="Margin" Value="10"></Setter>
         <Setter Property="FontWeight" Value="300"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+    </Style>
+    
+    <!-- Outer Buttons -->
+    <Style x:Key="OuterButton" TargetType="{x:Type Button}" BasedOn="{StaticResource InfoBlockButtonBase}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -86,11 +75,8 @@
     </Style>
     
     <!-- Inner Buttons -->
-    <Style x:Key="InnerButton" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonBase}">
-        <Setter Property="FontSize" Value="18"/>
+    <Style x:Key="InnerButton" TargetType="{x:Type Button}" BasedOn="{StaticResource InfoBlockButtonBase}">
         <Setter Property="Foreground" Value="#000"></Setter>
-        <Setter Property="FontWeight" Value="300"></Setter>
-        <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -119,4 +105,43 @@
     </Style>
     <!-- - - - - - - - - - - - - - - - - - - - - -->
     
+    <!-- TEXT BOXES -->
+    <Style x:Key="TextOfInfoBlock" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="FontWeight" Value="300"></Setter>
+    </Style>
+    
+    <Style x:Key="TittleText" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextOfInfoBlock}">
+        <Setter Property="Foreground" Value="#FFF"></Setter>
+    </Style>
+
+    <Style x:Key="InfoText" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextOfInfoBlock}">
+        <Setter Property="Margin" Value="0, 8.5, 0, 0"></Setter>
+        <Setter Property="Foreground" Value="#D1D1D1"></Setter>
+    </Style>
+    
+    <Style x:Key="AdditionalTittleText" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextOfInfoBlock}">
+        <Setter Property="Foreground" Value="#D1D1D1"></Setter>
+        <Setter Property="FontSize" Value="12"></Setter>
+    </Style>
+    <!-- - - - - - - - - - - - - - - - - - - - - -->
+    
+    <!-- TEXT BOXES AT CARD BLOCK IN ACCOUNT BLOCK INFO -->
+    <Style x:Key="AdditionalTittleTextCardBlock" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource AdditionalTittleText}">
+        <Setter Property="Margin" Value="8.5"></Setter>
+    </Style>
+    
+    <Style x:Key="CardNumberTextBlock" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="Foreground" Value="#FFFFFF"></Setter>
+        <Setter Property="FontWeight" Value="500"></Setter>
+    </Style>
+    
+    <Style x:Key="CardTypeTextBlock" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextBlockBase}">
+        <Setter Property="FontSize" Value="12"></Setter>
+        <Setter Property="Foreground" Value="#BABABA"></Setter>
+        <Setter Property="FontWeight" Value="500"></Setter>
+    </Style>
+    <!-- - - - - - - - - - - - - - - - - - - - - -->
+    
+    <!-- - - - - - - - - - - - - - - - - - - - - -->
 </ResourceDictionary>

@@ -13,4 +13,46 @@
         </Setter>
     </Style>
     <!-- - - - - - - - - - - - - - - - - - - - - -->
+    
+    <!-- - - - - - - - - - - - - - - - - - - - - -->
+    <!-- BUTTON BASE -->
+    <!-- - - - - - - - - - - - - - - - - - - - - -->
+    <Style x:Key="ButtonBase" TargetType="{x:Type Button}">
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="FontFamily" Value="Roboto"/>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+    <!-- - - - - - - - - - - - - - - - - - - - - -->
+    
+    <!-- - - - - - - - - - - - - - - - - - - - - -->
+    <!-- TOGGLE BUTTON BASE -->
+    <!-- - - - - - - - - - - - - - - - - - - - - -->
+    <Style x:Key="ToggleButtonBase" TargetType="{x:Type ToggleButton}">
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="FontFamily" Value="Roboto"/>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+    <!-- - - - - - - - - - - - - - - - - - - - - -->
+
+    
+    <!-- - - - - - - - - - - - - - - - - - - - - -->
+    <!-- TEXT BLOCK BASE -->
+    <!-- - - - - - - - - - - - - - - - - - - - - -->
+    <Style x:Key="TextBlockBase" TargetType="{x:Type TextBlock}">
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="FontFamily" Value="Roboto"></Setter>
+        <Setter Property="FontSize" Value="14"></Setter>
+    </Style>
+    <!-- - - - - - - - - - - - - - - - - - - - - -->
+    
+    <!-- - - - - - - - - - - - - - - - - - - - - -->
+    <!-- Other -->
+    <!-- - - - - - - - - - - - - - - - - - - - - -->
+    <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"></BooleanToVisibilityConverter>
+    <!-- - - - - - - - - - - - - - - - - - - - - -->
 </ResourceDictionary>
