@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
              xmlns:local="clr-namespace:HarwexBank"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
@@ -11,7 +12,8 @@
         <!-- ACCOUNT LIST -->
         <DataTemplate DataType="{x:Type local:AccountsListViewModel}">
             <Grid DataContext="{Binding DataContext,
-            RelativeSource={RelativeSource AncestorType=UserControl}}">
+            RelativeSource={RelativeSource AncestorType=UserControl}}"
+                  tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Visibility}">
                 
                 <ScrollViewer VerticalScrollBarVisibility="Hidden">
                     <Grid>
@@ -45,7 +47,8 @@
         <!-- OPEN NEW ACCOUNT -->
         <DataTemplate DataType="{x:Type local:CreateNewAccountViewModel}">
             <Grid DataContext="{Binding DataContext,
-            RelativeSource={RelativeSource AncestorType=UserControl}}">
+            RelativeSource={RelativeSource AncestorType=UserControl}}"
+                  tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Visibility}">
                 
                 <Grid Margin="40"
                       HorizontalAlignment="Center">
