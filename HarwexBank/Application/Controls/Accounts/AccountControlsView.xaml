@@ -3,7 +3,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/HarwexBank;component/Styles/ToMainWindow/InfoBlock.xaml"/>
+        <ResourceDictionary Source="/HarwexBank;component/Styles/ToMainWindow/Controls/InfoBlock.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
     <!-- GENERAL INFO -->
