@@ -8,7 +8,8 @@
              d:DesignHeight="300" d:DesignWidth="300">
 
     <ScrollViewer VerticalScrollBarVisibility="Hidden">
-        <ItemsControl ItemsSource="{Binding UserApprovedCreditModels}"
+        <ItemsControl Margin="0, 15, 0, 0"
+                      ItemsSource="{Binding UserApprovedCreditModels}"
                       ItemTemplate="{StaticResource CreditsListToFinancePage}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

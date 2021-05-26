@@ -7,7 +7,8 @@
     </ResourceDictionary.MergedDictionaries>
     
     <!-- GENERAL INFO CONTROL -->
-    <Grid x:Key="CreditGeneralInfo" x:Shared="False">
+    <Grid x:Key="CreditGeneralInfo" x:Shared="False"
+          SizeChanged="GeneralInfo_OnSizeChanged">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -19,26 +20,30 @@
             <ColumnDefinition Width="Auto"></ColumnDefinition>  
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="1">
+        <StackPanel Grid.Row="0" Grid.Column="1">
             <TextBlock Style="{StaticResource TittleText}"
                        Text="Дата взятия"/>
             <TextBlock Style="{StaticResource InfoText}"
                        Text="{Binding DateIn, StringFormat=d}"/>
         </StackPanel>
-        <StackPanel Grid.Column="3">
+        <StackPanel Grid.Row="0" Grid.Column="3">
             <TextBlock Style="{StaticResource TittleText}"
                        Text="Срок"/>
             <TextBlock Style="{StaticResource InfoText}"
                        Text="{Binding Term}"/>
         </StackPanel>
-        <StackPanel Grid.Column="5">
+        <StackPanel Grid.Row="0" Grid.Column="5">
             <TextBlock Style="{StaticResource TittleText}"
                        Text="Сумма"/>
             <TextBlock Style="{StaticResource InfoText}"
                        Text="{Binding Amount}"/>
         </StackPanel>
-        <StackPanel Grid.Column="7">
+        <StackPanel Grid.Row="0" Grid.Column="7">
             <TextBlock Style="{StaticResource TittleText}"
                        Text="Тип Кредита"/>
             <TextBlock Style="{StaticResource InfoText}"
@@ -78,7 +83,7 @@
     <!-- ADDITIONAL INFO CONTROLS -->
     <!-- Additional block to Finance Page -->
     <Grid x:Key="CreditAdditionalInfoToFinancePage" x:Shared="False"
-          Margin="8.5">
+          SizeChanged="AdditionalInfoClient_OnSizeChanged">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -86,16 +91,19 @@
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
 
         
-        <ContentControl Grid.Column="1" Content="{StaticResource CreditId}"></ContentControl>
-        <ContentControl Grid.Column="3" Content="{StaticResource CreditRate}"></ContentControl>
+        <ContentControl Grid.Row="0" Grid.Column="1" Content="{StaticResource CreditId}"></ContentControl>
+        <ContentControl Grid.Row="0" Grid.Column="3" Content="{StaticResource CreditRate}"></ContentControl>
     </Grid>
     
     <!-- Additional block to Credits Page -->
-    <Grid x:Key="CreditAdditionalInfoToCreditsPage" x:Shared="False"
-          Margin="8.5">
-        <Grid SizeChanged="FrameworkElement_OnSizeChanged">
+    <Grid x:Key="CreditAdditionalInfoToCreditsPage" x:Shared="False">
+        <Grid SizeChanged="AdditionalInfo_OnSizeChanged">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
