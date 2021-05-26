@@ -1,206 +1,129 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary x:Class="HarwexBank.CreditControlsView_xaml"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/HarwexBank;component/Styles/ToMainWindow/Controls/InfoBlock.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
     
     <!-- GENERAL INFO CONTROL -->
-    <Grid x:Key="CreditGeneralInfo" x:Shared="False"
-          Background="#3D89A1">
-        <Grid HorizontalAlignment="Center">
-            <Grid.Resources>
-            <ResourceDictionary>
-                
-                <!-- INCLUDING STYLES -->
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="/HarwexBank;component/Styles/MainWindowStyle.xaml"/>
-                </ResourceDictionary.MergedDictionaries>
-                
-                <Style TargetType="{x:Type StackPanel}">
-                    <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                </Style>
-                
-            </ResourceDictionary>
-        </Grid.Resources> 
-        
+    <Grid x:Key="CreditGeneralInfo" x:Shared="False">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>  
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
-        <StackPanel Grid.Column="0">
-            <TextBlock Style="{StaticResource TittleTextBlock}"
-                       Text="Дата взятия"/>
-            <TextBlock Style="{StaticResource InfoTextBlock}"
-                       Text="{Binding DateIn}"/>
-        </StackPanel>
+
         <StackPanel Grid.Column="1">
-            <TextBlock Style="{StaticResource TittleTextBlock}"
-                       Text="Срок"/>
-            <TextBlock Style="{StaticResource InfoTextBlock}"
-                       Text="{Binding Term}"/>
-        </StackPanel>
-        <StackPanel Grid.Column="2">
-            <TextBlock Style="{StaticResource TittleTextBlock}"
-                       Text="Сумма"/>
-            <TextBlock Style="{StaticResource InfoTextBlock}"
-                       Text="{Binding Amount}"/>
+            <TextBlock Style="{StaticResource TittleText}"
+                       Text="Дата взятия"/>
+            <TextBlock Style="{StaticResource InfoText}"
+                       Text="{Binding DateIn, StringFormat=d}"/>
         </StackPanel>
         <StackPanel Grid.Column="3">
-            <TextBlock Style="{StaticResource TittleTextBlock}"
-                       Text="Тип Кредита"/>
-            <TextBlock Style="{StaticResource InfoTextBlock}"
-                       Text="{Binding CreditTypeModelNavigation.Name}"/>
+            <TextBlock Style="{StaticResource TittleText}"
+                       Text="Срок"/>
+            <TextBlock Style="{StaticResource InfoText}"
+                       Text="{Binding Term}"/>
         </StackPanel>
-        </Grid>
+        <StackPanel Grid.Column="5">
+            <TextBlock Style="{StaticResource TittleText}"
+                       Text="Сумма"/>
+            <TextBlock Style="{StaticResource InfoText}"
+                       Text="{Binding Amount}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="7">
+            <TextBlock Style="{StaticResource TittleText}"
+                       Text="Тип Кредита"/>
+            <TextBlock Style="{StaticResource InfoText}"
+                       Text="{Binding CreditType}"/>
+        </StackPanel>
     </Grid>
     
     <!-- credit Id -->
     <StackPanel x:Key="CreditId" x:Shared="False">
-        <StackPanel.Resources>
-            <ResourceDictionary>
-                
-                <!-- INCLUDING STYLES -->
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="/HarwexBank;component/Styles/MainWindowStyle.xaml"/>
-                </ResourceDictionary.MergedDictionaries>
-                
-            </ResourceDictionary>
-        </StackPanel.Resources>
-        
-        <TextBlock Style="{StaticResource TittleTextAdditionalBlock}"
+        <TextBlock Style="{StaticResource TittleText}"
                    Text="Номер кредитного договора"/>
-        <TextBlock Style="{StaticResource InfoTextBlock}"
+        <TextBlock Style="{StaticResource InfoText}"
                    Text="{Binding Id}"/>
     </StackPanel>
     <!-- credit Rate -->
     <StackPanel x:Key="CreditRate" x:Shared="False">
-        <StackPanel.Resources>
-            <ResourceDictionary>
-                
-                <!-- INCLUDING STYLES -->
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="/HarwexBank;component/Styles/MainWindowStyle.xaml"/>
-                </ResourceDictionary.MergedDictionaries>
-                
-            </ResourceDictionary>
-        </StackPanel.Resources>
-        
-        <TextBlock Style="{StaticResource TittleTextAdditionalBlock}"
+        <TextBlock Style="{StaticResource TittleText}"
                    Text="Процентная ставка"/>
-        <TextBlock Style="{StaticResource InfoTextBlock}"
+        <TextBlock Style="{StaticResource InfoText}"
                    Text="{Binding CreditTypeModelNavigation.Rate}"/>
     </StackPanel>
     <!-- credit owner name -->
     <StackPanel x:Key="CreditOwnerName" x:Shared="False">
-        <StackPanel.Resources>
-            <ResourceDictionary>
-                
-                <!-- INCLUDING STYLES -->
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="/HarwexBank;component/Styles/MainWindowStyle.xaml"/>
-                </ResourceDictionary.MergedDictionaries>
-                
-            </ResourceDictionary>
-        </StackPanel.Resources>
-        
-        <TextBlock Style="{StaticResource TittleTextAdditionalBlock}"
+        <TextBlock Style="{StaticResource TittleText}"
                    Text="ФИО владельца"/>
-        <TextBlock Style="{StaticResource InfoTextBlock}"
+        <TextBlock Style="{StaticResource InfoText}"
                    Text="{Binding UserModelAccount.FullName}"/>
     </StackPanel>
     <!-- credit owner passport -->
     <StackPanel x:Key="CreditOwnerPassport" x:Shared="False">
-        <StackPanel.Resources>
-            <ResourceDictionary>
-                
-                <!-- INCLUDING STYLES -->
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="/HarwexBank;component/Styles/MainWindowStyle.xaml"/>
-                </ResourceDictionary.MergedDictionaries>
-                
-            </ResourceDictionary>
-        </StackPanel.Resources>
-        
-        <TextBlock Style="{StaticResource TittleTextAdditionalBlock}"
+        <TextBlock Style="{StaticResource TittleText}"
                    Text="Номер паспорта владельца"/>
-        <TextBlock Style="{StaticResource InfoTextBlock}"
+        <TextBlock Style="{StaticResource InfoText}"
                    Text="{Binding UserModelAccount.Passport}"/>
     </StackPanel>
     
     <!-- ADDITIONAL INFO CONTROLS -->
     <!-- Additional block to Finance Page -->
     <Grid x:Key="CreditAdditionalInfoToFinancePage" x:Shared="False"
-          Background="#2C6172">
-        <Grid HorizontalAlignment="Center">
-            <Grid.Resources>
-                <ResourceDictionary>
-                
-                    <!-- INCLUDING STYLES -->
-                    <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary Source="/HarwexBank;component/Styles/MainWindowStyle.xaml"/>
-                    </ResourceDictionary.MergedDictionaries>
-                
-                    <Style TargetType="{x:Type StackPanel}">
-                        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                    </Style>
-                
-                </ResourceDictionary>
-            </Grid.Resources> 
+          Margin="8.5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
         
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            
-            <ContentControl Grid.Column="0" Content="{StaticResource CreditId}"></ContentControl>
-            <ContentControl Grid.Column="1" Content="{StaticResource CreditRate}"></ContentControl>
-        </Grid>
+        <ContentControl Grid.Column="1" Content="{StaticResource CreditId}"></ContentControl>
+        <ContentControl Grid.Column="3" Content="{StaticResource CreditRate}"></ContentControl>
     </Grid>
+    
     <!-- Additional block to Credits Page -->
     <Grid x:Key="CreditAdditionalInfoToCreditsPage" x:Shared="False"
-          Background="#2C6172">
-        <Grid HorizontalAlignment="Center">
-            <Grid.Resources>
-                <ResourceDictionary>
-                
-                    <!-- INCLUDING STYLES -->
-                    <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary Source="/HarwexBank;component/Styles/MainWindowStyle.xaml"/>
-                    </ResourceDictionary.MergedDictionaries>
-                
-                    <Style TargetType="{x:Type StackPanel}">
-                        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                    </Style>
-                
-                </ResourceDictionary>
-            </Grid.Resources> 
+          Margin="8.5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
         
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            
-            <ContentControl Grid.Column="0" Content="{StaticResource CreditId}"></ContentControl>
-            <ContentControl Grid.Column="1" Content="{StaticResource CreditRate}"></ContentControl>
-            <ContentControl Grid.Column="2" Content="{StaticResource CreditOwnerName}"></ContentControl>
-            <ContentControl Grid.Column="3" Content="{StaticResource CreditOwnerPassport}"></ContentControl>
-        </Grid>
+        <ContentControl Grid.Column="1" Content="{StaticResource CreditId}"></ContentControl>
+        <ContentControl Grid.Column="3" Content="{StaticResource CreditRate}"></ContentControl>
+        <ContentControl Grid.Column="5" Content="{StaticResource CreditOwnerName}"></ContentControl>
+        <ContentControl Grid.Column="7" Content="{StaticResource CreditOwnerPassport}"></ContentControl>
     </Grid>
     
     <!-- TAKE NEW CREDIT CONTROL -->
     <Button x:Key="TakeNewCredit" x:Shared="False"
+            Style="{StaticResource OuterButton}"
             Command="{Binding DataContext.TakeNewCreditCommand,
             RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-            Width="150" Height="40">Взять новый кредит</Button>
+            Content="Взять кредит"></Button>
     
     <!-- ACCEPT REQUEST FOR CREDIT CONTROL -->
     <Button x:Key="AcceptCredit" x:Shared="False"
-            Width="150" Height="40"
+            Style="{StaticResource InnerButton}"
             Command="{Binding DataContext.AcceptCreditCommand,
             RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
             CommandParameter="{Binding}"
@@ -208,7 +131,7 @@
     
     <!-- DECLINE REQUEST FOR CREDIT CONTROL -->
     <Button x:Key="DeclineCredit" x:Shared="False"
-            Width="150" Height="40"
+            Style="{StaticResource InnerButton}"
             Command="{Binding DataContext.DeclineCreditCommand,
             RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
             CommandParameter="{Binding}"
@@ -218,20 +141,45 @@
     <!-- Credit list for FinancePage -->
     <DataTemplate x:Key="CreditsListToFinancePage">
         
-        <Grid Margin="0, 0, 0, 15">
+        <Grid Margin="30, 0, 30, 15">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
             
-            <!-- Account Info -->
-            <ContentControl Grid.Row="0"
-                            Background="#3D89A1"
-                            Content="{StaticResource CreditGeneralInfo}"></ContentControl>
+            <!-- Credit General Info -->
+            <ToggleButton Grid.Row="0" Panel.ZIndex="2" 
+                          Name="CreditGeneralInfo"
+                          IsChecked="False"
+                          Style="{StaticResource InfoBlock}">
+                <ContentControl Grid.Row="0"
+                                Content="{StaticResource CreditGeneralInfo}"></ContentControl>
+            </ToggleButton>
             
             <!-- Account Additional Info -->
-            <ContentControl Grid.Row="1" Content="{StaticResource CreditAdditionalInfoToFinancePage}">
-            </ContentControl>
+            <Border Grid.Row="1"
+                    Background="#2C6172"
+                    CornerRadius="0, 0, 25, 25"
+                    Margin="0, -30, 0, 0"
+                    Loaded="CreditAdditionalInfo_Loaded"
+                    tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Visibility}"
+                    tz:Transitionz.Translate="{tz:TranslateParams From='0, -10', To='0, 0', Duration=200, TransitionOn=Visibility}"
+                    tz:Transitionz.Visibility="{Binding ElementName=CreditGeneralInfo, Path=IsChecked, Converter={StaticResource BoolToVisibilityConverter}}">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    
+                    <ContentControl Grid.Column="0" Grid.Row="1" Content="{StaticResource CreditAdditionalInfoToFinancePage}">
+                    </ContentControl>
+                </Grid>
+
+            </Border>
             
         </Grid>
         
@@ -240,36 +188,60 @@
     <!-- Credit list for Credits Worker Page -->
     <DataTemplate x:Key="CreditsNonApprovedListToCreditsPage">
         
-        <Grid Margin="0, 0, 0, 15">
+        <Grid Margin="30, 0, 30, 15">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
             
-            <!-- Credit Info -->
-            <ContentControl Grid.Row="0"
-                            Background="#3D89A1"
-                            Content="{StaticResource CreditGeneralInfo}"></ContentControl>
+            <!-- Credit General Info -->
+            <ToggleButton Grid.Row="0" Panel.ZIndex="2" 
+                          Name="CreditGeneralInfo"
+                          IsChecked="False"
+                          Style="{StaticResource InfoBlock}">
+                <ContentControl Grid.Row="0"
+                                Content="{StaticResource CreditGeneralInfo}"></ContentControl>
+            </ToggleButton>
             
-            <!-- Credit Additional Info -->
-            <Grid Grid.Row="1"
-                  Background="#2C6172">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                </Grid.RowDefinitions>
-                
-                <ContentControl Grid.Row="0" Content="{StaticResource CreditAdditionalInfoToCreditsPage}">
-                </ContentControl>
+            <!-- Account Additional Info -->
+            <Border Grid.Row="1"
+                    Background="#2C6172"
+                    CornerRadius="0, 0, 25, 25"
+                    Margin="0, -30, 0, 0"
+                    Loaded="CreditAdditionalInfo_Loaded"
+                    tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Visibility}"
+                    tz:Transitionz.Translate="{tz:TranslateParams From='0, -10', To='0, 0', Duration=200, TransitionOn=Visibility}"
+                    tz:Transitionz.Visibility="{Binding ElementName=CreditGeneralInfo, Path=IsChecked, Converter={StaticResource BoolToVisibilityConverter}}">
 
-                <StackPanel Grid.Row="1" Orientation="Horizontal"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            Margin="22.5">
-                    <ContentControl Content="{StaticResource AcceptCredit}"></ContentControl>
-                    <ContentControl Content="{StaticResource DeclineCredit}"></ContentControl>
-                </StackPanel>
-            </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    
+                    <ContentControl Grid.Column="0" Grid.Row="1" Content="{StaticResource CreditAdditionalInfoToCreditsPage}">
+                    </ContentControl>
+                    
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                    
+                        <ContentControl Grid.Column="0"
+                                        Margin="25"
+                                        Content="{StaticResource AcceptCredit}"></ContentControl>
+                        <ContentControl Grid.Column="1"
+                                        Margin="25"
+                                        Content="{StaticResource DeclineCredit}"></ContentControl>
+                    </Grid>
+                </Grid>
+
+            </Border>
             
         </Grid>
         

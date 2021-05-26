@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
-    <!-- CARDS PAGE -->
+    <!-- TO CARDS PAGE -->
     <Grid x:Key="TransferBlockToCardsPage" x:Shared="False" 
           MaxHeight="140" Background="#266885">
         <Grid.ColumnDefinitions>
@@ -38,7 +38,7 @@
         </StackPanel>
     </Grid>
     
-    <!-- CLIENT'S JOURNAL PAGE -->
+    <!-- TO CLIENT'S JOURNAL PAGE -->
     <Grid x:Key="TransferBlockToClient" x:Shared="False" 
           MaxHeight="140" Background="#266885">
         <Grid.ColumnDefinitions>
@@ -133,7 +133,7 @@
     </Grid>
     
     
-    <!-- WORKER'S JOURNAL PAGE -->
+    <!-- TO WORKER'S JOURNAL PAGE -->
     <Grid x:Key="TransferBlockToWorker" x:Shared="False" 
           MaxHeight="140" Background="#266885">
         <Grid.ColumnDefinitions>

@@ -8,8 +8,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
 
     <ScrollViewer>
-        <ItemsControl Margin="30, 0, 30, 0"
-                      ItemsSource="{Binding UserApprovedCreditModels}"
+        <ItemsControl ItemsSource="{Binding UserApprovedCreditModels}"
                       ItemTemplate="{StaticResource CreditsListToFinancePage}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>

@@ -3,9 +3,9 @@ using System.Windows.Controls;
 
 namespace HarwexBank
 {
-    public partial class AccountControlsView
+    public partial class CreditControlsView_xaml
     {
-        void AccountAdditionalInfo_Loaded(object sender, RoutedEventArgs routedEventArgs)
+        void CreditAdditionalInfo_Loaded(object sender, RoutedEventArgs routedEventArgs)
         {
             ControlsBase.CollapseVisibility_OnLoad(sender, routedEventArgs);
         }

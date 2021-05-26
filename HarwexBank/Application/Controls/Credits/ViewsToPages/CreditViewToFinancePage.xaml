@@ -8,55 +8,43 @@
              d:DesignHeight="300" d:DesignWidth="300">
     
     <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary>
-                
-                    <!-- INCLUDING STYLES -->
-                    <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary Source="/HarwexBank;component/Styles/MainWindowStyle.xaml"/>
-                    </ResourceDictionary.MergedDictionaries>
-                
-                </ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
+        
+        <!-- CREDITS LIST -->
+        <DataTemplate DataType="{x:Type local:CreditListViewModel}">
+            <Grid DataContext="{Binding DataContext,
+            RelativeSource={RelativeSource AncestorType=UserControl}}">
             
-            <!-- CREDITS LIST -->
-            <DataTemplate DataType="{x:Type local:CreditListViewModel}">
-                <Grid DataContext="{Binding DataContext,
-                RelativeSource={RelativeSource AncestorType=UserControl}}">
-                
-                    <ScrollViewer>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" MaxHeight="90"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                                
-                            <!--Open New Account-->
-                            <ContentControl Grid.Row="0" 
-                                            Margin="0, 15, 0, 15"
-                                            Content="{StaticResource TakeNewCredit}">
-                            </ContentControl>
-                                
-                            <!-- Accounts List -->
-                            <ItemsControl Grid.Row="1"
-                                          Margin="30, 0, 30, 0"
-                                          ItemsSource="{Binding UserApprovedCreditModels}"
-                                          ItemTemplate="{StaticResource CreditsListToFinancePage}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Vertical"/>
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                            </ItemsControl>
-                        </Grid>
-                    </ScrollViewer>
-                
-                </Grid>
-            </DataTemplate>
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                            
+                        <!--Open New Account-->
+                        <ContentControl Grid.Row="0" 
+                                        Margin="20"
+                                        Content="{StaticResource TakeNewCredit}">
+                        </ContentControl>
+                            
+                        <!-- Accounts List -->
+                        <ItemsControl Grid.Row="1"
+                                      ItemsSource="{Binding UserApprovedCreditModels}"
+                                      ItemTemplate="{StaticResource CreditsListToFinancePage}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </Grid>
+                </ScrollViewer>
             
-            <!-- TAKE NEW CREDIT -->
-            <DataTemplate DataType="{x:Type local:TakeNewCreditViewModel}">
+            </Grid>
+        </DataTemplate>
+            
+        <!-- TAKE NEW CREDIT -->
+        <DataTemplate DataType="{x:Type local:TakeNewCreditViewModel}">
             <Grid DataContext="{Binding DataContext,
             RelativeSource={RelativeSource AncestorType=UserControl}}">
 
@@ -158,8 +146,7 @@
                 
             </Grid>
         </DataTemplate>
-            
-        </ResourceDictionary>
+        
     </UserControl.Resources>
     
     <ContentControl Content="{Binding SelectedControlViewModel}"></ContentControl>
