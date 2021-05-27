@@ -9,6 +9,9 @@ namespace HarwexBank
         public AuthorizationViewModel(ApplicationViewModel applicationViewModel)
         {
             ApplicationViewModel = applicationViewModel;
+            applicationViewModel.MinHeight = 500;
+            applicationViewModel.MinWidth = 800;
+            
             SelectedControlViewModel = new LoginViewModel(this);
         }
 

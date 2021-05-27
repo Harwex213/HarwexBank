@@ -12,27 +12,60 @@
         <!-- CLIENTS LIST -->
         <DataTemplate DataType="{x:Type local:ExistedClientsViewModel}">
             
-            <ItemsControl ItemsSource="{Binding ClientsViewModel.ExistedClients}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <ItemsControl Margin="0, 15, 0, 0"
+                              ItemsSource="{Binding ClientsViewModel.ExistedClients}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
                         
-                        <Button Background="#3D89A1"
-                                Command="{Binding DataContext.SelectClientCommand,
-                                RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                CommandParameter="{Binding }">
-                            <StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding FullName}"></TextBlock>
-                                    <TextBlock Text="{Binding UserBlockedTextMessage}"></TextBlock>
-                                </StackPanel>
-                                
-                                <TextBlock Text="{Binding Address}"></TextBlock>
-                            </StackPanel>
-                        </Button>
+                            <Grid Margin="30, 0, 30, 15">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Button Grid.Row="0"
+                                        Style="{StaticResource ClientBlock}"
+                                        Command="{Binding DataContext.SelectClientCommand,
+                                        RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                        CommandParameter="{Binding }">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"></ColumnDefinition>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="50"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel Grid.Column="1">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Style="{StaticResource TittleText}"
+                                                           Margin="0, 0, 10, 0"
+                                                           Name="ClientFullName"
+                                                           Text="{Binding FullName}"/>
+                                                <TextBlock Style="{StaticResource InfoText}"
+                                                           Foreground="#171717"
+                                                           Margin="0"
+                                                           VerticalAlignment="Center"
+                                                           Height="{Binding ElementName=ClientFullName, Path=ActualHeight}"
+                                                           Text="{Binding UserBlockedTextMessage}"/>
+                                            </StackPanel>
+                                            <TextBlock Style="{StaticResource InfoText}"
+                                                       Text="{Binding Passport}"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="3">
+                                            <TextBlock Style="{StaticResource TittleText}"
+                                                                Text="Клиент ID"/>
+                                            <TextBlock Style="{StaticResource InfoText}"
+                                                                Text="{Binding Id}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Button>
+                            </Grid>
                         
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
             
         </DataTemplate>
         <!-- - - - - - - - - - - - - - - - - - - - - - -->
@@ -54,78 +87,132 @@
             
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="4*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="2*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
                 
-                <!-- CLIENT GENERAL INFO -->
-                <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                            Orientation="Horizontal">
-                    
-                    <StackPanel>
-                        <TextBlock Text="{Binding ClientsViewModel.SelectedClient.FullName}"></TextBlock>
-                        <TextBlock Text="{Binding ClientsViewModel.SelectedClient.UserBlockedTextMessage}"></TextBlock>
-                    </StackPanel>
-                    
-                    <Button Content="Назад"
-                            Command="{Binding ClientsViewModel.GoToClientsListCommand}"></Button>
-                    
-                    <Button Content="{Binding ClientsViewModel.SelectedClient.UserToBlockButtonText}"
-                            Command="{Binding ClientsViewModel.BlockClientCommand}"></Button>
-                    
-                </StackPanel>
+                <!-- CLIENT TITTLE -->
+                <Border Grid.Row="0"
+                        Style="{StaticResource UnderLineBorder}">
+                    <WrapPanel Grid.Column="0"
+                               Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource ClientTittleText}"
+                                   FontWeight="Regular"
+                                   Margin="0, 0, 10, 0"
+                                   Text="{Binding ClientsViewModel.SelectedClient.FullName}"/>
+                        <TextBlock Style="{StaticResource InfoTextReverse}"
+                                   Foreground="#ed2626"
+                                   Text="{Binding ClientsViewModel.SelectedClient.UserBlockedTextMessage}"/>
+                    </WrapPanel>
+                </Border>
                 
-                <!-- CLIENT ADDITIONAL INFO -->
-                <StackPanel Grid.Row="1" Grid.Column="0">
-                    
-                    <TextBlock Text="Номер паспорта"></TextBlock>
-                    <TextBlock Text="{Binding ClientsViewModel.SelectedClient.Passport}"></TextBlock>
-                    
-                    <TextBlock Text="Адрес"></TextBlock>
-                    <TextBlock Text="{Binding ClientsViewModel.SelectedClient.Address}"></TextBlock>
-                    
-                    <Button Content="Отправить уведомление"
-                            Command="{Binding ClientsViewModel.GoToSendClientNotificationCommand}"></Button>
-                    
-                </StackPanel>
-                
-                <!-- CLIENT ACCOUNTS & CREDITS -->
-                <Grid Grid.Row="1" Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" MinHeight="70"></RowDefinition>
-                        <RowDefinition Height="6*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                        
-                    <Border Grid.Row="0"
-                            BorderBrush="Black" 
-                            BorderThickness="0,0,0,1">
-                        <ItemsControl ItemsSource="{Binding ControlViewModels}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Button Content="{Binding Name}"
-                                            Command="{Binding DataContext.ChangeControlCommand,
-                                    RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}}"
-                                            CommandParameter="{Binding }"
-                                            FontSize="18"
-                                            Margin="10,10"
-                                            Padding="10, 10"/>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- CLIENT INFO -->
+                    <Border Grid.Column="0"
+                            Style="{StaticResource RightLineBorder}"
+                            Padding="0">
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+
+                                <StackPanel Grid.Row="0"
+                                            Margin="20, 0">
+                                    <Button Style="{StaticResource OuterButton}"
+                                            Margin="0, 0, 0, 15"
+                                            Command="{Binding ClientsViewModel.GoToClientsListCommand}"
+                                            MinWidth="110"
+                                            Content="Назад"></Button>
+                                    
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource TittleTextReverse}"
+                                                   Text="Номер паспорта"/>
+                                        <TextBlock Style="{StaticResource InfoTextReverse}"
+                                                    Text="{Binding ClientsViewModel.SelectedClient.Passport}"/>
+                                    </StackPanel>
+                                    
+                                    <StackPanel Style="{StaticResource InfoCellTop}">
+                                        <TextBlock Style="{StaticResource TittleTextReverse}"
+                                                   Text="Адрес"/>
+                                        <TextBlock Style="{StaticResource InfoTextReverse}"
+                                                   Text="{Binding ClientsViewModel.SelectedClient.Address}"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="1">
+                                    <Button Style="{StaticResource OuterButton}"
+                                            Margin="0, 15, 0, 0"
+                                            Command="{Binding ClientsViewModel.BlockClientCommand}">
+                                        <Button.Content>
+                                        <TextBlock Text="{Binding ClientsViewModel.SelectedClient.UserToBlockButtonText}"
+                                                   TextAlignment="Center"
+                                                   TextWrapping="WrapWithOverflow">
+                                            </TextBlock>
+                                        </Button.Content>
+                                    </Button>
+                                    <Button Style="{StaticResource OuterButton}"
+                                            Margin="0, 15, 0, 0"
+                                            Command="{Binding ClientsViewModel.GoToSendClientNotificationCommand}">
+                                        <Button.Content>
+                                            <TextBlock Text="Отправить уведомление"
+                                                       TextAlignment="Center"
+                                                       TextWrapping="WrapWithOverflow">
+                                            </TextBlock>
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </ScrollViewer>
                     </Border>
+                    
+                    <!-- CLIENT ACCOUNTS / CARDS -->
+                    <Grid Grid.Column="1"
+                          Margin="0, 15">
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <Border Grid.Row="0">
+                            <ItemsControl x:Name="ClientsInfoBar"
+                                          Loaded="ControlsBar_OnLoaded"
+                                          ItemsSource="{Binding ControlViewModels}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+
+                                        <ToggleButton Name="ControlsBarToggleButton"
+                                                      Style="{StaticResource ControlsTopBarButtonStyle}" 
+                                                      Margin="15, 0"
+                                                      Content="{Binding Name}"
+                                                      Command="{Binding DataContext.ChangeControlCommand,
+                                                      RelativeSource={RelativeSource AncestorType={x:Type Grid}}}"
+                                                      CommandParameter="{Binding }"
+                                                      Loaded="ControlsBarToggleButton_OnLoaded"
+                                                      Click="ControlsBarToggleButton_OnClick">
+                                        </ToggleButton>
+
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Border>
         
-                    <ContentControl Grid.Row="1"
-                                    Content="{Binding SelectedControlViewModel}"/>
+                        <ContentControl Grid.Row="1" Content="{Binding SelectedControlViewModel}"/>
+                    </Grid>
                 </Grid>
             </Grid>
             
@@ -136,69 +223,106 @@
         <!-- NOTIFICATION GENERATION -->
         <DataTemplate DataType="{x:Type local:SendClientNotificationViewModel}">
             
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                
-                <!-- Card Type -->
-                <StackPanel Grid.Row="0" Orientation="Vertical">
-                    <TextBlock Text="Сообщение уведомления: "></TextBlock>
-                    <TextBox Name="NotificationMessage" 
-                             AcceptsReturn="True" 
-                             AcceptsTab="True"
-                             MinHeight="100">
-                        <TextBox.Text>
-                            <Binding Path="ClientsViewModel.NotificationMessage"
-                                     ValidatesOnExceptions="True"
-                                     Mode="TwoWay"
-                                     UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <DataErrorValidationRule/>
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
-                </StackPanel>
-
-                
-                <!-- Buttons -->
-                <Grid Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            
+                 <Grid HorizontalAlignment="Center"
+                       Name="NotificationForm"
+                       Margin="15, 25">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="4*"></RowDefinition>
+                    </Grid.RowDefinitions>
                     
-                    <Button Grid.Column="0"
-                            Command="{Binding ClientsViewModel.GoToClientInfoCommand}"
-                            Content="Назад"></Button>
-                    <Button Grid.Column="1"
-                            Command="{Binding ClientsViewModel.GenerateNotificationToClientCommand}"
-                            Content="Отправить">
-                        <Button.Style>
-                            <Style TargetType="Button">
+                    <Border Grid.Row="1" CornerRadius="20"
+                            Background="#3D89A1"
+                            Padding="40, 0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                    
+                            <Border Grid.Row="0"
+                                    Style="{StaticResource UnderLineBorder}"
+                                    BorderBrush="#FFF">
+                                <TextBlock Text="{Binding Name}"
+                                           Style="{StaticResource CreationFormTittle}">
+                                </TextBlock>
+                            </Border>
+                    
+                            <Grid Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                
+                                <TextBlock Grid.Row="0" 
+                                           Text="Сообщение уведомления: "
+                                           Style="{StaticResource FormLabel}"></TextBlock>
+                                <TextBox Grid.Row="1"
+                                         Name="NotificationMessage" 
+                                         AcceptsReturn="True" 
+                                         AcceptsTab="True"
+                                         MinHeight="120"
+                                         MaxLines="50"
+                                         TextWrapping="WrapWithOverflow">
+                                    <TextBox.Text>
+                                        <Binding Path="ClientsViewModel.NotificationMessage"
+                                                 ValidatesOnExceptions="True"
+                                                 Mode="TwoWay"
+                                                 UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </Grid>
+                    
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                    
+                                <Button Grid.Column="0"
+                                        Style="{StaticResource SubmitFormButton}"
+                                        Command="{Binding ClientsViewModel.GoToClientInfoCommand}"
+                                        Content="Назад"></Button>
+                                <Button Grid.Column="1"
+                                        Command="{Binding ClientsViewModel.GenerateNotificationToClientCommand}"
+                                        Content="Отправить">
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource SubmitFormButton}">
     
-                                <Setter Property="IsEnabled" Value="False"/>
+                                            <Setter Property="IsEnabled" Value="False"/>
     
-                                <Style.Triggers>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding Path=(Validation.HasError),
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Path=(Validation.HasError),
                                                             ElementName=NotificationMessage}" Value="False"/>
-                                        </MultiDataTrigger.Conditions>
+                                                    </MultiDataTrigger.Conditions>
     
-                                        <Setter Property="IsEnabled" Value="True"/>
+                                                    <Setter Property="IsEnabled" Value="True"/>
     
-                                    </MultiDataTrigger>
-                                </Style.Triggers>
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
                                                 
-                            </Style>
-                        </Button.Style>
-                    </Button>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Border>
                 </Grid>
                 
-            </Grid>
+            </ScrollViewer>
             
         </DataTemplate>
         

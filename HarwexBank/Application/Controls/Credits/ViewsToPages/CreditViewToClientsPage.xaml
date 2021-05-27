@@ -3,12 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
              xmlns:local="clr-namespace:HarwexBank"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <ScrollViewer>
-        <ItemsControl Margin="30, 0, 30, 0"
+    <ScrollViewer VerticalScrollBarVisibility="Hidden"
+                  tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Visibility}">
+        <ItemsControl Margin="0, 15, 0, 0"
                       ItemsSource="{Binding UserApprovedCreditModels}"
                       ItemTemplate="{StaticResource CreditsListToFinancePage}">
             <ItemsControl.ItemsPanel>

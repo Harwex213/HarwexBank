@@ -1,0 +1,149 @@
+﻿<UserControl x:Class="HarwexBank.AccountViewToFinancePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
+             xmlns:local="clr-namespace:HarwexBank"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        
+        <!-- ACCOUNT LIST -->
+        <DataTemplate DataType="{x:Type local:AccountsListViewModel}">
+            <Grid DataContext="{Binding DataContext,
+            RelativeSource={RelativeSource AncestorType=UserControl}}"
+                  tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Visibility}">
+                
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                                
+                        <!--Open New Account-->
+                        <ContentControl Grid.Row="0" 
+                                        Margin="20"
+                                        Content="{StaticResource OpenAccount}">
+                        </ContentControl>
+                                
+                        <!-- Accounts List -->
+                        <ItemsControl Grid.Row="1"
+                                      ItemsSource="{Binding AccountModels}"
+                                      ItemTemplate="{StaticResource AccountsListToFinancePage}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </Grid>
+                </ScrollViewer>
+                
+            </Grid>
+        </DataTemplate>
+        
+        <!-- OPEN NEW ACCOUNT -->
+        <DataTemplate DataType="{x:Type local:CreateNewAccountViewModel}">
+            <Grid DataContext="{Binding DataContext,
+            RelativeSource={RelativeSource AncestorType=UserControl}}"
+                  tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Visibility}">
+                
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                    
+                     <Grid HorizontalAlignment="Center"
+                           Margin="0, 25">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="4*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <Border Grid.Row="1" CornerRadius="20"
+                                Background="#3D89A1"
+                                Padding="40, 0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                        
+                                <Border Grid.Row="0"
+                                        Style="{StaticResource UnderLineBorder}"
+                                        BorderBrush="#FFF">
+                                    <TextBlock Text="{Binding Name}"
+                                               Style="{StaticResource CreationFormTittle}">
+                                    </TextBlock>
+                                </Border>
+                        
+                                <StackPanel Grid.Row="1">
+                                    <StackPanel>
+                                        <TextBlock Text="Тип создаваемой карты"
+                                                Style="{StaticResource FormLabel}"></TextBlock>
+                                        <ComboBox ItemsSource="{Binding CurrencyTypeModels}"
+                                                  SelectedItem="{Binding AccountToOpen.CurrencyTypeModelNavigation}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                        
+                                    <StackPanel>
+                                        <TextBlock Text="Валюта счёта"
+                                                Style="{StaticResource FormLabel}"></TextBlock>
+                                        <ComboBox ItemsSource="{Binding CardTypeModels}"
+                                                  SelectedValue="{Binding CardToCreate.CardTypeModelNavigation}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                        
+                                    <!-- <StackPanel> -->
+                                    <!--     <TextBlock Text="Введите сумму кредита" -->
+                                    <!--             Style="{StaticResource FormLabel}"></TextBlock> -->
+                                    <!--     <TextBox></TextBox> -->
+                                    <!-- </StackPanel> -->
+                                </StackPanel>
+                        
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                        
+                                    <Button Grid.Column="0"
+                                            HorizontalAlignment="Center"
+                                            Style="{StaticResource SubmitFormButton}"
+                                            Command="{Binding GoBackCommand}"
+                                            Content="Назад">
+                                    </Button>
+                                    <Button Grid.Column="1"
+                                            HorizontalAlignment="Center"
+                                            Style="{StaticResource SubmitFormButton}"
+                                            Command="{Binding CreateAccountCommand}"
+                                            Content="Отправить">
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    
+                </ScrollViewer>
+                
+            </Grid>
+        </DataTemplate>
+        
+    </UserControl.Resources>
+    
+    <ContentControl Content="{Binding SelectedControlViewModel}"></ContentControl>
+</UserControl>

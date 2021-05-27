@@ -50,7 +50,7 @@ namespace HarwexBank
             {
                 _selectedCard = value;
                 SelectedAccount = ModelResourcesManager.GetInstance().GetAccountById(SelectedCard.AccountId);
-                LastOperation = SelectedAccount.Operations.FirstOrDefault();
+                LastOperation = SelectedAccount.Operations.LastOrDefault();
                 LastOperationName = LastOperation switch
                 {
                     TransferToAccountModel => "Переводы",
@@ -101,7 +101,8 @@ namespace HarwexBank
         private ICommand _goToCardCreationCommand;
         private ICommand _createNewCardCommand;
         private ICommand _goToCardListCommand;
-        
+        private ICommand _selectCardCommand;
+
         // Props.
         public ICommand GoToCardCreationCommand
         {
@@ -124,7 +125,19 @@ namespace HarwexBank
                 return _createNewCardCommand;
             }
         }
+
+        public ICommand SelectCardCommand
+        {
+            get
+            {
+                _selectCardCommand ??= new RelayCommand(
+                    c => SelectCard((CardModel) c),
+                    c => c is CardModel);
         
+                return _selectCardCommand;
+            }
+        }
+
         public ICommand GoToCardListCommand
         {
             get
@@ -145,6 +158,11 @@ namespace HarwexBank
         private void GoToCardList()
         {
             SelectedControlViewModel = ControlViewModels[0];
+        }
+        
+        private void SelectCard(CardModel cardModel)
+        {
+            SelectedCard = cardModel;
         }
 
         private void CreateNewCard()
