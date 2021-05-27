@@ -223,69 +223,106 @@
         <!-- NOTIFICATION GENERATION -->
         <DataTemplate DataType="{x:Type local:SendClientNotificationViewModel}">
             
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                
-                <!-- Card Type -->
-                <StackPanel Grid.Row="0" Orientation="Vertical">
-                    <TextBlock Text="Сообщение уведомления: "></TextBlock>
-                    <TextBox Name="NotificationMessage" 
-                             AcceptsReturn="True" 
-                             AcceptsTab="True"
-                             MinHeight="100">
-                        <TextBox.Text>
-                            <Binding Path="ClientsViewModel.NotificationMessage"
-                                     ValidatesOnExceptions="True"
-                                     Mode="TwoWay"
-                                     UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <DataErrorValidationRule/>
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
-                </StackPanel>
-
-                
-                <!-- Buttons -->
-                <Grid Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            
+                 <Grid HorizontalAlignment="Center"
+                       Name="NotificationForm"
+                       Margin="15, 25">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="4*"></RowDefinition>
+                    </Grid.RowDefinitions>
                     
-                    <Button Grid.Column="0"
-                            Command="{Binding ClientsViewModel.GoToClientInfoCommand}"
-                            Content="Назад"></Button>
-                    <Button Grid.Column="1"
-                            Command="{Binding ClientsViewModel.GenerateNotificationToClientCommand}"
-                            Content="Отправить">
-                        <Button.Style>
-                            <Style TargetType="Button">
+                    <Border Grid.Row="1" CornerRadius="20"
+                            Background="#3D89A1"
+                            Padding="40, 0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                    
+                            <Border Grid.Row="0"
+                                    Style="{StaticResource UnderLineBorder}"
+                                    BorderBrush="#FFF">
+                                <TextBlock Text="{Binding Name}"
+                                           Style="{StaticResource CreationFormTittle}">
+                                </TextBlock>
+                            </Border>
+                    
+                            <Grid Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                
+                                <TextBlock Grid.Row="0" 
+                                           Text="Сообщение уведомления: "
+                                           Style="{StaticResource FormLabel}"></TextBlock>
+                                <TextBox Grid.Row="1"
+                                         Name="NotificationMessage" 
+                                         AcceptsReturn="True" 
+                                         AcceptsTab="True"
+                                         MinHeight="120"
+                                         MaxLines="50"
+                                         TextWrapping="WrapWithOverflow">
+                                    <TextBox.Text>
+                                        <Binding Path="ClientsViewModel.NotificationMessage"
+                                                 ValidatesOnExceptions="True"
+                                                 Mode="TwoWay"
+                                                 UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </Grid>
+                    
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                    
+                                <Button Grid.Column="0"
+                                        Style="{StaticResource SubmitFormButton}"
+                                        Command="{Binding ClientsViewModel.GoToClientInfoCommand}"
+                                        Content="Назад"></Button>
+                                <Button Grid.Column="1"
+                                        Command="{Binding ClientsViewModel.GenerateNotificationToClientCommand}"
+                                        Content="Отправить">
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource SubmitFormButton}">
     
-                                <Setter Property="IsEnabled" Value="False"/>
+                                            <Setter Property="IsEnabled" Value="False"/>
     
-                                <Style.Triggers>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding Path=(Validation.HasError),
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Path=(Validation.HasError),
                                                             ElementName=NotificationMessage}" Value="False"/>
-                                        </MultiDataTrigger.Conditions>
+                                                    </MultiDataTrigger.Conditions>
     
-                                        <Setter Property="IsEnabled" Value="True"/>
+                                                    <Setter Property="IsEnabled" Value="True"/>
     
-                                    </MultiDataTrigger>
-                                </Style.Triggers>
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
                                                 
-                            </Style>
-                        </Button.Style>
-                    </Button>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Border>
                 </Grid>
                 
-            </Grid>
+            </ScrollViewer>
             
         </DataTemplate>
         
