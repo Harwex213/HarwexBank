@@ -10,7 +10,6 @@
                  <ResourceDictionary Source="/HarwexBank;component/Application/Controls/Journal/JournalControlsView.xaml"/>
                  
                  <!-- STYLES -->
-                 <ResourceDictionary Source="/HarwexBank;component/Styles/ToMainWindow/Pages/FinancePage.xaml"/>
                  <ResourceDictionary Source="/HarwexBank;component/Styles/ToMainWindow/Controls/InfoBlock.xaml"/>
                  <ResourceDictionary Source="/HarwexBank;component/Styles/ToMainWindow/MainWindow.xaml"/>
              </ResourceDictionary.MergedDictionaries>

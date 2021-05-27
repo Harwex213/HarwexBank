@@ -16,14 +16,57 @@
         <Setter Property="BorderThickness" Value="0, 0, 0, 1"></Setter>
         <Setter Property="BorderBrush" Value="#000"></Setter>
     </Style>
-    <!-- - - - - - -->
     <!-- Underline Border Reverse -->
     <Style x:Key="UnderLineBorderReverse" TargetType="{x:Type Border}" BasedOn="{StaticResource UnderLineBorder}">
         <Setter Property="BorderBrush" Value="#FFF"></Setter>
     </Style>
+    <!-- RightLine Border -->
+    <Style x:Key="RightLineBorder" TargetType="{x:Type Border}" BasedOn="{StaticResource UnderLineBorder}">
+        <Setter Property="Margin" Value="0, 15"></Setter>
+        <Setter Property="BorderThickness" Value="0, 0, 1, 0"></Setter>
+    </Style>
     <!-- - - - - - -->
     
-    <!-- - - - - - - - - - - - - - - - - - - - - -->
+    <!-- TOGGLE BUTTON -->
+    <!-- Top Bar For Pages -->
+    <Style x:Key="ControlsTopBarButtonStyle" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource ToggleButtonBase}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Foreground" Value="#000"></Setter>
+        <Setter Property="Margin" Value="15, 5"></Setter>
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border 
+                        x:Name="Border"
+                        CornerRadius="23"
+                        Background="#FFF">
+                        <ContentPresenter
+                            Margin="20, 10"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            RecognizesAccessKey="True"/>
+                    </Border>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Border" Property="Background" Value="#1A30FF" />
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="Border" Property="Background" Value="#0026ED" />
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter TargetName="Border" Property="Background" Value="#0047FF" />
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- - - - - - -->
     
     
     <!-- - - - - - - - - - - - - - - - - - - - - -->
