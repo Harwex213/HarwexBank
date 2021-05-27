@@ -6,86 +6,121 @@
              xmlns:local="clr-namespace:HarwexBank"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.Resources>
-        <ResourceDictionary>
+    
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                    
+         <Grid Margin="0, 25, 25, 25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MaxWidth="440"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="4*"></RowDefinition>
+            </Grid.RowDefinitions>
             
-            <!-- INCLUDING STYLES -->
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/HarwexBank;component/Styles/MainWindowStyle.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
+            <Border Grid.Row="1" CornerRadius="20"
+                    Background="#266885">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
             
-        </ResourceDictionary>
-    </UserControl.Resources>
+                    <Border Grid.Row="0"
+                            Style="{StaticResource UnderLineBorder}"
+                            BorderBrush="#FFF">
+                        <TextBlock Text="{Binding Name}"
+                                   TextWrapping="WrapWithOverflow"
+                                   TextAlignment="Center"
+                                   Style="{StaticResource CreationFormTittle}">
+                        </TextBlock>
+                    </Border>
+            
+                    <StackPanel Grid.Row="1"
+                                Margin="20, 0">
+                        <StackPanel>
+                            <TextBlock Text="Выберите используемый счёт"
+                                    Style="{StaticResource FormLabel}"></TextBlock>
+                            <ComboBox ItemsSource="{Binding UserAccounts}"
+                                      SelectedItem="{Binding AccountInitiator}"
+                                      SelectedIndex="0">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Id}"></TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+            
+                        <StackPanel>
+                            <TextBlock Text="Введите номер счёта получателя"
+                                       Style="{StaticResource FormLabel}"></TextBlock>
+                            <TextBox Name="AccountReceiverId"
+                                     MaxWidth="1000">
+                                <TextBox.Text>
+                                    <Binding Path="AccountReceiverId"
+                                             ValidatesOnExceptions="True"
+                                             UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <DataErrorValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </StackPanel>
+            
+                        <StackPanel>
+                            <TextBlock Text="Введите сумму"
+                                       Style="{StaticResource FormLabel}"></TextBlock>
+                            <TextBox Name="TransferAmount"
+                                     MaxWidth="1000">
+                                <TextBox.Text>
+                                    <Binding Path="AmountToTransfer"
+                                             ValidatesOnExceptions="True"
+                                             UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <DataErrorValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </StackPanel>
+                    </StackPanel>
+            
+                    <Grid Grid.Row="2">
+                        <Button  Content="Оплатить"
+                                 HorizontalAlignment="Center"
+                                 Command="{Binding RepayCreditCommand}">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource SubmitFormButton}">
     
-    <StackPanel Orientation="Vertical"
-                Background="#266885">
-        
-        <!-- What account to use -->
-        <TextBlock Text="Выберите используемый счёт"></TextBlock>
-        <ComboBox ItemsSource="{Binding UserAccounts}"
-                  SelectedItem="{Binding AccountInitiator}"
-                  SelectedIndex="0">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Id}"></TextBlock>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        
-        <!-- What account to transfer to -->
-        <TextBlock Text="Введите номер счёта получателя"></TextBlock>
-        <TextBox Name="AccountReceiverId">
-            <TextBox.Text>
-                <Binding Path="AccountReceiverId"
-                         ValidatesOnExceptions="True"
-                         UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <DataErrorValidationRule/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        
-        <!-- Amount -->
-        <TextBlock Text="Введите сумму"></TextBlock>
-        <TextBox Name="TransferAmount">
-            <TextBox.Text>
-                <Binding Path="AmountToTransfer"
-                         ValidatesOnExceptions="True"
-                         UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <DataErrorValidationRule/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        
-        <!-- Button -->
-        <Button  Content="Отправить"
-                 Command="{Binding TransferToAccountCommand}">
-            <Button.Style>
-                <Style TargetType="Button">
+                                    <Setter Property="IsEnabled" Value="False"/>
     
-                    <Setter Property="IsEnabled" Value="False"/>
-    
-                    <Style.Triggers>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Path=(Validation.HasError),
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=(Validation.HasError),
                                                             ElementName=TransferAmount}" Value="False"/>
-                                <Condition Binding="{Binding Path=(Validation.HasError),
+                                                <Condition Binding="{Binding Path=(Validation.HasError),
                                                             ElementName=AccountReceiverId}" Value="False"/>
-                            </MultiDataTrigger.Conditions>
+                                            </MultiDataTrigger.Conditions>
     
-                            <Setter Property="IsEnabled" Value="True"/>
+                                            <Setter Property="IsEnabled" Value="True"/>
     
-                        </MultiDataTrigger>
-                    </Style.Triggers>
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
                                                 
-                </Style>
-            </Button.Style>
-        </Button>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
+                    
+                </Grid>
+            </Border>
+        </Grid>
         
-    </StackPanel>
+    </ScrollViewer>
     
 </UserControl>

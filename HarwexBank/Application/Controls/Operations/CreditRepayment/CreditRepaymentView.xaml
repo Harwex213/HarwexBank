@@ -6,81 +6,114 @@
              xmlns:local="clr-namespace:HarwexBank"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            
-            <!-- INCLUDING STYLES -->
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/HarwexBank;component/Styles/MainWindowStyle.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-            
-        </ResourceDictionary>
-    </UserControl.Resources>
     
-    <StackPanel Orientation="Vertical"
-                Background="#266885">
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
         
-        <!-- What account to use -->
-        <TextBlock Text="Выберите используемый счёт"></TextBlock>
-        <ComboBox ItemsSource="{Binding UserAccounts}"
-                  SelectedItem="{Binding AccountInitiator}"
-                  SelectedIndex="0">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Id}"></TextBlock>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+            <Grid Margin="0, 25, 25, 25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MaxWidth="440"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="4*"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <Border Grid.Row="1" CornerRadius="20"
+                        Background="#266885">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                
+                        <Border Grid.Row="0"
+                                Style="{StaticResource UnderLineBorder}"
+                                BorderBrush="#FFF">
+                            <TextBlock Text="{Binding Name}"
+                                       TextWrapping="WrapWithOverflow"
+                                       TextAlignment="Center"
+                                       Style="{StaticResource CreationFormTittle}">
+                            </TextBlock>
+                        </Border>
+                
+                        <StackPanel Grid.Row="1"
+                                    Margin="20, 0">
+                            <StackPanel>
+                                <TextBlock Text="Выберите используемый счёт"
+                                        Style="{StaticResource FormLabel}"></TextBlock>
+                                <ComboBox ItemsSource="{Binding UserAccounts}"
+                                          SelectedItem="{Binding AccountInitiator}"
+                                          SelectedIndex="0">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Id}"></TextBlock>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </StackPanel>
+                
+                            <StackPanel>
+                                <TextBlock Text="Выберите погашаемый кредит"
+                                        Style="{StaticResource FormLabel}"></TextBlock>
+                                <ComboBox ItemsSource="{Binding UserCredits}"
+                                          SelectedItem="{Binding SelectedCredit}"
+                                          SelectedIndex="0">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding CreditName}"></TextBlock>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </StackPanel>
+                
+                            <StackPanel>
+                                <TextBlock Text="Введите сумму для погашения"
+                                           Style="{StaticResource FormLabel}"></TextBlock>
+                                <TextBox Name="CreditRepaymentAmount">
+                                    <TextBox.Text>
+                                        <Binding Path="AmountToTransfer"
+                                                 ValidatesOnExceptions="True"
+                                                 UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <DataErrorValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+                        </StackPanel>
+                
+                        <Grid Grid.Row="2">
+                            <Button  Content="Оплатить"
+                                     HorizontalAlignment="Center"
+                                     Command="{Binding RepayCreditCommand}">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource SubmitFormButton}">
         
-        <!-- What credit to pay -->
-        <TextBlock Text="Выберите погашаемый кредит"></TextBlock>
-        <ComboBox ItemsSource="{Binding UserCredits}"
-                  SelectedItem="{Binding SelectedCredit}"
-                  SelectedIndex="0">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding CreditName}"></TextBlock>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+                                        <Setter Property="IsEnabled" Value="False"/>
         
-        <!-- Amount -->
-        <TextBlock Text="Введите сумму"></TextBlock>
-        <TextBox Name="CreditRepaymentAmount">
-            <TextBox.Text>
-                <Binding Path="AmountToTransfer"
-                         ValidatesOnExceptions="True"
-                         UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <DataErrorValidationRule/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding Path=(Validation.HasError),
+                                                                ElementName=CreditRepaymentAmount}" Value="False"/>
+                                                </MultiDataTrigger.Conditions>
         
-        <!-- Button -->
-        <Button  Content="Оплатить"
-                 Command="{Binding RepayCreditCommand}">
-            <Button.Style>
-                <Style TargetType="Button">
-    
-                    <Setter Property="IsEnabled" Value="False"/>
-    
-                    <Style.Triggers>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Path=(Validation.HasError),
-                                                            ElementName=CreditRepaymentAmount}" Value="False"/>
-                            </MultiDataTrigger.Conditions>
-    
-                            <Setter Property="IsEnabled" Value="True"/>
-    
-                        </MultiDataTrigger>
-                    </Style.Triggers>
-                                                
-                </Style>
-            </Button.Style>
-        </Button>
+                                                <Setter Property="IsEnabled" Value="True"/>
         
-    </StackPanel>
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                                    
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </Grid>
+                        
+                    </Grid>
+                </Border>
+            </Grid>
+        
+    </ScrollViewer>
 </UserControl>
