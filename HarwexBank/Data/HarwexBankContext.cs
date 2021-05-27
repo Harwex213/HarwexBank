@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Configuration;
 
 #nullable disable
 
@@ -11,10 +12,10 @@ namespace HarwexBank
     {
         public HarwexBankContext()
         {
-            // Database.EnsureDeleted();
-            // Database.EnsureCreated();
-            //
-            // CreateDefaultData();
+            Database.EnsureDeleted();
+            Database.EnsureCreated();
+            
+            CreateDefaultData();
         }
 
         #region DbSet Init
@@ -50,9 +51,20 @@ namespace HarwexBank
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
+            if (optionsBuilder.IsConfigured) 
+                return;
+            
+            switch (ConfigurationManager.AppSettings["CurrentDataBaseName"])
             {
-                optionsBuilder.UseSqlServer("Server=.;Database=HarwexBank;Trusted_Connection=True;");
+                case "MsSqlConnect":
+                    optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["MsSqlConnect"].ConnectionString);
+                    break;
+                case "MariaDbConnect":
+                    optionsBuilder.UseMySql(ConfigurationManager.ConnectionStrings["MariaDbConnect"].ConnectionString, 
+                        new MariaDbServerVersion(new Version(10, 4, 17)));
+                    break;
+                default:
+                    throw new Exception("Context doesn't have any connection to Database");
             }
         }
 
@@ -68,10 +80,10 @@ namespace HarwexBank
             
             modelBuilder.Entity<AccountModel>(AccountConfigure);
             modelBuilder.Entity<CurrencyTypeModel>(CurrencyTypeConfigure);
-
+            
             modelBuilder.Entity<CardModel>(CardConfigure);
             modelBuilder.Entity<CardTypeModel>(CardTypeConfigure);
-
+            
             modelBuilder.Entity<JournalModel>(JournalConfigure);
             modelBuilder.Entity<NotificationModel>(NotificationConfigure);
             modelBuilder.Entity<OperationModel>(OperationConfigure);
