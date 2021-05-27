@@ -17,6 +17,11 @@
         <Setter Property="BorderBrush" Value="#000"></Setter>
     </Style>
     <!-- - - - - - -->
+    <!-- Underline Border Reverse -->
+    <Style x:Key="UnderLineBorderReverse" TargetType="{x:Type Border}" BasedOn="{StaticResource UnderLineBorder}">
+        <Setter Property="BorderBrush" Value="#FFF"></Setter>
+    </Style>
+    <!-- - - - - - -->
     
     <!-- - - - - - - - - - - - - - - - - - - - - -->
     

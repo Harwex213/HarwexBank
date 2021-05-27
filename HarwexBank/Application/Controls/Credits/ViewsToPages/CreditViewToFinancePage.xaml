@@ -50,123 +50,129 @@
             <Grid DataContext="{Binding DataContext,
             RelativeSource={RelativeSource AncestorType=UserControl}}"
                   tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Visibility}">
-
-                <Grid Margin="40"
-                      HorizontalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                    </Grid.RowDefinitions>
+                
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
                     
-                    <Border CornerRadius="20"
-                            Background="#3D89A1"
-                            Padding="40, 0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                            </Grid.RowDefinitions>
-                    
-                            <Border Grid.Row="0"
-                                    Style="{StaticResource UnderLineBorder}"
-                                    BorderBrush="#FFF">
-                                <TextBlock Text="{Binding Name}"
-                                           Style="{StaticResource CreationFormTittle}">
-                                </TextBlock>
-                            </Border>
-                    
-                            <StackPanel Grid.Row="1">
-                                <StackPanel>
-                                    <TextBlock Text="Тип кредита"
-                                            Style="{StaticResource FormLabel}"></TextBlock>
-                                    <ComboBox ItemsSource="{Binding CreditTypeModels}"
-                                              SelectedIndex="0"
-                                              SelectedValue="{Binding CreditToTaking.CreditTypeModelNavigation}">
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Name}"></TextBlock>
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
+                    <Grid HorizontalAlignment="Center"
+                          Margin="0, 25">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="4*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <Border Grid.Row="1" CornerRadius="20"
+                                Background="#3D89A1"
+                                Padding="40, 0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                        
+                                <Border Grid.Row="0"
+                                        Style="{StaticResource UnderLineBorder}"
+                                        BorderBrush="#FFF">
+                                    <TextBlock Text="{Binding Name}"
+                                               Style="{StaticResource CreationFormTittle}">
+                                    </TextBlock>
+                                </Border>
+                        
+                                <StackPanel Grid.Row="1">
+                                    <StackPanel>
+                                        <TextBlock Text="Тип кредита"
+                                                Style="{StaticResource FormLabel}"></TextBlock>
+                                        <ComboBox ItemsSource="{Binding CreditTypeModels}"
+                                                  SelectedIndex="0"
+                                                  SelectedValue="{Binding CreditToTaking.CreditTypeModelNavigation}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                        
+                                    <StackPanel>
+                                        <TextBlock Text="Сумма кредита"
+                                                   Style="{StaticResource FormLabel}"></TextBlock>
+                                        <TextBox Name="CreditAmount">
+                                            <TextBox.Text>
+                                                <Binding Path="CreditToTaking.Amount"
+                                                         ValidatesOnExceptions="True"
+                                                         UpdateSourceTrigger="PropertyChanged">
+                                                    <Binding.ValidationRules>
+                                                        <DataErrorValidationRule/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                    </StackPanel>
+                                    
+                                    <StackPanel>
+                                        <TextBlock Text="Срок кредита"
+                                                   Style="{StaticResource FormLabel}"></TextBlock>
+                                        <TextBox Name="CreditTerm">
+                                            <TextBox.Text>
+                                                <Binding Path="CreditToTaking.Term"
+                                                         ValidatesOnExceptions="True"
+                                                         UpdateSourceTrigger="PropertyChanged">
+                                                    <Binding.ValidationRules>
+                                                        <DataErrorValidationRule/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
+                                    </StackPanel>
                                 </StackPanel>
-                    
-                                <StackPanel>
-                                    <TextBlock Text="Сумма кредита"
-                                               Style="{StaticResource FormLabel}"></TextBlock>
-                                    <TextBox Name="CreditAmount">
-                                        <TextBox.Text>
-                                            <Binding Path="CreditToTaking.Amount"
-                                                     ValidatesOnExceptions="True"
-                                                     UpdateSourceTrigger="PropertyChanged">
-                                                <Binding.ValidationRules>
-                                                    <DataErrorValidationRule/>
-                                                </Binding.ValidationRules>
-                                            </Binding>
-                                        </TextBox.Text>
-                                    </TextBox>
-                                </StackPanel>
-                                
-                                <StackPanel>
-                                    <TextBlock Text="Срок кредита"
-                                               Style="{StaticResource FormLabel}"></TextBlock>
-                                    <TextBox Name="CreditTerm">
-                                        <TextBox.Text>
-                                            <Binding Path="CreditToTaking.Term"
-                                                     ValidatesOnExceptions="True"
-                                                     UpdateSourceTrigger="PropertyChanged">
-                                                <Binding.ValidationRules>
-                                                    <DataErrorValidationRule/>
-                                                </Binding.ValidationRules>
-                                            </Binding>
-                                        </TextBox.Text>
-                                    </TextBox>
-                                </StackPanel>
-                            </StackPanel>
-                    
-                            <Grid Grid.Row="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                    
-                                <Button Grid.Column="0"
-                                        HorizontalAlignment="Center"
-                                        Style="{StaticResource SubmitFormButton}"
-                                        Command="{Binding GoBackCommand}"
-                                        Content="Назад"></Button>
-                                <Button Grid.Column="1"
-                                        HorizontalAlignment="Center"
-                                        Command="{Binding CreateNewCreditCommand}"
-                                        Content="Отправить">
-                                    <Button.Style>
-                                        <Style TargetType="Button" BasedOn="{StaticResource SubmitFormButton}">
+                        
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                        
+                                    <Button Grid.Column="0"
+                                            HorizontalAlignment="Center"
+                                            Style="{StaticResource SubmitFormButton}"
+                                            Command="{Binding GoBackCommand}"
+                                            Content="Назад"></Button>
+                                    <Button Grid.Column="1"
+                                            HorizontalAlignment="Center"
+                                            Command="{Binding CreateNewCreditCommand}"
+                                            Content="Отправить">
+                                        <Button.Style>
+                                            <Style TargetType="Button" BasedOn="{StaticResource SubmitFormButton}">
 
-                                            <Setter Property="IsEnabled" Value="False"/>
+                                                <Setter Property="IsEnabled" Value="False"/>
 
-                                            <Style.Triggers>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding Path=(Validation.HasError),
-                                                        ElementName=CreditAmount}" Value="False"/>
-                                                        <Condition Binding="{Binding Path=(Validation.HasError),
-                                                        ElementName=CreditTerm}" Value="False"/>
-                                                    </MultiDataTrigger.Conditions>
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError),
+                                                            ElementName=CreditAmount}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError),
+                                                            ElementName=CreditTerm}" Value="False"/>
+                                                        </MultiDataTrigger.Conditions>
 
-                                                    <Setter Property="IsEnabled" Value="True"/>
+                                                        <Setter Property="IsEnabled" Value="True"/>
 
-                                                </MultiDataTrigger>
-                                            </Style.Triggers>
-                                            
-                                        </Style>
-                                    </Button.Style>
-                                </Button>
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                                
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </Border>
-                </Grid>
+                        </Border>
+                    </Grid>
+                    
+                </ScrollViewer>
                 
             </Grid>
         </DataTemplate>

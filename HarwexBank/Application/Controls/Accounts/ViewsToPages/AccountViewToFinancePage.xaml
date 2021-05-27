@@ -50,89 +50,95 @@
             RelativeSource={RelativeSource AncestorType=UserControl}}"
                   tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=200, TransitionOn=Visibility}">
                 
-                <Grid Margin="40"
-                      HorizontalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                    </Grid.RowDefinitions>
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
                     
-                    <Border CornerRadius="20"
-                            Background="#3D89A1"
-                            Padding="40, 0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                            </Grid.RowDefinitions>
-                    
-                            <Border Grid.Row="0"
-                                    Style="{StaticResource UnderLineBorder}"
-                                    BorderBrush="#FFF">
-                                <TextBlock Text="{Binding Name}"
-                                           Style="{StaticResource CreationFormTittle}">
-                                </TextBlock>
-                            </Border>
-                    
-                            <StackPanel Grid.Row="1">
-                                <StackPanel>
-                                    <TextBlock Text="Тип создаваемой карты"
-                                            Style="{StaticResource FormLabel}"></TextBlock>
-                                    <ComboBox ItemsSource="{Binding CurrencyTypeModels}"
-                                              SelectedItem="{Binding AccountToOpen.CurrencyTypeModelNavigation}">
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Name}"></TextBlock>
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
+                     <Grid HorizontalAlignment="Center"
+                           Margin="0, 25">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="4*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <Border Grid.Row="1" CornerRadius="20"
+                                Background="#3D89A1"
+                                Padding="40, 0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                        
+                                <Border Grid.Row="0"
+                                        Style="{StaticResource UnderLineBorder}"
+                                        BorderBrush="#FFF">
+                                    <TextBlock Text="{Binding Name}"
+                                               Style="{StaticResource CreationFormTittle}">
+                                    </TextBlock>
+                                </Border>
+                        
+                                <StackPanel Grid.Row="1">
+                                    <StackPanel>
+                                        <TextBlock Text="Тип создаваемой карты"
+                                                Style="{StaticResource FormLabel}"></TextBlock>
+                                        <ComboBox ItemsSource="{Binding CurrencyTypeModels}"
+                                                  SelectedItem="{Binding AccountToOpen.CurrencyTypeModelNavigation}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                        
+                                    <StackPanel>
+                                        <TextBlock Text="Валюта счёта"
+                                                Style="{StaticResource FormLabel}"></TextBlock>
+                                        <ComboBox ItemsSource="{Binding CardTypeModels}"
+                                                  SelectedValue="{Binding CardToCreate.CardTypeModelNavigation}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                        
+                                    <!-- <StackPanel> -->
+                                    <!--     <TextBlock Text="Введите сумму кредита" -->
+                                    <!--             Style="{StaticResource FormLabel}"></TextBlock> -->
+                                    <!--     <TextBox></TextBox> -->
+                                    <!-- </StackPanel> -->
                                 </StackPanel>
-                    
-                                <StackPanel>
-                                    <TextBlock Text="Валюта счёта"
-                                            Style="{StaticResource FormLabel}"></TextBlock>
-                                    <ComboBox ItemsSource="{Binding CardTypeModels}"
-                                              SelectedValue="{Binding CardToCreate.CardTypeModelNavigation}">
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Name}"></TextBlock>
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
-                                </StackPanel>
-                    
-                                <!-- <StackPanel> -->
-                                <!--     <TextBlock Text="Введите сумму кредита" -->
-                                <!--             Style="{StaticResource FormLabel}"></TextBlock> -->
-                                <!--     <TextBox></TextBox> -->
-                                <!-- </StackPanel> -->
-                            </StackPanel>
-                    
-                            <Grid Grid.Row="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                    
-                                <Button Grid.Column="0"
-                                        HorizontalAlignment="Center"
-                                        Style="{StaticResource SubmitFormButton}"
-                                        Command="{Binding GoBackCommand}"
-                                        Content="Назад">
-                                </Button>
-                                <Button Grid.Column="1"
-                                        HorizontalAlignment="Center"
-                                        Style="{StaticResource SubmitFormButton}"
-                                        Command="{Binding CreateAccountCommand}"
-                                        Content="Отправить">
-                                </Button>
+                        
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                        
+                                    <Button Grid.Column="0"
+                                            HorizontalAlignment="Center"
+                                            Style="{StaticResource SubmitFormButton}"
+                                            Command="{Binding GoBackCommand}"
+                                            Content="Назад">
+                                    </Button>
+                                    <Button Grid.Column="1"
+                                            HorizontalAlignment="Center"
+                                            Style="{StaticResource SubmitFormButton}"
+                                            Command="{Binding CreateAccountCommand}"
+                                            Content="Отправить">
+                                    </Button>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </Border>
-                </Grid>
+                        </Border>
+                    </Grid>
+                    
+                </ScrollViewer>
                 
             </Grid>
         </DataTemplate>
