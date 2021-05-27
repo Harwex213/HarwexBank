@@ -39,9 +39,14 @@
                                         <StackPanel Grid.Column="1">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Style="{StaticResource TittleText}"
-                                                           FontWeight="Regular"
+                                                           Margin="0, 0, 10, 0"
+                                                           Name="ClientFullName"
                                                            Text="{Binding FullName}"/>
                                                 <TextBlock Style="{StaticResource InfoText}"
+                                                           Foreground="#171717"
+                                                           Margin="0"
+                                                           VerticalAlignment="Center"
+                                                           Height="{Binding ElementName=ClientFullName, Path=ActualHeight}"
                                                            Text="{Binding UserBlockedTextMessage}"/>
                                             </StackPanel>
                                             <TextBlock Style="{StaticResource InfoText}"
