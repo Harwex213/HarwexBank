@@ -49,12 +49,10 @@
                     <StackPanel Grid.Row="0" >
                         <TextBlock Style="{StaticResource InfoText}"
                                    Margin="0"
-                                   VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    Text="{Binding Date, StringFormat=d}"/>
                         <TextBlock Style="{StaticResource InfoText}"
                                    Margin="0"
-                                   VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    Text="{Binding Date, StringFormat=0:HH:mm}"/>
                     </StackPanel>
@@ -117,11 +115,10 @@
                     <StackPanel Grid.Row="0" >
                         <TextBlock Style="{StaticResource InfoText}"
                                    Margin="0"
-                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
                                    Text="{Binding Date, StringFormat=d}"/>
                         <TextBlock Style="{StaticResource InfoText}"
                                    Margin="0"
-                                   VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    Text="{Binding Date, StringFormat=0:HH:mm}"/>
                     </StackPanel>
@@ -143,184 +140,365 @@
     </Grid>
     
     <!-- TO CLIENT'S JOURNAL PAGE -->
-    <Grid x:Key="TransferBlockToClient" x:Shared="False" 
-          MaxHeight="140" Background="#266885">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="8.5*"></ColumnDefinition>
-            <ColumnDefinition Width="*" MinWidth="150"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        
-        <StackPanel Grid.Column="0">
-            <TextBlock Text="{Binding DataContext.SelectedControlViewModel.Name,
-            RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"></TextBlock>
-            
-            <Grid>
+    <Grid x:Key="TransferBlockToClient" x:Shared="False" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Background="#266885"
+                CornerRadius="27.5"
+                Margin="30, 0, 30, 15">
+            <Grid Margin="20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                
-                <StackPanel Grid.Column="0">
-                    
-                    <TextBlock Text="Счёт, с которого отправили" TextWrapping="WrapWithOverflow"></TextBlock>
-                    <TextBlock Text="{Binding BankAccountInitiator}"></TextBlock>
-                    
-                </StackPanel>
+
                 <StackPanel Grid.Column="1">
-                    
-                    
-                    <TextBlock Text="Счёт получатель" TextWrapping="WrapWithOverflow"></TextBlock>
-                    <TextBlock Text="{Binding BankAccountReceiver}"></TextBlock>
-                    
+                    <TextBlock Style="{StaticResource JournalTittleText}"
+                               Text="Переводы"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0"
+                                    Margin="0, 0, 40, 0">
+                            <TextBlock Style="{StaticResource InfoText}"
+                               Text="Счёт отправитель"/>
+                            <TextBlock Style="{StaticResource InfoText}"
+                               Text="{Binding BankAccountInitiator}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Style="{StaticResource InfoText}"
+                               Text="Счёт получатель"/>
+                            <TextBlock Style="{StaticResource InfoText}"
+                               Text="{Binding BankAccountReceiver}"/>
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
+                <Grid Grid.Column="3" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" >
+                        <TextBlock Style="{StaticResource InfoText}"
+                                   Margin="0"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding Date, StringFormat=d}"/>
+                        <TextBlock Style="{StaticResource InfoText}"
+                                   Margin="0"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding Date, StringFormat=0:HH:mm}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource JournalTittleText}"
+                                   Margin="0, 8.5, 4, 0"
+                                   Text="{Binding Amount}"/>
+                        <TextBlock Style="{StaticResource JournalTittleText}"
+                                   Margin="0, 8.5, 0, 12"
+                                   FontSize="12"
+                                   Text="{Binding BankAccountModelInitiatorNavigation.CurrencyType}"/>
+                    </StackPanel>
+                </Grid>
             </Grid>
-        </StackPanel>
-        
-        <StackPanel Grid.Column="1">
-            <TextBlock Text="{Binding Date}"></TextBlock>
-            <TextBlock Text="{Binding Amount}"></TextBlock>
-        </StackPanel>
-        
+        </Border>
     </Grid>
-    <Grid x:Key="CreditRepaymentBlockToClient" x:Shared="False"
-          MaxHeight="140" Background="#266885">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="8.5*"></ColumnDefinition>
-            <ColumnDefinition Width="*" MinWidth="150"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        
-        <StackPanel Grid.Column="0">
-            <TextBlock Text="{Binding DataContext.SelectedControlViewModel.Name,
-            RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"></TextBlock>
-            
-            <Grid>
+
+    <Grid x:Key="CreditRepaymentBlockToClient" x:Shared="False" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Background="#266885"
+                CornerRadius="27.5"
+                Margin="30, 0, 30, 15">
+            <Grid Margin="20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                
-                <StackPanel Grid.Column="0">
-                    
-                    <TextBlock Text="Счёт, с которого отправили" TextWrapping="WrapWithOverflow"></TextBlock>
-                    <TextBlock Text="{Binding BankAccountInitiator}"></TextBlock>
-                    
-                </StackPanel>
+
                 <StackPanel Grid.Column="1">
-                    
-                    
-                    <TextBlock Text="Выбранный кредит" TextWrapping="WrapWithOverflow"></TextBlock>
-                    <TextBlock Text="{Binding SelectedCredit}"></TextBlock>
-                    
+                    <TextBlock Style="{StaticResource JournalTittleText}"
+                               Text="Погашение кредитов"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0"
+                                    Margin="0, 0, 40, 0">
+                            <TextBlock Style="{StaticResource InfoText}"
+                               Text="Счёт отправитель"/>
+                            <TextBlock Style="{StaticResource InfoText}"
+                               Text="{Binding BankAccountInitiator}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Style="{StaticResource InfoText}"
+                               Text="Выбранный кредит"/>
+                            <TextBlock Style="{StaticResource InfoText}"
+                               Text="{Binding SelectedCredit}"/>
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
+                <Grid Grid.Column="3" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" >
+                        <TextBlock Style="{StaticResource InfoText}"
+                                   Margin="0"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding Date, StringFormat=d}"/>
+                        <TextBlock Style="{StaticResource InfoText}"
+                                   Margin="0"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding Date, StringFormat=0:HH:mm}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource JournalTittleText}"
+                                   Margin="0, 8.5, 4, 0"
+                                   Text="{Binding Amount}"/>
+                        <TextBlock Style="{StaticResource JournalTittleText}"
+                                   Margin="0, 8.5, 0, 12"
+                                   FontSize="12"
+                                   Text="{Binding BankAccountModelInitiatorNavigation.CurrencyType}"/>
+                    </StackPanel>
+                </Grid>
             </Grid>
-        </StackPanel>
-        
-        <StackPanel Grid.Column="1">
-            <TextBlock Text="{Binding Date}"></TextBlock>
-            <TextBlock Text="{Binding Amount}"></TextBlock>
-        </StackPanel>
-    </Grid>
-    <Grid x:Key="NotificationBlockToClient" x:Shared="False" 
-          MaxHeight="140" Background="#266885">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="8.5*"></ColumnDefinition>
-            <ColumnDefinition Width="*" MinWidth="150"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        
-        <StackPanel Grid.Column="0">
-            <TextBlock Text="{Binding Message}"></TextBlock>
-        </StackPanel>
-        
-        <StackPanel Grid.Column="1">
-            <TextBlock Text="{Binding Date}"></TextBlock>
-        </StackPanel>
+        </Border>
     </Grid>
     
+    <Grid x:Key="NotificationBlockToClient" x:Shared="False" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Background="#266885"
+                CornerRadius="27.5"
+                Margin="30, 0, 30, 15">
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="40"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Style="{StaticResource JournalTittleText}"
+                               Text="Уведомления"/>
+                    <TextBlock Style="{StaticResource InfoText}"
+                               TextWrapping="Wrap"
+                               Text="{Binding Message}"/>
+                </StackPanel>
+                <Grid Grid.Column="2" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" >
+                        <TextBlock Style="{StaticResource InfoText}"
+                                   Margin="0"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding Date, StringFormat=d}"/>
+                        <TextBlock Style="{StaticResource InfoText}"
+                                   Margin="0"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding Date, StringFormat=0:HH:mm}"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
     
     <!-- TO WORKER'S JOURNAL PAGE -->
-    <Grid x:Key="TransferBlockToWorker" x:Shared="False" 
-          MaxHeight="140" Background="#266885">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="8.5*"></ColumnDefinition>
-            <ColumnDefinition Width="*" MinWidth="150"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        
-        <StackPanel Grid.Column="0">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding DataContext.SelectedControlViewModel.Name,
-            RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"></TextBlock>
-                <TextBlock Text="Клиент: "></TextBlock>
-                <TextBlock Text="{Binding UserId}"></TextBlock>
-            </StackPanel>
-            
-            <Grid>
+    <Grid x:Key="TransferBlockToWorker" x:Shared="False" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Background="#266885"
+                CornerRadius="27.5"
+                Margin="30, 0, 30, 15">
+            <Grid Margin="20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                
-                <StackPanel Grid.Column="0">
-                    
-                    <TextBlock Text="Счёт, с которого отправили" TextWrapping="WrapWithOverflow"></TextBlock>
-                    <TextBlock Text="{Binding BankAccountInitiator}"></TextBlock>
-                    
-                </StackPanel>
+
                 <StackPanel Grid.Column="1">
-                    
-                    
-                    <TextBlock Text="Счёт получатель" TextWrapping="WrapWithOverflow"></TextBlock>
-                    <TextBlock Text="{Binding BankAccountReceiver}"></TextBlock>
-                    
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource JournalTittleText}"
+                                   Text="Переводы"/>
+                        <TextBlock Style="{StaticResource InfoText}"
+                                   Margin="6, 0, 2, 0"
+                                   FontSize="16"
+                                   Text="Клиент Id: "></TextBlock>
+                        <TextBlock Style="{StaticResource InfoText}"
+                                   Margin="0"
+                                   FontSize="16"
+                                   Text="{Binding UserId}"></TextBlock>
+                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0"
+                                    Margin="0, 0, 40, 0">
+                            <TextBlock Style="{StaticResource InfoText}"
+                               Text="Счёт отправитель"/>
+                            <TextBlock Style="{StaticResource InfoText}"
+                               Text="{Binding BankAccountInitiator}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Style="{StaticResource InfoText}"
+                               Text="Счёт получатель"/>
+                            <TextBlock Style="{StaticResource InfoText}"
+                               Text="{Binding BankAccountReceiver}"/>
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
+                <Grid Grid.Column="3" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" >
+                        <TextBlock Style="{StaticResource InfoText}"
+                                   Margin="0"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding Date, StringFormat=d}"/>
+                        <TextBlock Style="{StaticResource InfoText}"
+                                   Margin="0"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding Date, StringFormat=0:HH:mm}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource JournalTittleText}"
+                                   Margin="0, 8.5, 4, 0"
+                                   Text="{Binding Amount}"/>
+                        <TextBlock Style="{StaticResource JournalTittleText}"
+                                   Margin="0, 8.5, 0, 12"
+                                   FontSize="12"
+                                   Text="{Binding BankAccountModelInitiatorNavigation.CurrencyType}"/>
+                    </StackPanel>
+                </Grid>
             </Grid>
-        </StackPanel>
-        
-        <StackPanel Grid.Column="1">
-            <TextBlock Text="{Binding Date}"></TextBlock>
-            <TextBlock Text="{Binding Amount}"></TextBlock>
-        </StackPanel>
+        </Border>
     </Grid>
-    <Grid x:Key="CreditRepaymentBlockToWorker" x:Shared="False" 
-          MaxHeight="140" Background="#266885">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="8.5*"></ColumnDefinition>
-            <ColumnDefinition Width="*" MinWidth="150"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        
-        <StackPanel Grid.Column="0">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding DataContext.SelectedControlViewModel.Name,
-            RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"></TextBlock>
-                <TextBlock Text="Клиент: "></TextBlock>
-                <TextBlock Text="{Binding UserId}"></TextBlock>
-            </StackPanel>
-            
-            <Grid>
+    
+    <Grid x:Key="CreditRepaymentBlockToWorker" x:Shared="False" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Background="#266885"
+                CornerRadius="27.5"
+                Margin="30, 0, 30, 15">
+            <Grid Margin="20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                
-                <StackPanel Grid.Column="0">
-                    
-                    <TextBlock Text="Счёт, с которого отправили" TextWrapping="WrapWithOverflow"></TextBlock>
-                    <TextBlock Text="{Binding BankAccountInitiator}"></TextBlock>
-                    
-                </StackPanel>
+
                 <StackPanel Grid.Column="1">
-                    
-                    
-                    <TextBlock Text="Выбранный кредит" TextWrapping="WrapWithOverflow"></TextBlock>
-                    <TextBlock Text="{Binding SelectedCredit}"></TextBlock>
-                    
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource JournalTittleText}"
+                                   Name="TextBlock"
+                                   Text="Погашение кредитов"/>
+                        <TextBlock Style="{StaticResource InfoText}"
+                                   Margin="6, 0, 2, 0"
+                                   FontSize="16"
+                                   Text="Клиент Id: "></TextBlock>
+                        <TextBlock Style="{StaticResource InfoText}"
+                                   Margin="0"
+                                   FontSize="16"
+                                   Text="{Binding UserId}"></TextBlock>
+                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0"
+                                    Margin="0, 0, 40, 0">
+                            <TextBlock Style="{StaticResource InfoText}"
+                               Text="Счёт отправитель"/>
+                            <TextBlock Style="{StaticResource InfoText}"
+                               Text="{Binding BankAccountInitiator}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Style="{StaticResource InfoText}"
+                               Text="Выбранный кредит"/>
+                            <TextBlock Style="{StaticResource InfoText}"
+                               Text="{Binding SelectedCredit}"/>
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
+                <Grid Grid.Column="3" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" >
+                        <TextBlock Style="{StaticResource InfoText}"
+                                   Margin="0"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding Date, StringFormat=d}"/>
+                        <TextBlock Style="{StaticResource InfoText}"
+                                   Margin="0"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding Date, StringFormat=0:HH:mm}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource JournalTittleText}"
+                                   Margin="0, 8.5, 4, 0"
+                                   Text="{Binding Amount}"/>
+                        <TextBlock Style="{StaticResource JournalTittleText}"
+                                   Margin="0, 8.5, 0, 12"
+                                   FontSize="12"
+                                   Text="{Binding BankAccountModelInitiatorNavigation.CurrencyType}"/>
+                    </StackPanel>
+                </Grid>
             </Grid>
-        </StackPanel>
-        
-        <StackPanel Grid.Column="1">
-            <TextBlock Text="{Binding Date}"></TextBlock>
-            <TextBlock Text="{Binding Amount}"></TextBlock>
-        </StackPanel>
+        </Border>
     </Grid>
     
 </ResourceDictionary>

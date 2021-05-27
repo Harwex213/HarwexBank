@@ -29,10 +29,7 @@
         <!-- - - - - - - - - - - - - - - - - - - - - -->
         <!-- FINANCE TOP NAVBAR -->
         <!-- - - - - - - - - - - - - - - - - - - - - -->
-        <Border Grid.Row="0" 
-                BorderBrush="#000" BorderThickness="0, 0, 0, 1"
-                Margin="15, 0"
-                Padding="15, 15">
+        <Border Grid.Row="0" Style="{StaticResource UnderLineBorder}">
             <ItemsControl Name="FinanceBar" 
                           ItemsSource="{Binding ControlViewModels}">
                 <ItemsControl.ItemsPanel>
@@ -44,14 +41,14 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
 
-                        <ToggleButton Name="FinanceBarToggleButton"
-                                      Style="{StaticResource FinanceBarButtonStyle}" 
+                        <ToggleButton Name="ControlsBarToggleButton"
+                                      Style="{StaticResource ControlsTopBarButtonStyle}" 
                                       Content="{Binding Name}"
                                       Command="{Binding DataContext.ChangeControlCommand,
                                       RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                                       CommandParameter="{Binding }"
-                                      Loaded="FinanceBarToggleButton_OnLoaded"
-                                      Click="FinanceBarToggleButton_OnClick">
+                                      Loaded="ControlsBarToggleButton_OnLoaded"
+                                      Click="ControlsBarToggleButton_OnClick">
                         </ToggleButton>
 
                     </DataTemplate>

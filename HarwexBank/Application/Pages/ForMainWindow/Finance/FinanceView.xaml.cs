@@ -13,24 +13,24 @@ namespace HarwexBank
         }
         private int _barElementsCount;
         
-        private void FinanceBarToggleButton_OnClick(object sender, RoutedEventArgs e)
+        private void ControlsBarToggleButton_OnClick(object sender, RoutedEventArgs e)
         {
             for(var i = 0; i < FinanceBar.Items.Count; i++)
             {
                 var uiElement = (ContentPresenter)FinanceBar.ItemContainerGenerator.ContainerFromIndex(i);
-                var item = (uiElement.ContentTemplate.FindName("FinanceBarToggleButton", uiElement) as ToggleButton);
+                var item = (uiElement.ContentTemplate.FindName("ControlsBarToggleButton", uiElement) as ToggleButton);
                 item.IsChecked = false;
             }
         
             ((ToggleButton) sender).IsChecked = true;
         }
         
-        private void FinanceBarToggleButton_OnLoaded(object sender, RoutedEventArgs e)
+        private void ControlsBarToggleButton_OnLoaded(object sender, RoutedEventArgs e)
         {
             _barElementsCount++;
             if (_barElementsCount < 2)
             {
-                FinanceBarToggleButton_OnClick(sender, e);
+                ControlsBarToggleButton_OnClick(sender, e);
             }
         }
     }

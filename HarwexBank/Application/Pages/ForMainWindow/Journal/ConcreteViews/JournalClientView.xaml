@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
              xmlns:local="clr-namespace:HarwexBank"
+             tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=600, TransitionOn=Loaded}"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
@@ -70,37 +72,40 @@
         
     </UserControl.Resources>
     
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" MinHeight="60"></RowDefinition>
-            <RowDefinition Height="6*"></RowDefinition>
-        </Grid.RowDefinitions>
-    
-        <Border Grid.Row="0"
-                BorderBrush="Black"
-                BorderThickness="0,0,0,1">
-            <ItemsControl ItemsSource="{Binding ControlViewModels}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
         
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Button Content="{Binding Name}"
-                                Command="{Binding DataContext.ChangeControlCommand,
-                                    RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                CommandParameter="{Binding }"
-                                FontSize="18"
-                                Margin="10,10"
-                                Padding="10, 10"
-                                MinWidth="70"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </Border>
-    
-        <ContentControl Grid.Row="1" Content="{Binding SelectedControlViewModel}"/>
-    </Grid>
+            <Border Grid.Row="0" Style="{StaticResource UnderLineBorder}">
+                <ItemsControl Name="JournalBar" 
+                              ItemsSource="{Binding ControlViewModels}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+            
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ToggleButton Name="ControlsBarToggleButton"
+                                          Content="{Binding Name}"
+                                          Style="{StaticResource ControlsTopBarButtonStyle}" 
+                                          Command="{Binding DataContext.ChangeControlCommand,
+                                          RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                          CommandParameter="{Binding }"
+                                          Loaded="ControlsBarToggleButton_OnLoaded"
+                                          Click="ControlsBarToggleButton_OnClick"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Border>
+        
+            <ContentControl Grid.Row="1"
+                            Margin="0, 15, 0, 0"
+                            Content="{Binding SelectedControlViewModel}"/>
+        </Grid>
+    </ScrollViewer>
 </UserControl>
