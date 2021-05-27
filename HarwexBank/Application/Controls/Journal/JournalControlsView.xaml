@@ -62,7 +62,7 @@
                                 VerticalAlignment="Center">
                         <TextBlock Style="{StaticResource JournalTittleText}"
                                    Margin="0, 8.5, 4, 0"
-                                   Text="{Binding Amount}"/>
+                                   Text="{Binding Amount, StringFormat={}{0:#,#.00}}"/>
                         <TextBlock Style="{StaticResource JournalTittleText}"
                                    Margin="0, 8.5, 0, 12"
                                    FontSize="12"
@@ -128,7 +128,7 @@
                                 VerticalAlignment="Center">
                         <TextBlock Style="{StaticResource JournalTittleText}"
                                    Margin="0, 8.5, 4, 0"
-                                   Text="{Binding Amount}"/>
+                                   Text="{Binding Amount, StringFormat={}{0:#,#.00}}"/>
                         <TextBlock Style="{StaticResource JournalTittleText}"
                                    Margin="0, 8.5, 0, 12"
                                    FontSize="12"
@@ -203,7 +203,7 @@
                                 VerticalAlignment="Center">
                         <TextBlock Style="{StaticResource JournalTittleText}"
                                    Margin="0, 8.5, 4, 0"
-                                   Text="{Binding Amount}"/>
+                                   Text="{Binding Amount, StringFormat={}{0:#,#.00}}"/>
                         <TextBlock Style="{StaticResource JournalTittleText}"
                                    Margin="0, 8.5, 0, 12"
                                    FontSize="12"
@@ -277,7 +277,7 @@
                                 VerticalAlignment="Center">
                         <TextBlock Style="{StaticResource JournalTittleText}"
                                    Margin="0, 8.5, 4, 0"
-                                   Text="{Binding Amount}"/>
+                                   Text="{Binding Amount, StringFormat={}{0:#,#.00}}"/>
                         <TextBlock Style="{StaticResource JournalTittleText}"
                                    Margin="0, 8.5, 0, 12"
                                    FontSize="12"
@@ -405,7 +405,7 @@
                                 VerticalAlignment="Center">
                         <TextBlock Style="{StaticResource JournalTittleText}"
                                    Margin="0, 8.5, 4, 0"
-                                   Text="{Binding Amount}"/>
+                                   Text="{Binding Amount, StringFormat={}{0:#,#.00}}"/>
                         <TextBlock Style="{StaticResource JournalTittleText}"
                                    Margin="0, 8.5, 0, 12"
                                    FontSize="12"
@@ -490,7 +490,7 @@
                                 VerticalAlignment="Center">
                         <TextBlock Style="{StaticResource JournalTittleText}"
                                    Margin="0, 8.5, 4, 0"
-                                   Text="{Binding Amount}"/>
+                                   Text="{Binding Amount, StringFormat={}{0:#,#.00}}"/>
                         <TextBlock Style="{StaticResource JournalTittleText}"
                                    Margin="0, 8.5, 0, 12"
                                    FontSize="12"

@@ -50,7 +50,7 @@ namespace HarwexBank
             {
                 _selectedCard = value;
                 SelectedAccount = ModelResourcesManager.GetInstance().GetAccountById(SelectedCard.AccountId);
-                LastOperation = SelectedAccount.Operations.FirstOrDefault();
+                LastOperation = SelectedAccount.Operations.LastOrDefault();
                 LastOperationName = LastOperation switch
                 {
                     TransferToAccountModel => "Переводы",
