@@ -78,8 +78,11 @@ namespace HarwexBank
         public ObservableCollection<CardModel> UserCards { get; private set; }
         public ObservableCollection<IssuedCreditModel> UserCredits { get; private set; }
         public ObservableCollection<JournalModel> UserJournal { get; private set; }
-        
+
         // Global Data.
+        private CurrencyConverter _currencyConverter;
+        public CurrencyConverter CurrencyConverter => _currencyConverter ??= new CurrencyConverter();
+
         private ObservableCollection<UserModel> _existedClients;
         private ObservableCollection<IssuedCreditModel> _allNonApprovedCredits;
         private ObservableCollection<JournalModel> _allJournal;
