@@ -26,8 +26,11 @@ namespace HarwexBank
         
         public List<string> CurrencyRates { get; set; }
 
-        public decimal UsdToBynRate => Convert.ToDecimal(CurrencyRates[0]);
-        public decimal RubToBynRate => Convert.ToDecimal(CurrencyRates[2]) / 100;
+        public static int UsdToBynIndex => 0;
+        public static int RubToBynIndex => 2;
+
+        public decimal UsdToBynRate => Convert.ToDecimal(CurrencyRates[UsdToBynIndex]);
+        public decimal RubToBynRate => Convert.ToDecimal(CurrencyRates[RubToBynIndex]) / 100;
 
         public decimal ConvertUsdToByn(decimal usdAmount)
         {
