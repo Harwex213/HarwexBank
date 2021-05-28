@@ -75,7 +75,8 @@
                                     <TextBox.Text>
                                         <Binding Path="AmountToTransfer"
                                                  ValidatesOnExceptions="True"
-                                                 UpdateSourceTrigger="PropertyChanged">
+                                                 UpdateSourceTrigger="PropertyChanged"
+                                                 StringFormat="{}{0:#,#.00}">
                                             <Binding.ValidationRules>
                                                 <DataErrorValidationRule/>
                                             </Binding.ValidationRules>
