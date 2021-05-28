@@ -101,5 +101,14 @@ namespace HarwexBank
                 OnPropertyChanged("FreezeButtonText"); 
             }
         }
+        
+        public static bool CheckAccountAmountToPossibilityOfTransfer(CurrencyTypeModel.CurrencyTypes currencyTarget,
+            CurrencyTypeModel.CurrencyTypes currencyInitial, decimal initialAmount, decimal transferAmount)
+        {
+            var currencyConverter = ModelResourcesManager.GetInstance().CurrencyConverter;
+            var amountToTransfer = currencyConverter.ConvertCurrencies(currencyTarget, currencyInitial, transferAmount);
+
+            return initialAmount > amountToTransfer;
+        }
     }
 }

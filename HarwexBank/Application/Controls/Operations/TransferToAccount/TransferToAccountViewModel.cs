@@ -14,14 +14,19 @@ namespace HarwexBank
         {
             UserAccounts = ModelResourcesManager.GetInstance().UserAccounts;
             UserJournal = ModelResourcesManager.GetInstance().UserJournal;
+            CurrencyTypeModels = ModelResourcesManager.GetInstance().ExistedCurrencyTypes;
+
+            OperationCurrencyType = CurrencyTypeModels[0];
         }
 
         // Using Data.
         public ObservableCollection<JournalModel> UserJournal { get; set; }
         public ObservableCollection<AccountModel> UserAccounts { get; set; }
+        public ObservableCollection<CurrencyTypeModel> CurrencyTypeModels { get; set; }
         public AccountModel AccountInitiator { get; set; }
         public AccountModel AccountReceiver { get; set; }
         public int AccountReceiverId { get; set; }
+        public CurrencyTypeModel OperationCurrencyType { get; set; }
         public decimal AmountToTransfer { get; set; }
         
         // Data Validation.
@@ -53,9 +58,13 @@ namespace HarwexBank
                         {
                             return "Сумма не должна быть меньше, либо равна нулю";
                         }
-                        if (AmountToTransfer > AccountInitiator.Amount)
+                        if (!AccountModel.CheckAccountAmountToPossibilityOfTransfer(
+                            AccountInitiator.CurrencyTypeModelNavigation.CurrencyTypeEnum,
+                            OperationCurrencyType.CurrencyTypeEnum,
+                            AccountInitiator.Amount,
+                            AmountToTransfer))
                         {
-                            return "Сумма не должна превышать сумму счёта: " + AccountInitiator.Amount;
+                            return $"Сумма не должна превышать сумму счёта: {AccountInitiator.Amount} {AccountInitiator.CurrencyType}";
                         }
                         break;
                 }
@@ -84,19 +93,32 @@ namespace HarwexBank
         // Methods.
         private void TransferToAccount()
         {
-            if (AccountInitiator.Amount < AmountToTransfer)
+            if (!AccountModel.CheckAccountAmountToPossibilityOfTransfer(
+                AccountInitiator.CurrencyTypeModelNavigation.CurrencyTypeEnum,
+                OperationCurrencyType.CurrencyTypeEnum,
+                AccountInitiator.Amount,
+                AmountToTransfer))
             {
-                MessageBox.Show("Недостаточно средств");
+                MessageBox.Show("Сумма не должна превышать сумму" +
+                                $" счёта: {AccountInitiator.Amount} {AccountInitiator.CurrencyType}");
                 return;
             }
-            AccountInitiator.Amount -= AmountToTransfer;
-            AccountReceiver.Amount += AmountToTransfer;
+            
+            var currencyConverter = ModelResourcesManager.GetInstance().CurrencyConverter;
+            
+            AccountInitiator.Amount -= currencyConverter.ConvertCurrencies(
+                AccountInitiator.CurrencyTypeModelNavigation.CurrencyTypeEnum,
+                OperationCurrencyType.CurrencyTypeEnum, AmountToTransfer);
+            AccountReceiver.Amount += currencyConverter.ConvertCurrencies(
+                AccountReceiver.CurrencyTypeModelNavigation.CurrencyTypeEnum,
+                OperationCurrencyType.CurrencyTypeEnum, AmountToTransfer);
             JournalModel journalNote = new TransferToAccountModel()
             {
                 UserId = AccountInitiator.UserId,
                 Date = DateTime.Now,
                 BankAccountInitiator = AccountInitiator.Id,
                 BankAccountReceiver = AccountReceiver.Id,
+                CurrencyTypeModelNavigation = OperationCurrencyType,
                 Amount = AmountToTransfer
             };
             UserJournal.Add(journalNote);

@@ -1,9 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HarwexBank
 {
     public class CurrencyTypeModel : ObservableObject, ModelResourcesManager.IModel
     {
+        public enum CurrencyTypes
+        {
+            BYN,
+            RUB,
+            USD
+        }
+        
         public CurrencyTypeModel()
         {
             Accounts = new HashSet<AccountModel>();
@@ -36,5 +45,8 @@ namespace HarwexBank
                 OnPropertyChanged("Name");
             }
         }
+
+        [NotMapped]
+        public CurrencyTypes CurrencyTypeEnum => Enum.Parse<CurrencyTypes>(Name);
     }
 }

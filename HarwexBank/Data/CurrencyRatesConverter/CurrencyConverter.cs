@@ -1,6 +1,6 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
-using System.Windows.Controls;
 using HarwexBank.Parser;
 using HarwexBank.Parser.MyFin;
 
@@ -58,6 +58,45 @@ namespace HarwexBank
         public bool CheckRatesExistence()
         {
             return UsdToBynRate != 0 && RubToBynRate != 0;
+        }
+
+        public decimal ConvertCurrencies(CurrencyTypeModel.CurrencyTypes currencyTarget,
+            CurrencyTypeModel.CurrencyTypes currencyInitial, decimal amount)
+        {
+            if (!CheckRatesExistence())
+            {
+                return -1;
+            }
+            
+            switch (currencyTarget)
+            {
+                case CurrencyTypeModel.CurrencyTypes.BYN:
+                    return currencyInitial switch
+                    {
+                        CurrencyTypeModel.CurrencyTypes.BYN => amount,
+                        CurrencyTypeModel.CurrencyTypes.RUB => ConvertRubToByn(amount),
+                        CurrencyTypeModel.CurrencyTypes.USD => ConvertUsdToByn(amount),
+                        _ => throw new ArgumentOutOfRangeException(nameof(currencyInitial), currencyInitial, null)
+                    };
+                case CurrencyTypeModel.CurrencyTypes.RUB:
+                    return currencyInitial switch
+                    {
+                        CurrencyTypeModel.CurrencyTypes.BYN => ConvertBynToRub(amount),
+                        CurrencyTypeModel.CurrencyTypes.RUB => amount,
+                        CurrencyTypeModel.CurrencyTypes.USD => ConvertBynToRub(ConvertUsdToByn(amount)),
+                        _ => throw new ArgumentOutOfRangeException(nameof(currencyInitial), currencyInitial, null)
+                    };
+                case CurrencyTypeModel.CurrencyTypes.USD:
+                    return currencyInitial switch
+                    {
+                        CurrencyTypeModel.CurrencyTypes.BYN => ConvertBynToUsd(amount),
+                        CurrencyTypeModel.CurrencyTypes.RUB => ConvertBynToUsd(ConvertRubToByn(amount)),
+                        CurrencyTypeModel.CurrencyTypes.USD => amount,
+                        _ => throw new ArgumentOutOfRangeException(nameof(currencyInitial), currencyInitial, null)
+                    };
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(currencyTarget), currencyTarget, null);
+            }
         }
 
         public decimal ConvertUsdToByn(decimal usdAmount)

@@ -12,10 +12,10 @@ namespace HarwexBank
     {
         public HarwexBankContext()
         {
-            // Database.EnsureDeleted();
-            // Database.EnsureCreated();
-            //
-            // CreateDefaultData();
+            Database.EnsureDeleted();
+            Database.EnsureCreated();
+            
+            CreateDefaultData();
         }
 
         #region DbSet Init
@@ -290,6 +290,7 @@ namespace HarwexBank
             entity.HasOne(d => d.CurrencyTypeModelNavigation)
                 .WithMany(p => p.OperationModels)
                 .HasForeignKey(d => d.OperationCurrencyType)
+                .HasPrincipalKey(t=> t.Name)
                 .HasConstraintName("OPERATION_CURRENCY_TYPE_FK");
         }
         private void CreditRepaymentConfigure(EntityTypeBuilder<CreditRepaymentModel> entity)
