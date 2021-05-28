@@ -18,9 +18,12 @@ namespace HarwexBank
                     return;
                 
                 Grid.SetRow(((Grid)sender).Children[2], 1);
-                Grid.SetRow(((Grid)sender).Children[3], 1);
                 Grid.SetColumn(((Grid)sender).Children[2], 1);
+                ((FrameworkElement) ((Grid) sender).Children[2]).Margin = new Thickness(0, 8.5, 0, 0);
+                
+                Grid.SetRow(((Grid)sender).Children[3], 1);
                 Grid.SetColumn(((Grid)sender).Children[3], 3);
+                ((FrameworkElement) ((Grid) sender).Children[3]).Margin = new Thickness(0, 8.5, 0, 0);
                 
                 ((Grid) sender).ColumnDefinitions.RemoveAt(8);
                 ((Grid) sender).ColumnDefinitions.RemoveAt(7);
@@ -46,9 +49,12 @@ namespace HarwexBank
                     {Width = (GridLength) new GridLengthConverter().ConvertFrom("*")});
                 
                 Grid.SetRow(((Grid)sender).Children[2], 0);
-                Grid.SetRow(((Grid)sender).Children[3], 0);
                 Grid.SetColumn(((Grid)sender).Children[2], 5);
+                ((FrameworkElement) ((Grid) sender).Children[2]).Margin = new Thickness(0);
+                
+                Grid.SetRow(((Grid)sender).Children[3], 0);
                 Grid.SetColumn(((Grid)sender).Children[3], 7);
+                ((FrameworkElement) ((Grid) sender).Children[3]).Margin = new Thickness(0);
             }
         }
 
@@ -60,6 +66,7 @@ namespace HarwexBank
                     return;
                 
                 Grid.SetRow(((Grid)sender).Children[1], 2);
+                ((FrameworkElement) ((Grid) sender).Children[1]).Margin = new Thickness(0, 8.5, 0, 0);
                 
                 ((Grid) sender).ColumnDefinitions.RemoveAt(1);
             }
@@ -73,6 +80,7 @@ namespace HarwexBank
                     {Width = (GridLength) new GridLengthConverter().ConvertFrom("Auto")});
                 
                 Grid.SetRow(((Grid)sender).Children[1], 1);
+                ((FrameworkElement) ((Grid) sender).Children[1]).Margin = new Thickness(0);
             }
         }
     }

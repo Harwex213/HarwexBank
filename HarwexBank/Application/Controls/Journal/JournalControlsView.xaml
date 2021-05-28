@@ -66,7 +66,7 @@
                         <TextBlock Style="{StaticResource JournalTittleText}"
                                    Margin="0, 8.5, 0, 12"
                                    FontSize="12"
-                                   Text="{Binding BankAccountModelInitiatorNavigation.CurrencyType}"/>
+                                   Text="{Binding OperationCurrencyType}"/>
                     </StackPanel>
                 </Grid>
             </Grid>
@@ -132,7 +132,7 @@
                         <TextBlock Style="{StaticResource JournalTittleText}"
                                    Margin="0, 8.5, 0, 12"
                                    FontSize="12"
-                                   Text="{Binding BankAccountModelInitiatorNavigation.CurrencyType}"/>
+                                   Text="{Binding OperationCurrencyType}"/>
                     </StackPanel>
                 </Grid>
             </Grid>
@@ -207,7 +207,7 @@
                         <TextBlock Style="{StaticResource JournalTittleText}"
                                    Margin="0, 8.5, 0, 12"
                                    FontSize="12"
-                                   Text="{Binding BankAccountModelInitiatorNavigation.CurrencyType}"/>
+                                   Text="{Binding OperationCurrencyType}"/>
                     </StackPanel>
                 </Grid>
             </Grid>
@@ -281,7 +281,7 @@
                         <TextBlock Style="{StaticResource JournalTittleText}"
                                    Margin="0, 8.5, 0, 12"
                                    FontSize="12"
-                                   Text="{Binding BankAccountModelInitiatorNavigation.CurrencyType}"/>
+                                   Text="{Binding OperationCurrencyType}"/>
                     </StackPanel>
                 </Grid>
             </Grid>
@@ -409,7 +409,7 @@
                         <TextBlock Style="{StaticResource JournalTittleText}"
                                    Margin="0, 8.5, 0, 12"
                                    FontSize="12"
-                                   Text="{Binding BankAccountModelInitiatorNavigation.CurrencyType}"/>
+                                   Text="{Binding OperationCurrencyType}"/>
                     </StackPanel>
                 </Grid>
             </Grid>
@@ -494,7 +494,7 @@
                         <TextBlock Style="{StaticResource JournalTittleText}"
                                    Margin="0, 8.5, 0, 12"
                                    FontSize="12"
-                                   Text="{Binding BankAccountModelInitiatorNavigation.CurrencyType}"/>
+                                   Text="{Binding OperationCurrencyType}"/>
                     </StackPanel>
                 </Grid>
             </Grid>
