@@ -1,9 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Globalization;
 using System.Windows.Input;
 
 namespace HarwexBank
 {
-    public class MainViewModel : BaseControlViewModel, IControlViewModel
+    public class MainViewModel : BaseControlViewModel, IControlViewModel, ICurrencyRatesObserver
     {
         public string Name => "Harwex Bank";
 
@@ -16,10 +16,36 @@ namespace HarwexBank
             WindowFactory = MainWindowFactory.GetFactory();
             ControlViewModels.AddRange(WindowFactory.GetPages());
             SelectedControlViewModel = ControlViewModels[0];
+            
+            ModelResourcesManager.GetInstance().CurrencyConverter.Attach(this);
         }
 
         public ApplicationViewModel ApplicationViewModel { get; }
         public static MainWindowFactory WindowFactory { get; private set; }
+
+        private string _usdToBynRate;
+        private string _rubToBynRate;
+        
+        public string UsdToBynRate
+        {
+            get => _usdToBynRate;
+            set => Set(ref _usdToBynRate, value);
+        }
+
+        public string RubToBynRate
+        {
+            get => _rubToBynRate;
+            set => Set(ref _rubToBynRate, value);
+        }
+        
+        public void NewRates(ICurrencyRatesSubject subject)
+        {
+            if (subject is not CurrencyConverter converter) 
+                return;
+            
+            UsdToBynRate = converter.UsdToBynRate.ToString(CultureInfo.CurrentCulture);
+            RubToBynRate = converter.RubToBynRate.ToString(CultureInfo.CurrentCulture);
+        }
 
         #region Commands
 
