@@ -87,7 +87,6 @@
                                         <TextBlock Text="Тип кредита"
                                                 Style="{StaticResource FormLabel}"></TextBlock>
                                         <ComboBox ItemsSource="{Binding CreditTypeModels}"
-                                                  SelectedIndex="0"
                                                   SelectedValue="{Binding CreditToTaking.CreditTypeModelNavigation}">
                                             <ComboBox.ItemTemplate>
                                                 <DataTemplate>

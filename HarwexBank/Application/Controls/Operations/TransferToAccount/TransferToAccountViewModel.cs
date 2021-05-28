@@ -45,9 +45,9 @@ namespace HarwexBank
                         }
                         break;
                     case nameof(AmountToTransfer):
-                        if (AmountToTransfer < 0)
+                        if (AmountToTransfer <= 0)
                         {
-                            return "Сумма не должна быть отрицательной";
+                            return "Сумма не должна быть меньше, либо равна нулю";
                         }
                         if (AmountToTransfer > AccountInitiator.Amount)
                         {

@@ -164,7 +164,9 @@ namespace HarwexBank
         {
             get
             {
-                if (columnName == nameof(NotificationMessage) && NotificationMessage.Length < 10)
+                if (columnName == nameof(NotificationMessage) &&
+                    string.IsNullOrEmpty(NotificationMessage) ||
+                    NotificationMessage?.Length < 10)
                 {
                     return "Сообщение слишком короткое";
                 }

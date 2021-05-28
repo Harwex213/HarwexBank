@@ -18,13 +18,33 @@ namespace HarwexBank
         }
 
         // Using Data.
+        // Fields
+        private AccountModel _accountInitiator;
+        private IssuedCreditModel _selectedCredit;
+        private decimal _amountToTransfer;
+        
         public ObservableCollection<JournalModel> UserJournal { get; set; }
         public ObservableCollection<AccountModel> UserAccounts { get; set; }
         public ObservableCollection<IssuedCreditModel> UserCredits { get; set; }
-        public AccountModel AccountInitiator { get; set; }
-        public IssuedCreditModel SelectedCredit { get; set; }
-        public decimal AmountToTransfer { get; set; }
-        
+
+        public AccountModel AccountInitiator
+        {
+            get => _accountInitiator;
+            set => Set(ref _accountInitiator, value);
+        }
+
+        public IssuedCreditModel SelectedCredit
+        {
+            get => _selectedCredit;
+            set => Set(ref _selectedCredit, value);
+        }
+
+        public decimal AmountToTransfer
+        {
+            get => _amountToTransfer;
+            set => Set(ref _amountToTransfer, value);
+        }
+
         // Data Validation.
         public string Error => null;
 
@@ -45,9 +65,9 @@ namespace HarwexBank
                 switch (name)
                 {
                     case nameof(AmountToTransfer):
-                        if (AmountToTransfer < 0)
+                        if (AmountToTransfer <= 0)
                         {
-                            return "Сумма не должна быть отрицательной";
+                            return "Сумма не должна быть меньше, либо равна нулю";
                         }
                         if (AmountToTransfer > AccountInitiator.Amount)
                         {
@@ -68,7 +88,7 @@ namespace HarwexBank
 
         // Fields.
         private ICommand _repayCreditCommand;
-        
+
         // Props.
         public ICommand RepayCreditCommand
         {
