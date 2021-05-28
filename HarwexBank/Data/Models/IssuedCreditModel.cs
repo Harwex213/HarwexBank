@@ -21,9 +21,11 @@ namespace HarwexBank
         private decimal _amount;
         private decimal _repaidAmount;
         private decimal _amountToPay;
+        private decimal _overPaymentAmount;
         private bool _isApproved;
         private bool _isRepaid;
-
+        
+        
         public virtual CreditTypeModel CreditTypeModelNavigation { get; set; }
         public virtual UserModel UserModelAccount { get; set; }
         public virtual ICollection<CreditRepaymentModel> CreditRepayments { get; set; }
@@ -58,7 +60,7 @@ namespace HarwexBank
         }
 
         [NotMapped]
-        public string CreditName => "Кредит номер " + Id + ", " + CreditType;
+        public string CreditName => "Кредит номер " + Id + ", " + CreditType + ", " + CreditTypeModelNavigation.CreditCurrencyType;
 
         public DateTime DateIn
         {
@@ -101,6 +103,14 @@ namespace HarwexBank
             get => _amountToPay;
             set => Set(ref _amountToPay, value);
         }
+        
+        [NotMapped]
+        public decimal OverPaymentAmount
+        {
+            get => _overPaymentAmount;
+            set =>  Set(ref _overPaymentAmount, value);
+        }
+
         public bool IsApproved
         {
             get => _isApproved;
@@ -119,32 +129,30 @@ namespace HarwexBank
                 OnPropertyChanged("IsRepaid");
             }
         }
-        
+
         public string Error => null;
 
         public string this[string name]
         {
             get
             {
-                string result = null;
-
                 switch (name)
                 {
                     case nameof(Amount):
                         if (Amount < CreditTypeModelNavigation.MinimalTakingAmount || Amount > CreditTypeModelNavigation.MaximalTakingAmount)
                         {
-                            result = $"Сумма должна быть от {CreditTypeModelNavigation.MinimalTakingAmount} до {CreditTypeModelNavigation.MaximalTakingAmount}";
+                            return $"Сумма должна быть от {CreditTypeModelNavigation.MinimalTakingAmount} до {CreditTypeModelNavigation.MaximalTakingAmount}";
                         }
                         break;
                     case nameof(Term):
                         if (Term < CreditTypeModelNavigation.MinimalTerm || Term > CreditTypeModelNavigation.MaximalTerm)
                         {
-                            result = $"Срок должен быть от {CreditTypeModelNavigation.MinimalTerm} до {CreditTypeModelNavigation.MaximalTerm}";
+                            return $"Срок должен быть от {CreditTypeModelNavigation.MinimalTerm} до {CreditTypeModelNavigation.MaximalTerm}";
                         }
                         break;
                 }
 
-                return result;
+                return null;
             }
         }
     }

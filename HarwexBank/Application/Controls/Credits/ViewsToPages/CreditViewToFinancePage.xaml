@@ -113,7 +113,7 @@
                                     </StackPanel>
                                     
                                     <StackPanel>
-                                        <TextBlock Text="Срок кредита"
+                                        <TextBlock Text="Срок кредита (месяцы)"
                                                    Style="{StaticResource FormLabel}"></TextBlock>
                                         <TextBox Name="CreditTerm">
                                             <TextBox.Text>
@@ -126,6 +126,20 @@
                                                 </Binding>
                                             </TextBox.Text>
                                         </TextBox>
+                                    </StackPanel>
+                                    
+                                    <StackPanel Margin="0, 18.5, 0, 0">
+                                        <TextBlock Text="Полная сумма к погашеню"
+                                                   Style="{StaticResource TittleText}"></TextBlock>
+                                        <TextBlock Text="{Binding CreditToTaking.AmountToPay, StringFormat=N2}"
+                                                   Style="{StaticResource InfoText}"></TextBlock>
+                                    </StackPanel>
+                                    
+                                    <StackPanel Margin="0, 18.5, 0, 0">
+                                        <TextBlock Text="Сумма переплат"
+                                                   Style="{StaticResource TittleText}"></TextBlock>
+                                        <TextBlock Text="{Binding CreditToTaking.OverPaymentAmount, StringFormat=N2}"
+                                                   Style="{StaticResource InfoText}"></TextBlock>
                                     </StackPanel>
                                 </StackPanel>
                         

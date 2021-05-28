@@ -18,8 +18,8 @@ namespace HarwexBank
                     // Using data.
                     UserApprovedCreditModels = ModelResourcesManager.GetInstance().UserCredits;
                     CreditTypeModels = ModelResourcesManager.GetInstance().ExistedCreditTypes;
-                    
-                    CreditToTaking = new IssuedCreditModel{ CreditTypeModelNavigation = CreditTypeModels[0] };
+
+                    ResetCreditToTaking();
                     
                     // Using VM
                     ControlViewModels.Add(new CreditListViewModel());
@@ -50,6 +50,38 @@ namespace HarwexBank
         
         // Shells for new models
         public IssuedCreditModel CreditToTaking { get; set;  }
+
+        private void ResetCreditToTaking()
+        {
+            CreditToTaking = new IssuedCreditModel{ CreditTypeModelNavigation = CreditTypeModels[0] };
+            CreditToTaking.PropertyChanged += (sender, args) =>
+            {
+                switch (args.PropertyName)
+                {
+                    case nameof(IssuedCreditModel.Amount):
+                    case nameof(IssuedCreditModel.Term):
+                    {
+                        var creditCalculator = new CreditCalculator.CreditCalculator(CreditToTaking.Amount,
+                            CreditToTaking.CreditTypeModelNavigation.Rate, CreditToTaking.Term);
+                        if (sender is not null)
+                        {
+                            ((IssuedCreditModel) sender).AmountToPay = creditCalculator.GetAnnuityPlan() *
+                                                                       ((IssuedCreditModel) sender).Term;
+                            if (((IssuedCreditModel) sender).AmountToPay != 0)
+                            {
+                                ((IssuedCreditModel) sender).OverPaymentAmount = ((IssuedCreditModel) sender).AmountToPay -
+                                    ((IssuedCreditModel) sender).Amount;
+                            }
+                            else
+                            {
+                                ((IssuedCreditModel) sender).OverPaymentAmount = 0;
+                            }
+                        }
+                        break;
+                    }
+                }
+            };
+        }
 
         #region Commands
 
@@ -112,7 +144,7 @@ namespace HarwexBank
 
             ModelResourcesManager.GetInstance().AddModel(CreditToTaking);
             MessageBox.Show("Заявка оставлена");
-            CreditToTaking = new IssuedCreditModel();
+            ResetCreditToTaking();
             
             SelectedControlViewModel = ControlViewModels[0];
         }
