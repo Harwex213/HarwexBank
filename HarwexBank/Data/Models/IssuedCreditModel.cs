@@ -20,6 +20,7 @@ namespace HarwexBank
         private long _term;
         private decimal _amount;
         private decimal _repaidAmount;
+        private decimal _amountToPay;
         private bool _isApproved;
         private bool _isRepaid;
 
@@ -94,6 +95,11 @@ namespace HarwexBank
                 _repaidAmount = value;
                 OnPropertyChanged("RepaidAmount");
             }
+        }
+        public decimal AmountToPay
+        {
+            get => _amountToPay;
+            set => Set(ref _amountToPay, value);
         }
         public bool IsApproved
         {

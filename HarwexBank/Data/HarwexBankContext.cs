@@ -215,6 +215,7 @@ namespace HarwexBank
             // Columns.
             entity.Property(e => e.Amount).HasColumnType("money");
             entity.Property(e => e.RepaidAmount).HasColumnType("money");
+            entity.Property(e => e.AmountToPay).HasColumnType("money");
 
             entity.Property(e => e.DateIn).HasColumnType("datetime");
 
@@ -487,6 +488,7 @@ namespace HarwexBank
                     DateIn = DateTime.Today,
                     Term = 32,
                     Amount = 20000m,
+                    AmountToPay = 32131m,
                     IsApproved = true,
                     IsRepaid = false
                 },
@@ -497,6 +499,7 @@ namespace HarwexBank
                     DateIn = DateTime.Today,
                     Term = 16,
                     Amount = 4000m,
+                    AmountToPay = 4215m,
                     IsApproved = false,
                     IsRepaid = false
                 }
