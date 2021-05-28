@@ -43,6 +43,10 @@ namespace HarwexBank
                         {
                             return "Введённый счёт не найден";
                         }
+                        if (AccountReceiver == AccountInitiator)
+                        {
+                            return "Введённые счёта не должны совпадать";
+                        }
                         break;
                     case nameof(AmountToTransfer):
                         if (AmountToTransfer <= 0)
