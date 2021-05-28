@@ -55,6 +55,11 @@ namespace HarwexBank
 
         #region CurrencyConvertions
 
+        public bool CheckRatesExistence()
+        {
+            return UsdToBynRate != 0 && RubToBynRate != 0;
+        }
+
         public decimal ConvertUsdToByn(decimal usdAmount)
         {
             return usdAmount * UsdToBynRate;
