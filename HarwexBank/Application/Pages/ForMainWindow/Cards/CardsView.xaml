@@ -112,6 +112,15 @@
                                                 <TextBlock Style="{StaticResource InfoBigText}"
                                            Text="{Binding SelectedCard.CardType}"/>
                                             </StackPanel>
+                                            <StackPanel Style="{StaticResource InfoCell}">
+                                                <Button Style="{StaticResource InnerButton}"
+                                                        Margin="0"
+                                                        Command="{Binding DeleteCardCommand}"
+                                                        CommandParameter="{Binding SelectedCard}">
+                                                    <TextBlock Text="Удалить карту"
+                                                               TextWrapping="Wrap"></TextBlock>
+                                                </Button>
+                                            </StackPanel>
                                         </WrapPanel>
                                     </Border>
                                     <Border Grid.Row="1" 

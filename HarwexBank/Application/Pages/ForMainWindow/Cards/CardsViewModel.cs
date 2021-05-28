@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Numerics;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -21,6 +22,11 @@ namespace HarwexBank
             UserAccounts = ModelResourcesManager.GetInstance().UserAccounts;
             CardTypeModels = ModelResourcesManager.GetInstance().ExistedCardTypes;
 
+            if (UserCards.Count > 0)
+            {
+                SelectedCard = UserCards[0];
+            }
+            
             ControlViewModels.Add(new CardsListViewModel());
             ControlViewModels.Add(new CreateNewCardViewModel());
 
@@ -102,6 +108,7 @@ namespace HarwexBank
         private ICommand _createNewCardCommand;
         private ICommand _goToCardListCommand;
         private ICommand _selectCardCommand;
+        private ICommand _deleteCardCommand;
 
         // Props.
         public ICommand GoToCardCreationCommand
@@ -123,6 +130,18 @@ namespace HarwexBank
                     _ => CreateNewCard());
         
                 return _createNewCardCommand;
+            }
+        }
+
+        public ICommand DeleteCardCommand
+        {
+            get
+            {
+                _deleteCardCommand ??= new RelayCommand(
+                    c => DeleteCard((CardModel) c),
+                    c => c is CardModel);
+        
+                return _deleteCardCommand;
             }
         }
 
@@ -163,6 +182,27 @@ namespace HarwexBank
         private void SelectCard(CardModel cardModel)
         {
             SelectedCard = cardModel;
+        }
+
+        private void DeleteCard(CardModel cardModel)
+        {
+            switch (MessageBox.Show("Вы уверены?", "Удаление карты", MessageBoxButton.YesNo))
+            {
+                case MessageBoxResult.None:
+                    break;
+                case MessageBoxResult.OK:
+                    break;
+                case MessageBoxResult.Cancel:
+                    break;
+                case MessageBoxResult.Yes:
+                    UserCards.Remove(cardModel);
+                    ModelResourcesManager.GetInstance().RemoveModel(cardModel);
+                    break;
+                case MessageBoxResult.No:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private void CreateNewCard()
