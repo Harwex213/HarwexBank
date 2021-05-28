@@ -131,10 +131,11 @@
                                Style="{StaticResource TopBarElements}"></TextBlock>
                                 <Button Style="{StaticResource ButtonForIcon}"
                                         VerticalAlignment="Center"
-                                        Margin="15, 0, 35, 0">
-                                        <fa5:FontAwesome Icon="Solid_SignOutAlt"
-                                                     FontSize="44">
-                                        </fa5:FontAwesome>
+                                        Margin="15, 0, 35, 0"
+                                        Command="{Binding LoggOutCommand}">
+                                    <fa5:FontAwesome Icon="Solid_SignOutAlt"
+                                                  FontSize="44">
+                                    </fa5:FontAwesome>
                                 </Button>
                             </StackPanel>
                     </Grid>

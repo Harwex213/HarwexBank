@@ -68,6 +68,7 @@ namespace HarwexBank
         private void LoggOut()
         {
             ApplicationViewModel.GoToAuthorizationView();
+            ModelResourcesManager.GetInstance().CurrencyConverter.Detach(this);
         }
         
 

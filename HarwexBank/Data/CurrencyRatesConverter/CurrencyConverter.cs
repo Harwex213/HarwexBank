@@ -12,15 +12,16 @@ namespace HarwexBank
         public const string RubRateName = "Российский рубль";
 
         private readonly List<ICurrencyRatesObserver> _observers;
+        private ParserWorker<Dictionary<string, string>> _parser;
 
         public CurrencyConverter()
         {
             _observers = new List<ICurrencyRatesObserver>();
             
-            var parser = new ParserWorker<Dictionary<string, string>>(new MyFinCurrencyRatesParser());
+            _parser = new ParserWorker<Dictionary<string, string>>(new MyFinCurrencyRatesParser());
 
-            parser.OnCompleted += _ => { };
-            parser.OnNewData += (_, data) =>
+            _parser.OnCompleted += _ => { };
+            _parser.OnNewData += (_, data) =>
             {
                 UsdToBynRate = Convert.ToDecimal(data[UsdRateName]);
                 RubToBynRate = Convert.ToDecimal(data[RubRateName]);
@@ -28,8 +29,8 @@ namespace HarwexBank
                 Notify();
             };
 
-            parser.Settings = new MyFinCurrencyRatesSettings();
-            parser.Start();
+            _parser.Settings = new MyFinCurrencyRatesSettings();
+            _parser.Start();
         }
         
         public decimal UsdToBynRate { get; private set; }
@@ -38,6 +39,7 @@ namespace HarwexBank
         public void Attach(ICurrencyRatesObserver observer)
         {
             _observers.Add(observer);
+            _parser.Start();
         }
 
         public void Detach(ICurrencyRatesObserver observer)
