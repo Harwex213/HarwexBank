@@ -39,9 +39,9 @@
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="5">
             <TextBlock Style="{StaticResource TittleText}"
-                       Text="Сумма"/>
+                       Text="Сумма к погашению"/>
             <TextBlock Style="{StaticResource InfoText}"
-                       Text="{Binding Amount}"/>
+                       Text="{Binding AmountToPay}"/>
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="7">
             <TextBlock Style="{StaticResource TittleText}"
@@ -64,6 +64,13 @@
                    Text="Процентная ставка"/>
         <TextBlock Style="{StaticResource InfoText}"
                    Text="{Binding CreditTypeModelNavigation.Rate}"/>
+    </StackPanel>
+    <!-- credit Currency Type -->
+    <StackPanel x:Key="CreditCurrencyType" x:Shared="False">
+        <TextBlock Style="{StaticResource TittleText}"
+                   Text="Валюта кредита"/>
+        <TextBlock Style="{StaticResource InfoText}"
+                   Text="{Binding CreditTypeModelNavigation.CreditCurrencyType}"/>
     </StackPanel>
     <!-- credit owner name -->
     <StackPanel x:Key="CreditOwnerName" x:Shared="False">
@@ -91,8 +98,11 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
@@ -100,12 +110,16 @@
         
         <ContentControl Grid.Row="0" Grid.Column="1" Content="{StaticResource CreditId}"></ContentControl>
         <ContentControl Grid.Row="0" Grid.Column="3" Content="{StaticResource CreditRate}"></ContentControl>
+        <ContentControl Grid.Row="0" Grid.Column="5" Content="{StaticResource CreditCurrencyType}"></ContentControl>
     </Grid>
     
     <!-- Additional block to Credits Page -->
     <Grid x:Key="CreditAdditionalInfoToCreditsPage" x:Shared="False">
-        <Grid SizeChanged="AdditionalInfo_OnSizeChanged">
+        <Grid SizeChanged="AdditionalInfo_OnSizeChanged"
+              Margin="0, 8.5">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -123,8 +137,9 @@
                 
             <ContentControl Grid.Row="0" Grid.Column="1" Content="{StaticResource CreditId}"></ContentControl>
             <ContentControl Grid.Row="0" Grid.Column="3" Content="{StaticResource CreditRate}"></ContentControl>
-            <ContentControl Grid.Row="0" Grid.Column="5" Content="{StaticResource CreditOwnerName}"></ContentControl>
-            <ContentControl Grid.Row="0" Grid.Column="7" Content="{StaticResource CreditOwnerPassport}"></ContentControl>
+            <ContentControl Grid.Row="0" Grid.Column="5" Content="{StaticResource CreditCurrencyType}"></ContentControl>
+            <ContentControl Grid.Row="0" Grid.Column="7" Content="{StaticResource CreditOwnerName}"></ContentControl>
+            <ContentControl Grid.Row="0" Grid.Column="9" Content="{StaticResource CreditOwnerPassport}"></ContentControl>
         </Grid>
     </Grid>
     

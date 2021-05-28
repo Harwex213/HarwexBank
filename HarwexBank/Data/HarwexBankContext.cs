@@ -12,10 +12,10 @@ namespace HarwexBank
     {
         public HarwexBankContext()
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
-            
-            CreateDefaultData();
+            // Database.EnsureDeleted();
+            // Database.EnsureCreated();
+            //
+            // CreateDefaultData();
         }
 
         #region DbSet Init
