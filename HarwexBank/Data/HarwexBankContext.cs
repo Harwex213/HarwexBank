@@ -145,7 +145,7 @@ namespace HarwexBank
             // Columns.
             entity.Property(e => e.Amount).HasColumnType("money");
 
-            entity.Property(e => e.RegistrationDate).HasColumnType("date");
+            entity.Property(e => e.RegistrationDate).HasColumnType("datetime");
 
             // References.
             entity.HasOne(d => d.CurrencyTypeModelNavigation)
@@ -216,7 +216,7 @@ namespace HarwexBank
             entity.Property(e => e.Amount).HasColumnType("money");
             entity.Property(e => e.RepaidAmount).HasColumnType("money");
 
-            entity.Property(e => e.DateIn).HasColumnType("date");
+            entity.Property(e => e.DateIn).HasColumnType("datetime");
 
             // References.
             entity.HasOne(d => d.CreditTypeModelNavigation)
@@ -243,7 +243,8 @@ namespace HarwexBank
         {
             entity.ToTable("JOURNAL");
 
-            entity.Property(e => e.Date).IsRequired();
+            entity.Property(e => e.Date).IsRequired().HasColumnType("datetime");
+            
             // References.
             entity.HasOne(d => d.UserIdNavigation)
                 .WithMany(p => p.Journal)
@@ -265,7 +266,6 @@ namespace HarwexBank
             // Columns.
             entity.Property(e => e.Amount).HasColumnType("money");
 
-            entity.Property(e => e.Date).HasColumnType("date");
             
             // References.
             entity.HasOne(d => d.BankAccountModelInitiatorNavigation)
