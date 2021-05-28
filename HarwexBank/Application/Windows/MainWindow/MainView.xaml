@@ -6,7 +6,6 @@
              xmlns:tz="http://schemas.abtsoftware.co.uk/transitionz"
              xmlns:fa5="http://schemas.fontawesome.com/icons/"
              xmlns:local="clr-namespace:HarwexBank"
-             tz:Transitionz.Opacity="{tz:OpacityParams From=0, To=1, Duration=800, TransitionOn=Loaded}"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
         <UserControl.Resources>
@@ -102,19 +101,42 @@
                                            Style="{StaticResource LogoHarwexBank}"></TextBlock>
                             </StackPanel>
                         </Grid>
-                        <StackPanel Grid.Column="1"
-                                    Orientation="Horizontal" HorizontalAlignment="Right">
-                            <TextBlock Text="Oleg Kaportsev"
+                         <StackPanel Grid.Column="1"
+                                     Orientation="Horizontal"
+                                     HorizontalAlignment="Right">
+                                <WrapPanel VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal"
+                                                VerticalAlignment="Center"
+                                                Margin="0, 0, 15, 0">
+                                        <TextBlock Style="{StaticResource TextBlockBase}"
+                                                   FontSize="18"
+                                                   Text="USD: "></TextBlock>
+                                        <TextBlock Style="{StaticResource TextBlockBase}"
+                                                   FontSize="18"
+                                                   FontWeight="SemiBold"
+                                                   Text="{Binding UsdToBynRate}"></TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal"
+                                                VerticalAlignment="Center">
+                                        <TextBlock Style="{StaticResource TextBlockBase}"
+                                                   FontSize="18"
+                                                   Text="RUB (100): "></TextBlock>
+                                        <TextBlock Style="{StaticResource TextBlockBase}"
+                                                   FontSize="18"
+                                                   FontWeight="SemiBold"
+                                                   Text="{Binding RubToBynRate}"></TextBlock>
+                                    </StackPanel>
+                                </WrapPanel>
+                                <TextBlock Text="Oleg Kaportsev"
                                Style="{StaticResource TopBarElements}"></TextBlock>
-                            <Button Style="{StaticResource ButtonForIcon}"
-                                    VerticalAlignment="Center"
-                                    Margin="37.5, 0, 75, 0"
-                                    Command="{Binding LoggOutCommand}">
-                                <fa5:FontAwesome Icon="Solid_SignOutAlt"
-                                                 FontSize="44">
-                                </fa5:FontAwesome>
-                            </Button>
-                        </StackPanel>
+                                <Button Style="{StaticResource ButtonForIcon}"
+                                        VerticalAlignment="Center"
+                                        Margin="15, 0, 35, 0">
+                                        <fa5:FontAwesome Icon="Solid_SignOutAlt"
+                                                     FontSize="44">
+                                        </fa5:FontAwesome>
+                                </Button>
+                            </StackPanel>
                     </Grid>
                 </Border>
                 <!-- - - - - - - - - - - - - - - - - - - - - -->

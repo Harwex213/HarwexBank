@@ -13,6 +13,7 @@ namespace HarwexBank
         private string _name;
 
         public virtual ICollection<AccountModel> Accounts { get; set; }
+        public virtual ICollection<CreditTypeModel> CreditTypes { get; set; }
         public int Id
         {
             get => _id;

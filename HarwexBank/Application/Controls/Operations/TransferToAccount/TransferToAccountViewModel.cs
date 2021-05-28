@@ -43,11 +43,15 @@ namespace HarwexBank
                         {
                             return "Введённый счёт не найден";
                         }
+                        if (AccountReceiver == AccountInitiator)
+                        {
+                            return "Введённые счёта не должны совпадать";
+                        }
                         break;
                     case nameof(AmountToTransfer):
-                        if (AmountToTransfer < 0)
+                        if (AmountToTransfer <= 0)
                         {
-                            return "Сумма не должна быть отрицательной";
+                            return "Сумма не должна быть меньше, либо равна нулю";
                         }
                         if (AmountToTransfer > AccountInitiator.Amount)
                         {
@@ -80,6 +84,11 @@ namespace HarwexBank
         // Methods.
         private void TransferToAccount()
         {
+            if (AccountInitiator.Amount < AmountToTransfer)
+            {
+                MessageBox.Show("Недостаточно средств");
+                return;
+            }
             AccountInitiator.Amount -= AmountToTransfer;
             AccountReceiver.Amount += AmountToTransfer;
             JournalModel journalNote = new TransferToAccountModel()

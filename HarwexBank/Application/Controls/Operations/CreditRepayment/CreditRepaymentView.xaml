@@ -45,7 +45,8 @@
                                         Style="{StaticResource FormLabel}"></TextBlock>
                                 <ComboBox ItemsSource="{Binding UserAccounts}"
                                           SelectedItem="{Binding AccountInitiator}"
-                                          SelectedIndex="0">
+                                          IsSynchronizedWithCurrentItem="True"
+                                          SelectedIndex="0" >
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding Id}"></TextBlock>
@@ -58,8 +59,7 @@
                                 <TextBlock Text="Выберите погашаемый кредит"
                                         Style="{StaticResource FormLabel}"></TextBlock>
                                 <ComboBox ItemsSource="{Binding UserCredits}"
-                                          SelectedItem="{Binding SelectedCredit}"
-                                          SelectedIndex="0">
+                                          SelectedItem="{Binding SelectedCredit}">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding CreditName}"></TextBlock>
@@ -75,7 +75,8 @@
                                     <TextBox.Text>
                                         <Binding Path="AmountToTransfer"
                                                  ValidatesOnExceptions="True"
-                                                 UpdateSourceTrigger="PropertyChanged">
+                                                 UpdateSourceTrigger="PropertyChanged"
+                                                 StringFormat="{}{0:#,#.00}">
                                             <Binding.ValidationRules>
                                                 <DataErrorValidationRule/>
                                             </Binding.ValidationRules>

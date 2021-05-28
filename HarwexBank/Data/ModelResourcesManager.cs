@@ -29,6 +29,8 @@ namespace HarwexBank
             _context.Operations.Load();
             _context.TransferToAccounts.Load();
             _context.CreditRepayments.Load();
+            
+            _context.Database.SetCommandTimeout(60);
         }
 
         public static ModelResourcesManager GetInstance()
@@ -76,8 +78,11 @@ namespace HarwexBank
         public ObservableCollection<CardModel> UserCards { get; private set; }
         public ObservableCollection<IssuedCreditModel> UserCredits { get; private set; }
         public ObservableCollection<JournalModel> UserJournal { get; private set; }
-        
+
         // Global Data.
+        private CurrencyConverter _currencyConverter;
+        public CurrencyConverter CurrencyConverter => _currencyConverter ??= new CurrencyConverter();
+
         private ObservableCollection<UserModel> _existedClients;
         private ObservableCollection<IssuedCreditModel> _allNonApprovedCredits;
         private ObservableCollection<JournalModel> _allJournal;
@@ -146,66 +151,62 @@ namespace HarwexBank
 
         public void AddModel(IModel model)
         {
-            _context.Add(model);
-            _context.SaveChangesAsync();
+            _context.AddAsync(model);
+            _context.SaveChanges();
         }
         
         public void UpdateModel(IModel model)
         {
             _context.Update(model);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public void RemoveModel(IModel model)
         {
             _context.Remove(model);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public void GenerateCreditRepayment(JournalModel note, AccountModel accountInitiator,
             IssuedCreditModel selectedCredit)
         {
-            using (var transaction = _context.Database.BeginTransaction())
+            using var transaction = _context.Database.BeginTransaction();
+            try
             {
-                try
-                {
-                    _context.Accounts.Update(accountInitiator);
-                    _context.IssuedCredits.Update(selectedCredit);
-                    GenerateJournalNote(note);
-                    transaction.Commit();
-                }
-                catch (Exception e)
-                {
-                    transaction.Rollback();
-                    MessageBox.Show(e.Message);
-                }
+                _context.Accounts.Update(accountInitiator);
+                _context.IssuedCredits.Update(selectedCredit);
+                GenerateJournalNote(note);
+                transaction.Commit();
+            }
+            catch (Exception e)
+            {
+                transaction.Rollback();
+                MessageBox.Show(e.Message);
             }
         }
         
         public void GenerateTransfer(JournalModel note, AccountModel accountInitiator,
             AccountModel accountReceiver)
         {
-            using (var transaction = _context.Database.BeginTransaction())
+            using var transaction = _context.Database.BeginTransaction();
+            try
             {
-                try
-                {
-                    _context.Accounts.Update(accountInitiator);
-                    _context.Accounts.Update(accountReceiver);
-                    GenerateJournalNote(note);
-                    transaction.CommitAsync();
-                }
-                catch (Exception e)
-                {
-                    transaction.Rollback();
-                    MessageBox.Show(e.Message);
-                }
+                _context.Accounts.Update(accountInitiator);
+                _context.Accounts.Update(accountReceiver);
+                GenerateJournalNote(note);
+                transaction.Commit();
+            }
+            catch (Exception e)
+            {
+                transaction.Rollback();
+                MessageBox.Show(e.Message);
             }
         }
 
         public void GenerateJournalNote(JournalModel operation)
         {
             _context.Journal.Add(operation);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
         
         #endregion

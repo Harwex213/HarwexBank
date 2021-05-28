@@ -43,9 +43,9 @@
                         <StackPanel>
                             <TextBlock Text="Выберите используемый счёт"
                                     Style="{StaticResource FormLabel}"></TextBlock>
-                            <ComboBox ItemsSource="{Binding UserAccounts}"
-                                      SelectedItem="{Binding AccountInitiator}"
-                                      SelectedIndex="0">
+                            <ComboBox Name="AccountIdUsed"
+                                      ItemsSource="{Binding UserAccounts}"
+                                      SelectedItem="{Binding AccountInitiator}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Id}"></TextBlock>
@@ -79,7 +79,8 @@
                                 <TextBox.Text>
                                     <Binding Path="AmountToTransfer"
                                              ValidatesOnExceptions="True"
-                                             UpdateSourceTrigger="PropertyChanged">
+                                             UpdateSourceTrigger="PropertyChanged"
+                                             StringFormat="{}{0:#,#.00}">
                                         <Binding.ValidationRules>
                                             <DataErrorValidationRule/>
                                         </Binding.ValidationRules>
@@ -92,7 +93,7 @@
                     <Grid Grid.Row="2">
                         <Button  Content="Оплатить"
                                  HorizontalAlignment="Center"
-                                 Command="{Binding RepayCreditCommand}">
+                                 Command="{Binding TransferToAccountCommand}">
                             <Button.Style>
                                 <Style TargetType="Button" BasedOn="{StaticResource SubmitFormButton}">
     
@@ -109,6 +110,14 @@
     
                                             <Setter Property="IsEnabled" Value="True"/>
     
+                                        </MultiDataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=SelectedIndex,
+                                                            ElementName=AccountIdUsed}" Value="-1"/>
+                                            </MultiDataTrigger.Conditions>
+    
+                                            <Setter Property="IsEnabled" Value="False"/>
                                         </MultiDataTrigger>
                                     </Style.Triggers>
                                                 

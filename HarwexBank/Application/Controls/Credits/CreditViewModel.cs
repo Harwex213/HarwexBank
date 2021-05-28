@@ -12,14 +12,14 @@ namespace HarwexBank
         public string Name => "Кредиты";
         public CreditViewModel()
         {
-            CreditToTaking = new IssuedCreditModel();
-
             switch (MainViewModel.WindowFactory)
             {
                 case ClientMainWindow:
                     // Using data.
                     UserApprovedCreditModels = ModelResourcesManager.GetInstance().UserCredits;
                     CreditTypeModels = ModelResourcesManager.GetInstance().ExistedCreditTypes;
+                    
+                    CreditToTaking = new IssuedCreditModel{ CreditTypeModelNavigation = CreditTypeModels[0] };
                     
                     // Using VM
                     ControlViewModels.Add(new CreditListViewModel());

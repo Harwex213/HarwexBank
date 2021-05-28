@@ -11,9 +11,6 @@ namespace HarwexBank
         public string Name => "Счета";
         public AccountViewModel()
         {
-            AccountToOpen = new AccountModel();
-            CardToCreate = new CardModel();
-            
             switch (MainViewModel.WindowFactory)
             {
                 case ClientMainWindow:
@@ -21,6 +18,9 @@ namespace HarwexBank
                     AccountModels = ModelResourcesManager.GetInstance().UserAccounts;
                     CurrencyTypeModels = ModelResourcesManager.GetInstance().ExistedCurrencyTypes;
                     CardTypeModels = ModelResourcesManager.GetInstance().ExistedCardTypes;
+                    
+                    AccountToOpen = new AccountModel{ CurrencyTypeModelNavigation = CurrencyTypeModels[0] };
+                    CardToCreate = new CardModel{ CardTypeModelNavigation = CardTypeModels[0] };
                     
                     // Using VM
                     ControlViewModels.Add(new AccountsListViewModel());

@@ -145,7 +145,7 @@ namespace HarwexBank
             // Columns.
             entity.Property(e => e.Amount).HasColumnType("money");
 
-            entity.Property(e => e.RegistrationDate).HasColumnType("date");
+            entity.Property(e => e.RegistrationDate).HasColumnType("datetime");
 
             // References.
             entity.HasOne(d => d.CurrencyTypeModelNavigation)
@@ -216,7 +216,7 @@ namespace HarwexBank
             entity.Property(e => e.Amount).HasColumnType("money");
             entity.Property(e => e.RepaidAmount).HasColumnType("money");
 
-            entity.Property(e => e.DateIn).HasColumnType("date");
+            entity.Property(e => e.DateIn).HasColumnType("datetime");
 
             // References.
             entity.HasOne(d => d.CreditTypeModelNavigation)
@@ -233,17 +233,32 @@ namespace HarwexBank
         private void CreditTypeConfigure(EntityTypeBuilder<CreditTypeModel> entity)
         {
             entity.ToTable("CREDIT_TYPE");
-
+            
             // Columns.
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(50);
+            entity.Property(e => e.Rate).IsRequired();
+
+            entity.Property(e => e.MinimalTerm).IsRequired();
+            entity.Property(e => e.MaximalTerm).IsRequired();
+
+            entity.Property(e => e.MinimalTakingAmount).IsRequired().HasColumnType("money");
+            entity.Property(e => e.MaximalTakingAmount).IsRequired().HasColumnType("money");
+            
+            // References.
+            entity.HasOne(d => d.CurrencyTypeModelNavigation)
+                .WithMany(p => p.CreditTypes)
+                .HasForeignKey(d => d.CreditCurrencyType)
+                .HasPrincipalKey(t=> t.Name)
+                .HasConstraintName("CREDIT_TYPE_CURRENCY_FK");
         }
         private void JournalConfigure(EntityTypeBuilder<JournalModel> entity)
         {
             entity.ToTable("JOURNAL");
 
-            entity.Property(e => e.Date).IsRequired();
+            entity.Property(e => e.Date).IsRequired().HasColumnType("datetime");
+            
             // References.
             entity.HasOne(d => d.UserIdNavigation)
                 .WithMany(p => p.Journal)
@@ -265,7 +280,6 @@ namespace HarwexBank
             // Columns.
             entity.Property(e => e.Amount).HasColumnType("money");
 
-            entity.Property(e => e.Date).HasColumnType("date");
             
             // References.
             entity.HasOne(d => d.BankAccountModelInitiatorNavigation)
@@ -426,9 +440,36 @@ namespace HarwexBank
             
             CreditTypes.AddRange(new List<CreditTypeModel>
             {
-                new() {Name = "Студенческий", Rate = 0.13m },
-                new() {Name = "Потребительский", Rate = 0.25m},
-                new() {Name = "Корпоративный", Rate = 0.1m}
+                new()
+                {
+                    Name = "Студенческий",
+                    Rate = 0.13m,
+                    MinimalTerm = 12,
+                    MaximalTerm = 36,
+                    MinimalTakingAmount = 500,
+                    MaximalTakingAmount = 10000,
+                    CreditCurrencyType = "BYN"
+                },
+                new()
+                {
+                    Name = "Потребительский", 
+                    Rate = 0.25m,
+                    MinimalTerm = 6,
+                    MaximalTerm = 48,
+                    MinimalTakingAmount = 500,
+                    MaximalTakingAmount = 10000,
+                    CreditCurrencyType = "BYN"
+                },
+                new()
+                {
+                    Name = "Корпоративный",
+                    Rate = 0.1m,
+                    MinimalTerm = 24,
+                    MaximalTerm = 60, 
+                    MinimalTakingAmount = 5000, 
+                    MaximalTakingAmount = 10000,
+                    CreditCurrencyType = "USD"
+                }
             });
             
             IssuedCredits.AddRange(new List<IssuedCreditModel>
@@ -438,7 +479,7 @@ namespace HarwexBank
                     UserId = userOleg.Id,
                     CreditType = "Корпоративный",
                     DateIn = DateTime.Today,
-                    Term = 5,
+                    Term = 32,
                     Amount = 20000m,
                     IsApproved = true,
                     IsRepaid = false
@@ -448,7 +489,7 @@ namespace HarwexBank
                     UserId = userOleg.Id,
                     CreditType = "Студенческий",
                     DateIn = DateTime.Today,
-                    Term = 2,
+                    Term = 16,
                     Amount = 4000m,
                     IsApproved = false,
                     IsRepaid = false

@@ -125,15 +125,15 @@ namespace HarwexBank
                 switch (name)
                 {
                     case nameof(Amount):
-                        if (Amount is < 0 or > 100000)
+                        if (Amount < CreditTypeModelNavigation.MinimalTakingAmount || Amount > CreditTypeModelNavigation.MaximalTakingAmount)
                         {
-                            result = "Сумма должна быть от 0 до 100000";
+                            result = $"Сумма должна быть от {CreditTypeModelNavigation.MinimalTakingAmount} до {CreditTypeModelNavigation.MaximalTakingAmount}";
                         }
                         break;
                     case nameof(Term):
-                        if (Term is < 0 or > 10)
+                        if (Term < CreditTypeModelNavigation.MinimalTerm || Term > CreditTypeModelNavigation.MaximalTerm)
                         {
-                            result = "Срок должен быть от 0 до 10";
+                            result = $"Срок должен быть от {CreditTypeModelNavigation.MinimalTerm} до {CreditTypeModelNavigation.MaximalTerm}";
                         }
                         break;
                 }

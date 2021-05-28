@@ -112,6 +112,15 @@
                                                 <TextBlock Style="{StaticResource InfoBigText}"
                                            Text="{Binding SelectedCard.CardType}"/>
                                             </StackPanel>
+                                            <StackPanel Style="{StaticResource InfoCell}">
+                                                <Button Style="{StaticResource InnerButton}"
+                                                        Margin="0"
+                                                        Command="{Binding DeleteCardCommand}"
+                                                        CommandParameter="{Binding SelectedCard}">
+                                                    <TextBlock Text="Удалить карту"
+                                                               TextWrapping="Wrap"></TextBlock>
+                                                </Button>
+                                            </StackPanel>
                                         </WrapPanel>
                                     </Border>
                                     <Border Grid.Row="1" 
@@ -237,7 +246,8 @@
                                     <StackPanel>
                                         <TextBlock Text="Тип создаваемой карты"
                                                 Style="{StaticResource FormLabel}"></TextBlock>
-                                        <ComboBox ItemsSource="{Binding CardTypeModels}"
+                                        <ComboBox Name="CardType"
+                                                  ItemsSource="{Binding CardTypeModels}"
                                                   SelectedIndex="0"
                                                   SelectedItem="{Binding CardToCreate.CardTypeModelNavigation}">
                                             <ComboBox.ItemTemplate>
@@ -251,7 +261,8 @@
                                     <StackPanel>
                                         <TextBlock Text="Счёт, к которому следует привязать"
                                                    Style="{StaticResource FormLabel}"></TextBlock>
-                                        <ComboBox ItemsSource="{Binding UserAccounts}"
+                                        <ComboBox Name="AccountToConnect"
+                                                  ItemsSource="{Binding UserAccounts}"
                                                   SelectedIndex="0"
                                                   SelectedItem="{Binding SelectedAccountToAdd}">
                                             <ComboBox.ItemTemplate>
@@ -283,9 +294,26 @@
                                     </Button>
                                     <Button Grid.Column="1"
                                             HorizontalAlignment="Center"
-                                            Style="{StaticResource SubmitFormButton}"
                                             Command="{Binding CreateNewCardCommand}"
                                             Content="Создать">
+                                        <Button.Style>
+                                            <Style TargetType="Button" BasedOn="{StaticResource SubmitFormButton}">
+    
+                                                <Setter Property="IsEnabled" Value="True"/>
+    
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=SelectedIndex,
+                                                    ElementName=AccountToConnect}" Value="-1">
+                                                        <Setter Property="IsEnabled" Value="False"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=SelectedIndex, 
+                                                    ElementName=CardType}" Value="-1">
+                                                        <Setter Property="IsEnabled" Value="False"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                                
+                                            </Style>
+                                        </Button.Style>
                                     </Button>
                                 </Grid>
                             </Grid>
