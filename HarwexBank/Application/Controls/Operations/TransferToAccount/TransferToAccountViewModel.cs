@@ -80,6 +80,11 @@ namespace HarwexBank
         // Methods.
         private void TransferToAccount()
         {
+            if (AccountInitiator.Amount < AmountToTransfer)
+            {
+                MessageBox.Show("Недостаточно средств");
+                return;
+            }
             AccountInitiator.Amount -= AmountToTransfer;
             AccountReceiver.Amount += AmountToTransfer;
             JournalModel journalNote = new TransferToAccountModel()

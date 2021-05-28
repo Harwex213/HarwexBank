@@ -104,6 +104,11 @@ namespace HarwexBank
         // Methods.
         private void RepayCredit()
         {
+            if (AccountInitiator.Amount < AmountToTransfer)
+            {
+                MessageBox.Show("Недостаточно средств");
+                return;
+            }
             AccountInitiator.Amount -= AmountToTransfer;
             SelectedCredit.RepaidAmount += AmountToTransfer;
             if (SelectedCredit.RepaidAmount == SelectedCredit.Amount)

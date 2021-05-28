@@ -92,7 +92,7 @@
                     <Grid Grid.Row="2">
                         <Button  Content="Оплатить"
                                  HorizontalAlignment="Center"
-                                 Command="{Binding RepayCreditCommand}">
+                                 Command="{Binding TransferToAccountCommand}">
                             <Button.Style>
                                 <Style TargetType="Button" BasedOn="{StaticResource SubmitFormButton}">
     
