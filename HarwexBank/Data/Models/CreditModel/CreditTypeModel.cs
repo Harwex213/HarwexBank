@@ -15,6 +15,13 @@ namespace HarwexBank
         private int _id;
         private string _name;
         private decimal _ratio;
+        private int _minimalTerm;
+        private int _maximalTerm;
+        private decimal _minimalTakingAmount;
+        private decimal _maximalTakingAmount;
+        private string _creditCurrencyType;
+
+        public virtual CurrencyTypeModel CurrencyTypeModelNavigation { get; set; }
         public virtual ICollection<IssuedCreditModel> IssuedCredits { get; set; }
         public int Id
         {
@@ -44,6 +51,36 @@ namespace HarwexBank
                 _ratio = value;
                 OnPropertyChanged("Rate");
             }
+        }
+        
+        public int MinimalTerm
+        {
+            get => _minimalTerm;
+            set => Set(ref _minimalTerm, value);
+        }
+
+        public int MaximalTerm
+        {
+            get => _maximalTerm;
+            set => Set(ref _maximalTerm, value);
+        }
+
+        public decimal MinimalTakingAmount
+        {
+            get => _minimalTakingAmount;
+            set => Set(ref _minimalTakingAmount, value);
+        }
+
+        public decimal MaximalTakingAmount
+        {
+            get => _maximalTakingAmount;
+            set => Set(ref _maximalTakingAmount, value);
+        }
+
+        public string CreditCurrencyType
+        {
+            get => _creditCurrencyType;
+            set => Set(ref _creditCurrencyType, value);
         }
 
         #region Data Validation
