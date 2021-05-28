@@ -48,7 +48,11 @@
                                       SelectedItem="{Binding AccountInitiator}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Id}"></TextBlock>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Id}"></TextBlock>
+                                            <TextBlock Text=", "></TextBlock>
+                                            <TextBlock Text="{Binding CurrencyType}"></TextBlock>
+                                        </StackPanel>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
@@ -72,7 +76,7 @@
                         </StackPanel>
             
                         <StackPanel>
-                            <TextBlock Text="Выберите валюты операции"
+                            <TextBlock Text="Выберите валюту операции"
                                        Style="{StaticResource FormLabel}"></TextBlock>
                             <ComboBox Name="CurrencyType"
                                       ItemsSource="{Binding CurrencyTypeModels}"

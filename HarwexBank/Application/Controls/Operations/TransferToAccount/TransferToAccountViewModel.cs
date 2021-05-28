@@ -28,7 +28,7 @@ namespace HarwexBank
         public int AccountReceiverId { get; set; }
         public CurrencyTypeModel OperationCurrencyType { get; set; }
         public decimal AmountToTransfer { get; set; }
-        
+
         // Data Validation.
         public string Error => null;
 
