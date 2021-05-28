@@ -7,6 +7,8 @@ namespace HarwexBank
         public CurrencyTypeModel()
         {
             Accounts = new HashSet<AccountModel>();
+            CreditTypes = new HashSet<CreditTypeModel>();
+            OperationModels = new HashSet<OperationModel>();
         }
 
         private int _id;
@@ -14,6 +16,7 @@ namespace HarwexBank
 
         public virtual ICollection<AccountModel> Accounts { get; set; }
         public virtual ICollection<CreditTypeModel> CreditTypes { get; set; }
+        public virtual ICollection<OperationModel> OperationModels { get; set; }
         public int Id
         {
             get => _id;

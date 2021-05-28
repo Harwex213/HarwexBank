@@ -286,6 +286,11 @@ namespace HarwexBank
                 .WithMany(p => p.Operations)
                 .HasForeignKey(d => d.BankAccountInitiator)
                 .HasConstraintName("OPERATION_ACCOUNT_INIT_FK");
+            
+            entity.HasOne(d => d.CurrencyTypeModelNavigation)
+                .WithMany(p => p.OperationModels)
+                .HasForeignKey(d => d.OperationCurrencyType)
+                .HasConstraintName("OPERATION_CURRENCY_TYPE_FK");
         }
         private void CreditRepaymentConfigure(EntityTypeBuilder<CreditRepaymentModel> entity)
         {

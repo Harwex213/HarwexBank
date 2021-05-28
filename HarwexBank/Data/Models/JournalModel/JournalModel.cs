@@ -37,8 +37,10 @@ namespace HarwexBank
     {
         public int BankAccountInitiator { get; set; }
         public decimal Amount { get; set; }
+        public string OperationCurrencyType { get; set; }
 
         public virtual AccountModel BankAccountModelInitiatorNavigation { get; set; }
+        public virtual CurrencyTypeModel CurrencyTypeModelNavigation { get; set; }
     }
     
     public partial class TransferToAccountModel : OperationModel
