@@ -21,8 +21,7 @@ namespace HarwexBank.Parser
         }
 
         public bool IsActive { get; private set; }
-
-
+        
         public event Action<object, T> OnNewData;
         public event Action<object> OnCompleted;
 
@@ -49,23 +48,20 @@ namespace HarwexBank.Parser
 
         private async void Worker()
         {
-            for(var i = _parserSettings.StartPoint; i <= _parserSettings.EndPoint; i++)
+            if (!IsActive)
             {
-                if (!IsActive)
-                {
-                    OnCompleted?.Invoke(this);
-                    return;
-                }
-
-                var source = await _loader.GetSource();
-                var domParser = new HtmlParser();
-
-                var document = await domParser.ParseDocumentAsync(source);
-
-                var result = Parser.Parse(document);
-
-                OnNewData?.Invoke(this, result);
+                OnCompleted?.Invoke(this);
+                return;
             }
+
+            var source = await _loader.GetSource();
+            var domParser = new HtmlParser();
+
+            var document = await domParser.ParseDocumentAsync(source);
+
+            var result = Parser.Parse(document);
+
+            OnNewData?.Invoke(this, result);
 
             OnCompleted?.Invoke(this);
             IsActive = false;
