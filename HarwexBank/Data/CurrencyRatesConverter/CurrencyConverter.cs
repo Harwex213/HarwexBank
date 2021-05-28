@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Controls;
 using HarwexBank.Parser;
 using HarwexBank.Parser.MyFin;
 
@@ -7,8 +8,8 @@ namespace HarwexBank
 {
     public class CurrencyConverter : ICurrencyRatesSubject
     {
-        public const int UsdToBynIndex = 0;
-        public const int RubToBynIndex = 2;
+        public const string UsdRateName = "Доллар США";
+        public const string RubRateName = "Российский рубль";
 
         private readonly List<ICurrencyRatesObserver> _observers;
 
@@ -16,13 +17,13 @@ namespace HarwexBank
         {
             _observers = new List<ICurrencyRatesObserver>();
             
-            var parser = new ParserWorker<string[]>(new MyFinCurrencyRatesParser());
+            var parser = new ParserWorker<Dictionary<string, string>>(new MyFinCurrencyRatesParser());
 
             parser.OnCompleted += _ => { };
             parser.OnNewData += (_, data) =>
             {
-                UsdToBynRate = Convert.ToDecimal(data[UsdToBynIndex]);
-                RubToBynRate = Convert.ToDecimal(data[RubToBynIndex]);
+                UsdToBynRate = Convert.ToDecimal(data[UsdRateName]);
+                RubToBynRate = Convert.ToDecimal(data[RubRateName]);
 
                 Notify();
             };
