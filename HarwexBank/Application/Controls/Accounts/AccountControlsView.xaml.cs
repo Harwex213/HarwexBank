@@ -66,7 +66,6 @@ namespace HarwexBank
                     return;
                 
                 Grid.SetRow(((Grid)sender).Children[1], 2);
-                ((FrameworkElement) ((Grid) sender).Children[1]).Margin = new Thickness(0, 8.5, 0, 0);
                 
                 ((Grid) sender).ColumnDefinitions.RemoveAt(1);
             }
@@ -80,7 +79,6 @@ namespace HarwexBank
                     {Width = (GridLength) new GridLengthConverter().ConvertFrom("Auto")});
                 
                 Grid.SetRow(((Grid)sender).Children[1], 1);
-                ((FrameworkElement) ((Grid) sender).Children[1]).Margin = new Thickness(0);
             }
         }
     }

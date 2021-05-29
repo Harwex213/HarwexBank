@@ -172,6 +172,7 @@ namespace HarwexBank
         {
             account.IsFrozen = !account.IsFrozen;
             ModelResourcesManager.GetInstance().UpdateModel(account);
+            account.IsAccountFrozen = account.IsFrozen.ToString();
 
             switch (account.FreezeButtonText)
             {

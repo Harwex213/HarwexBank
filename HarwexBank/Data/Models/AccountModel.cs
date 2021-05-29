@@ -19,6 +19,19 @@ namespace HarwexBank
         private DateTime _registrationDate;
         private decimal _amount;
         private bool _isFrozen;
+        
+        private string _isAccountFrozen;
+        
+        [NotMapped]
+        public string IsAccountFrozen
+        {
+            get => _isFrozen switch
+            {
+                true => "Счёт заморожен",
+                false => null
+            };
+            set => Set(ref _isAccountFrozen, value);
+        }
 
         public virtual CurrencyTypeModel CurrencyTypeModelNavigation { get; set; }
         public virtual UserModel UserModelAccount { get; set; }
@@ -94,12 +107,12 @@ namespace HarwexBank
         [NotMapped]
         public string FreezeButtonText
         {
-            get { return _freezeButtonText ??= "Заморозить счёт"; }
-            set
+            get => _isFrozen switch
             {
-                _freezeButtonText = value;
-                OnPropertyChanged("FreezeButtonText"); 
-            }
+                true => "Разморозить счёт",
+                false => "Заморозить счёт"
+            };
+            set => Set(ref _freezeButtonText, value);
         }
         
         public static bool CheckAccountAmountToPossibilityOfTransfer(CurrencyTypeModel.CurrencyTypes currencyTarget,

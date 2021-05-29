@@ -8,90 +8,132 @@
     
     <!-- GENERAL INFO -->
     <Grid x:Key="AccountGeneralInfo" x:Shared="False">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Grid.Column="1"
+                           Style="{StaticResource InfoTextReverse}"
+                           Margin="0"
+                           Foreground="#ed2626"
+                           Text="{Binding IsAccountFrozen}"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="1">
-            <TextBlock Style="{StaticResource TittleText}"
-                       Text="Номер счёта"/>
-            <TextBlock Style="{StaticResource InfoText}"
-                       Text="{Binding Id}"/>
-        </StackPanel>
-        <StackPanel Grid.Row="0" Grid.Column="3">
-            <TextBlock Style="{StaticResource TittleText}"
-                       Text="Дата открытия счёта"/>
-            <TextBlock Style="{StaticResource InfoText}"
-                       Text="{Binding RegistrationDate, StringFormat=d}"/>
-        </StackPanel>
-        <StackPanel Grid.Row="0" Grid.Column="5">
-            <TextBlock Style="{StaticResource TittleText}"
-                       Text="Остаток на счёте"/>
-            <TextBlock Style="{StaticResource InfoText}"
-                       Text="{Binding Amount}"/>
-        </StackPanel>
-        <StackPanel Grid.Row="0" Grid.Column="7">
-            <TextBlock Style="{StaticResource TittleText}"
-                       Text="Валюта счёта"/>
-            <TextBlock Style="{StaticResource InfoText}"
-                       Text="{Binding CurrencyType}"/>
-        </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1">
+                    <TextBlock Style="{StaticResource TittleText}"
+                               Text="Номер счёта"/>
+                    <TextBlock Style="{StaticResource InfoText}"
+                               Text="{Binding Id}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="3">
+                    <TextBlock Style="{StaticResource TittleText}"
+                               Text="Дата открытия счёта"/>
+                    <TextBlock Style="{StaticResource InfoText}"
+                               Text="{Binding RegistrationDate, StringFormat=d}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="5">
+                    <TextBlock Style="{StaticResource TittleText}"
+                               Text="Остаток на счёте"/>
+                    <TextBlock Style="{StaticResource InfoText}"
+                               Text="{Binding Amount}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="7">
+                    <TextBlock Style="{StaticResource TittleText}"
+                               Text="Валюта счёта"/>
+                    <TextBlock Style="{StaticResource InfoText}"
+                               Text="{Binding CurrencyType}"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
     </Grid>
     
-    <Grid x:Key="AccountGeneralInfoSmall" x:Shared="False"
-          SizeChanged="GeneralInfo_OnSizeChanged">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+    <Grid x:Key="AccountGeneralInfoSmall" x:Shared="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+                
+            <TextBlock Grid.Column="1"
+                       Style="{StaticResource InfoTextReverse}"
+                       Margin="0"
+                       Foreground="#ed2626"
+                       Text="{Binding IsAccountFrozen}"/>
+        </Grid>
+        <Grid Grid.Row="1"
+              SizeChanged="GeneralInfo_OnSizeChanged">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="1">
-            <TextBlock Style="{StaticResource TittleText}"
-                       Text="Номер счёта"/>
-            <TextBlock Style="{StaticResource InfoText}"
-                       Text="{Binding Id}"/>
-        </StackPanel>
-        <StackPanel Grid.Row="0" Grid.Column="3">
-            <TextBlock Style="{StaticResource TittleText}"
-                       Text="Дата открытия счёта"/>
-            <TextBlock Style="{StaticResource InfoText}"
-                       Text="{Binding RegistrationDate, StringFormat=d}"/>
-        </StackPanel>
-        <StackPanel Grid.Row="0" Grid.Column="5">
-            <TextBlock Style="{StaticResource TittleText}"
-                       Text="Остаток на счёте"/>
-            <TextBlock Style="{StaticResource InfoText}"
-                       Text="{Binding Amount}"/>
-        </StackPanel>
-        <StackPanel Grid.Row="0" Grid.Column="7">
-            <TextBlock Style="{StaticResource TittleText}"
-                       Text="Валюта счёта"/>
-            <TextBlock Style="{StaticResource InfoText}"
-                       Text="{Binding CurrencyType}"/>
-        </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="1">
+                <TextBlock Style="{StaticResource TittleText}"
+                           Text="Номер счёта"/>
+                <TextBlock Style="{StaticResource InfoText}"
+                           Text="{Binding Id}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="3">
+                <TextBlock Style="{StaticResource TittleText}"
+                           Text="Дата открытия счёта"/>
+                <TextBlock Style="{StaticResource InfoText}"
+                           Text="{Binding RegistrationDate, StringFormat=d}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="5">
+                <TextBlock Style="{StaticResource TittleText}"
+                           Text="Остаток на счёте"/>
+                <TextBlock Style="{StaticResource InfoText}"
+                           Text="{Binding Amount}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="7">
+                <TextBlock Style="{StaticResource TittleText}"
+                           Text="Валюта счёта"/>
+                <TextBlock Style="{StaticResource InfoText}"
+                           Text="{Binding CurrencyType}"/>
+            </StackPanel>
+        </Grid>
     </Grid>
     
     <!-- CARDS INFO -->
@@ -265,9 +307,9 @@
                     </ContentControl>
 
                     <StackPanel Grid.Column="1" Grid.Row="1"
-                            VerticalAlignment="Bottom"
-                            HorizontalAlignment="Center"
-                            Margin="22.5, 0, 22.5, 22.5">
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Center"
+                                Margin="22.5, 0, 22.5, 22.5">
                         <ContentControl Content="{StaticResource FreezeAccount}"></ContentControl>
                     </StackPanel>
                 </Grid>

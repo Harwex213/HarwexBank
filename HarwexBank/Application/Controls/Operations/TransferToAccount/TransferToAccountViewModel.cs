@@ -93,6 +93,17 @@ namespace HarwexBank
         // Methods.
         private void TransferToAccount()
         {
+            if (AccountInitiator.IsFrozen)
+            {
+                MessageBox.Show("Счёт отправителя заморожен");
+                return;
+            }
+            if (AccountReceiver.IsFrozen)
+            {
+                MessageBox.Show("Счёт получателя заморожен");
+                return;
+            }
+            
             if (!AccountModel.CheckAccountAmountToPossibilityOfTransfer(
                 AccountInitiator.CurrencyTypeModelNavigation.CurrencyTypeEnum,
                 OperationCurrencyType.CurrencyTypeEnum,
