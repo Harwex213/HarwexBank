@@ -35,17 +35,20 @@ namespace HarwexBank
             ControlViewModels.Add(new UpdateExistedCreditTypeViewModel());
 
             SelectedControlViewModel = ControlViewModels.FirstOrDefault();
+            
+            CurrencyTypeModels = ModelResourcesManager.GetInstance().ExistedCurrencyTypes;
 
             InitializeNewData();
         }
 
+        public ObservableCollection<CurrencyTypeModel> CurrencyTypeModels { get; }
         public ObservableCollection<CreditTypeModel> ExistedCreditTypes { get; set; }
         public CreditTypeModel SelectedCreditType { get; set; }
         public CreditTypeModel CreditTypeToCreate { get; set; }
 
         private void InitializeNewData()
         {
-            CreditTypeToCreate = new CreditTypeModel();
+            CreditTypeToCreate = new CreditTypeModel{ CurrencyTypeModelNavigation = CurrencyTypeModels[0] };
         }
 
         #region Commands

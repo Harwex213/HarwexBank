@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Windows;
 using HarwexBank.Parser;
 using HarwexBank.Parser.MyFin;
 

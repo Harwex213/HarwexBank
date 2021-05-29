@@ -109,6 +109,46 @@ namespace HarwexBank
                             return "Процентная ставка должна быть не больше 1 и не меньше 0";
                         }
                         break;
+                    case nameof(MinimalTerm):
+                        if (MinimalTerm <= 0 )
+                        {
+                            return "Минимальный срок должен не меньше 0";
+                        }
+                        if (MaximalTerm <= MinimalTerm)
+                        {
+                            return "Минимальный срок не должен быть больше максимального";
+                        }
+                        break;
+                    case nameof(MaximalTerm):
+                        if (MaximalTerm <=0)
+                        {
+                            return "Минимальный срок должен не меньше 0";
+                        }
+                        if (MaximalTerm <= MinimalTerm)
+                        {
+                            return "Минимальный срок не должен быть больше максимального";
+                        }
+                        break;
+                    case nameof(MinimalTakingAmount):
+                        if (MinimalTakingAmount <=0)
+                        {
+                            return "Минимальный срок должен быть не меньше 0";
+                        }
+                        if (MaximalTakingAmount <= MinimalTakingAmount)
+                        {
+                            return "Минимальная сумма не должна быть больше максимальной";
+                        }
+                        break;
+                    case nameof(MaximalTakingAmount):
+                        if (MaximalTakingAmount <=0)
+                        {
+                            return "Минимальный срок должен быть не меньше 0";
+                        }
+                        if (MaximalTakingAmount <= MinimalTakingAmount)
+                        {
+                            return "Минимальная сумма не должна быть больше максимальной";
+                        }
+                        break;
                 }
 
                 return null;

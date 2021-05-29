@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using AngleSharp.Html.Parser;
 
 namespace HarwexBank.Parser
@@ -48,25 +49,32 @@ namespace HarwexBank.Parser
 
         private async void Worker()
         {
-            if (!IsActive)
+            try
             {
+                if (!IsActive)
+                {
+                    OnCompleted?.Invoke(this);
+                    return;
+                }
+
+                var source = await _loader.GetSource();
+                var domParser = new HtmlParser();
+
+                var document = await domParser.ParseDocumentAsync(source);
+
+                var result = Parser.Parse(document);
+
+                OnNewData?.Invoke(this, result);
+
                 OnCompleted?.Invoke(this);
-                return;
+                IsActive = false;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Курсы валют не были получены");
             }
 
-            var source = await _loader.GetSource();
-            var domParser = new HtmlParser();
-
-            var document = await domParser.ParseDocumentAsync(source);
-
-            var result = Parser.Parse(document);
-
-            OnNewData?.Invoke(this, result);
-
-            OnCompleted?.Invoke(this);
-            IsActive = false;
         }
-
 
     }
 }
