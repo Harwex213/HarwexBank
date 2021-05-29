@@ -19,8 +19,6 @@ namespace HarwexBank
         {
             switch (MainViewModel.WindowFactory)
             {
-                case AdminMainWindow:
-                    break;
                 case ClientMainWindow:
                     Journal = ModelResourcesManager.GetInstance().UserJournal;
                     
@@ -29,6 +27,7 @@ namespace HarwexBank
                     ControlViewModels.Add(new CreditRepaymentTabViewModel(this));
                     ControlViewModels.Add(new NotificationTabViewModel(this));
                     break;
+                case AdminMainWindow:
                 case WorkerMainWindow:
                     Journal = ModelResourcesManager.GetInstance().AllJournal;
                     

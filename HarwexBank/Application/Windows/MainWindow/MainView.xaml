@@ -40,7 +40,7 @@
                         <local:JournalWorkerView />
                 </DataTemplate>
                 
-                <!-- WORKER PAGES -->
+                <!-- MANAGER PAGES -->
                 <DataTemplate DataType="{x:Type local:CreditsAdminPageViewModel}">
                         <local:CreditsAdminPageView />
                 </DataTemplate>
@@ -163,13 +163,17 @@
                             <DataTemplate> 
              
                                 <ToggleButton Name="LeftBarToggleButton" 
-                                              Style="{StaticResource LeftBarButtonStyle}" 
-                                              Content="{Binding Name}"
+                                              Style="{StaticResource LeftBarButtonStyle}"
                                               Command="{Binding DataContext.ChangeControlCommand,
                                               RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                                               CommandParameter="{Binding }"
                                               Click="LeftBarToggleButton_OnClick"
-                                              Loaded="LeftBarToggleButton_OnLoaded"> 
+                                              Loaded="LeftBarToggleButton_OnLoaded">
+                                    <ToggleButton.Content>
+                                        <TextBlock Text="{Binding Name}" 
+                                                   TextAlignment="Center"
+                                                   TextWrapping="WrapWithOverflow"></TextBlock>
+                                    </ToggleButton.Content>
                                 </ToggleButton>
              
                             </DataTemplate> 

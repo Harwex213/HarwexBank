@@ -27,6 +27,7 @@ namespace HarwexBank
                     ControlViewModels.Add(new CreateNewAccountViewModel());
                     break;
                 
+                case AdminMainWindow:
                 case WorkerMainWindow:
                     
                     // Using VM

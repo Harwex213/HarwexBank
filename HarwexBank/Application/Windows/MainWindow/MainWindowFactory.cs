@@ -26,7 +26,10 @@ namespace HarwexBank
         {
             return new()
             {
-                new CreditsAdminPageViewModel()
+                new CreditsAdminPageViewModel(),
+                new CreditsWorkerPageViewModel(),
+                new ClientsViewModel(),
+                new JournalWorkerViewModel()
             };
         }
     }

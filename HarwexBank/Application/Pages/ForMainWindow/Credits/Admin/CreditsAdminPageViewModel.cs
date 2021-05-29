@@ -24,7 +24,7 @@ namespace HarwexBank
     
     public class CreditsAdminPageViewModel : BaseControlViewModel, IControlViewModel
     {
-        public string Name => "Кредиты";
+        public string Name => "Виды Кредитов";
 
         public CreditsAdminPageViewModel()
         {

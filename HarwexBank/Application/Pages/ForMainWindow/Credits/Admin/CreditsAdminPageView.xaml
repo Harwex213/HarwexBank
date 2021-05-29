@@ -8,15 +8,6 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         
-        <DataTemplate DataType="{x:Type local:CreditTypesListViewModel}">
-            <Grid DataContext="{Binding DataContext,
-                RelativeSource={RelativeSource AncestorType=UserControl}}">
-                
-
-                
-            </Grid>
-        </DataTemplate>
-        
         <!-- - - - - - - - - - - - - - - - - - - - - - -->
         <!-- CREDIT TYPE LISTS -->
         <DataTemplate DataType="{x:Type local:CreditTypesListViewModel}">
