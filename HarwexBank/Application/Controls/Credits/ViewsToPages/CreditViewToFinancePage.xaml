@@ -90,7 +90,13 @@
                                                   SelectedValue="{Binding CreditToTaking.CreditTypeModelNavigation}">
                                             <ComboBox.ItemTemplate>
                                                 <DataTemplate>
-                                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                                    <WrapPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                                        <TextBlock Text=", "></TextBlock>
+                                                        <TextBlock Text="{Binding Rate}"></TextBlock>
+                                                        <TextBlock Text="% годовых, "></TextBlock>
+                                                        <TextBlock Text="{Binding CreditCurrencyType}"></TextBlock>
+                                                    </WrapPanel>
                                                 </DataTemplate>
                                             </ComboBox.ItemTemplate>
                                         </ComboBox>

@@ -62,7 +62,21 @@
                                           SelectedItem="{Binding SelectedCredit}">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding CreditName}"></TextBlock>
+                                            <StackPanel Orientation="Vertical"
+                                                        HorizontalAlignment="Center">
+                                                <StackPanel Orientation="Horizontal"
+                                                            HorizontalAlignment="Center">
+                                                    <TextBlock Text="Кредит номер "></TextBlock>
+                                                    <TextBlock Text="{Binding Id}"></TextBlock>
+                                                    <TextBlock Text=", "></TextBlock>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal"
+                                                            HorizontalAlignment="Center">
+                                                    <TextBlock Text="{Binding CreditTypeModelNavigation.Name}"></TextBlock>
+                                                    <TextBlock Text=", "></TextBlock>
+                                                    <TextBlock Text="{Binding CreditTypeModelNavigation.CreditCurrencyType}"></TextBlock>
+                                                </StackPanel>
+                                            </StackPanel>
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
