@@ -14,36 +14,119 @@
             <Grid DataContext="{Binding DataContext,
                 RelativeSource={RelativeSource AncestorType=UserControl}}">
                 
-                <StackPanel>
-                    <Button Content="Создать новый вид кредита"
-                            Command="{Binding GoToCreateNewCreditTypeCommand}"></Button>
-                            
-                    <ItemsControl ItemsSource="{Binding ExistedCreditTypes}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                                                            
+                        <Button Grid.Row="0" 
+                                Style="{StaticResource OuterButton}"
+                                Margin="15"
+                                Content="Создать новый вид кредита"
+                                Command="{Binding GoToCreateNewCreditTypeCommand}"></Button>
                         
-                                <Button Background="#3D89A1"
-                                        Command="{Binding DataContext.SelectCreditTypeCommand,
-                                RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                        CommandParameter="{Binding }">
-                                    <StackPanel Orientation="Horizontal">
-                                            
-                                        <StackPanel>
-                                            <TextBlock Text="Название"></TextBlock>
-                                            <TextBlock Text="{Binding Name}"></TextBlock>
-                                        </StackPanel>
-                                            
-                                        <StackPanel>
-                                            <TextBlock Text="Ставка"></TextBlock>
-                                            <TextBlock Text="{Binding Rate}"></TextBlock>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Button>
                         
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
+                        <ItemsControl Grid.Row="1" 
+                                      ItemsSource="{Binding ExistedCreditTypes}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                
+                                    <Grid Margin="30, 0, 30, 15">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        
+                                        <Button Grid.Row="0"
+                                                Style="{StaticResource ClientBlock}"
+                                                Command="{Binding DataContext.SelectCreditTypeCommand,
+                                                RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                                CommandParameter="{Binding }">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"></RowDefinition>
+                                                    <RowDefinition Height="Auto"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                
+                                                <Grid Grid.Row="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+                                                    
+                                                    <StackPanel Grid.Row="0" Grid.Column="1">
+                                                        <TextBlock Style="{StaticResource TittleText}"
+                                                                   Text="Название"/>
+                                                        <TextBlock Style="{StaticResource InfoText}"
+                                                                   Text="{Binding Name}"/>
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Row="0" Grid.Column="3">
+                                                        <TextBlock Style="{StaticResource TittleText}"
+                                                                   Text="Ставка кредита"/>
+                                                        <TextBlock Style="{StaticResource InfoText}"
+                                                                   Text="{Binding Rate}"/>
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Row="0" Grid.Column="5">
+                                                        <TextBlock Style="{StaticResource TittleText}"
+                                                                   Text="Валюта кредита"/>
+                                                        <TextBlock Style="{StaticResource InfoText}"
+                                                                   Text="{Binding CreditCurrencyType}"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                                
+                                                <Grid Grid.Row="1">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+                                                    
+                                                    <StackPanel Grid.Column="1"
+                                                                Margin="0, 8.5">
+                                                        <TextBlock Style="{StaticResource TittleText}"
+                                                                   Text="Сроки"/>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Style="{StaticResource InfoText}"
+                                                                       Text="{Binding MinimalTerm}"/>
+                                                            <TextBlock Style="{StaticResource InfoText}"
+                                                                       Text=" - "/>
+                                                            <TextBlock Style="{StaticResource InfoText}"
+                                                                       Text="{Binding MaximalTerm}"/>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                    
+                                                    <StackPanel Grid.Column="3"
+                                                                Margin="0, 8.5">
+                                                        <TextBlock Style="{StaticResource TittleText}"
+                                                                   Text="Диапазон суммы"/>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Style="{StaticResource InfoText}"
+                                                                       Text="{Binding MinimalTakingAmount}"/>
+                                                            <TextBlock Style="{StaticResource InfoText}"
+                                                                       Text=" - "/>
+                                                            <TextBlock Style="{StaticResource InfoText}"
+                                                                       Text="{Binding MaximalTakingAmount}"/>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Grid>
+                                        </Button>
+                                    </Grid>
+                                
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        
+                    </Grid>
+                </ScrollViewer>
                 
             </Grid>
         </DataTemplate>
