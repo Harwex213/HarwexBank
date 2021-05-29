@@ -69,8 +69,10 @@ namespace HarwexBank
                                                                        ((IssuedCreditModel) sender).Term;
                             if (((IssuedCreditModel) sender).AmountToPay != 0)
                             {
-                                ((IssuedCreditModel) sender).OverPaymentAmount = ((IssuedCreditModel) sender).AmountToPay -
-                                    ((IssuedCreditModel) sender).Amount;
+                                ((IssuedCreditModel) sender).OverPaymentAmount = ((IssuedCreditModel) sender).AmountToPay - 
+                                                                                 ((IssuedCreditModel) sender).Amount;
+                                ((IssuedCreditModel) sender).AmountRemained = ((IssuedCreditModel) sender).AmountToPay -
+                                                                              ((IssuedCreditModel) sender).RepaidAmount;
                             }
                             else
                             {

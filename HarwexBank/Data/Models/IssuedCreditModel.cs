@@ -21,6 +21,7 @@ namespace HarwexBank
         private decimal _amount;
         private decimal _repaidAmount;
         private decimal _amountToPay;
+        private decimal _amountRemained;
         private decimal _overPaymentAmount;
         private bool _isApproved;
         private bool _isRepaid;
@@ -109,6 +110,13 @@ namespace HarwexBank
         {
             get => _overPaymentAmount;
             set =>  Set(ref _overPaymentAmount, value);
+        }
+
+        [NotMapped]
+        public decimal AmountRemained
+        {
+            get => AmountToPay - RepaidAmount;
+            set =>  Set(ref _amountRemained, value);
         }
 
         public bool IsApproved

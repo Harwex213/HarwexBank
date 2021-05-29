@@ -15,6 +15,9 @@ namespace HarwexBank
             UserAccounts = ModelResourcesManager.GetInstance().UserAccounts;
             UserCredits = ModelResourcesManager.GetInstance().UserCredits;
             UserJournal = ModelResourcesManager.GetInstance().UserJournal;
+            CurrencyTypeModels = ModelResourcesManager.GetInstance().ExistedCurrencyTypes;
+            
+            OperationCurrencyType = CurrencyTypeModels[0];
         }
 
         // Using Data.
@@ -26,6 +29,8 @@ namespace HarwexBank
         public ObservableCollection<JournalModel> UserJournal { get; set; }
         public ObservableCollection<AccountModel> UserAccounts { get; set; }
         public ObservableCollection<IssuedCreditModel> UserCredits { get; set; }
+        public ObservableCollection<CurrencyTypeModel> CurrencyTypeModels { get; set; }
+        public CurrencyTypeModel OperationCurrencyType { get; set; }
 
         public AccountModel AccountInitiator
         {
@@ -61,7 +66,6 @@ namespace HarwexBank
                     return "Выберите сначала кредит";
                 }
 
-                var amountToPaid = SelectedCredit.Amount - SelectedCredit.RepaidAmount;
                 switch (name)
                 {
                     case nameof(AmountToTransfer):
@@ -69,13 +73,21 @@ namespace HarwexBank
                         {
                             return "Сумма не должна быть меньше, либо равна нулю";
                         }
-                        if (AmountToTransfer > AccountInitiator.Amount)
+                        if (!AccountModel.CheckAccountAmountToPossibilityOfTransfer(
+                            AccountInitiator.CurrencyTypeModelNavigation.CurrencyTypeEnum,
+                            OperationCurrencyType.CurrencyTypeEnum,
+                            AccountInitiator.Amount,
+                            AmountToTransfer))
                         {
-                            return "Сумма не должна превышать сумму счёта: " + AccountInitiator.Amount;
+                            return $"Сумма не должна превышать сумму счёта: {AccountInitiator.Amount} {AccountInitiator.CurrencyType}";
                         }
-                        if (AmountToTransfer > amountToPaid)
+                        var currencyConverter = ModelResourcesManager.GetInstance().CurrencyConverter;
+                        if (currencyConverter.ConvertCurrencies(
+                                SelectedCredit.CreditTypeModelNavigation.CurrencyTypeModelNavigation.CurrencyTypeEnum,
+                                 OperationCurrencyType.CurrencyTypeEnum, AmountToTransfer)
+                             > SelectedCredit?.AmountRemained)
                         {
-                            return "Сумма не должна превышать сумму погашения: " + amountToPaid;
+                            return "Сумма не должна превышать остаточную сумму погашения: " + SelectedCredit?.AmountRemained;
                         }
                         break;
                 }
@@ -104,13 +116,30 @@ namespace HarwexBank
         // Methods.
         private void RepayCredit()
         {
-            if (AccountInitiator.Amount < AmountToTransfer)
+            if (SelectedCredit.IsRepaid)
             {
-                MessageBox.Show("Недостаточно средств");
+                MessageBox.Show("Кредит уже выплачен");
                 return;
             }
-            AccountInitiator.Amount -= AmountToTransfer;
-            SelectedCredit.RepaidAmount += AmountToTransfer;
+            if (!AccountModel.CheckAccountAmountToPossibilityOfTransfer(
+                AccountInitiator.CurrencyTypeModelNavigation.CurrencyTypeEnum,
+                OperationCurrencyType.CurrencyTypeEnum,
+                AccountInitiator.Amount,
+                AmountToTransfer))
+            {
+                MessageBox.Show("Сумма не должна превышать сумму" +
+                                $" счёта: {AccountInitiator.Amount} {AccountInitiator.CurrencyType}");
+                return;
+            }
+
+            var currencyConverter = ModelResourcesManager.GetInstance().CurrencyConverter;
+            
+            AccountInitiator.Amount -= currencyConverter.ConvertCurrencies(
+                AccountInitiator.CurrencyTypeModelNavigation.CurrencyTypeEnum,
+                OperationCurrencyType.CurrencyTypeEnum, AmountToTransfer);
+            SelectedCredit.RepaidAmount += currencyConverter.ConvertCurrencies(
+                SelectedCredit.CreditTypeModelNavigation.CurrencyTypeModelNavigation.CurrencyTypeEnum,
+                OperationCurrencyType.CurrencyTypeEnum, AmountToTransfer);
             if (SelectedCredit.RepaidAmount == SelectedCredit.Amount)
             {
                 SelectedCredit.IsRepaid = true;
@@ -121,11 +150,13 @@ namespace HarwexBank
                 Date = DateTime.Now,
                 BankAccountInitiator = AccountInitiator.Id,
                 SelectedCredit = SelectedCredit.Id,
+                CurrencyTypeModelNavigation = OperationCurrencyType,
                 Amount = AmountToTransfer
             };
             UserJournal.Add(journalNote);
             ModelResourcesManager.GetInstance().GenerateCreditRepayment(journalNote, AccountInitiator, SelectedCredit);
 
+            SelectedCredit.AmountRemained = SelectedCredit.AmountToPay - SelectedCredit.RepaidAmount;
             MessageBox.Show("Успешно оплачено");
         }
         

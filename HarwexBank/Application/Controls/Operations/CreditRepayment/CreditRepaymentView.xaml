@@ -81,7 +81,28 @@
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
                             </StackPanel>
+                            
+                            <StackPanel Margin="0, 18.5, 0, 0">
+                                <TextBlock Text="Осталось к погашению"
+                                           Style="{StaticResource TittleText}"></TextBlock>
+                                <TextBlock Text="{Binding SelectedCredit.AmountRemained, StringFormat=N2}"
+                                           Style="{StaticResource InfoText}"></TextBlock>
+                            </StackPanel>
                 
+                            <StackPanel>
+                                <TextBlock Text="Выберите валюту операции"
+                                           Style="{StaticResource FormLabel}"></TextBlock>
+                                <ComboBox Name="CurrencyType"
+                                          ItemsSource="{Binding CurrencyTypeModels}"
+                                          SelectedItem="{Binding OperationCurrencyType}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}"></TextBlock>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </StackPanel>
+                            
                             <StackPanel>
                                 <TextBlock Text="Введите сумму для погашения"
                                            Style="{StaticResource FormLabel}"></TextBlock>
@@ -119,6 +140,10 @@
                                                 <Setter Property="IsEnabled" Value="True"/>
         
                                             </MultiDataTrigger>
+                                            <DataTrigger Binding="{Binding Path=SelectedIndex,
+                                            ElementName=CurrencyType}" Value="-1">
+                                                <Setter Property="IsEnabled" Value="False"/>
+                                            </DataTrigger>
                                         </Style.Triggers>
                                                     
                                     </Style>
