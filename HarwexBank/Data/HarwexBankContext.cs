@@ -478,33 +478,7 @@ namespace HarwexBank
                     CreditCurrencyType = "USD"
                 }
             });
-            
-            IssuedCredits.AddRange(new List<IssuedCreditModel>
-            {
-                new()
-                {
-                    UserId = userOleg.Id,
-                    CreditType = "Корпоративный",
-                    DateIn = DateTime.Today,
-                    Term = 32,
-                    Amount = 20000m,
-                    AmountToPay = 32131m,
-                    IsApproved = true,
-                    IsRepaid = false
-                },
-                new()
-                {
-                    UserId = userOleg.Id,
-                    CreditType = "Студенческий",
-                    DateIn = DateTime.Today,
-                    Term = 16,
-                    Amount = 4000m,
-                    AmountToPay = 4215m,
-                    IsApproved = false,
-                    IsRepaid = false
-                }
-            });
-            
+
             SaveChanges();
         }
     }

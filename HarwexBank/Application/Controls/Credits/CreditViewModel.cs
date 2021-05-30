@@ -17,6 +17,7 @@ namespace HarwexBank
                 case ClientMainWindow:
                     // Using data.
                     UserApprovedCreditModels = ModelResourcesManager.GetInstance().UserCredits;
+                    UserAccounts = ModelResourcesManager.GetInstance().UserAccounts;
                     CreditTypeModels = ModelResourcesManager.GetInstance().ExistedCreditTypes;
 
                     ResetCreditToTaking();
@@ -30,10 +31,12 @@ namespace HarwexBank
                     
                     // Using VM
                     ControlViewModels.Add(new CreditListViewModel());
-                    ControlViewModels.Add(new TakeNewCreditViewModel());
                     break;
                 
                 case AdminMainWindow:
+                    // Using VM
+                    ControlViewModels.Add(new CreditListViewModel());
+                    
                     CreditTypeModels = ModelResourcesManager.GetInstance().ExistedCreditTypes;
                     
                     break;
@@ -50,6 +53,8 @@ namespace HarwexBank
         
         // Shells for new models
         public IssuedCreditModel CreditToTaking { get; set;  }
+        public ObservableCollection<AccountModel> UserAccounts { get; set; }
+        public AccountModel AccountIdToPay { get; set; }
 
         private void ResetCreditToTaking()
         {
@@ -143,6 +148,7 @@ namespace HarwexBank
             CreditToTaking.DateIn = DateTime.Now;
             CreditToTaking.IsApproved = false;
             CreditToTaking.IsRepaid = false;
+            CreditToTaking.AccountId = AccountIdToPay.Id;
 
             ModelResourcesManager.GetInstance().AddModel(CreditToTaking);
             MessageBox.Show("Заявка оставлена");

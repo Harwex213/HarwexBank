@@ -116,6 +116,11 @@ namespace HarwexBank
         // Methods.
         private void RepayCredit()
         {
+            if (AccountInitiator.IsFrozen)
+            {
+                MessageBox.Show("Счёт отправителя заморожен");
+                return;
+            }
             if (SelectedCredit.IsRepaid)
             {
                 MessageBox.Show("Кредит уже выплачен");

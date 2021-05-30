@@ -84,6 +84,24 @@
                         
                                 <StackPanel Grid.Row="1">
                                     <StackPanel>
+                                        <TextBlock Text="На какой счёт отправить"
+                                                   Style="{StaticResource FormLabel}"></TextBlock>
+                                        <ComboBox ItemsSource="{Binding UserAccounts}"
+                                                  Name="AccountIdToPay"
+                                                  SelectedValue="{Binding AccountIdToPay}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Id}"></TextBlock>
+                                                        <TextBlock Text=", "></TextBlock>
+                                                        <TextBlock Text="{Binding CurrencyType}"></TextBlock>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    
+                                    <StackPanel>
                                         <TextBlock Text="Тип кредита"
                                                 Style="{StaticResource FormLabel}"></TextBlock>
                                         <ComboBox ItemsSource="{Binding CreditTypeModels}"
@@ -181,6 +199,10 @@
                                                         <Setter Property="IsEnabled" Value="True"/>
 
                                                     </MultiDataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=SelectedIndex,
+                                                    ElementName=AccountIdToPay}" Value="-1">
+                                                        <Setter Property="IsEnabled" Value="False"/>
+                                                    </DataTrigger>
                                                 </Style.Triggers>
                                                 
                                             </Style>

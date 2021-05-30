@@ -83,25 +83,12 @@ namespace HarwexBank
         private CurrencyConverter _currencyConverter;
         public CurrencyConverter CurrencyConverter => _currencyConverter ??= new CurrencyConverter();
 
-        private ObservableCollection<UserModel> _existedClients;
-        private ObservableCollection<IssuedCreditModel> _allNonApprovedCredits;
-        private ObservableCollection<JournalModel> _allJournal;
-        private ObservableCollection<CurrencyTypeModel> _existedCurrencyTypes;
-        private ObservableCollection<CardTypeModel> _existedCardTypes;
-        private ObservableCollection<CreditTypeModel> _existedCreditTypes;
-
-        public ObservableCollection<UserModel> ExistedClients =>
-            _existedClients ??= new ObservableCollection<UserModel>(GetAllClients());
-        public ObservableCollection<IssuedCreditModel> AllNonApprovedCredits => 
-            _allNonApprovedCredits ??= new ObservableCollection<IssuedCreditModel>(GetAllNonApprovedCredits());
-        public ObservableCollection<JournalModel> AllJournal =>
-            _allJournal ??= new ObservableCollection<JournalModel>(GetAllJournalNotes());
-        public ObservableCollection<CurrencyTypeModel> ExistedCurrencyTypes =>
-            _existedCurrencyTypes ??= new ObservableCollection<CurrencyTypeModel>(GetExistedCurrencyTypeModels());
-        public ObservableCollection<CardTypeModel> ExistedCardTypes =>
-            _existedCardTypes ??= new ObservableCollection<CardTypeModel>(GetExistedCardTypeModels());
-        public ObservableCollection<CreditTypeModel> ExistedCreditTypes =>
-            _existedCreditTypes ??= new ObservableCollection<CreditTypeModel>(GetExistedCreditTypeModels());
+        public ObservableCollection<UserModel> ExistedClients => new ObservableCollection<UserModel>(GetAllClients());
+        public ObservableCollection<IssuedCreditModel> AllNonApprovedCredits =>  new ObservableCollection<IssuedCreditModel>(GetAllNonApprovedCredits());
+        public ObservableCollection<JournalModel> AllJournal => new ObservableCollection<JournalModel>(GetAllJournalNotes());
+        public ObservableCollection<CurrencyTypeModel> ExistedCurrencyTypes => new ObservableCollection<CurrencyTypeModel>(GetExistedCurrencyTypeModels());
+        public ObservableCollection<CardTypeModel> ExistedCardTypes => new ObservableCollection<CardTypeModel>(GetExistedCardTypeModels());
+        public ObservableCollection<CreditTypeModel> ExistedCreditTypes => new ObservableCollection<CreditTypeModel>(GetExistedCreditTypeModels());
         
         private IEnumerable<UserModel> GetAllClients()
         {
@@ -110,7 +97,7 @@ namespace HarwexBank
         
         private IEnumerable<IssuedCreditModel> GetAllNonApprovedCredits()
         {
-            return _context.IssuedCredits?.Where(c => !c.IsRepaid).ToList();
+            return _context.IssuedCredits?.Where(c => !c.IsApproved).ToList();
         }
 
         private IEnumerable<JournalModel> GetAllJournalNotes()

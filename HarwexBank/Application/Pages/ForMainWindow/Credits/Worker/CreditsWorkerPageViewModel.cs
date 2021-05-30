@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using Microsoft.EntityFrameworkCore;
 
 namespace HarwexBank
 {
@@ -51,6 +53,13 @@ namespace HarwexBank
         {
             issuedCreditModel.IsApproved = true;
             
+            var currencyConverter = ModelResourcesManager.GetInstance().CurrencyConverter;
+            var accountToPay = ModelResourcesManager.GetInstance().GetAccountById(issuedCreditModel.AccountId);
+            accountToPay.Amount += currencyConverter.ConvertCurrencies(
+                accountToPay.CurrencyTypeModelNavigation.CurrencyTypeEnum,
+                issuedCreditModel.CreditTypeModelNavigation.CurrencyTypeModelNavigation.CurrencyTypeEnum,
+                issuedCreditModel.Amount);
+
             ModelResourcesManager.GetInstance().UpdateModel(issuedCreditModel);
             AwaitToApprovedCreditModels.Remove(issuedCreditModel);
             
