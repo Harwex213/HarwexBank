@@ -104,31 +104,50 @@
                          <StackPanel Grid.Column="1"
                                      Orientation="Horizontal"
                                      HorizontalAlignment="Right">
-                                <WrapPanel VerticalAlignment="Center">
-                                    <StackPanel Orientation="Horizontal"
-                                                VerticalAlignment="Center"
-                                                Margin="0, 0, 15, 0">
-                                        <TextBlock Style="{StaticResource TextBlockBase}"
-                                                   FontSize="18"
-                                                   Text="USD: "></TextBlock>
-                                        <TextBlock Style="{StaticResource TextBlockBase}"
-                                                   FontSize="18"
-                                                   FontWeight="SemiBold"
-                                                   Text="{Binding UsdToBynRate}"></TextBlock>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal"
-                                                VerticalAlignment="Center">
-                                        <TextBlock Style="{StaticResource TextBlockBase}"
-                                                   FontSize="18"
-                                                   Text="RUB (100): "></TextBlock>
-                                        <TextBlock Style="{StaticResource TextBlockBase}"
-                                                   FontSize="18"
-                                                   FontWeight="SemiBold"
-                                                   Text="{Binding RubToBynRate}"></TextBlock>
-                                    </StackPanel>
-                                </WrapPanel>
-                                <TextBlock Text="Oleg Kaportsev"
-                               Style="{StaticResource TopBarElements}"></TextBlock>
+                            <WrapPanel VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal"
+                                            VerticalAlignment="Center"
+                                            Margin="0, 0, 15, 0">
+                                    <TextBlock Style="{StaticResource TextBlockBase}"
+                                               FontSize="18"
+                                               Text="USD: "></TextBlock>
+                                    <TextBlock Style="{StaticResource TextBlockBase}"
+                                               FontSize="18"
+                                               FontWeight="SemiBold"
+                                               Text="{Binding UsdToBynRate}"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal"
+                                            VerticalAlignment="Center">
+                                    <TextBlock Style="{StaticResource TextBlockBase}"
+                                               FontSize="18"
+                                               Text="RUB (100): "></TextBlock>
+                                    <TextBlock Style="{StaticResource TextBlockBase}"
+                                               FontSize="18"
+                                               FontWeight="SemiBold"
+                                               Text="{Binding RubToBynRate}"></TextBlock>
+                                </StackPanel>
+                            </WrapPanel>
+                             <Button Style="{StaticResource ButtonForIcon}"
+                                     VerticalAlignment="Center"
+                                     Command="{Binding UndoCommand}">
+                                 <fa5:FontAwesome Icon="Solid_ArrowLeft"
+                                                  FontSize="44">
+                                 </fa5:FontAwesome>
+                             </Button>
+                             <Button Style="{StaticResource ButtonForIcon}"
+                                     VerticalAlignment="Center"
+                                     Command="{Binding RedoCommand}">
+                                 <fa5:FontAwesome Icon="Solid_ArrowRight"
+                                                  FontSize="44">
+                                 </fa5:FontAwesome>
+                             </Button>
+                             <Button HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     Content="Ru/En"
+                                     Width="50"
+                                     Height="30"
+                                     Click="ButtonBase_OnClick">
+                                 </Button>
                                 <Button Style="{StaticResource ButtonForIcon}"
                                         VerticalAlignment="Center"
                                         Margin="15, 0, 35, 0"

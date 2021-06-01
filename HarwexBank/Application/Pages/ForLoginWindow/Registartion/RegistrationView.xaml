@@ -24,7 +24,7 @@
                     <StackPanel Orientation="Vertical">
                         
                         <!-- FIRSTNAME -->
-                        <TextBlock Text="Имя"/>
+                        <TextBlock Text="{DynamicResource RegistrationPageFirstNameLabel}"/>
                         <TextBox Name="UserFirstName">
                             <TextBox.Text>
                                 <Binding Path="RegisteredUser.FirstName"
@@ -38,7 +38,7 @@
                         </TextBox>
                         
                         <!-- LASTNAME -->
-                        <TextBlock Text="Фамилия"/>
+                        <TextBlock Text="{DynamicResource RegistrationPageLastNameLabel}"/>
                         <TextBox Name="UserLastName">
                             <TextBox.Text>
                                 <Binding Path="RegisteredUser.LastName"
@@ -52,7 +52,7 @@
                         </TextBox>
         
                         <!-- PATRONYMIC -->
-                        <TextBlock Text="Отчество"/>
+                        <TextBlock Text="{DynamicResource RegistrationPagePatronymicLabel}"/>
                         <TextBox Name="UserPatronymic">
                             <TextBox.Text>
                                 <Binding Path="RegisteredUser.Patronymic"
@@ -66,7 +66,7 @@
                         </TextBox>
         
                         <!-- ADDRESS -->
-                        <TextBlock Text="Адрес"/>
+                        <TextBlock Text="{DynamicResource RegistrationPageAddressLabel}"/>
                         <TextBox Name="UserAddress">
                             <TextBox.Text>
                                 <Binding Path="RegisteredUser.Address"
@@ -84,11 +84,11 @@
                             
                             <!-- BUTTON BACK TO LOGIN FORM -->
                             <Button Style="{StaticResource RegistrationButtons}"
-                                    Content="Назад"
+                                    Content="{DynamicResource GoBackBtn}"
                                     Command="{Binding BackToLoginCommand}"></Button>
                             
                             <!-- BUTTON CONTINUE REGISTRATION -->
-                            <Button Content="Далее"
+                            <Button Content="{DynamicResource GoNextBtn}"
                                     Command="{Binding ContinueRegistrationCommand}">
                                 <Button.Style>
                                     <Style TargetType="Button" 
@@ -132,7 +132,7 @@
                     <StackPanel Orientation="Vertical">
                         
                         <!-- PASSPORT -->
-                        <TextBlock Text="Номер паспорта"/>
+                        <TextBlock Text="{DynamicResource RegistrationPagePassportLabel}"/>
                         <TextBox Name="UserPassport"
                                  MaxLength="9">
                             <TextBox.Text>
@@ -147,7 +147,7 @@
                         </TextBox>
 
                         <!-- LOGIN -->
-                        <TextBlock Text="Логин"/>
+                        <TextBlock Text="{DynamicResource AuthorizationWindowLoginLabel}"/>
                         <TextBox Name="UserLogin">
                             <TextBox.Text>
                                 <Binding Path="RegisteredUser.Login"
@@ -161,7 +161,7 @@
                         </TextBox>
         
                         <!-- PASSWORD -->
-                        <TextBlock Text="Пароль"/>
+                        <TextBlock Text="{DynamicResource AuthorizationWindowPasswordLabel}"/>
                         <PasswordBox Name="UserPassword"
                                      local:PasswordHelper.Attach="True">
                             <local:PasswordHelper.Password>
@@ -194,11 +194,11 @@
                             
                             <!-- BUTTON RETURN BACK -->
                             <Button Style="{StaticResource RegistrationButtons}"
-                                    Content="Назад"
+                                    Content="{DynamicResource GoBackBtn}"
                                     Command="{Binding ReturnBackCommand}"></Button>
                             
                             <!-- BUTTON TO REGISTER -->
-                            <Button Content="Зарегистрироваться"
+                            <Button Content="{DynamicResource RegistrationPageToSignUpBtn}"
                                     Command="{Binding FinishRegistrationCommand}">
                                 <Button.Style>
                                     <Style TargetType="Button" 

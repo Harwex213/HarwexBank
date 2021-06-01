@@ -6,7 +6,7 @@ namespace HarwexBank
 {
     public class LoginViewModel : BaseControlViewModel, IControlViewModel
     {
-        public string Name => "Вход";
+        public string Name => Application.Current.Resources["LoginPageHeader"].ToString();
 
         public LoginViewModel(AuthorizationViewModel authorizationViewModel)
         {
@@ -21,7 +21,7 @@ namespace HarwexBank
         // Fields.
         private ICommand _logInCommand;
         private ICommand _startRegistrationCommand;
-        
+
         // Props.
         public ICommand LogInCommand
         {

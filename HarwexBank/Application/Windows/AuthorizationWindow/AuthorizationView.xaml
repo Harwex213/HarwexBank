@@ -34,28 +34,38 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-
-            <TextBlock Grid.Row="1" 
+            
+            <TextBlock Grid.Row="1"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontSize="48"
                        Foreground="White"
                        FontFamily="Roboto"
                        FontWeight="Light" Text="Harwex Bank"/>
-
+            
             <Grid Grid.Row="2"
                   Background="White">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="70"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" 
-                           VerticalAlignment="Bottom"
-                           Margin="0, 0, 0, 5"
-                           HorizontalAlignment="Center"
-                           FontSize="36"
-                           Text="{Binding SelectedControlViewModel.Name}"/>
+                <StackPanel Grid.Row="0"
+                            HorizontalAlignment="Center">
+                    <TextBlock VerticalAlignment="Center"
+                               Margin="0, 0, 0, 5"
+                               HorizontalAlignment="Center"
+                               FontSize="36"
+                               Text="{Binding SelectedControlViewModel.Name}"/>
+                
+                    <Button HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Content="Ru/En"
+                            Width="50"
+                            Height="30"
+                            Margin="0, 0, 0, 5"
+                            Click="ButtonBase_OnClick"></Button>
+                </StackPanel>
                 
                 <ContentControl Grid.Row="1" 
                                 Margin="40, 0"

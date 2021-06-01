@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using HarwexBank.Languages;
 
 namespace HarwexBank
 {
@@ -7,6 +9,11 @@ namespace HarwexBank
         public AuthorizationView()
         {
             InitializeComponent();
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            new ChangeLanguage();
         }
     }
 }

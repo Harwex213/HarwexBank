@@ -1,18 +1,19 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 
 namespace HarwexBank
 {
     public class RegistrationPage01 : IControlViewModel
     {
-        public string Name => "Регистрация";
+        public string Name => Application.Current.Resources["RegistrationPageHeader"].ToString();
     }
     public class RegistrationPage02 : IControlViewModel
     {
-        public string Name => "Регистрация";
+        public string Name => Application.Current.Resources["RegistrationPageHeader"].ToString();
     }
     public class RegistrationViewModel : BaseControlViewModel, IControlViewModel
     {
-        public string Name => "Регистрация";
+        public string Name => Application.Current.Resources["RegistrationPageHeader"].ToString();
 
         public RegistrationViewModel(AuthorizationViewModel authorizationViewModel)
         {

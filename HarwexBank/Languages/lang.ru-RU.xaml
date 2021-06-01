@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:HarwexBank"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib">
+    
+    <!-- GENERAL -->
+    <s:String x:Key="GoBackBtn">Назад</s:String>
+    <s:String x:Key="GoNextBtn">Далее</s:String>
+    
+    <!-- AUTHORIZATION WINDOW -->
+    <s:String x:Key="AuthorizationWindowLoginLabel">Логин</s:String>
+    <s:String x:Key="AuthorizationWindowPasswordLabel">Пароль</s:String>
+    <!-- Login Page -->
+    <s:String x:Key="LoginPageHeader">Авторизация</s:String>
+    <s:String x:Key="LoginPageSignInBtn">Вход</s:String>
+    <s:String x:Key="LoginPageSignUpBtn">Регистрация</s:String>
+    
+    <!-- Login Page -->
+    <s:String x:Key="RegistrationPageHeader">Регистрация</s:String>
+    <s:String x:Key="RegistrationPageFirstNameLabel">Имя</s:String>
+    <s:String x:Key="RegistrationPageLastNameLabel">Фамилия</s:String>
+    <s:String x:Key="RegistrationPagePatronymicLabel">Отчество</s:String>
+    <s:String x:Key="RegistrationPageAddressLabel">Адрес</s:String>
+    <s:String x:Key="RegistrationPagePassportLabel">Номер паспорта</s:String>
+    <s:String x:Key="RegistrationPageToSignUpBtn">Зарегистрироваться</s:String>
+    
+    <!-- MAIN WINDOW -->
+</ResourceDictionary>

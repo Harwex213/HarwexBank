@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using HarwexBank.Languages;
 
 namespace HarwexBank
 {
@@ -31,6 +32,11 @@ namespace HarwexBank
             {
                 LeftBarToggleButton_OnClick(sender, e);
             }
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            new ChangeLanguage();
         }
     }
 }

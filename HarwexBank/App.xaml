@@ -12,6 +12,9 @@
                  <!-- STYLES -->
                  <ResourceDictionary Source="/HarwexBank;component/Styles/ToMainWindow/Controls/InfoBlock.xaml"/>
                  <ResourceDictionary Source="/HarwexBank;component/Styles/ToMainWindow/MainWindow.xaml"/>
+                 
+                 <!-- STYLES -->
+                 <ResourceDictionary Source="/HarwexBank;component/Languages/lang.ru-RU.xaml"/>
              </ResourceDictionary.MergedDictionaries>
          </ResourceDictionary>
     </Application.Resources>

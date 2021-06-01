@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:HarwexBank"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib">
+    
+    <!-- GENERAL -->
+    <s:String x:Key="GoBackBtn">Back</s:String>
+    <s:String x:Key="GoNextBtn">Next</s:String>
+    
+    <!-- AUTHORIZATION WINDOW -->
+    <s:String x:Key="AuthorizationWindowLoginLabel">Login</s:String>
+    <s:String x:Key="AuthorizationWindowPasswordLabel">Password</s:String>
+    <!-- Login Page -->
+    <s:String x:Key="LoginPageHeader">Authorization</s:String>
+    <s:String x:Key="LoginPageSignInBtn">Log In</s:String>
+    <s:String x:Key="LoginPageSignUpBtn">Registration</s:String>
+    
+    <!-- Login Page -->
+    <s:String x:Key="RegistrationPageHeader">Registration</s:String>
+    <s:String x:Key="RegistrationPageFirstNameLabel">FirstName</s:String>
+    <s:String x:Key="RegistrationPageLastNameLabel">LastName</s:String>
+    <s:String x:Key="RegistrationPagePatronymicLabel">Patronymic</s:String>
+    <s:String x:Key="RegistrationPageAddressLabel">Address</s:String>
+    <s:String x:Key="RegistrationPagePassportLabel">Passport number</s:String>
+    <s:String x:Key="RegistrationPageToSignUpBtn">Sign Up</s:String>
+    
+    <!-- MAIN WINDOW -->
+</ResourceDictionary>

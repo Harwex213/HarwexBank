@@ -46,5 +46,10 @@ namespace HarwexBank
 
             SelectedControlViewModel = ControlViewModels.FirstOrDefault(vm => vm == viewModel);
         }
+
+        public BaseControlViewModel()
+        {
+            App.LanguageChanged += () => OnPropertyChanged("Name");
+        }
     }
 }

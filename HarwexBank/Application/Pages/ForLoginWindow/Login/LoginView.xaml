@@ -19,19 +19,19 @@
     </UserControl.Resources>
 
     <StackPanel Orientation="Vertical">
-        <TextBlock Text="Логин"/>
+        <TextBlock Text="{DynamicResource AuthorizationWindowLoginLabel}"/>
         <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <TextBlock Text="Пароль"/>
+        <TextBlock Text="{DynamicResource AuthorizationWindowPasswordLabel}"/>
         <PasswordBox local:PasswordHelper.Attach="True" 
                      local:PasswordHelper.Password="{Binding Password,
                         UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
         <Button Style="{StaticResource LogInButton}"
-                Content="Вход"
+                Content="{DynamicResource LoginPageSignInBtn}"
                 Command="{Binding LogInCommand}"></Button>
         <Button Style="{StaticResource StartRegistrationButton}"
-                Content="Регистрация"
+                Content="{DynamicResource LoginPageSignUpBtn}"
                 Command="{Binding StartRegistrationCommand}"></Button>
     </StackPanel>
 </UserControl>
